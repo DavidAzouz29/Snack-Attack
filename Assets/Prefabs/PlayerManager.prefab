@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &119002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 466394}
+  - 114: {fileID: 11405996}
+  - 114: {fileID: 11405644}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &466394
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11405644
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a38d93fbb21cdf41911aaf39ce72b1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 0
+  speedBoost: 50
+  verticalAxis: _Vertical
+  horizontalAxis: _Horizontal
+  rotationAxisX: Rotation_X
+  rotationAxisY: Rotation_X
+  r_weapon: {fileID: 0}
+  m_eCurrentPlayerState: 0
+  m_playerID: 0
+--- !u!114 &11405996
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3018b43c077382546b330607ef477773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  r_Player: {fileID: 144594, guid: 88fa3afb77fe8f24c9b8f0bb4ef7e3a9, type: 2}
+  r_Players:
+  - {fileID: 0}
+  - {fileID: 0}
+  v3PlayerPosition: {x: 0, y: 0, z: 0}
+  c_Camera: {fileID: 0}
+  r_Player1: {fileID: 2100000, guid: ea1370ecde5f46341bf77b477774cbcb, type: 2}
+  r_Player2: {fileID: 2100000, guid: 57f55d2eb2421ef4d8e437fc9f608cd7, type: 2}
+  uiPlayerArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  r_PlayerController: {fileID: 0}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 119002}
+  m_IsPrefabParent: 1
