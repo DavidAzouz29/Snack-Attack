@@ -26,9 +26,13 @@ public class PlayerController : MonoBehaviour
 
     // PRIVATE VARIABLES [MenuItem ("MyMenu/Do Something")]
     [Header("Movement")]
-    public float playerSpeed;
-    public float speedBoost = 6;
+    public float playerSpeed = 10.0f;
+    public float speedBoost = 6.0f;
     [Tooltip("This will change at runtime.")]
+    [Header("Health")]
+    public int hitsBeforeDeath = 5;
+    public int health = 100;
+    
     public string verticalAxis = "_Vertical";
     public string horizontalAxis = "_Horizontal";
     public string rotationAxisX = "_Rotation_X";
@@ -51,7 +55,7 @@ public class PlayerController : MonoBehaviour
     public enum E_PLAYER_STATE
     {
         E_PLAYER_STATE_ALIVE,
-        E_PLAYER_STATE_WEAPON, //TODO: add more?
+        E_PLAYER_STATE_BOSS, //TODO: add more?
         E_PLAYER_STATE_DEAD,
 
         E_PLAYER_STATE_COUNT,
@@ -65,9 +69,9 @@ public class PlayerController : MonoBehaviour
     //Rigidbody m_rigidBody;
     private float fRot = 0.2f;
 
-    private int health = 100;
-
-	//private healthBar healthBars;
+    // Health
+    private int healthDeduct = 0;
+    //private healthBar healthBars;
 
     // Use this for initialization
     void Start ()
@@ -98,9 +102,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-		//TODO: healthBars = FindObjectOfType<healthBar> ();
-
-		animator = GetComponentInChildren<Animator> ();
+        //TODO: healthBars = FindObjectOfType<healthBar> ();
+        healthDeduct = health / hitsBeforeDeath;
+        animator = GetComponentInChildren<Animator> ();
     }
 
     // Update is called once per frame
@@ -119,13 +123,13 @@ public class PlayerController : MonoBehaviour
 			Vector3 pos = transform.position + movementDirection * playerSpeed * Time.deltaTime;
 			transform.position = Vector3.Lerp (transform.position, pos, 0.2f);
 			//Debug.Log("HELP");
-			animator.SetBool("Walking", true);
+			//animator.SetBool("Walking", true);
 //			c_walk.CrossFade("Walk");
 		} 
 		// we're not moving so play the idle animation
 		else 
 		{
-			animator.SetBool ("Walking", false);
+			//animator.SetBool ("Walking", false);
 //			c_idle.Play ("idle");
 		}
 
@@ -152,7 +156,7 @@ public class PlayerController : MonoBehaviour
         {
             m_eCurrentPlayerState = E_PLAYER_STATE.E_PLAYER_STATE_DEAD;
             //DO STUFF
-            animator.SetBool("Dead", true);
+            //animator.SetBool("Dead", true);
         }
 
         //m_rigidBody.AddForce(movementDirection * playerSpeed * Time.deltaTime);
@@ -168,7 +172,7 @@ public class PlayerController : MonoBehaviour
                     //Debug.Log("Alive!");
                     break;
                 }
-            case E_PLAYER_STATE.E_PLAYER_STATE_WEAPON:
+            case E_PLAYER_STATE.E_PLAYER_STATE_BOSS:
                 {
                     r_weapon.SetActive(true);
                     //Debug.Log("Bomb!");
@@ -212,9 +216,9 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public E_PLAYER_STATE ChangeStateWeapon()
+    public E_PLAYER_STATE ChangeStateBoss()
     {
-        return E_PLAYER_STATE.E_PLAYER_STATE_WEAPON;
+        return E_PLAYER_STATE.E_PLAYER_STATE_BOSS;
     }
 
     public E_PLAYER_STATE ChangeStateDead()
@@ -250,8 +254,8 @@ public class PlayerController : MonoBehaviour
     {
         if (a_collision.gameObject.tag == "Weapon")
         {
-            Debug.Log("PC: HIT");        
-            health -= 20;
+            Debug.Log("PC: HIT");
+            health -= healthDeduct; //20?
             dizzyBirds.Play();
 
 			float healthFraction = 1.0f - (float)health / 100;

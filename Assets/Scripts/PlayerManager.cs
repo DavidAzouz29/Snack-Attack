@@ -72,7 +72,7 @@ public class PlayerManager : MonoBehaviour
             v3PlayerPosition.z = Random.Range(-fTerrRadius, fTerrRadius); //
             Object j = Instantiate(r_Player, v3PlayerPosition, r_Player.transform.rotation);
 			j.name = "Character " + ( i + 1);
-            SkinnedMeshRenderer mesh = ((GameObject)j).GetComponentInChildren<SkinnedMeshRenderer>();
+            /*SkinnedMeshRenderer mesh = ((GameObject)j).GetComponentInChildren<SkinnedMeshRenderer>();
             // if the first player
             if(i == 0)
             {
@@ -83,7 +83,7 @@ public class PlayerManager : MonoBehaviour
             {
                 mesh.material = r_Player2;
                 //mesh.material.mainTexture = r_Player2T;
-            }
+            }*/
             // -------------------------------------------------------------
             // This allows each instance the ability to move independently
             // -------------------------------------------------------------
