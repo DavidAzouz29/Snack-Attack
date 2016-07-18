@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         E_PLAYER_STATE_ALIVE,
         E_PLAYER_STATE_BOSS, //TODO: add more?
+        E_PLAYER_STATE_TEAMUP,
         E_PLAYER_STATE_DEAD,
 
         E_PLAYER_STATE_COUNT,
@@ -219,6 +220,11 @@ public class PlayerController : MonoBehaviour
     public E_PLAYER_STATE ChangeStateBoss()
     {
         return E_PLAYER_STATE.E_PLAYER_STATE_BOSS;
+    }
+
+    public E_PLAYER_STATE ChangeStateTeamup()
+    {
+        return E_PLAYER_STATE.E_PLAYER_STATE_TEAMUP;
     }
 
     public E_PLAYER_STATE ChangeStateDead()

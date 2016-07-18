@@ -12,11 +12,11 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[System.Serializable]
+/*[System.Serializable]
 public class Done_Boundary 
 {
 	public float xMin, xMax, zMin, zMax;
-}
+} */
 
 //-------------------------------------
 // *{} Class Declaration - PlayerShooting
@@ -29,36 +29,32 @@ public class PlayerShooting : MonoBehaviour
     public float speed = 20.0f;
     public float fireTime = 0.05f;
 	public float tilt;
-	public Done_Boundary boundary;
+	//public Done_Boundary boundary;
 
     public GameObject shot;
 	public Transform shotSpawn;
-	public float fireRate;
+	public float fireRate; // how long we wait before firing another bullet
 
     public AudioClip shootSound;
+    public string sFire = "_Fire";
 
     //-------------------------------------
     // PRIVATE INSTANCE VARIABLES
     //-------------------------------------
-	private float nextFire;
+    private float nextFire;
 
     //-------------------------------------
-	// Use this for initialization
+    // Use this for initialization
     //-------------------------------------
-	void Start () 
+    void Start()
     {
-        //if (Input.GetButton("Fire1") && Time.time > nextFire)
-        //{
-        //    nextFire = Time.time + fireRate;
-        //    Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
-        //    //InvokeRepeating("Fire", fireTime, fireTime); Used for Object Pooling
-        //}
-	}
+        InvokeRepeating("Fire", fireTime, fireTime); // Used for Object Pooling
+    }
 
     //-------------------------------------
-	// Update is called once per frame
+    // Update is called once per frame
     //-------------------------------------
-	void Update () 
+    /*void Update () 
     {
         // Hacky way of getting players firing
         if (Input.GetButton("Fire1") && Time.time > nextFire ||
@@ -67,20 +63,26 @@ public class PlayerShooting : MonoBehaviour
             nextFire = Time.time + fireRate;
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
         }
-    }
+    } */
 
     void Fire()
     {
-        // Object Pooling Stuff
-        //GameObject obj = ObjectPoolScript.current.GetPooledObject();
-        //
-        //if (obj == null) return;
-        //
-        //SoundManager.instance.RandomizeSfx(shootSound);
-        //obj.transform.position = transform.position;
-        //obj.transform.rotation = transform.rotation;
-        //obj.SetActive(true);
+        if (Input.GetButton(sFire) && Time.time > nextFire)
+        {
+            //Object Pooling Stuff
+            GameObject go = ObjectPool.current.GetPooledObject();
+
+            if (go == null) return;
+
+            //SoundManager.instance.RandomizeSfx(shootSound);
+            go.transform.position = transform.position;
+            go.transform.rotation = transform.rotation;
+            go.SetActive(true);
+        }
     }
+
+    // pass through the number/ id
+    public void SetFire(string a_fire) { sFire = a_fire; }
 }
 
 //--------------------------------------------------------------------------------------

@@ -1,23 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &118282
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 476280}
-  - 33: {fileID: 3394778}
-  - 136: {fileID: 13666084}
-  - 23: {fileID: 2365492}
-  m_Layer: 0
-  m_Name: Shot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &172846
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,10 +14,9 @@ GameObject:
   - 23: {fileID: 2354846}
   - 114: {fileID: 11496878}
   - 114: {fileID: 11444456}
-  - 114: {fileID: 11489426}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,21 +48,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.679}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_Children:
-  - {fileID: 476280}
-  m_Father: {fileID: 483440}
-  m_RootOrder: 0
---- !u!4 &476280
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118282}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0.35}
-  m_LocalScale: {x: 0.61793375, y: 0.61793375, z: 0.61793375}
   m_Children: []
-  m_Father: {fileID: 464654}
+  m_Father: {fileID: 483440}
   m_RootOrder: 0
 --- !u!4 &483440
 Transform:
@@ -90,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 7.1759133, y: 4.312428, z: -1.8502941}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 464654}
@@ -148,32 +116,6 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!23 &2365492
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118282}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!33 &3382734
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -181,13 +123,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172846}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!33 &3394778
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118282}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &3395338
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -248,30 +183,11 @@ MonoBehaviour:
   speed: 20
   fireTime: 0.05
   tilt: 0
-  boundary:
-    xMin: 0
-    xMax: 0
-    zMin: 0
-    zMax: 0
-  shot: {fileID: 118282}
+  shot: {fileID: 188208, guid: e33d5455faf498e48a0663e1226280c6, type: 2}
   shotSpawn: {fileID: 464654}
-  fireRate: 0.1
+  fireRate: 0.3
   shootSound: {fileID: 0}
---- !u!114 &11489426
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172846}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93b52d20c0181d4c96ed5e2ffdd7807, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledObject: {fileID: 118282}
-  pooledAmount: 20
-  willGrow: 1
-  pooledObjects: []
+  sFire: _Fire
 --- !u!114 &11496878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,19 +215,6 @@ MonoBehaviour:
   r_gameOverPanel: {fileID: 0}
   m_eCurrentPlayerState: 0
   m_playerID: 0
---- !u!136 &13666084
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118282}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

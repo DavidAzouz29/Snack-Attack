@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BulletDestroyScript : MonoBehaviour
 {
-    public float destroyTime = 2.0f;
+    public float destroyTime = 5.0f;
 
     void OnEnable()
     {

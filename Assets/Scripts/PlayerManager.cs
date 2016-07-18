@@ -41,8 +41,11 @@ public class PlayerManager : MonoBehaviour
     //public Texture r_Player2T;
 
     //public Color[] colorsArray = new Color[MAX_PLAYERS];
-    public PlayerController[] uiPlayerArray = new PlayerController[MAX_PLAYERS]; //TODO: private
+    public PlayerController[] uiPlayerConArray = new PlayerController[MAX_PLAYERS]; //TODO: private
     public PlayerController r_PlayerController; // Referance to a player.
+
+    public PlayerShooting[] uiPlayerShootArray = new PlayerShooting[MAX_PLAYERS]; //TODO: private
+    public PlayerShooting r_PlayerShooting; // Referance to a player.
 
     //----------------------------------
     // PRIVATE VARIABLES
@@ -71,7 +74,7 @@ public class PlayerManager : MonoBehaviour
             v3PlayerPosition.x = Random.Range(-fTerrRadius, fTerrRadius); //
             v3PlayerPosition.z = Random.Range(-fTerrRadius, fTerrRadius); //
             Object j = Instantiate(r_Player, v3PlayerPosition, r_Player.transform.rotation);
-			j.name = "Character " + ( i + 1);
+            j.name = "Character " + (i + 1);
             /*SkinnedMeshRenderer mesh = ((GameObject)j).GetComponentInChildren<SkinnedMeshRenderer>();
             // if the first player
             if(i == 0)
@@ -89,8 +92,11 @@ public class PlayerManager : MonoBehaviour
             // -------------------------------------------------------------
             r_PlayerController = ((GameObject)j).GetComponent<PlayerController>();
             r_PlayerController.SetPlayerID(i);
+            r_PlayerShooting = ((GameObject)j).GetComponent<PlayerShooting>();
+            r_PlayerShooting.SetFire("P" + (i + 1) + "_Fire");
 
-            uiPlayerArray[i] = r_PlayerController;
+            uiPlayerConArray[i] = r_PlayerController;
+            uiPlayerShootArray[i] = r_PlayerShooting;
             r_Players[i] = (GameObject)j;
             // -------------------------------------------------------------
             Debug.Log(v3PlayerPosition);

@@ -40,13 +40,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a38d93fbb21cdf41911aaf39ce72b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 0
+  playerSpeed: 10
   speedBoost: 50
+  hitsBeforeDeath: 5
+  health: 100
   verticalAxis: _Vertical
   horizontalAxis: _Horizontal
   rotationAxisX: Rotation_X
   rotationAxisY: Rotation_X
+  Fire: _Fire
+  Throw: _Throw
+  Jump: _Jump
+  dizzyBirds: {fileID: 0}
   r_weapon: {fileID: 0}
+  r_gameOverPanel: {fileID: 0}
   m_eCurrentPlayerState: 0
   m_playerID: 0
 --- !u!114 &11405996
@@ -60,18 +67,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3018b43c077382546b330607ef477773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r_Player: {fileID: 144594, guid: 88fa3afb77fe8f24c9b8f0bb4ef7e3a9, type: 2}
+  r_Player: {fileID: 172846, guid: 3a670b7535304c1459075445ca9ab08f, type: 2}
   r_Players:
   - {fileID: 0}
   - {fileID: 0}
   v3PlayerPosition: {x: 0, y: 0, z: 0}
+  distance: {x: 0, y: 0, z: 0}
+  heightOfCamera: 2.3
   c_Camera: {fileID: 0}
-  r_Player1: {fileID: 2100000, guid: ea1370ecde5f46341bf77b477774cbcb, type: 2}
-  r_Player2: {fileID: 2100000, guid: 57f55d2eb2421ef4d8e437fc9f608cd7, type: 2}
-  uiPlayerArray:
+  r_Player1: {fileID: 0}
+  r_Player2: {fileID: 0}
+  uiPlayerConArray:
   - {fileID: 0}
   - {fileID: 0}
-  r_PlayerController: {fileID: 0}
+  r_PlayerController: {fileID: 11405644}
+  uiPlayerShootArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  r_PlayerShooting: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -23,6 +23,7 @@ public class ObjectPool : MonoBehaviour
     //--------------------
     // Public variables
     //--------------------
+    public static ObjectPool current;
     // The Prefab to pool
     public GameObject prefab;
     // how many to create to start with
@@ -37,10 +38,15 @@ public class ObjectPool : MonoBehaviour
     // Private variables
     //--------------------
     // the array of actual generated gameobjects
-    private GameObject[] generated;
+    public GameObject[] generated;
     //how many have been spawned from the generated list
     private int used_count;
-    private int m_iFirstDeadIndex = -1; // First dead thing
+    //private int m_iFirstDeadIndex = -1; // First dead thing
+
+    void Awake()
+    {
+        current = this;
+    }
 
     // Use this for initialization
     void Start()
@@ -52,13 +58,15 @@ public class ObjectPool : MonoBehaviour
             generated[i].SetActive(false);
         }
         used_count = 0;
-        m_iFirstDeadIndex = 0;
+        //m_iFirstDeadIndex = 0;
     }
 
     public GameObject Create(Vector3 a_position, Quaternion a_rotation)
     {
         GameObject result = null;
+        //------------------------------------------------------------
         #region Expanding the array
+        //------------------------------------------------------------
         // if we've filled up the array and we don't have a hard limit
         if (used_count == generated.Length && !hard_limit)
         {
@@ -83,6 +91,7 @@ public class ObjectPool : MonoBehaviour
             generated = new_array;
         }
         #endregion
+        //------------------------------------------------------------
 
         // check if we have space left
         if (used_count < generated.Length)
@@ -152,5 +161,25 @@ public class ObjectPool : MonoBehaviour
             }
         }
         Debug.Log("OP: Freed");
+    }
+
+    public GameObject GetPooledObject()
+    {
+        for (int i = 0; i < generated.Length; i++)
+        {
+            if (!generated[i].activeInHierarchy)
+            {
+                return generated[i];
+            }
+        }
+
+        /*if (hard_limit)
+        {
+            GameObject obj = (GameObject)Instantiate(prefab);
+            generated.Add(obj);
+            return obj;
+        } */
+
+        return null;
     }
 }

@@ -25,7 +25,7 @@ abstract public class PowerUpEffect : ScriptableObject
 }
 
 // TODO: move to separate script
-// Adds an amount to the total value of our Boss 
+// Adds an amount to the total value of our Boss
 class BossBooster : PowerUpEffect
 {
     public int Amount;
