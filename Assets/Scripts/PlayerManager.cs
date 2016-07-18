@@ -33,8 +33,9 @@ public class PlayerManager : MonoBehaviour
     public Vector3 v3PlayerPosition = Vector3.zero;
 	[Header("Values for camera pos and Lerping")]
 	public Vector3 distance = Vector3.zero;
-	public float heightOfCamera = 2.3f;
-    public Camera c_Camera;
+    //public float heightOfCamera = 2.3f;
+    //public Camera c_Camera;
+    public CameraControl m_CameraControl;
     public Material r_Player1;
     public Material r_Player2;
     //public Texture r_Player1T; //TODO: make textures/ materials work
@@ -51,22 +52,24 @@ public class PlayerManager : MonoBehaviour
     // PRIVATE VARIABLES
     //----------------------------------
     private float fTerrRadius = 3.5f;
-    private const int m_iCameraFOV = 60;
-    private const int m_iCameraFOVBT = 40;
-    private float m_fCameraFOVCurrent = 0.0f;
+
+
+    //private const int m_iCameraFOV = 60;
+    //private const int m_iCameraFOVBT = 40;
+    //private float m_fCameraFOVCurrent = 0.0f;
 
     // Selects the main camera once level is loaded
     void OnLevelWasLoaded()
     {
-        c_Camera = Camera.main;
-        c_Camera.fieldOfView = m_iCameraFOV;
+        //c_Camera = Camera.main;
+        //c_Camera.fieldOfView = m_iCameraFOV;
     }
 
     // Use this for initialization
     void Start ()
     {
         v3PlayerPosition.y = 2.0f;
-
+        m_CameraControl.m_Targets = new Transform[MAX_PLAYERS]; //assigns the maximum characters the camera should track
         //Loop through and create our players.
         for (uint i = 0; i < MAX_PLAYERS; ++i)
         {
@@ -100,6 +103,11 @@ public class PlayerManager : MonoBehaviour
             r_Players[i] = (GameObject)j;
             // -------------------------------------------------------------
             Debug.Log(v3PlayerPosition);
+        }
+        for (int i = 0; i < MAX_PLAYERS; i++)
+        {
+            // ... set it to the appropriate tank transform.
+            m_CameraControl.m_Targets[i] = uiPlayerArray[i].transform;
         }
     }
 
