@@ -102,7 +102,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 466394, guid: d973477ce6faaf341a49c270bb9c5cc3, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.54
       objectReference: {fileID: 0}
     - target: {fileID: 466394, guid: d973477ce6faaf341a49c270bb9c5cc3, type: 2}
       propertyPath: m_LocalRotation.x
@@ -136,6 +136,14 @@ Prefab:
       propertyPath: playerSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 11405996, guid: d973477ce6faaf341a49c270bb9c5cc3, type: 2}
+      propertyPath: m_CameraControl
+      value: 
+      objectReference: {fileID: 815541633}
+    - target: {fileID: 11405996, guid: d973477ce6faaf341a49c270bb9c5cc3, type: 2}
+      propertyPath: r_PlayerShooting
+      value: 
+      objectReference: {fileID: 2012414783}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d973477ce6faaf341a49c270bb9c5cc3, type: 2}
   m_IsPrefabParent: 0
@@ -256,6 +264,7 @@ GameObject:
   - 92: {fileID: 815541630}
   - 124: {fileID: 815541629}
   - 81: {fileID: 815541628}
+  - 114: {fileID: 815541633}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -330,9 +339,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &815541633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815541627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2caed897abcd47d40883fbc78f4fa4ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DampTime: 0.2
+  m_ScreenEdgeBuffer: 4
+  m_MinSize: 6.5
+  m_Targets: []
 --- !u!114 &1245628072 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11405644, guid: d973477ce6faaf341a49c270bb9c5cc3,
     type: 2}
   m_PrefabInternal: {fileID: 142454571}
   m_Script: {fileID: 11500000, guid: 6a38d93fbb21cdf41911aaf39ce72b1d, type: 3}
+--- !u!1 &2012414780 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 119002, guid: d973477ce6faaf341a49c270bb9c5cc3, type: 2}
+  m_PrefabInternal: {fileID: 142454571}
+--- !u!114 &2012414783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2012414780}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9357b8960b03004eab064c046c41d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
+  fireTime: 0.05
+  tilt: 0
+  shot: {fileID: 0}
+  shotSpawn: {fileID: 0}
+  fireRate: 0
+  shootSound: {fileID: 0}
+  sFire: _Fire

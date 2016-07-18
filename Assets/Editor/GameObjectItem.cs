@@ -1,35 +1,41 @@
 ﻿///<summary>
-///
-/// viewed: http://forum.unity3d.com/threads/editor-script-create-game-object-from-a-prefab.47845/
+/// Name: GameObjectItem.cs
+/// Author: David Azouz
+/// Date Created: 18/07/16
+/// Date Modified: 18/07/16
+/// --------------------------------------------------
+/// Brief:
+/// viewed: https://docs.unity3d.com/ScriptReference/EditorUtility.html
+/// http://forum.unity3d.com/threads/editor-script-create-game-object-from-a-prefab.47845/
+/// http://code.tutsplus.com/tutorials/how-to-add-your-own-tools-to-unitys-editor--active-10047
+/// --------------------------------------------------
+/// Edits:
+/// -   - David Azouz 14/07/2016
+/// - 
+/// 
+/// TODO:
+/// 
 /// </summary>
 
 using UnityEngine;
 using UnityEditor;
-using System.Collections;
 
 public class GameObjectItem : Editor
 {
-    //public GameObject prefab;
-    //private string menuP = "Player";
-    [MenuItem("Player Game Object/AddPlayer")]
+    [MenuItem("Player Game Object/Add Player")]
     public static void AddPlayerToScene()
     {
-        //AssetDatabase.CreateAsset(prefab, "");
         Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Player.prefab", typeof(GameObject));
-        GameObject clone = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
-        // Modify the clone to your heart's content
-        clone.transform.position = Vector3.one;
-        //AssetDatabase.Refresh();
+        GameObject obj = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+        // you may now modify the game object
+        obj.transform.position = Vector3.one;
     }
-
-
-	/*// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	} */
+    [MenuItem("Player Game Object/Add Shot")]
+    public static void AddShotToScene()
+    {
+        Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Shot.prefab", typeof(GameObject));
+        GameObject obj = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+        // you may now modify the game object
+        obj.transform.position = Vector3.one;
+    }
 }
