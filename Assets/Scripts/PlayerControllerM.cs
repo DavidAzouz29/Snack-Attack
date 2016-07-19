@@ -46,10 +46,11 @@ public class PlayerControllerM : MonoBehaviour {
 
 	void Movement () {
 
-		movementInput = new Vector3 (Input.GetAxis (movementXName), 0, Input.GetAxis (movementYName)); // Setting up movement input (left stick)
-		rotationInput = new Vector3 (Input.GetAxis (rotationXName), 0, Input.GetAxis (rotationYName)); // Setting up rotation input (right stick)
+		movementInput = new Vector3 (Input.GetAxis ("P1_Horizontal"), 0, Input.GetAxis ("P1_Vertical")); // Setting up movement input (left stick)
+		rotationInput = new Vector3 (Input.GetAxis ("P1_Rotation_X"), 0, Input.GetAxis ("P1_Rotation_Y")); // Setting up rotation input (right stick)
 
-		if (movementInput.magnitude > 1) { // Will check if movement input length is greater than 1
+
+        if (movementInput.magnitude > 1) { // Will check if movement input length is greater than 1
 			movementInput.Normalize (); // If so, it will be set back to 1, this will still keep the same direction that the player is moving the left stick
 		}
 		if (movementInput.magnitude < deadzone) { // Will check if movement input length is lower than the deadzone amount

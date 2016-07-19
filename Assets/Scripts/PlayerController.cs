@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
     private int healthDeduct = 0;
     //private healthBar healthBars;
 
+    public bool m_Moving = false;
+
     // Use this for initialization
     void Start ()
     {
@@ -120,9 +122,12 @@ public class PlayerController : MonoBehaviour
         // Movement
 		if (moveHorizontal < -fRot || moveHorizontal > fRot ||
 		          moveVertical < -fRot || moveVertical > fRot) {
-			Vector3 movementDirection = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+            m_Moving = true;
+            Vector3 movementDirection = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 			Vector3 pos = transform.position + movementDirection * playerSpeed * Time.deltaTime;
 			transform.position = Vector3.Lerp (transform.position, pos, 0.2f);
+
+
 			//Debug.Log("HELP");
 			//animator.SetBool("Walking", true);
 //			c_walk.CrossFade("Walk");
@@ -130,9 +135,10 @@ public class PlayerController : MonoBehaviour
 		// we're not moving so play the idle animation
 		else 
 		{
-			//animator.SetBool ("Walking", false);
-//			c_idle.Play ("idle");
-		}
+            m_Moving = false;
+            //animator.SetBool ("Walking", false);
+            //			c_idle.Play ("idle");
+        }
 
         // If we are rotating
         // Rotation/ Direction with the (right) analog stick

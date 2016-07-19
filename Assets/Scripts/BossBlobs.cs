@@ -8,22 +8,84 @@ public class BossBlobs : MonoBehaviour {
     Whoever is currently the boss, when going below a certain health threshold, should drop blobs around them.
     */
 
-    static uint m_Fourth = 100, m_Third = 75, m_Second = 50, m_First = 25;
+    [Tooltip("Use these to specify at what health the boss drops its blobs.")]
+    public List<int> m_Thresholds = new List<int>(new int[] { 100, 75, 50, 25 });
 
-    public uint m_CurrentThreshold;
+    [Tooltip("Use these to specify how many blobs to drop")]
+    public List<int> m_BlobsToDrop = new List<int>(new int[] { 4, 3, 2, 1 });
 
-    public uint m_CurrentHealth;
-    public uint m_PreviousHealth;
+    [Tooltip("use these to specify how much power the blobs will give")]
+    public List<int> m_PowerToGive = new List<int>(new int[] { 5, 10, 15, 20 });
 
-    public GameObject m_Blob;
+    [Tooltip("The scale of each different power level")]
+    public List<float> m_ScaleLevel = new List<float>(new float[] { 2.0f, 1.5f, 1.0f, 0.75f });
+    
+    private int m_CurrentThreshold;
 
-    public List<GameObject> m_CreatedBlobs;
+    private int m_CurrentHealth;
+    private int m_PreviousHealth;
+
+    public enum Thresholds
+    {
+        GIANT,
+        BIG,
+        REGULAR,
+        SMALL
+    }
+
+    public Thresholds m_Threshold;
+
+    public struct Blobs
+    {
+        public int GiantThresh, BigThresh, RegularThresh, SmallThresh;
+        public int GiantDrop, BigDrop, RegularDrop, SmallDrop;
+        public int GiantPower, BigPower, RegularPower, SmallPower;
+        public float GiantScale, BigScale, RegularScale, SmallScale;
+    };
+
+    public Blobs m_Blobs;
+
+    /*
+        Could turn this into a list, for different characters and have different
+        prefabs for different bosses. Eg; Watermelon slices for watermelon boss blobs.
+    */
+    public GameObject m_BlobObject; 
+
+    [HideInInspector]
+    public List<GameObject> m_CreatedBlobs; // Used to manage the instantiated blobs, and to only explode those.
 
 
     void Start()
     {
-        m_CurrentThreshold = m_Fourth;
-        m_CurrentHealth = m_CurrentThreshold;
+        InitializeStruct();
+
+        m_Threshold = Thresholds.GIANT;
+        m_CurrentHealth = 100;
+        m_CurrentThreshold = m_Blobs.GiantThresh;
+        //m_Blobs initialise
+    }
+
+    void InitializeStruct()
+    {
+        m_Blobs.GiantDrop   = m_BlobsToDrop[0];
+        m_Blobs.BigDrop     = m_BlobsToDrop[1];
+        m_Blobs.RegularDrop = m_BlobsToDrop[2];
+        m_Blobs.SmallDrop   = m_BlobsToDrop[3];
+
+        m_Blobs.GiantPower   = m_PowerToGive[0];
+        m_Blobs.BigPower     = m_PowerToGive[1];
+        m_Blobs.RegularPower = m_PowerToGive[2];
+        m_Blobs.SmallPower   = m_PowerToGive[3];
+
+        m_Blobs.GiantScale   = m_ScaleLevel[0];
+        m_Blobs.BigScale     = m_ScaleLevel[1];
+        m_Blobs.RegularScale = m_ScaleLevel[2];
+        m_Blobs.SmallScale   = m_ScaleLevel[3];
+
+        m_Blobs.GiantThresh   = m_Thresholds[0];
+        m_Blobs.BigThresh     = m_Thresholds[1];
+        m_Blobs.RegularThresh = m_Thresholds[2];
+        m_Blobs.SmallThresh   = m_Thresholds[3];
     }
 
     void Update()
@@ -33,13 +95,9 @@ public class BossBlobs : MonoBehaviour {
             m_CurrentHealth = m_CurrentHealth - 5;
             if (m_CurrentHealth < m_CurrentThreshold)
             {
-                DropBlobs(m_CurrentThreshold);
-                m_CurrentThreshold = m_CurrentThreshold - 25;
+                Drop(m_Threshold);
 
-                // Everytime a player goes down a threshold, lower their scale by .25
-                gameObject.transform.localScale = new Vector3(transform.localScale.x - 0.25f,  
-                                                              transform.localScale.y - 0.25f,
-                                                              transform.localScale.z - 0.25f); 
+
             }
         }
     }
@@ -53,75 +111,89 @@ public class BossBlobs : MonoBehaviour {
             Destroy(_col.gameObject); // Destroy the projectile
 
             m_CurrentHealth = m_CurrentHealth - 5; // Use projectile damage here
-            if(m_CurrentHealth < m_CurrentThreshold)
+            if(m_CurrentHealth < m_CurrentThreshold) // Does the 'boss' drop a health threshold?
             {
-                DropBlobs(m_CurrentThreshold);
-                m_CurrentThreshold = m_CurrentThreshold - 25;
+                Drop(m_Threshold);
+                m_CurrentThreshold = m_CurrentThreshold - 25; // Drop the threshold.
             }
         }
     }
 
-    void DropBlobs(uint _threshold)
+    void Drop(Thresholds _t)
     {
-        int _blobs;
-        // Should only be called if this 'boss' has gone below certain threshold.
-        switch (_threshold)
+        switch (_t)
         {
-            case 25:
-                _blobs = 4;
-                for (int i = 0; i < _blobs; i++)
+            #region GIANT
+            case Thresholds.GIANT:
+                for (int i = 0; i < m_Blobs.GiantDrop ; i++)
                 {
-                    int a = 1;
-                    GameObject _curBlob = (GameObject)Instantiate(m_Blob, BlobSpawn(a), Quaternion.identity);
-                    _curBlob.GetComponent<BlobManager>().m_PowerToGive = 20;
+                    int a = i * (360 / m_Blobs.GiantDrop);
+                    GameObject _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
+                    _curBlob.GetComponent<BlobManager>().m_PowerToGive = m_Blobs.GiantPower;
                     m_CreatedBlobs.Add(_curBlob);
                 }
                 // Apply Explosion
                 ExplodeBlobs();
                 m_CreatedBlobs.Clear();
-                // Drop Some Blobs
-                break;
-            case 50:
-                _blobs = 2;
-                for (int i = 0; i < _blobs; i++)
-                {
-                    int a = i * (360 / _blobs);
-                    GameObject _curBlob = (GameObject)Instantiate(m_Blob, BlobSpawn(a), Quaternion.identity);
-                    _curBlob.GetComponent<BlobManager>().m_PowerToGive = 15;
-                    m_CreatedBlobs.Add(_curBlob);
-                }
-                // Apply Explosion
-                ExplodeBlobs();
-                m_CreatedBlobs.Clear();
-                break;
-            case 75:
-                _blobs = 3;
-                for (int i = 0; i < _blobs; i++)
-                {
-                    int a = i * (360 / _blobs);
-                    GameObject _curBlob = (GameObject)Instantiate(m_Blob, BlobSpawn(a), Quaternion.identity);
-                    _curBlob.GetComponent<BlobManager>().m_PowerToGive = 10;
-                    m_CreatedBlobs.Add(_curBlob);
-                }
-                // Apply Explosion
-                ExplodeBlobs();
-                m_CreatedBlobs.Clear();
-                break;
-            case 100:
-                // Drop 4 blobs
-                _blobs = 4;
-                for (int i = 0; i < _blobs; i++)
-                {
-                    int a = i * (360 / _blobs);
-                    GameObject _curBlob = (GameObject)Instantiate(m_Blob, BlobSpawn(a), Quaternion.identity);
-                    _curBlob.GetComponent<BlobManager>().m_PowerToGive = 5;
-                    m_CreatedBlobs.Add(_curBlob);
-                }
-                // Apply Explosion
-                ExplodeBlobs();
-                m_CreatedBlobs.Clear();
-                break;
 
+                // Everytime a player goes down a threshold, lower their scale by .25
+                gameObject.transform.localScale = new Vector3(transform.localScale.x - m_Blobs.GiantScale,
+                                                              transform.localScale.y - m_Blobs.GiantScale,
+                                                              transform.localScale.z - m_Blobs.GiantScale);
+
+                m_CurrentThreshold = m_Blobs.BigThresh;
+                m_Threshold = Thresholds.BIG;
+                break;
+            #endregion
+
+            #region BIG
+            case Thresholds.BIG:
+                for (int i = 0; i < m_Blobs.BigDrop; i++)
+                {
+                    int a = i * (360 / m_Blobs.BigDrop);
+                    GameObject _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
+                    _curBlob.GetComponent<BlobManager>().m_PowerToGive = m_Blobs.BigPower;
+                    m_CreatedBlobs.Add(_curBlob);
+                }
+                // Apply Explosion
+                ExplodeBlobs();
+                m_CreatedBlobs.Clear();
+
+                // Everytime a player goes down a threshold, lower their scale by .25
+                gameObject.transform.localScale = new Vector3(transform.localScale.x - m_Blobs.BigScale,
+                                                              transform.localScale.y - m_Blobs.BigScale,
+                                                              transform.localScale.z - m_Blobs.BigScale);
+
+                m_Threshold = Thresholds.REGULAR;
+                break;
+            #endregion
+
+            #region REGULAR
+            case Thresholds.REGULAR:
+                for (int i = 0; i < m_Blobs.RegularDrop; i++)
+                {
+                    int a = i * (360 / m_Blobs.RegularDrop);
+                    GameObject _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
+                    _curBlob.GetComponent<BlobManager>().m_PowerToGive = m_Blobs.RegularPower;
+                    m_CreatedBlobs.Add(_curBlob);
+                }
+                // Apply Explosion
+                ExplodeBlobs();
+                m_CreatedBlobs.Clear();
+
+                // Everytime a player goes down a threshold, lower their scale by .25
+                gameObject.transform.localScale = new Vector3(transform.localScale.x - m_Blobs.RegularScale,
+                                                              transform.localScale.y - m_Blobs.RegularScale,
+                                                              transform.localScale.z - m_Blobs.RegularScale);
+
+                m_CurrentThreshold = m_Blobs.SmallThresh;
+                m_Threshold = Thresholds.SMALL;
+                break;
+            #endregion
+
+            case Thresholds.SMALL:
+                // Kill
+                break;
             default:
                 break;
         }
@@ -157,4 +229,5 @@ public class BossBlobs : MonoBehaviour {
 
         return _position;
     }
+
 }
