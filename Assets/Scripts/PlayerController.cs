@@ -8,8 +8,10 @@
 /// Brief: Player Controller class that controls the player.
 /// viewed: https://unity3d.com/learn/tutorials/projects/roll-a-ball/moving-the-player
 /// http://wiki.unity3d.com/index.php?title=Xbox360Controller
+/// http://answers.unity3d.com/questions/788043/is-it-possible-to-translate-an-object-diagonally-a.html
 /// *Edit*
-/// - Player state machine - 20/06/2016
+/// - Player state machine - David Azouz 20/06/2016
+/// - Player moving at a 45 degree angle - David Azouz 20/06/2016
 /// TODO:
 /// - More than one player added - /6/2016
 /// - 
@@ -28,6 +30,8 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public float playerSpeed = 10.0f;
     public float speedBoost = 6.0f;
+    public bool m_Moving = false;
+
     [Tooltip("This will change at runtime.")]
     [Header("Health")]
     public int hitsBeforeDeath = 5;
@@ -50,9 +54,13 @@ public class PlayerController : MonoBehaviour
     [Header("Weapon")]
     public GameObject r_weapon;
     public GameObject r_gameOverPanel;
+<<<<<<< HEAD
     public bool m_Moving = false;
     //public GameObject r_bombExplosionParticleEffect;
     //public Camera r_camera;
+=======
+
+>>>>>>> 80e9e2f392bc9ef3030392a6a4807d1a3d2b0b0b
     //choosing player states
     [HideInInspector]
     public enum E_PLAYER_STATE
@@ -71,9 +79,19 @@ public class PlayerController : MonoBehaviour
     // A way to identidy players
     [SerializeField] private uint m_playerID = 0;
     private float fRot = 0.2f;
+<<<<<<< HEAD
     // Health
     private int healthDeduct = 0;
     //private healthBar healthBars;
+=======
+    private Vector3 velocity = Vector3.zero;
+    private Vector3 goalPos = Vector3.zero;
+
+    // Health
+    private int healthDeduct = 0;
+    //private healthBar healthBars;
+
+>>>>>>> 80e9e2f392bc9ef3030392a6a4807d1a3d2b0b0b
     // Use this for initialization
     void Start ()
     {
@@ -118,21 +136,22 @@ public class PlayerController : MonoBehaviour
         float moveRotationY = Input.GetAxis(rotationAxisY);
 
         // Movement
-		if (moveHorizontal < -fRot || moveHorizontal > fRot ||
-		          moveVertical < -fRot || moveVertical > fRot) {
+        if (moveHorizontal < -fRot || moveHorizontal > fRot ||
+                  moveVertical < -fRot || moveVertical > fRot)
+        {
             m_Moving = true;
             Vector3 movementDirection = new Vector3 (moveHorizontal, 0.0f, moveVertical);
-			Vector3 pos = transform.position + movementDirection * playerSpeed * Time.deltaTime;
-			transform.position = Vector3.Lerp (transform.position, pos, 0.2f);
+            movementDirection = Quaternion.Euler(0, 45, 0) * movementDirection;
+            Vector3 pos = transform.position + movementDirection * playerSpeed * Time.deltaTime;
+            transform.position = Vector3.Lerp (transform.position, pos, 0.2f);
 
-
-			//Debug.Log("HELP");
-			//animator.SetBool("Walking", true);
-			//c_walk.CrossFade("Walk");
-		} 
-		// we're not moving so play the idle animation
-		else 
-		{
+            //Debug.Log("HELP");
+            //animator.SetBool("Walking", true);
+            //c_walk.CrossFade("Walk");
+        }
+        // we're not moving so play the idle animation
+        else
+        {
             m_Moving = false;
             //animator.SetBool ("Walking", false);
             //c_idle.Play ("idle");
