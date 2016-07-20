@@ -14,12 +14,11 @@ public class GameManager : MonoBehaviour {
         //Generate Random player
         m_RandomPlayer = Random.Range(0, (MAX_PLAYERS - 1));
         //Grab required data and assign the random player as the boss
-        m_BossScale = 2;
-        //m_BossScale = m_PlayerManager.GetComponent<PlayerManager>().uiPlayerConArray[m_RandomPlayer].gameObject.GetComponent<BossBlobs>().m_Blobs.GiantScale;
+        m_BossScale = m_PlayerManager.GetComponent<PlayerManager>().uiPlayerConArray[m_RandomPlayer].gameObject.GetComponent<BossBlobs>().m_Blobs.GiantScale;
         //
         Debug.Log(m_BossScale);
-        m_PlayerManager.GetComponent<PlayerManager>().uiPlayerConArray[m_RandomPlayer].gameObject.GetComponent<BossBlobs>().enabled = true;
-        m_PlayerManager.GetComponent<PlayerManager>().uiPlayerConArray[m_RandomPlayer].gameObject.transform.localScale = new Vector3(m_BossScale, m_BossScale, m_BossScale);
+        m_PlayerManager.GetComponent<PlayerManager>().r_Players[m_RandomPlayer].gameObject.GetComponent<BossBlobs>().enabled = true;
+        m_PlayerManager.GetComponent<PlayerManager>().r_Players[m_RandomPlayer].gameObject.transform.localScale = new Vector3(m_BossScale, m_BossScale, m_BossScale);
 
 
     }

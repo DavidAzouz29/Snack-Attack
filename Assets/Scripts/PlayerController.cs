@@ -54,13 +54,8 @@ public class PlayerController : MonoBehaviour
     [Header("Weapon")]
     public GameObject r_weapon;
     public GameObject r_gameOverPanel;
-<<<<<<< HEAD
-    public bool m_Moving = false;
     //public GameObject r_bombExplosionParticleEffect;
     //public Camera r_camera;
-=======
-
->>>>>>> 80e9e2f392bc9ef3030392a6a4807d1a3d2b0b0b
     //choosing player states
     [HideInInspector]
     public enum E_PLAYER_STATE
@@ -79,19 +74,12 @@ public class PlayerController : MonoBehaviour
     // A way to identidy players
     [SerializeField] private uint m_playerID = 0;
     private float fRot = 0.2f;
-<<<<<<< HEAD
     // Health
     private int healthDeduct = 0;
     //private healthBar healthBars;
-=======
     private Vector3 velocity = Vector3.zero;
     private Vector3 goalPos = Vector3.zero;
 
-    // Health
-    private int healthDeduct = 0;
-    //private healthBar healthBars;
-
->>>>>>> 80e9e2f392bc9ef3030392a6a4807d1a3d2b0b0b
     // Use this for initialization
     void Start ()
     {
