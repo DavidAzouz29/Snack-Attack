@@ -34,7 +34,6 @@ public class PlayerManager : MonoBehaviour
 	[Header("Values for camera pos and Lerping")]
 	public Vector3 distance = Vector3.zero;
     //public float heightOfCamera = 2.3f;
-    //public Camera c_Camera;
     public CameraControl m_CameraControl;
     public Material r_Player1;
     public Material r_Player2;
@@ -51,19 +50,7 @@ public class PlayerManager : MonoBehaviour
     //----------------------------------
     // PRIVATE VARIABLES
     //----------------------------------
-    private float fTerrRadius = 3.5f;
-
-
-    //private const int m_iCameraFOV = 60;
-    //private const int m_iCameraFOVBT = 40;
-    //private float m_fCameraFOVCurrent = 0.0f;
-
-    // Selects the main camera once level is loaded
-    void OnLevelWasLoaded()
-    {
-        //c_Camera = Camera.main;
-        //c_Camera.fieldOfView = m_iCameraFOV;
-    }
+    private float fTerrRadius = 5;
 
     // Use this for initialization
     void Start ()
@@ -90,6 +77,7 @@ public class PlayerManager : MonoBehaviour
                 mesh.material = r_Player2;
                 //mesh.material.mainTexture = r_Player2T;
             }*/
+
             // -------------------------------------------------------------
             // This allows each instance the ability to move independently
             // -------------------------------------------------------------
@@ -110,73 +98,4 @@ public class PlayerManager : MonoBehaviour
             m_CameraControl.m_Targets[i] = uiPlayerConArray[i].transform;
         }
     }
-
-	//TODO: get camera lerping working
-    // Used for zooming the camera in and out based on the distance of the playerss
-  /*void Update()
-    {
-        // Distance
-        Vector3 smallest = r_Players[0].transform.position;
-		Vector3 largest = r_Players[MAX_PLAYERS - 1].transform.position; //changed from 0
-        foreach (GameObject g in r_Players)
-        {
-            if (g == null) break;
-
-            if (g.transform.position.x < smallest.x)
-            {
-                smallest.x = g.transform.position.x;
-            }
-            else if (g.transform.position.x > largest.x)
-            {
-                largest.x = g.transform.position.x;
-            }
-
-            if (g.transform.position.z < smallest.y)
-            {
-                smallest.y = g.transform.position.z;
-            }
-            else if (g.transform.position.z > largest.y)
-            {
-                largest.y = g.transform.position.z;
-            }
-        } 
-
-        distance = largest - smallest;
-		if (distance.x <= 5) distance.x = 5; Debug.Log ("x");
-		if (distance.y <= 1) distance.y = 1; Debug.Log ("y");
-		if (distance.z <= 5) distance.z = 5; Debug.Log ("z");
-
-		if (distance.x >= 5) distance.x = 5; Debug.Log ("x");
-		if (distance.y >= 1) distance.y = 1; Debug.Log ("y");
-		if (distance.z >= 5) distance.z = 5; Debug.Log ("z");
-
-        // Average
-        Vector3 average = Vector3.zero;
-        foreach (GameObject g in r_Players)
-        {
-            if (g == null) break;
-
-            average += g.transform.position;
-        }
-        average /= MAX_PLAYERS;
-        heightOfCamera = distance.magnitude;
-		if (heightOfCamera > 4) {
-			heightOfCamera = ;
-			//c_Camera.fieldOfView = Mathf.Lerp (m_iCameraFOV, m_iCameraFOVBT, Time.deltaTime);//m_fCameraFOVCurrent); //0.2f quicker || //Time.timeScale//
-
-		} else if (heightOfCamera < 3) {
-			heightOfCamera = 0;
-		} else if (heightOfCamera < -1) {
-			heightOfCamera = -1;
-		}
-
-        //////Camera.main.transform.position = new Vector3(average.x, heightOfCamera, average.z - (3 * amountOfPlayers));
-        //Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(average.x, heightOfCamera, average.z - (3 * MAX_PLAYERS)), 0.1f);
-		float fExtra = 0;//5.0f;
-		c_Camera.transform.position = Vector3.Lerp(c_Camera.transform.position, new Vector3(average.x - fExtra, heightOfCamera, average.z - (3 * MAX_PLAYERS) - fExtra), 0.1f);
-		Vector3 v3LookAt = new Vector3 (distance.x / 2, distance.y / 2, distance.z / 2);
-		c_Camera.transform.LookAt(v3LookAt); //Vector3.Lerp(Camera.main.transform.position, new Vector3(average.x, heightOfCamera, average.z - (3 * MAX_PLAYERS)), 0.1f);
-		Debug.DrawLine(c_Camera.transform.position, v3LookAt);
-		//c_Camera.fieldOfView = Mathf.Lerp (m_iCameraFOV, m_iCameraFOVBT, Time.deltaTime);//m_fCameraFOVCurrent); //0.2f quicker || //Time.timeScale//
-	} */
 }

@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     [Header("Health")]
     public int hitsBeforeDeath = 5;
     public int health = 100;
-    
+    public float m_JumpHeight = 5;   
     public string verticalAxis = "_Vertical";
     public string horizontalAxis = "_Horizontal";
     public string rotationAxisX = "_Rotation_X";
@@ -40,16 +40,19 @@ public class PlayerController : MonoBehaviour
 	public string Fire = "_Fire";
 	public string Throw = "_Throw";
     public string Jump = "_Jump";
-	Animator animator;
+    [HideInInspector]
+    public bool m_IsBoss = false;
+
+    Animator animator;
 
     public AudioSource dizzyBirds;
 
     [Header("Weapon")]
     public GameObject r_weapon;
     public GameObject r_gameOverPanel;
+    public bool m_Moving = false;
     //public GameObject r_bombExplosionParticleEffect;
     //public Camera r_camera;
-
     //choosing player states
     [HideInInspector]
     public enum E_PLAYER_STATE
@@ -61,21 +64,16 @@ public class PlayerController : MonoBehaviour
 
         E_PLAYER_STATE_COUNT,
     };
-
     public E_PLAYER_STATE m_eCurrentPlayerState;
+
 
     // PRIVATE VARIABLES
     // A way to identidy players
     [SerializeField] private uint m_playerID = 0;
-    //Rigidbody m_rigidBody;
     private float fRot = 0.2f;
-
     // Health
     private int healthDeduct = 0;
     //private healthBar healthBars;
-
-    public bool m_Moving = false;
-
     // Use this for initialization
     void Start ()
     {
@@ -156,7 +154,7 @@ public class PlayerController : MonoBehaviour
         }
 		if (Input.GetButton ("Jump"))
         {
-		    // TODO: do jump
+            //TODO: Jump
 		}
 
         if (health <= 0)
@@ -175,12 +173,14 @@ public class PlayerController : MonoBehaviour
             //checks if the player is alive
             case E_PLAYER_STATE.E_PLAYER_STATE_ALIVE:
                 {
-//                    r_weapon.SetActive(false);
+                    //gameObject.GetComponent<BossBlobs>().enabled = false;
+                    //r_weapon.SetActive(false);
                     //Debug.Log("Alive!");
                     break;
                 }
             case E_PLAYER_STATE.E_PLAYER_STATE_BOSS:
                 {
+                    //gameObject.GetComponent<BossBlobs>().enabled = true;
                     r_weapon.SetActive(true);
                     //Debug.Log("Bomb!");
                     break;
@@ -188,6 +188,7 @@ public class PlayerController : MonoBehaviour
             //if player is dead
             case E_PLAYER_STATE.E_PLAYER_STATE_DEAD:
                 {
+                    //gameObject.GetComponent<BossBlobs>().enabled = false;
                     // Particle effect bomb (explosion)
                     //r_bombExplosionParticleEffect.SetActive(true);
                     // actions to perform after a certain time
