@@ -565,6 +565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 30
   speedBoost: 6
+  m_Moving: 0
   hitsBeforeDeath: 5
   health: 100
   m_JumpHeight: 5
@@ -573,14 +574,14 @@ MonoBehaviour:
   rotationAxisX: _Rotation_X
   rotationAxisY: _Rotation_Y
   Fire: _Fire
-  Throw: _Throw
+  Melee: _Melee
   Jump: _Jump
   m_IsBoss: 0
   dizzyBirds: {fileID: 0}
   r_weapon: {fileID: 0}
   r_gameOverPanel: {fileID: 0}
-  m_Moving: 0
   m_eCurrentPlayerState: 0
+  m_eCurrentClassState: 0
   m_playerID: 0
 --- !u!137 &13777984
 SkinnedMeshRenderer:

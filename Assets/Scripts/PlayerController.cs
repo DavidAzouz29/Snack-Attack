@@ -36,13 +36,14 @@ public class PlayerController : MonoBehaviour
     [Header("Health")]
     public int hitsBeforeDeath = 5;
     public int health = 100;
-    public float m_JumpHeight = 5;   
+    public float m_JumpHeight = 5; 
+    // these will change for each player  
     public string verticalAxis = "_Vertical";
     public string horizontalAxis = "_Horizontal";
     public string rotationAxisX = "_Rotation_X";
 	public string rotationAxisY = "_Rotation_Y";
 	public string Fire = "_Fire";
-	public string Throw = "_Throw";
+	public string Melee = "_Melee";
     public string Jump = "_Jump";
     [HideInInspector]
     public bool m_IsBoss = false;
@@ -50,12 +51,11 @@ public class PlayerController : MonoBehaviour
     Animator animator;
 
     public AudioSource dizzyBirds;
-
+    //public GameManager 
     [Header("Weapon")]
     public GameObject r_weapon;
     public GameObject r_gameOverPanel;
     //public GameObject r_bombExplosionParticleEffect;
-    //public Camera r_camera;
     //choosing player states
     [HideInInspector]
     public enum E_PLAYER_STATE
@@ -69,6 +69,16 @@ public class PlayerController : MonoBehaviour
     };
     public E_PLAYER_STATE m_eCurrentPlayerState;
 
+    // what class the player is
+    [HideInInspector]
+    public enum E_CLASS_STATE
+    {
+        E_CLASS_STATE_ROCKYROAD, //ice-cream
+        E_CLASS_STATE_WATERMELOMON, 
+
+        E_PLAYER_STATE_COUNT,
+    };
+    public E_PLAYER_STATE m_eCurrentClassState;
 
     // PRIVATE VARIABLES
     // A way to identidy players
@@ -77,8 +87,6 @@ public class PlayerController : MonoBehaviour
     // Health
     private int healthDeduct = 0;
     //private healthBar healthBars;
-    private Vector3 velocity = Vector3.zero;
-    private Vector3 goalPos = Vector3.zero;
 
     // Use this for initialization
     void Start ()
@@ -91,7 +99,7 @@ public class PlayerController : MonoBehaviour
         rotationAxisX = "_Rotation_X";
         rotationAxisY = "_Rotation_Y";
         Fire = "_Fire";
-        Throw = "_Throw";
+        Melee = "_Melee";
         Jump = "_Jump";
 
         // Loops through our players and assigns variables for input from different controllers
@@ -104,7 +112,7 @@ public class PlayerController : MonoBehaviour
                 rotationAxisX = "P" + (i + 1) + rotationAxisX; // "_Rotation_X";
                 rotationAxisY = "P" + (i + 1) + rotationAxisY; // "_Rotation_Y";
 				Fire = "P" + (i + 1) + Fire;
-                Throw = "P" + (i + 1) + Throw;
+                Melee = "P" + (i + 1) + Melee;
                 Jump = "P" + (i + 1) + Jump;
             }
         }
@@ -189,9 +197,21 @@ public class PlayerController : MonoBehaviour
                 {
                     //gameObject.GetComponent<BossBlobs>().enabled = true;
                     r_weapon.SetActive(true);
-                    //Debug.Log("Bomb!");
+                    //Debug.Log("Boss");
                     break;
                 }
+            /*case E_PLAYER_STATE.E_PLAYER_STATE_TEAMUP:
+                {
+                    // if player 'A' and 'B's' states
+                    switch(m_eCurrentClassState)
+                    {
+                        case E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
+                            {
+
+                            }
+                    }
+                    m_playerID
+                } */
             //if player is dead
             case E_PLAYER_STATE.E_PLAYER_STATE_DEAD:
                 {

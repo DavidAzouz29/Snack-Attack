@@ -31,16 +31,11 @@ public class PlayerManager : MonoBehaviour
     public GameObject r_Player; // Referance to a player.
     public GameObject[] r_Players = new GameObject[MAX_PLAYERS]; // Used for camera FOV
     public Vector3 v3PlayerPosition = Vector3.zero;
-	[Header("Values for camera pos and Lerping")]
-	public Vector3 distance = Vector3.zero;
-    //public float heightOfCamera = 2.3f;
+	[Header("Materials for different players")]
     public CameraControl m_CameraControl;
     public Material r_Player1;
     public Material r_Player2;
-    //public Texture r_Player1T; //TODO: make textures/ materials work
-    //public Texture r_Player2T;
 
-    //public Color[] colorsArray = new Color[MAX_PLAYERS];
     public PlayerController[] uiPlayerConArray = new PlayerController[MAX_PLAYERS]; //TODO: private
     public PlayerController r_PlayerController; // Referance to a player.
 
@@ -70,12 +65,10 @@ public class PlayerManager : MonoBehaviour
             if(i == 0)
             {
                 mesh.material = r_Player1;
-                //mesh.material.mainTexture = r_Player1T;
             }
             else if (i == 1)
             {
                 mesh.material = r_Player2;
-                //mesh.material.mainTexture = r_Player2T;
             }*/
 
             // -------------------------------------------------------------
