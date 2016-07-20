@@ -106,8 +106,8 @@ public class PlayerManager : MonoBehaviour
         }
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
-            // ... set it to the appropriate tank transform.
-            m_CameraControl.m_Targets[i] = uiPlayerConArray[i].transform; //TODO: r_Players?
+            // assign the target transforms for the camera to track
+            m_CameraControl.m_Targets[i] = uiPlayerConArray[i].transform;
         }
     }
 

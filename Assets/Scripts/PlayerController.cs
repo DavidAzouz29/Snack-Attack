@@ -129,15 +129,15 @@ public class PlayerController : MonoBehaviour
 
 
 			//Debug.Log("HELP");
-			//animator.SetBool("Walking", true);
-//			c_walk.CrossFade("Walk");
+			animator.SetBool("Walking", true);
+			//c_walk.CrossFade("Walk");
 		} 
 		// we're not moving so play the idle animation
 		else 
 		{
             m_Moving = false;
-            //animator.SetBool ("Walking", false);
-            //			c_idle.Play ("idle");
+            animator.SetBool ("Walking", false);
+            //c_idle.Play ("idle");
         }
 
         // If we are rotating
@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
         {
             m_eCurrentPlayerState = E_PLAYER_STATE.E_PLAYER_STATE_DEAD;
             //DO STUFF
-            //animator.SetBool("Dead", true);
+            animator.SetBool("Dead", true);
         }
 
         //m_rigidBody.AddForce(movementDirection * playerSpeed * Time.deltaTime);
