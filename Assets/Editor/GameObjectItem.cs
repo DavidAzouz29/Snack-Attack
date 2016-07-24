@@ -29,6 +29,7 @@ public class GameObjectItem : Editor
         GameObject obj = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
         // you may now modify the game object
         obj.transform.position = Vector3.one;
+		Selection.activeGameObject = obj;
     }
     [MenuItem("Player Game Object/Add Shot")]
     public static void AddShotToScene()
@@ -37,5 +38,6 @@ public class GameObjectItem : Editor
         GameObject obj = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
         // you may now modify the game object
         obj.transform.position = Vector3.one;
+		Selection.activeGameObject = obj;
     }
 }

@@ -33,6 +33,7 @@ public class PlayerShooting : MonoBehaviour
 
     public GameObject shot;
 	public Transform shotSpawn;
+	//public ObjectPool objectPool;
 	public float fireRate; // how long we wait before firing another bullet
 
     public AudioClip shootSound;
@@ -48,6 +49,7 @@ public class PlayerShooting : MonoBehaviour
     //-------------------------------------
     void Start()
     {
+		//objectPool.Create (shotSpawn.position, shotSpawn.rotation);
         InvokeRepeating("Fire", fireTime, fireTime); // Used for Object Pooling
     }
 
@@ -78,6 +80,7 @@ public class PlayerShooting : MonoBehaviour
             go.transform.position = transform.position;
             go.transform.rotation = transform.rotation;
             go.SetActive(true);
+			//UnityEditor.EditorApplication.isPaused = true;
         }
     }
 

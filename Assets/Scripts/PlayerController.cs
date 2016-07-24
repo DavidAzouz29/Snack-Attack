@@ -166,6 +166,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("Reset"))
         {
             transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, 0.2f);
+			transform.localScale = new Vector3 (1, 1, 1);
+			m_eCurrentPlayerState = E_PLAYER_STATE.E_PLAYER_STATE_ALIVE;
         }
 		if (Input.GetButton ("Jump"))
         {
