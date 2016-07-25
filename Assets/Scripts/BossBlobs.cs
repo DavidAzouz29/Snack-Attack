@@ -215,7 +215,7 @@ public class BossBlobs : MonoBehaviour {
         }
     }
 
-    void ExplodeBlobs()
+    public void ExplodeBlobs()
     {
         float _radius = 3.0f;
         Vector3 _explosionPos = transform.position;
@@ -244,6 +244,15 @@ public class BossBlobs : MonoBehaviour {
         _position.z = _center.z + _radius * Mathf.Cos(_angle * Mathf.Deg2Rad);
 
         return _position;
+    }
+
+    public void Respawn()
+    {
+        m_Threshold = Thresholds.REGULAR;
+        m_CurrentHealth = 100;
+        m_Power = 100;
+        m_CurrentThreshold = m_Blobs.RegularThresh;
+        transform.localScale = new Vector3(1, 1, 1);
     }
 
 }
