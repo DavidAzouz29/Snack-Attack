@@ -6,6 +6,7 @@
 /// Brief: Power up effect.
 /// viewed: Delegate object example 27:21m https://youtu.be/VBA1QCoEAX4 
 /// https://bitbucket.org/richardfine/scriptableobjectdemo 
+/// https://unity3d.com/learn/tutorials/topics/scripting/interfaces
 /// --------------------------------------------------
 /// Edits:
 /// -  - David Azouz 14/07/2016
