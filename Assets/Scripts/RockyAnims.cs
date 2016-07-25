@@ -26,8 +26,7 @@ public class RockyAnims : MonoBehaviour {
         WalkToIdle();
         AttackToIdle();
         AttackToWalk();
-
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown(m_PC.Melee))
         {
             Attack();
         }

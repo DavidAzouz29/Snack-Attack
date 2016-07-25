@@ -104,7 +104,6 @@ public class BossBlobs : MonoBehaviour {
             }
         }
         UpdateScale();
-        Debug.Log(m_Power);
     }
     
     void UpdateScale()

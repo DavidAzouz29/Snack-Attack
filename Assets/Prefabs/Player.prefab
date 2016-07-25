@@ -125,7 +125,7 @@ GameObject:
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -551,10 +551,9 @@ MonoBehaviour:
   tilt: 0
   shot: {fileID: 121434, guid: 75647a5edc70c4e43944bdd34166c1e0, type: 2}
   shotSpawn: {fileID: 455838}
-  objectPool: {fileID: 0}
   fireRate: 0.3
   shootSound: {fileID: 0}
-  sFire: P1_Fire
+  sFire: 
 --- !u!114 &11496878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -580,6 +579,7 @@ MonoBehaviour:
   Melee: _Melee
   Jump: _Jump
   m_IsBoss: 0
+  m_ShootingManager: {fileID: 11444456}
   dizzyBirds: {fileID: 0}
   r_weapon: {fileID: 0}
   r_gameOverPanel: {fileID: 0}

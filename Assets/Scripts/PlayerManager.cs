@@ -60,16 +60,6 @@ public class PlayerManager : MonoBehaviour
             v3PlayerPosition.z = Random.Range(-fTerrRadius, fTerrRadius); //
             Object j = Instantiate(r_Player, v3PlayerPosition, r_Player.transform.rotation);
             j.name = "Character " + (i + 1);
-            /*SkinnedMeshRenderer mesh = ((GameObject)j).GetComponentInChildren<SkinnedMeshRenderer>();
-            // if the first player
-            if(i == 0)
-            {
-                mesh.material = r_Player1;
-            }
-            else if (i == 1)
-            {
-                mesh.material = r_Player2;
-            }*/
 
             // -------------------------------------------------------------
             // This allows each instance the ability to move independently
@@ -82,8 +72,6 @@ public class PlayerManager : MonoBehaviour
             uiPlayerConArray[i] = r_PlayerController;
             uiPlayerShootArray[i] = r_PlayerShooting;
             r_Players[i] = (GameObject)j;
-            // -------------------------------------------------------------
-            Debug.Log(v3PlayerPosition);
         }
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
