@@ -9,7 +9,7 @@ public class BossBlobs : MonoBehaviour {
     */
 
     [Tooltip("Use these to specify at what health the boss drops its blobs.")]
-    public List<int> m_Thresholds = new List<int>(new int[] { 100, 75, 50, 25 });
+    public List<int> m_Thresholds = new List<int>(new int[] { 200, 150, 100, 75 });
 
     [Tooltip("Use these to specify how many blobs to drop")]
     public List<int> m_BlobsToDrop = new List<int>(new int[] { 4, 3, 2, 1 });
@@ -24,6 +24,9 @@ public class BossBlobs : MonoBehaviour {
 
     private int m_CurrentHealth;
     private int m_PreviousHealth;
+
+    public int m_Power;
+    public bool m_Updated = false;
 
     public enum Thresholds
     {
@@ -60,8 +63,10 @@ public class BossBlobs : MonoBehaviour {
         InitializeStruct();
 
         m_Threshold = Thresholds.GIANT;
-        m_CurrentHealth = 100;
+        m_CurrentHealth = 200;
+        m_Power = 200;
         m_CurrentThreshold = m_Blobs.GiantThresh;
+        transform.localScale = new Vector3(2,2,2);
         //m_Blobs initialise
     }
 
@@ -96,12 +101,28 @@ public class BossBlobs : MonoBehaviour {
             if (m_CurrentHealth < m_CurrentThreshold)
             {
                 Drop(m_Threshold);
-
-
             }
         }
+        UpdateScale();
+        Debug.Log(m_Power);
     }
     
+    void UpdateScale()
+    {
+        if (m_Updated)
+        {
+            m_Updated = false;
+            if (m_Power >= m_Thresholds[0]) // if power >= 200
+                transform.localScale = new Vector3(m_ScaleLevel[0], m_ScaleLevel[0], m_ScaleLevel[0]);
+            else if (m_Power >= m_Thresholds[1])
+                transform.localScale = new Vector3(m_ScaleLevel[1], m_ScaleLevel[1], m_ScaleLevel[1]);
+            else if (m_Power >= m_Thresholds[2])
+                transform.localScale = new Vector3(m_ScaleLevel[2], m_ScaleLevel[2], m_ScaleLevel[2]);
+            else if (m_Power >= m_Thresholds[3])
+                transform.localScale = new Vector3(m_ScaleLevel[3], m_ScaleLevel[3], m_ScaleLevel[3]);
+        }
+    }
+
     void OnCollisionEnter(Collision _col)
     {
         if(_col.gameObject.tag == "Projectile")
@@ -137,11 +158,10 @@ public class BossBlobs : MonoBehaviour {
                 m_CreatedBlobs.Clear();
 
                 // Everytime a player goes down a threshold, lower their scale by .25
-                gameObject.transform.localScale = new Vector3(transform.localScale.x - m_Blobs.GiantScale,
-                                                              transform.localScale.y - m_Blobs.GiantScale,
-                                                              transform.localScale.z - m_Blobs.GiantScale);
+                gameObject.transform.localScale = new Vector3(m_ScaleLevel[1], m_ScaleLevel[1], m_ScaleLevel[1]);
 
                 m_CurrentThreshold = m_Blobs.BigThresh;
+                m_Power = 150;
                 m_Threshold = Thresholds.BIG;
                 break;
             #endregion
@@ -160,10 +180,8 @@ public class BossBlobs : MonoBehaviour {
                 m_CreatedBlobs.Clear();
 
                 // Everytime a player goes down a threshold, lower their scale by .25
-                gameObject.transform.localScale = new Vector3(transform.localScale.x - m_Blobs.BigScale,
-                                                              transform.localScale.y - m_Blobs.BigScale,
-                                                              transform.localScale.z - m_Blobs.BigScale);
-
+                gameObject.transform.localScale = new Vector3(m_ScaleLevel[2], m_ScaleLevel[2], m_ScaleLevel[2]);
+                m_Power = 100;
                 m_Threshold = Thresholds.REGULAR;
                 break;
             #endregion
@@ -182,10 +200,9 @@ public class BossBlobs : MonoBehaviour {
                 m_CreatedBlobs.Clear();
 
                 // Everytime a player goes down a threshold, lower their scale by .25
-                gameObject.transform.localScale = new Vector3(transform.localScale.x - m_Blobs.RegularScale,
-                                                              transform.localScale.y - m_Blobs.RegularScale,
-                                                              transform.localScale.z - m_Blobs.RegularScale);
+                gameObject.transform.localScale = new Vector3(m_ScaleLevel[3], m_ScaleLevel[3], m_ScaleLevel[3]);
 
+                m_Power = 75;
                 m_CurrentThreshold = m_Blobs.SmallThresh;
                 m_Threshold = Thresholds.SMALL;
                 break;
