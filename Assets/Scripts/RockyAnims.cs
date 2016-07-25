@@ -7,44 +7,82 @@ public class RockyAnims : MonoBehaviour {
 
     private PlayerController m_PC;
 
-    private bool m_Idiling, m_Walking, m_Attacking;
+    private bool m_Idling, m_Walking, m_Attacking;
+
+    private Vector3 m_PreviousPos;
 
     void Start()
     {
         m_Anim = GetComponent<Animator>();
         m_PC = FindObjectOfType<PlayerController>();
+        m_Idling = true;
+        m_PreviousPos = transform.position;
     }
+
 
     void FixedUpdate()
     {
-        if (m_PC.m_Moving && !m_Walking)
-            BeginWalk();
-        else if(!m_PC.m_Moving && m_Walking)
-        {
-            StopWalk();
-
-        }
+        IdleToWalk();
+        WalkToIdle();
+        AttackToIdle();
+        AttackToWalk();
 
         if (Input.GetButtonDown("Fire2"))
         {
             Attack();
         }
+
+        m_PreviousPos = transform.position;
     }
 
-    void BeginWalk()
+    void ChangeStates()
     {
-        m_Anim.SetTrigger("BeginWalk");
-        m_Walking = true;
-    }
 
-    void StopWalk()
-    {
-        m_Anim.SetTrigger("StopWalk");
-        m_Walking = false;
     }
 
     void Attack()
     {
         m_Anim.SetTrigger("Attack");
+        
+    }
+
+    void IdleToWalk()
+    {
+        if (Vector3.Distance(m_PreviousPos, transform.position) > 0.15 && !m_Walking)
+        {
+            m_Anim.SetBool("Walking", true);
+            m_Anim.SetBool("Idling", false);
+            m_Walking = true;
+        }
+    }
+
+    void WalkToIdle()
+    {
+        if ( Vector3.Distance(m_PreviousPos, transform.position) == 0 && m_Walking)
+        {
+            m_Anim.SetBool("Idling", true);
+            m_Anim.SetBool("Walking", false);
+            m_Walking = false;
+        }
+    }
+
+    void AttackToIdle()
+    {
+        if (!m_Walking)
+        {
+            m_Anim.SetBool("Idling", true);
+            m_Anim.SetBool("Walking", false);
+            m_Anim.SetTrigger("AttackToIdle");
+        }
+    }
+
+    void AttackToWalk()
+    {
+        if (m_Walking)
+        {
+            m_Anim.SetBool("Walking", true);
+            m_Anim.SetBool("Idling", false);
+            m_Anim.SetTrigger("AttackToWalk");
+        }
     }
 }

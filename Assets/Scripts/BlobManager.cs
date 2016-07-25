@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BlobManager : MonoBehaviour {
 
-    public int m_PowerToGive = 0;
+    public int m_PowerToGive = 0; // Based off scale percentage. Giant Thresh = 2.0f scale, which is 200 total power.
 
     void OnCollisionEnter(Collision _col)
     {
@@ -11,11 +11,8 @@ public class BlobManager : MonoBehaviour {
         {
             if (_col.gameObject.tag != "Boss")
             {
-                _col.gameObject.GetComponent<PlayerController>().health += m_PowerToGive; // Give the player power for picking up the blob
-
-                _col.transform.localScale = new Vector3(_col.transform.localScale.x + (m_PowerToGive * .01f),
-                                                        _col.transform.localScale.x + (m_PowerToGive * .01f),
-                                                        _col.transform.localScale.x + (m_PowerToGive * .01f));
+                _col.gameObject.GetComponent<BossBlobs>().m_Power += m_PowerToGive;
+                _col.gameObject.GetComponent<BossBlobs>().m_Updated = true;
 
                 Destroy(gameObject); // Maybe play a cool animation here
             }
