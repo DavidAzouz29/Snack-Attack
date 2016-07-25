@@ -33,11 +33,11 @@ public class PlayerShooting : MonoBehaviour
 
     public GameObject shot;
 	public Transform shotSpawn;
-	//public ObjectPool objectPool;
+	public ObjectPool objectPool;
 	public float fireRate; // how long we wait before firing another bullet
 
     public AudioClip shootSound;
-    public string sFire = "_Fire";
+    public string sFire;
 
     //-------------------------------------
     // PRIVATE INSTANCE VARIABLES
@@ -50,22 +50,23 @@ public class PlayerShooting : MonoBehaviour
     void Start()
     {
 		//objectPool.Create (shotSpawn.position, shotSpawn.rotation);
-        InvokeRepeating("Fire", fireTime, fireTime); // Used for Object Pooling
+        //InvokeRepeating("Fire", fireTime, fireTime); // Used for Object Pooling
     }
 
     //-------------------------------------
     // Update is called once per frame
     //-------------------------------------
-    /*void Update () 
+
+    void Update () 
     {
         // Hacky way of getting players firing
-        if (Input.GetButton("Fire1") && Time.time > nextFire ||
-            Input.GetButton("Fire2") && Time.time > nextFire)
+        if (Input.GetButton(sFire) && Time.time > nextFire ||
+            Input.GetButton(sFire) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
         }
-    } */
+    }
 
     void Fire()
     {

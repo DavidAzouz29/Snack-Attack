@@ -582,7 +582,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 191440, guid: 85e53be144369114598bf62755add551, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 85e53be144369114598bf62755add551, type: 2}
@@ -812,6 +812,7 @@ MonoBehaviour:
   tilt: 0
   shot: {fileID: 0}
   shotSpawn: {fileID: 0}
-  fireRate: 0
+  objectPool: {fileID: 0}
+  fireRate: 1
   shootSound: {fileID: 0}
-  sFire: _Fire
+  sFire: P1_Fire
