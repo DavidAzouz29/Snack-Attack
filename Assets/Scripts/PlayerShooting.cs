@@ -43,14 +43,17 @@ public class PlayerShooting : MonoBehaviour
     // PRIVATE INSTANCE VARIABLES
     //-------------------------------------
     private float nextFire;
-
+    private Vector3 SpawnPosition;
+    private Quaternion SpawnRotation;
     //-------------------------------------
     // Use this for initialization
     //-------------------------------------
     void Start()
     {
-		//objectPool.Create (shotSpawn.position, shotSpawn.rotation);
+        //objectPool.Create (shotSpawn.position, shotSpawn.rotation);
         //InvokeRepeating("Fire", fireTime, fireTime); // Used for Object Pooling
+        SpawnPosition = shotSpawn.position;
+        SpawnRotation = Quaternion.Euler(0, 180, 0) * transform.rotation;
     }
 
     //-------------------------------------
@@ -59,12 +62,14 @@ public class PlayerShooting : MonoBehaviour
 
     void Update () 
     {
+        SpawnPosition = shotSpawn.position;
+        SpawnRotation = Quaternion.Euler(0, 180, 0) * transform.rotation;
         // Hacky way of getting players firing
         if (Input.GetButton(sFire) && Time.time > nextFire ||
             Input.GetButton(sFire) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+            Instantiate(shot, SpawnPosition, SpawnRotation);
         }
     }
 
