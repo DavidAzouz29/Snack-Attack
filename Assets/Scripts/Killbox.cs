@@ -1,25 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Killbox : MonoBehaviour {
 
-    [Tooltip("Where to respawn the player if they fall into this killbox")]
-    public Vector3 m_PlayerRespawn;
-
-    [Tooltip("Where to respawn the boss blobs if they fall into this killbox")]
-    public Vector3 m_BlobRespawn;
-
     public int m_BlobPower = 10;
 
+    public GameObject m_SpawnManagerObject;
+    private SpawnManager m_SpawnManager;
+    private List<GameObject> m_PlayerSpawnList, m_BlobSpawnList;
+
+    private Vector3 m_BlobPos;
     
+    private bool m_Respawning;
+    private GameObject m_Player;
+
+    void Start()
+    {
+        m_SpawnManager = m_SpawnManagerObject.GetComponent<SpawnManager>();
+        m_PlayerSpawnList = m_SpawnManager.m_PlayerSpawns;
+        m_BlobSpawnList = m_SpawnManager.m_BlobSpawns;
+    }
 
     void OnTriggerEnter(Collider _col)
     {
         if(_col.gameObject.tag == "Player")
         {
+            m_Player = _col.gameObject;
             // Kill and respawn the player
-            _col.transform.position = m_PlayerRespawn;
-            int _pow = _col.GetComponent<BossBlobs>().m_Power;
+            m_Player.transform.position = m_PlayerSpawnList[Random.Range(0, m_PlayerSpawnList.Count)].transform.position;
+
+            int _pow = m_Player.GetComponent<BossBlobs>().m_Power;
             // Get player power here, spawn blobs they would have lost.
             if (_pow >= 150)
             {
@@ -27,35 +38,49 @@ public class Killbox : MonoBehaviour {
                 int _drop = Mathf.RoundToInt(_toDrop);
 
                 Debug.Log(_drop);
+
                 for (int i = 0; i < _drop; i++)
                 {
                     int a = i * (360 / _drop);
-                    GameObject _blob = (GameObject)Instantiate(_col.GetComponent<BossBlobs>().m_BlobObject, BlobSpawn(a), Quaternion.identity);
+                    GameObject _blob = (GameObject)Instantiate(m_Player.GetComponent<BossBlobs>().m_BlobObject, BlobSpawn(a), Quaternion.identity);
                     _blob.GetComponent<BlobManager>().m_PowerToGive = m_BlobPower;
                 }
                 ExplodeBlobs();
             }
-            _col.GetComponent<BossBlobs>().Respawn();
+
+            m_Respawning = true;
 
         }
         else if(_col.gameObject.tag == "Blob")
         {
             // Respawn the blob
-            _col.transform.position = m_BlobRespawn;
+            _col.transform.position = m_BlobSpawnList[Random.Range(0, m_BlobSpawnList.Count)].transform.position;
+        }
+    }
+
+    void Update()
+    {
+        if (m_Respawning)
+        {
+            m_Respawning = false;
+            StartCoroutine(IRespawn(m_Player));
+            m_Player = null;
         }
     }
 
     Vector3 BlobSpawn(int _a)
     {
-        Vector3 _center = m_BlobRespawn;
+        if(m_BlobPos == null || m_BlobPos == Vector3.zero)
+            m_BlobPos = m_BlobSpawnList[Random.Range(0, m_BlobSpawnList.Count)].transform.position;
+
         float _radius = 3.0f;
 
         float _angle = _a + Random.Range(5.0f, 40.0f);
         Vector3 _position;
 
-        _position.x = _center.x + _radius * Mathf.Sin(_angle * Mathf.Deg2Rad);
-        _position.y = _center.y;
-        _position.z = _center.z + _radius * Mathf.Cos(_angle * Mathf.Deg2Rad);
+        _position.x = m_BlobPos.x + _radius * Mathf.Sin(_angle * Mathf.Deg2Rad);
+        _position.y = m_BlobPos.y;
+        _position.z = m_BlobPos.z + _radius * Mathf.Cos(_angle * Mathf.Deg2Rad);
 
         return _position;
     }
@@ -63,7 +88,7 @@ public class Killbox : MonoBehaviour {
     void ExplodeBlobs()
     {
         float _radius = 3.0f;
-        Vector3 _explosionPos = m_BlobRespawn;
+        Vector3 _explosionPos = m_BlobPos;
         Collider[] _colliders = Physics.OverlapSphere(_explosionPos, _radius);
         foreach (Collider hit in _colliders)
         {
@@ -74,5 +99,17 @@ public class Killbox : MonoBehaviour {
                 rb.tag = "Blob"; // Reset the tag so forces aren't applied to it again.
             }
         }
+        m_BlobPos = Vector3.zero;
+    }
+
+    IEnumerator IRespawn(GameObject _player)
+    {
+        _player.SetActive(false);
+        yield return new WaitForSeconds(m_SpawnManager.m_PlayerRespawnTime);
+
+        _player.SetActive(true);
+        _player.GetComponent<BossBlobs>().Respawn();
+        m_Respawning = false;
+
     }
 }

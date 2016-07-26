@@ -5,10 +5,10 @@ using System.Collections.Generic;
 public class BossBlobs : MonoBehaviour {
 
     /*
-    Whoever is currently the boss, when going below a certain health threshold, should drop blobs around them.
+    Whoever is currently the boss, when going below a certain ppwer threshold, should drop blobs around them.
     */
 
-    [Tooltip("Use these to specify at what health the boss drops its blobs.")]
+    [Tooltip("Use these to specify at what Power the boss drops its blobs.")]
     public List<int> m_Thresholds = new List<int>(new int[] { 200, 150, 100, 75 });
 
     [Tooltip("Use these to specify how many blobs to drop")]
@@ -21,9 +21,6 @@ public class BossBlobs : MonoBehaviour {
     public List<float> m_ScaleLevel = new List<float>(new float[] { 2.0f, 1.5f, 1.0f, 0.75f });
     
     private int m_CurrentThreshold;
-
-    private int m_CurrentHealth;
-    private int m_PreviousHealth;
 
     public int m_Power;
     public bool m_Updated = false;
@@ -63,7 +60,6 @@ public class BossBlobs : MonoBehaviour {
         InitializeStruct();
 
         m_Threshold = Thresholds.GIANT;
-        m_CurrentHealth = 200;
         m_Power = 200;
         m_CurrentThreshold = m_Blobs.GiantThresh;
         transform.localScale = new Vector3(2,2,2);
@@ -97,8 +93,8 @@ public class BossBlobs : MonoBehaviour {
     {
         if(Input.GetKeyDown(KeyCode.F))
         {
-            m_CurrentHealth = m_CurrentHealth - 5;
-            if (m_CurrentHealth < m_CurrentThreshold)
+            m_Power = m_Power - 5; // Power - Damage recieved
+            if (m_Power < m_CurrentThreshold)
             {
                 Drop(m_Threshold);
             }
@@ -126,15 +122,13 @@ public class BossBlobs : MonoBehaviour {
     {
         if(_col.gameObject.tag == "Projectile")
         {
-            m_PreviousHealth = m_CurrentHealth;
             // Will need to get the damage of the projectile here
             Destroy(_col.gameObject); // Destroy the projectile
-
-            m_CurrentHealth = m_CurrentHealth - 5; // Use projectile damage here
-            if(m_CurrentHealth < m_CurrentThreshold) // Does the 'boss' drop a health threshold?
+            
+            m_Power = m_Power - 5; // Power - Damage recieved
+            if (m_Power < m_CurrentThreshold)
             {
                 Drop(m_Threshold);
-                m_CurrentThreshold = m_CurrentThreshold - 25; // Drop the threshold.
             }
         }
     }
@@ -249,7 +243,6 @@ public class BossBlobs : MonoBehaviour {
     public void Respawn()
     {
         m_Threshold = Thresholds.REGULAR;
-        m_CurrentHealth = 100;
         m_Power = 100;
         m_CurrentThreshold = m_Blobs.RegularThresh;
         transform.localScale = new Vector3(1, 1, 1);
