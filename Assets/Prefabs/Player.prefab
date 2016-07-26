@@ -116,6 +116,7 @@ GameObject:
   - 4: {fileID: 483440}
   - 54: {fileID: 5482348}
   - 65: {fileID: 6513834}
+  - 136: {fileID: 13691700}
   - 114: {fileID: 11496878}
   - 114: {fileID: 11444456}
   - 33: {fileID: 3301232}
@@ -168,7 +169,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 464654}
   - 33: {fileID: 3395338}
-  - 65: {fileID: 6572890}
   - 23: {fileID: 2328490}
   m_Layer: 9
   m_Name: ShotSpawn
@@ -334,7 +334,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176486}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: -1.129, y: 0.704, z: -0.75}
+  m_LocalPosition: {x: -1.129, y: 0.704, z: -0.6}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 483440}
@@ -456,7 +456,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 32
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!65 &6513834
 BoxCollider:
@@ -468,20 +468,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &6572890
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 176486}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.8, y: 0.93, z: 1.03}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!95 &9520308
 Animator:
   serializedVersion: 3
@@ -586,6 +574,19 @@ MonoBehaviour:
   m_eCurrentPlayerState: 0
   m_eCurrentClassState: 0
   m_playerID: 0
+--- !u!136 &13691700
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172846}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.12
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.65, z: 0}
 --- !u!137 &13777984
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
