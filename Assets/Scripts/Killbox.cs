@@ -8,7 +8,7 @@ public class Killbox : MonoBehaviour {
 
     public GameObject m_SpawnManagerObject;
     private SpawnManager m_SpawnManager;
-    private List<GameObject> m_PlayerSpawnList, m_BlobSpawnList;
+    public List<GameObject> m_PlayerSpawnList, m_BlobSpawnList;
 
     private Vector3 m_BlobPos;
     
@@ -102,14 +102,18 @@ public class Killbox : MonoBehaviour {
         m_BlobPos = Vector3.zero;
     }
 
-    IEnumerator IRespawn(GameObject _player)
+    public void PlayerRespawn(GameObject _player)
+    {
+        StartCoroutine(IRespawn(_player));
+    }
+
+    public IEnumerator IRespawn(GameObject _player)
     {
         _player.SetActive(false);
-        yield return new WaitForSeconds(m_SpawnManager.m_PlayerRespawnTime);
 
+        yield return new WaitForSeconds(m_SpawnManager.m_PlayerRespawnTime);
         _player.SetActive(true);
         _player.GetComponent<BossBlobs>().Respawn();
         m_Respawning = false;
-
     }
 }

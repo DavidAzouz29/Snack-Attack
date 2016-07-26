@@ -55,7 +55,9 @@ public class PlayerShooting : MonoBehaviour
         if (Input.GetButton(sFire) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            Instantiate(shot, SpawnPosition, SpawnRotation);
+            GameObject _shot = (GameObject)Instantiate(shot, SpawnPosition, SpawnRotation);
+            _shot.GetComponent<BulletScript>().m_Parent = gameObject;
+
         }
     }
 
