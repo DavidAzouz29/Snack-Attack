@@ -13,6 +13,8 @@ public class EditorBoss : Editor {
         EditorList.Show(serializedObject.FindProperty("m_PowerToGive"), true, true);
         EditorList.Show(serializedObject.FindProperty("m_ScaleLevel"), true, true);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("m_BlobObject"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("m_Power"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("m_PowerMax"));
         serializedObject.ApplyModifiedProperties();
     }
 

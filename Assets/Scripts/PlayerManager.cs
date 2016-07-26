@@ -28,7 +28,10 @@ public class PlayerManager : MonoBehaviour
     //----------------------------------
 	[Header("Hold Players")]
     public const uint MAX_PLAYERS = 2; // TODO: change in Player Controller
-    public GameObject r_Player; // Referance to a player.
+    public GameObject r_PlayerRockyroad;    // Referance to a player.
+    public GameObject r_PlayerBroccolion;   // Referance to a player.
+    public GameObject r_PlayerWatermelomon; // Referance to a player.
+    public GameObject r_PlayerKaraTea;      // Referance to a player.
     public GameObject[] r_Players = new GameObject[MAX_PLAYERS]; // Used for camera FOV
     public Vector3 v3PlayerPosition = Vector3.zero;
 	[Header("Materials for different players")]
@@ -46,18 +49,39 @@ public class PlayerManager : MonoBehaviour
     // PRIVATE VARIABLES
     //----------------------------------
     private float fTerrRadius = 5;
+    private GameObject r_Player;
 
     // Use this for initialization
     void Start ()
     {
-        v3PlayerPosition.y = 2.0f;
+        
+    }
+
+    void CreatePlayers()
+    {
         m_CameraControl.m_Targets = new Transform[MAX_PLAYERS]; //assigns the maximum characters the camera should track
         //Loop through and create our players.
         for (uint i = 0; i < MAX_PLAYERS; ++i)
         {
             // Position characters randomly on the floor
             v3PlayerPosition.x = Random.Range(-fTerrRadius, fTerrRadius); //
-            v3PlayerPosition.z = Random.Range(-fTerrRadius, fTerrRadius); //
+            // if it's the first player, set them to character 'x', second to 'y' etc.
+            if (i == 0)
+            {
+                r_Player = r_PlayerRockyroad;
+            }
+            else if (i == 1)
+            {
+                r_Player = r_PlayerBroccolion;
+            }
+            else if (i == 2)
+            {
+                r_Player = r_PlayerWatermelomon;
+            }
+            else if (i == 3)
+            {
+                r_Player = r_PlayerKaraTea;
+            }
             Object j = Instantiate(r_Player, v3PlayerPosition, r_Player.transform.rotation);
             j.name = "Character " + (i + 1);
 
@@ -78,5 +102,5 @@ public class PlayerManager : MonoBehaviour
             // assign the target transforms for the camera to track
             m_CameraControl.m_Targets[i] = uiPlayerConArray[i].transform;
         }
-    }
+    } 
 }
