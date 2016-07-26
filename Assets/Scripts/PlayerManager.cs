@@ -18,6 +18,7 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 //#define MAX_PLAYERS 4
 
@@ -51,20 +52,24 @@ public class PlayerManager : MonoBehaviour
     private float fTerrRadius = 5;
     private GameObject r_Player;
 
+    private List<GameObject> m_PlayerSpawns;
+
+    private SpawnManager m_SpawnManager;
     // Use this for initialization
     void Start ()
     {
-        
+        m_SpawnManager = FindObjectOfType<SpawnManager>();
+        m_PlayerSpawns = m_SpawnManager.m_PlayerSpawns;
     }
 
-    void CreatePlayers()
+    public void CreatePlayers()
     {
         m_CameraControl.m_Targets = new Transform[MAX_PLAYERS]; //assigns the maximum characters the camera should track
         //Loop through and create our players.
         for (uint i = 0; i < MAX_PLAYERS; ++i)
         {
             // Position characters randomly on the floor
-            v3PlayerPosition.x = Random.Range(-fTerrRadius, fTerrRadius); //
+            v3PlayerPosition = m_PlayerSpawns[Random.Range(0, (int)MAX_PLAYERS)].transform.position; //
             // if it's the first player, set them to character 'x', second to 'y' etc.
             if (i == 0)
             {

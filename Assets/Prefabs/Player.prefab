@@ -395,7 +395,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 6.51, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 442090}
@@ -506,9 +506,10 @@ MonoBehaviour:
   - 1.5
   - 1
   - 0.75
-  m_Power: 0
+  m_CurrentThreshold: 0
+  m_Power: 100
   m_Updated: 0
-  m_Threshold: 0
+  m_Threshold: 2
   m_BlobObject: {fileID: 144692, guid: 5ed4bc4f1c59b7747b666c04b58aceba, type: 2}
   m_CreatedBlobs: []
 --- !u!114 &11442798

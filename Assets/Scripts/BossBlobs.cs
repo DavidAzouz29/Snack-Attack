@@ -20,10 +20,12 @@ public class BossBlobs : MonoBehaviour {
     [Tooltip("The scale of each different power level")]
     public List<float> m_ScaleLevel = new List<float>(new float[] { 2.0f, 1.5f, 1.0f, 0.75f });
     
-    private int m_CurrentThreshold;
+    public int m_CurrentThreshold;
 
     public int m_Power;
     public bool m_Updated = false;
+
+    private Killbox m_Killbox;
 
     public enum Thresholds
     {
@@ -55,8 +57,11 @@ public class BossBlobs : MonoBehaviour {
     public List<GameObject> m_CreatedBlobs; // Used to manage the instantiated blobs, and to only explode those.
 
 
+    private bool m_Respawned = false;
+
     void Start()
     {
+        m_Killbox = FindObjectOfType<Killbox>();
         InitializeStruct();
 
         m_Threshold = Thresholds.GIANT;
@@ -91,13 +96,10 @@ public class BossBlobs : MonoBehaviour {
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if(m_Power <= 0 && !m_Respawned)
         {
-            m_Power = m_Power - 5; // Power - Damage recieved
-            if (m_Power < m_CurrentThreshold)
-            {
-                Drop(m_Threshold);
-            }
+            m_Killbox.PlayerRespawn(gameObject);
+            m_Respawned = true;
         }
         UpdateScale();
     }
@@ -122,18 +124,26 @@ public class BossBlobs : MonoBehaviour {
     {
         if(_col.gameObject.tag == "Projectile")
         {
-            // Will need to get the damage of the projectile here
-            Destroy(_col.gameObject); // Destroy the projectile
-            
-            m_Power = m_Power - 5; // Power - Damage recieved
-            if (m_Power < m_CurrentThreshold)
+            BulletScript _script = _col.gameObject.GetComponent<BulletScript>();
+            if (_script.m_Parent != null)
             {
-                Drop(m_Threshold);
+
+                if (_script.m_Parent != gameObject)
+                {
+                    // Will need to get the damage of the projectile here
+                    Destroy(_col.gameObject); // Destroy the projectile
+
+                    m_Power = m_Power - 30; // Power - Damage recieved
+                    if (m_Power < m_CurrentThreshold)
+                    {
+                        Drop(m_Threshold);
+                    }
+                }
             }
         }
     }
 
-    void Drop(Thresholds _t)
+    public void Drop(Thresholds _t)
     {
         switch (_t)
         {
