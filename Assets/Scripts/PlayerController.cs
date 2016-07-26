@@ -24,7 +24,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    public const uint MAX_PLAYERS = 2; //TODO: more than two players?
+    public const uint MAX_PLAYERS = 3; //TODO: more than two players?
 
     // PRIVATE VARIABLES [MenuItem ("MyMenu/Do Something")]
     [Header("Movement")]
