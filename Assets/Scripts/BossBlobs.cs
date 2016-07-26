@@ -22,7 +22,9 @@ public class BossBlobs : MonoBehaviour {
     
     private int m_CurrentThreshold;
 
+    // Power (Boss)
     public int m_Power;
+    public int m_PowerMax = 200;
     public bool m_Updated = false;
 
     public enum Thresholds
@@ -60,7 +62,7 @@ public class BossBlobs : MonoBehaviour {
         InitializeStruct();
 
         m_Threshold = Thresholds.GIANT;
-        m_Power = 200;
+        m_Power = m_PowerMax;
         m_CurrentThreshold = m_Blobs.GiantThresh;
         transform.localScale = new Vector3(2,2,2);
         //m_Blobs initialise
