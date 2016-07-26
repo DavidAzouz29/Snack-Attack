@@ -3,7 +3,7 @@ using UnityEditor;
 
 public class EditorList {
 
-    public static void Show(SerializedProperty list, bool _showListLabel = true)
+    public static void Show(SerializedProperty list, bool _showListLabel = true, bool _blobs = false)
     {
         if(_showListLabel)
         {
@@ -11,11 +11,11 @@ public class EditorList {
             EditorGUI.indentLevel += 1;
         }
 
-        if (!_showListLabel || list.isExpanded)
+        if (!_showListLabel || list.isExpanded && _blobs)
         {
             for (int i = 0; i < list.arraySize; i++)
             {
-                switch(i)
+                switch (i)
                 {
                     case 0:
                         EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i),
@@ -39,6 +39,16 @@ public class EditorList {
                 }
             }
         }
+
+        else if (!_blobs)
+        {
+            for (int i = 0; i < list.arraySize; i++)
+            {
+                EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i), new GUIContent("Giant"));
+
+            }
+        }
+        
         if(_showListLabel)
             EditorGUI.indentLevel -= 1;
     }

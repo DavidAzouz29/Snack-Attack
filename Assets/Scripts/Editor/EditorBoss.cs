@@ -8,10 +8,10 @@ public class EditorBoss : Editor {
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        EditorList.Show(serializedObject.FindProperty("m_Thresholds"));
-        EditorList.Show(serializedObject.FindProperty("m_BlobsToDrop"));
-        EditorList.Show(serializedObject.FindProperty("m_PowerToGive"));
-        EditorList.Show(serializedObject.FindProperty("m_ScaleLevel"));
+        EditorList.Show(serializedObject.FindProperty("m_Thresholds"), true, true);
+        EditorList.Show(serializedObject.FindProperty("m_BlobsToDrop"), true, true);
+        EditorList.Show(serializedObject.FindProperty("m_PowerToGive"), true, true);
+        EditorList.Show(serializedObject.FindProperty("m_ScaleLevel"), true, true);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("m_BlobObject"));
         serializedObject.ApplyModifiedProperties();
     }
