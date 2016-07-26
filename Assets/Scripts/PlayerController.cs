@@ -75,7 +75,9 @@ public class PlayerController : MonoBehaviour
     public enum E_CLASS_STATE
     {
         E_CLASS_STATE_ROCKYROAD, //ice-cream
-        E_CLASS_STATE_WATERMELOMON, 
+        E_CLASS_STATE_BROCCOLION,
+        E_CLASS_STATE_WATERMELOMON,
+        E_CLASS_STATE_KARATEA,
 
         E_PLAYER_STATE_COUNT,
     };
