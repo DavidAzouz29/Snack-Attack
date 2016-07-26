@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
         E_PLAYER_STATE_COUNT,
     };
-    public E_PLAYER_STATE m_eCurrentClassState;
+    public E_CLASS_STATE m_eCurrentClassState;
 
     // PRIVATE VARIABLES
     // A way to identidy players

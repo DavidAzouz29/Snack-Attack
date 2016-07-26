@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
     // PUBLIC VARIABLES
     //----------------------------------
 	[Header("Hold Players")]
-    public const uint MAX_PLAYERS = 2; // TODO: change in Player Controller
+    public const uint MAX_PLAYERS = 3; // TODO: change in Player Controller
     public GameObject r_PlayerRockyroad;    // Referance to a player.
     public GameObject r_PlayerBroccolion;   // Referance to a player.
     public GameObject r_PlayerWatermelomon; // Referance to a player.
@@ -62,6 +62,8 @@ public class PlayerManager : MonoBehaviour
         m_PlayerSpawns = m_SpawnManager.m_PlayerSpawns;
     }
 
+    // TODO: Player Array is 0 - this is being called in (RoundTimer) Update not Start like it once was,
+    // as there are 0 players in the array GameManager script is playing up
     public void CreatePlayers()
     {
         m_CameraControl.m_Targets = new Transform[MAX_PLAYERS]; //assigns the maximum characters the camera should track
@@ -74,21 +76,33 @@ public class PlayerManager : MonoBehaviour
             if (i == 0)
             {
                 r_Player = r_PlayerRockyroad;
+                uiPlayerConArray[i].m_eCurrentClassState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
             }
             else if (i == 1)
             {
                 r_Player = r_PlayerBroccolion;
+                uiPlayerConArray[i].m_eCurrentClassState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION;
             }
             else if (i == 2)
             {
                 r_Player = r_PlayerWatermelomon;
+                uiPlayerConArray[i].m_eCurrentClassState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON;
             }
             else if (i == 3)
             {
                 r_Player = r_PlayerKaraTea;
+                uiPlayerConArray[i].m_eCurrentClassState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA;
             }
             Object j = Instantiate(r_Player, v3PlayerPosition, r_Player.transform.rotation);
             j.name = "Character " + (i + 1);
+            // Chooses which mesh to display
+            /*SkinnedMeshRenderer mesh = ((GameObject)j).GetComponentInChildren<SkinnedMeshRenderer>();
+            // if the first player
+            if (i == 0)
+            {
+                mesh.material = r_Player1;
+                //mesh.material.mainTexture = r_Player1T;
+            } */
 
             // -------------------------------------------------------------
             // This allows each instance the ability to move independently

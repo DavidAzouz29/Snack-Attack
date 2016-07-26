@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11405996}
   - 114: {fileID: 11405644}
   - 114: {fileID: 11495504}
+  - 114: {fileID: 11410444}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: PlayerManager
@@ -55,7 +56,7 @@ MonoBehaviour:
   Melee: _Melee
   Jump: _Jump
   m_IsBoss: 0
-  m_ShootingManager: {fileID: 0}
+  m_ShootingManager: {fileID: 11495504}
   dizzyBirds: {fileID: 0}
   r_weapon: {fileID: 0}
   r_gameOverPanel: {fileID: 0}
@@ -73,11 +74,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3018b43c077382546b330607ef477773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r_PlayerRockyroad: {fileID: 172846, guid: 3a670b7535304c1459075445ca9ab08f, type: 2}
+  r_PlayerRockyroad: {fileID: 172846, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
   r_PlayerBroccolion: {fileID: 118960, guid: 75eb26eef60e91146acc81bd6fcb688e, type: 2}
-  r_PlayerWatermelomon: {fileID: 0}
+  r_PlayerWatermelomon: {fileID: 199350, guid: a0db3c4eb6e028a42ad09b9f2573921d, type: 2}
   r_PlayerKaraTea: {fileID: 0}
   r_Players:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   v3PlayerPosition: {x: 0, y: 0, z: 0}
@@ -92,6 +94,25 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   r_PlayerShooting: {fileID: 11495504}
+--- !u!114 &11410444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9357b8960b03004eab064c046c41d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
+  fireTime: 0.05
+  tilt: 0
+  shot: {fileID: 0}
+  shotSpawn: {fileID: 0}
+  fireRate: 1
+  shootSound: {fileID: 0}
+  sFire: P1_Fire
 --- !u!114 &11495504
 MonoBehaviour:
   m_ObjectHideFlags: 1

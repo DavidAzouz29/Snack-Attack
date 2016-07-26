@@ -26,6 +26,7 @@ public class BossBlobs : MonoBehaviour {
     public int m_Power;
     public int m_PowerMax = 200;
     public bool m_Updated = false;
+    public ParticleSystem r_ParticleSystem;
 
     private Killbox m_Killbox;
 
@@ -233,6 +234,7 @@ public class BossBlobs : MonoBehaviour {
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
                 rb.AddExplosionForce(Random.Range(5.0f, 15.0f), _explosionPos, _radius, 5.0f, ForceMode.Impulse);
                 rb.tag = "Blob"; // Reset the tag so forces aren't applied to it again.
+                r_ParticleSystem.Play();
             }
         }
     }

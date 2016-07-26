@@ -19,7 +19,7 @@ public class RoundTimer : MonoBehaviour {
     public List<GameObject> m_Players;
 
     private int m_PlayerCount;
-
+    [SerializeField]
     private PlayerManager m_PlayerManager;
 
     void Start()
