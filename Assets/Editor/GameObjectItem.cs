@@ -25,7 +25,7 @@ public class GameObjectItem : Editor
     [MenuItem("Player Game Object/Add Player RockyRoad")]
     public static void AddPlayerRockyRoadToScene()
     {
-        Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Player.prefab", typeof(GameObject));
+        Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/RockyRoad.prefab", typeof(GameObject));
         GameObject obj = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
         // you may now modify the game object
         obj.transform.position = Vector3.one;

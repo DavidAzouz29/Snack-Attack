@@ -226,7 +226,7 @@ GameObject:
   - 114: {fileID: 11442798}
   - 114: {fileID: 11403754}
   m_Layer: 9
-  m_Name: Player
+  m_Name: RockyRoad
   m_TagString: Player
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -288,7 +288,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 464654}
   - 33: {fileID: 3395338}
-  - 23: {fileID: 2328490}
   m_Layer: 9
   m_Name: ShotSpawn
   m_TagString: Untagged
@@ -554,32 +553,6 @@ Transform:
   - {fileID: 22416682}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!23 &2328490
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 176486}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!33 &3301232
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -657,6 +630,7 @@ MonoBehaviour:
   - 1.5
   - 1
   - 0.75
+  m_CurrentThreshold: 0
   m_Power: 0
   m_PowerMax: 200
   m_Updated: 0
@@ -1389,6 +1363,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsKinematic
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Name
+      value: RockyRoad
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

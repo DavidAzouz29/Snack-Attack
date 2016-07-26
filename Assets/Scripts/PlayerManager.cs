@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
     // PUBLIC VARIABLES
     //----------------------------------
 	[Header("Hold Players")]
-    public const uint MAX_PLAYERS = 2; // TODO: change in Player Controller
+    public const uint MAX_PLAYERS = 4; // TODO: change in Player Controller
     public GameObject r_PlayerRockyroad;    // Referance to a player.
     public GameObject r_PlayerBroccolion;   // Referance to a player.
     public GameObject r_PlayerWatermelomon; // Referance to a player.
@@ -105,7 +105,7 @@ public class PlayerManager : MonoBehaviour
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
             // assign the target transforms for the camera to track
-            m_CameraControl.m_Targets[i] = uiPlayerConArray[i].transform;
+            m_CameraControl.m_Targets[i] = r_Players[i].transform;
         }
     } 
 }

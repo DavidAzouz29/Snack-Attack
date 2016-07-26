@@ -55,6 +55,11 @@ public class RoundTimer : MonoBehaviour {
         }
     }
 
+    public float GetTimeRemaining()
+    {
+        return m_TimeRemaining;
+    }
+
     //void SetUpCameraAndSpawns()
     //{
 
