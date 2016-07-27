@@ -10,7 +10,9 @@ public class EditorSpawns : Editor
 
     private static GUIContent
         m_PlayerSpawnCreate = new GUIContent("Create Player Spawn", "Use this to create a new spawn for players."),
-        m_BlobSpawnCreate = new GUIContent("Create Blob Spawn", "Use this to create a new spawn for blobs."); // Creating buttons to use for designers.
+        m_BlobSpawnCreate = new GUIContent("Create Blob Spawn", "Use this to create a new spawn for blobs."),
+		m_PlayerSpawnClear = new GUIContent("Clear Player Spawns", "Use this to remove any existing player spawn points."),
+		m_BlobSpawnClear = new GUIContent("Clear Blob Spawns", "Use this to remove any existing blob spawn points."); // Creating buttons to use for designers.
 
     void OnEnable()
     {
@@ -55,12 +57,21 @@ public class EditorSpawns : Editor
             // Create new player prefab, add it to the list.
             m_SpawnManager.CreatePlayerSpawn();
         }
-        GUILayout.Space(10);
+		if(GUILayout.Button(m_PlayerSpawnClear))
+		{
+			// Create new player prefab, add it to the list.
+			m_SpawnManager.m_PlayerSpawns.Clear();
+		}
+		GUILayout.Space(10);
 
         if (GUILayout.Button(m_BlobSpawnCreate))
         {
             m_SpawnManager.CreateBlobSpawn();
         }
+		if (GUILayout.Button(m_BlobSpawnClear))
+		{
+			m_SpawnManager.m_BlobSpawns.Clear();
+		}
     }
 }
 

@@ -24,23 +24,21 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
     const int MAX_PLAYERS = 3;
-    public GameObject m_PlayerManager; //TODO: why not PlayerManager?
-    public PlayerManager r_PlayerManager;
+	public PlayerManager r_PlayerManager; //TODO: why not PlayerManager?
 
     private int m_RandomPlayer;
     private float m_BossScale;
     // Use this for initialization
-    void Start ()
+    public void SetupBoss ()
     {
-        r_PlayerManager = m_PlayerManager.GetComponent<PlayerManager>();
         //Generate Random player
         m_RandomPlayer = Random.Range(0, MAX_PLAYERS);
         //Grab required data and assign the random player as the boss
         // TODO: Player Array is 0 (in PlayerManager)- this is being called in (RoundTimer) Update not Start like it once was,
         // as there are 0 players in the array GameManager script is playing up
-        r_PlayerManager.r_Players[m_RandomPlayer].gameObject.GetComponent<BossBlobs>().enabled = true;
-        m_BossScale = r_PlayerManager.r_Players[m_RandomPlayer].gameObject.GetComponent<BossBlobs>().m_Blobs.GiantScale;
-        r_PlayerManager.r_Players[m_RandomPlayer].gameObject.transform.localScale = new Vector3(m_BossScale, m_BossScale, m_BossScale);
+		r_PlayerManager.GetPlayer(m_RandomPlayer).GetComponent<BossBlobs>().enabled = true;
+		m_BossScale = r_PlayerManager.GetPlayer(m_RandomPlayer).GetComponent<BossBlobs>().m_Blobs.GiantScale;
+		r_PlayerManager.GetPlayer(m_RandomPlayer).transform.localScale = new Vector3(m_BossScale, m_BossScale, m_BossScale);
     }
 	
 	// Update is called once per frame

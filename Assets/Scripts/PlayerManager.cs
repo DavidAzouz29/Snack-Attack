@@ -33,17 +33,17 @@ public class PlayerManager : MonoBehaviour
     public GameObject r_PlayerBroccolion;   // Referance to a player.
     public GameObject r_PlayerWatermelomon; // Referance to a player.
     public GameObject r_PlayerKaraTea;      // Referance to a player.
-    public GameObject[] r_Players = new GameObject[MAX_PLAYERS]; // Used for camera FOV
+    GameObject[] r_Players = new GameObject[MAX_PLAYERS]; // Used for camera FOV
     public Vector3 v3PlayerPosition = Vector3.zero;
 	[Header("Materials for different players")]
     public CameraControl m_CameraControl;
     public Material r_Player1;
     public Material r_Player2;
 
-    public PlayerController[] uiPlayerConArray = new PlayerController[MAX_PLAYERS]; //TODO: private
+    PlayerController[] uiPlayerConArray = new PlayerController[MAX_PLAYERS];
     public PlayerController r_PlayerController; // Referance to a player.
 
-    public PlayerShooting[] uiPlayerShootArray = new PlayerShooting[MAX_PLAYERS]; //TODO: private
+    PlayerShooting[] uiPlayerShootArray = new PlayerShooting[MAX_PLAYERS];
     public PlayerShooting r_PlayerShooting; // Referance to a player.
 
     //----------------------------------
@@ -55,12 +55,19 @@ public class PlayerManager : MonoBehaviour
     private List<GameObject> m_PlayerSpawns;
 
     private SpawnManager m_SpawnManager;
+	private GameManager m_GameManager;
     // Use this for initialization
     void Start ()
     {
         m_SpawnManager = FindObjectOfType<SpawnManager>();
+		m_GameManager = FindObjectOfType<GameManager>();
         m_PlayerSpawns = m_SpawnManager.m_PlayerSpawns;
     }
+
+	public GameObject GetPlayer(int i)
+	{
+		return r_Players [i];
+	}
 
     // TODO: Player Array is 0 - this is being called in (RoundTimer) Update not Start like it once was,
     // as there are 0 players in the array GameManager script is playing up
@@ -70,33 +77,36 @@ public class PlayerManager : MonoBehaviour
         //Loop through and create our players.
         for (uint i = 0; i < MAX_PLAYERS; ++i)
         {
+			PlayerController.E_CLASS_STATE playerState = PlayerController.E_CLASS_STATE.E_PLAYER_STATE_COUNT;
+
             // Position characters randomly on the floor
-            v3PlayerPosition = m_PlayerSpawns[Random.Range(0, (int)MAX_PLAYERS)].transform.position; //
+            v3PlayerPosition = m_PlayerSpawns[Random.Range(0, (int)MAX_PLAYERS)].transform.position;
             // if it's the first player, set them to character 'x', second to 'y' etc.
             if (i == 0)
             {
                 r_Player = r_PlayerRockyroad;
-                uiPlayerConArray[i].m_eCurrentClassState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
+				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
             }
             else if (i == 1)
             {
                 r_Player = r_PlayerBroccolion;
-                uiPlayerConArray[i].m_eCurrentClassState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION;
+				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION;
             }
             else if (i == 2)
             {
                 r_Player = r_PlayerWatermelomon;
-                uiPlayerConArray[i].m_eCurrentClassState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON;
+				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON;
             }
             else if (i == 3)
             {
                 r_Player = r_PlayerKaraTea;
-                uiPlayerConArray[i].m_eCurrentClassState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA;
+				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA;
             }
-            Object j = Instantiate(r_Player, v3PlayerPosition, r_Player.transform.rotation);
-            j.name = "Character " + (i + 1);
-            // Chooses which mesh to display
-            /*SkinnedMeshRenderer mesh = ((GameObject)j).GetComponentInChildren<SkinnedMeshRenderer>();
+            
+			Object j = Instantiate(r_Player, v3PlayerPosition, r_Player.transform.rotation);
+			j.name = "Character " + (i + 1);
+			// Chooses which mesh to display
+			/*SkinnedMeshRenderer mesh = ((GameObject)j).GetComponentInChildren<SkinnedMeshRenderer>();
             // if the first player
             if (i == 0)
             {
@@ -104,22 +114,25 @@ public class PlayerManager : MonoBehaviour
                 //mesh.material.mainTexture = r_Player1T;
             } */
 
-            // -------------------------------------------------------------
-            // This allows each instance the ability to move independently
-            // -------------------------------------------------------------
-            r_PlayerController = ((GameObject)j).GetComponent<PlayerController>();
-            r_PlayerController.SetPlayerID(i);
-            r_PlayerShooting = ((GameObject)j).GetComponent<PlayerShooting>();
-            r_PlayerShooting.SetFire("P" + (i + 1) + "_Fire");
+			// -------------------------------------------------------------
+			// This allows each instance the ability to move independently
+			// -------------------------------------------------------------
+			r_PlayerController = ((GameObject)j).GetComponent<PlayerController>();
+			r_PlayerController.SetPlayerID(i);
+			r_PlayerShooting = ((GameObject)j).GetComponent<PlayerShooting>();
+			r_PlayerShooting.SetFire("P" + (i + 1) + "_Fire");
 
-            uiPlayerConArray[i] = r_PlayerController;
-            uiPlayerShootArray[i] = r_PlayerShooting;
-            r_Players[i] = (GameObject)j;
+			uiPlayerConArray[i] = r_PlayerController;
+			uiPlayerConArray[i].m_eCurrentClassState = playerState;
+			uiPlayerShootArray[i] = r_PlayerShooting;
+			r_Players[i] = (GameObject)j;
         }
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
             // assign the target transforms for the camera to track
             m_CameraControl.m_Targets[i] = r_Players[i].transform;
         }
+
+		m_GameManager.SetupBoss();
     } 
 }
