@@ -33,8 +33,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject r_PlayerBroccolion;   // Referance to a player.
     public GameObject r_PlayerWatermelomon; // Referance to a player.
     public GameObject r_PlayerKaraTea;      // Referance to a player.
+    [SerializeField]
     GameObject[] r_Players = new GameObject[MAX_PLAYERS]; // Used for camera FOV
-    public Vector3 v3PlayerPosition = Vector3.zero;
 	[Header("Materials for different players")]
     public CameraControl m_CameraControl;
     public Material r_Player1;
@@ -49,7 +49,7 @@ public class PlayerManager : MonoBehaviour
     //----------------------------------
     // PRIVATE VARIABLES
     //----------------------------------
-    private float fTerrRadius = 5;
+    Vector3 v3PlayerPosition = Vector3.zero;
     private GameObject r_Player;
 
     private List<GameObject> m_PlayerSpawns;

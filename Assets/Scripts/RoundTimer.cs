@@ -33,7 +33,7 @@ public class RoundTimer : MonoBehaviour {
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.G))
+        if(Input.GetKeyDown(KeyCode.G) || Input.GetKeyDown(KeyCode.JoystickButton6))
         {
             m_RoundStarted = true;
         }

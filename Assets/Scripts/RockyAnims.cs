@@ -1,4 +1,20 @@
-﻿using UnityEngine;
+﻿/// ----------------------------------
+/// <summary>
+/// Name: PlayerController.cs
+/// Author: Nick Dallafiore and David Azouz
+/// Date Created: 27/07/2016
+/// Date Modified: 7/2016
+/// ----------------------------------
+/// Brief: Animations Manager
+/// viewed: 
+/// *Edit*
+/// - Set up - Nick Dallafiore /07/2016
+/// - Jump animation added - David Azouz 27/07/2016
+/// TODO:
+/// - Set Triggers for Jump?
+/// </summary>
+/// ----------------------------------
+using UnityEngine;
 using System.Collections;
 
 public class RockyAnims : MonoBehaviour {
@@ -7,15 +23,16 @@ public class RockyAnims : MonoBehaviour {
 
     private PlayerController m_PC;
 
-    private bool m_Idling, m_Walking, m_Attacking;
+    private bool m_Idling, m_Walking, m_Attacking, m_isJumping;
 
-    private Vector3 m_PreviousPos;
+    private Vector3 m_PreviousPos; // TODO: get previous pos from m_PC?
 
     void Start()
     {
         m_Anim = GetComponent<Animator>();
         m_PC = FindObjectOfType<PlayerController>();
         m_Idling = true;
+        m_isJumping = false;
         m_PreviousPos = transform.position;
     }
 
@@ -26,6 +43,8 @@ public class RockyAnims : MonoBehaviour {
         WalkToIdle();
         AttackToIdle();
         AttackToWalk();
+        //IdleToJump();
+        //JumpToIdle();
         if (Input.GetButtonDown(m_PC.Melee))
         {
             Attack();
@@ -45,9 +64,14 @@ public class RockyAnims : MonoBehaviour {
         
     }
 
+    //---------------------------
+    // Idle
+    //---------------------------
     void IdleToWalk()
     {
-        if (Vector3.Distance(m_PreviousPos, transform.position) > 0.15 && !m_Walking)
+        // extra check is for our jump animation
+        if (Vector3.Distance(m_PreviousPos, transform.position) > 0.15 && !m_Walking 
+            && (m_PreviousPos.y - transform.position.y) < 0.5f)
         {
             m_Anim.SetBool("Walking", true);
             m_Anim.SetBool("Idling", false);
@@ -55,9 +79,22 @@ public class RockyAnims : MonoBehaviour {
         }
     }
 
+    void IdleToJump()
+    {
+        if (m_isJumping)
+        {
+            m_Anim.SetBool("Jumping", true);
+            m_Anim.SetBool("Idling", false);
+            m_Walking = false; // this is so the animation doesn't play
+        }
+    }
+
+    //---------------------------
+    // Walk
+    //---------------------------
     void WalkToIdle()
     {
-        if ( Vector3.Distance(m_PreviousPos, transform.position) == 0 && m_Walking)
+        if (Vector3.Distance(m_PreviousPos, transform.position) == 0 && m_Walking)
         {
             m_Anim.SetBool("Idling", true);
             m_Anim.SetBool("Walking", false);
@@ -65,6 +102,19 @@ public class RockyAnims : MonoBehaviour {
         }
     }
 
+    void WalkToJump()
+    {
+        if (m_isJumping)
+        {
+            m_Anim.SetBool("Jumping", true);
+            m_Anim.SetBool("Walking", false);
+            m_Walking = false; // this is so the animation doesn't play
+        }
+    }
+
+    //---------------------------
+    // Attack
+    //---------------------------
     void AttackToIdle()
     {
         if (!m_Walking)
@@ -84,4 +134,34 @@ public class RockyAnims : MonoBehaviour {
             m_Anim.SetTrigger("AttackToWalk");
         }
     }
+
+    void AttackToJump()
+    {
+        m_Anim.SetBool("Jumping", true);
+        m_Anim.SetTrigger("AttackToJump");
+        m_isJumping = true;
+    }
+
+    //---------------------------
+    // Jump To
+    //---------------------------
+    void JumpToIdle()
+    {
+        m_Anim.SetBool("Jumping", false);
+        m_Anim.SetBool("Idling", true);
+        m_isJumping = false;
+    }
+    void JumpToWalk()
+    {
+        m_Anim.SetBool("Jumping", false);
+        m_Anim.SetBool("Walking", true);
+        m_isJumping = false;
+    }
+    //TODO: Set Triggers?
+    /*void JumpToAttack()
+    {
+        m_Anim.SetBool("Jumping", false);
+        m_Anim.SetBool("Walking", true);
+        m_isJumping = false;
+    } */
 }

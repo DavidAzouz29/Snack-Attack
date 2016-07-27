@@ -15,6 +15,7 @@ public class EditorBoss : Editor {
         EditorGUILayout.PropertyField(serializedObject.FindProperty("m_BlobObject"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("m_Power"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("m_PowerMax"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("r_ParticleSystem"));
         serializedObject.ApplyModifiedProperties();
     }
 
