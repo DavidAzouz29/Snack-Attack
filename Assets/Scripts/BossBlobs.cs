@@ -74,7 +74,7 @@ public class BossBlobs : MonoBehaviour {
         m_Power = m_PowerMax;
         m_CurrentThreshold = m_Blobs.GiantThresh;
         transform.localScale = new Vector3(2,2,2);
-        r_PlayerMan = GetComponent<PlayerManager>();
+        r_PlayerMan = FindObjectOfType<PlayerManager>();
         r_PlayerCon = GetComponent<PlayerController>();
         r_ParticleSystem = GetComponent<ParticleSystem>();
         blobsArray = r_PlayerMan.GetShotArray();

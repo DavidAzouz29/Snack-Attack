@@ -48,7 +48,7 @@ public class PlayerShooting : MonoBehaviour
     {
         SpawnPosition = shotSpawn.position;
         SpawnRotation = Quaternion.Euler(0, 180, 0) * transform.rotation;
-        r_PlayerMan = GetComponent<PlayerManager>();
+        r_PlayerMan = FindObjectOfType<PlayerManager>();
         r_PlayerCon = GetComponent<PlayerController>();
         shotArray = r_PlayerMan.GetShotArray();
     }
