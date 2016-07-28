@@ -220,7 +220,16 @@ public class PlayerController : MonoBehaviour
         // if we're not paused and our timescale is modified
         if (!isPaused && Time.timeScale != 1)
         {
-            Time.timeScale = 1;
+            isPaused = true;
+            //Time.timeScale = 1;
+        }
+        if (isPaused == true)
+        {
+            if(Input.anyKey)
+            {
+                //Application.UnloadLevel(0);
+                //Application.LoadLevel(0);
+            }
         }
 
         //creating a variable that gets the input axis
@@ -230,8 +239,8 @@ public class PlayerController : MonoBehaviour
         float moveRotationY = Input.GetAxis(rotationAxisY);
 
         // Movement
-        if (moveHorizontal < -fRot || moveHorizontal > fRot ||
-                  moveVertical < -fRot || moveVertical > fRot)
+        if ((moveHorizontal < -fRot || moveHorizontal > fRot ||
+                  moveVertical < -fRot || moveVertical > fRot) && isPaused == false)
         {
             m_Moving = true;
             // TOOD: rb.AddForce(Vector3.up);
@@ -254,8 +263,8 @@ public class PlayerController : MonoBehaviour
 
         // If we are rotating
         // Rotation/ Direction with the (right) analog stick
-        if (moveRotationX < -fRot || moveRotationX > fRot ||
-            moveRotationY < -fRot || moveRotationY > fRot)
+        if ((moveRotationX < -fRot || moveRotationX > fRot ||
+            moveRotationY < -fRot || moveRotationY > fRot) && isPaused == false)
         {
             transform.forward = new Vector3(moveRotationX, 0.0f, moveRotationY);
             transform.forward = Quaternion.Euler(0, -45, 0) * transform.forward;

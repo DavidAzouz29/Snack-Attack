@@ -20,7 +20,7 @@ public class PlayerScoreList : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(scoreManager == null) {
-			Debug.LogError("You forgot to add the score manager component to a game object!");
+			//Debug.LogError("You forgot to add the score manager component to a game object!");
 			return;
 		}
 

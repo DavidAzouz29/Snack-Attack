@@ -13,8 +13,13 @@ public class WindowManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Tab)) {
-			scoreBoard.SetActive( !scoreBoard.activeSelf );
-		}
+
+        if (Time.timeScale == 0)
+        {
+            scoreBoard.SetActive(true);
+        }
+		//if(Input.GetKeyDown(KeyCode.Tab)) {
+		//	scoreBoard.SetActive( !scoreBoard.activeSelf );
+		//}
 	}
 }

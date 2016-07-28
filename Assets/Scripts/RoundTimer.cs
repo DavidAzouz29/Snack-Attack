@@ -44,6 +44,7 @@ public class RoundTimer : MonoBehaviour {
             if (m_TimeRemaining <= 0.0f)
             {
                 m_RoundStarted = false;
+                Time.timeScale = 0;
             }
             else if(!m_Spawned)
             {

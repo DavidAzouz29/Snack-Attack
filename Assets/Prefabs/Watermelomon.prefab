@@ -2323,11 +2323,15 @@ MonoBehaviour:
   speed: 20
   fireTime: 0.05
   tilt: 0
-  shot: {fileID: 121434, guid: 75647a5edc70c4e43944bdd34166c1e0, type: 2}
   shotSpawn: {fileID: 453834}
   fireRate: 0.3
-  shootSound: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: dcca04730ed8e0840951fc204594deff, type: 3}
   sFire: 
+  _shot: {fileID: 196346, guid: e9b5c2fe24cadc44d8d2bea22a05d0db, type: 2}
+  shotArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &11457978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2554,8 +2558,12 @@ MonoBehaviour:
   m_Updated: 0
   r_ParticleSystem: {fileID: 0}
   m_Threshold: 0
-  m_BlobObject: {fileID: 144692, guid: 5ed4bc4f1c59b7747b666c04b58aceba, type: 2}
+  m_BlobObject: {fileID: 196346, guid: 9a242a37a086da847b023a6115a09ae6, type: 2}
   m_CreatedBlobs: []
+  blobsArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!136 &13685404
 CapsuleCollider:
   m_ObjectHideFlags: 1
