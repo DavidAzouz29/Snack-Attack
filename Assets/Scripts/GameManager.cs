@@ -23,8 +23,8 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-    const int MAX_PLAYERS = 3;
 	public PlayerManager r_PlayerManager; //TODO: why not PlayerManager?
+    //const uint MAX_PLAYERS = PlayerManager.MAX_PLAYERS; //TODO: needed?
 
     private int m_RandomPlayer;
     private float m_BossScale;
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
     public void SetupBoss ()
     {
         //Generate Random player
-        m_RandomPlayer = Random.Range(0, MAX_PLAYERS);
+        m_RandomPlayer = Random.Range(0, (int)PlayerManager.MAX_PLAYERS);
         //Grab required data and assign the random player as the boss
         // TODO: Player Array is 0 (in PlayerManager)- this is being called in (RoundTimer) Update not Start like it once was,
         // as there are 0 players in the array GameManager script is playing up

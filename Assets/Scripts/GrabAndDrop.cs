@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 public class GrabAndDrop : MonoBehaviour
 {
-	public const uint MAX_PLAYERS = 2; //TODO: more than two players?
+    public const uint MAX_PLAYERS = PlayerManager.MAX_PLAYERS; //TODO: more than two players?
     public GameObject character;
 	public GameObject grabbedObject;
     public GameObject hand;

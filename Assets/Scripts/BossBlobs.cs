@@ -59,7 +59,10 @@ public class BossBlobs : MonoBehaviour {
     [HideInInspector]
     public List<GameObject> m_CreatedBlobs; // Used to manage the instantiated blobs, and to only explode those.
 
-
+    private PlayerManager r_PlayerMan;
+    private PlayerController r_PlayerCon;
+    [SerializeField]
+    private GameObject[] blobsArray = new GameObject[PlayerManager.MAX_PLAYERS];
     private bool m_Respawned = false;
 
     void Start()
@@ -71,6 +74,10 @@ public class BossBlobs : MonoBehaviour {
         m_Power = m_PowerMax;
         m_CurrentThreshold = m_Blobs.GiantThresh;
         transform.localScale = new Vector3(2,2,2);
+        r_PlayerMan = GetComponent<PlayerManager>();
+        r_PlayerCon = GetComponent<PlayerController>();
+        r_ParticleSystem = GetComponent<ParticleSystem>();
+        blobsArray = r_PlayerMan.GetShotArray();
         //m_Blobs initialise
     }
 
@@ -148,14 +155,45 @@ public class BossBlobs : MonoBehaviour {
 
     public void Drop(Thresholds _t)
     {
+        GameObject _curBlob = null;
+        // Spawn *type* of projectile based of player class
+        switch (r_PlayerCon.m_eCurrentClassState)
+        {
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
+                {
+                    _curBlob = blobsArray[0];
+                    break;
+                }
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
+                {
+                    _curBlob = blobsArray[1];
+                    break;
+                }
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
+                {
+                    _curBlob = blobsArray[2];
+                    break;
+                }
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA:
+                {
+                    _curBlob = blobsArray[3];
+                    break;
+                }
+            default:
+                {
+                    Debug.LogError("Character animation not set up");
+                    break;
+                }
+        }
+
         switch (_t)
         {
             #region GIANT
             case Thresholds.GIANT:
-                for (int i = 0; i < m_Blobs.GiantDrop ; i++)
+                for (int i = 0; i < m_Blobs.GiantDrop; i++)
                 {
                     int a = i * (360 / m_Blobs.GiantDrop);
-                    GameObject _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
+                    _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
                     _curBlob.GetComponent<BlobManager>().m_PowerToGive = m_Blobs.GiantPower;
                     m_CreatedBlobs.Add(_curBlob);
                 }
@@ -177,7 +215,7 @@ public class BossBlobs : MonoBehaviour {
                 for (int i = 0; i < m_Blobs.BigDrop; i++)
                 {
                     int a = i * (360 / m_Blobs.BigDrop);
-                    GameObject _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
+                    _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
                     _curBlob.GetComponent<BlobManager>().m_PowerToGive = m_Blobs.BigPower;
                     m_CreatedBlobs.Add(_curBlob);
                 }
@@ -197,7 +235,7 @@ public class BossBlobs : MonoBehaviour {
                 for (int i = 0; i < m_Blobs.RegularDrop; i++)
                 {
                     int a = i * (360 / m_Blobs.RegularDrop);
-                    GameObject _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
+                    _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
                     _curBlob.GetComponent<BlobManager>().m_PowerToGive = m_Blobs.RegularPower;
                     m_CreatedBlobs.Add(_curBlob);
                 }

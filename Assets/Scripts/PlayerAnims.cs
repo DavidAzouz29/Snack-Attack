@@ -6,7 +6,7 @@
 /// Date Modified: 7/2016
 /// ----------------------------------
 /// Brief: Animations Manager
-/// viewed: 
+/// viewed: http://stackoverflow.com/questions/30310847/gameobject-findobjectoftype-vs-getcomponent
 /// *Edit*
 /// - Set up - Nick Dallafiore /07/2016
 /// - Jump animation added - David Azouz 27/07/2016
@@ -17,9 +17,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class RockyAnims : MonoBehaviour {
+public class PlayerAnims : MonoBehaviour {
 
-    public Animator m_Anim;
+    public Animator m_Anim; // 
 
     private PlayerController m_PC;
 
@@ -29,8 +29,9 @@ public class RockyAnims : MonoBehaviour {
 
     void Start()
     {
+        // Player Controller script is attached to our game object anyway.
+        m_PC = GetComponent<PlayerController>(); //FindObjectOfType<PlayerController>();
         m_Anim = GetComponent<Animator>();
-        m_PC = FindObjectOfType<PlayerController>();
         m_Idling = true;
         m_isJumping = false;
         m_PreviousPos = transform.position;
@@ -70,7 +71,8 @@ public class RockyAnims : MonoBehaviour {
     void IdleToWalk()
     {
         // extra check is for our jump animation
-        if (Vector3.Distance(m_PreviousPos, transform.position) > 0.15 && !m_Walking 
+        float fDis = Vector2.Distance(new Vector2(m_PreviousPos.x, m_PreviousPos.z), new Vector2(transform.position.x, transform.position.z));
+        if (fDis > 0.15 && !m_Walking 
             && (m_PreviousPos.y - transform.position.y) < 0.5f)
         {
             m_Anim.SetBool("Walking", true);
@@ -94,7 +96,8 @@ public class RockyAnims : MonoBehaviour {
     //---------------------------
     void WalkToIdle()
     {
-        if (Vector3.Distance(m_PreviousPos, transform.position) == 0 && m_Walking)
+        float fDis = Vector2.Distance(new Vector2(m_PreviousPos.x, m_PreviousPos.z), new Vector2(transform.position.x, transform.position.z));
+        if (fDis == 0 && m_Walking)
         {
             m_Anim.SetBool("Idling", true);
             m_Anim.SetBool("Walking", false);

@@ -21,9 +21,12 @@ using System.Collections;
 // which class our characters are a part of
 public interface IClass
 {
+    uint MAX_PLAYERS { get; set; } // Make 4
+
     PlayerController.E_CLASS_STATE playerState { get; set; } // what class are we?
     GameObject player { get; set; } // which model we will be
     ParticleSystem splat { get; set; } // for the splat
+    GameObject[] shotArray { get; set; } // Which blobs/ projectiles we'll fire
 
     // Which material will they have?
     Material matA { get; set; }
@@ -34,7 +37,7 @@ public interface IClass
     PlayerShooting r_PS { get; set; }
 
     Animator c_Animator { get; set; }
-    RockyAnims r_RA { get; set; }
+    PlayerAnims r_PA { get; set; }
     BossBlobs r_BB { get; set; }
 }
 

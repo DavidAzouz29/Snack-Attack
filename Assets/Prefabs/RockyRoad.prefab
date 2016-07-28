@@ -177,7 +177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &167886
 GameObject:
   m_ObjectHideFlags: 1
@@ -638,6 +638,10 @@ MonoBehaviour:
   m_Threshold: 0
   m_BlobObject: {fileID: 144692, guid: 5ed4bc4f1c59b7747b666c04b58aceba, type: 2}
   m_CreatedBlobs: []
+  blobsArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &11407002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -716,11 +720,15 @@ MonoBehaviour:
   speed: 20
   fireTime: 0.05
   tilt: 0
-  shot: {fileID: 121434, guid: 75647a5edc70c4e43944bdd34166c1e0, type: 2}
   shotSpawn: {fileID: 455838}
   fireRate: 0.3
   shootSound: {fileID: 0}
   sFire: 
+  _shot: {fileID: 0}
+  shotArray:
+  - {fileID: 100000, guid: 4c005af3d91b39849be83ef5ac106a37, type: 3}
+  - {fileID: 100000, guid: cf12f693b8fbd7740b4d42477316217b, type: 3}
+  - {fileID: 100000, guid: b5e1eadcbefcb6b4da93cc0a85949ffe, type: 3}
 --- !u!114 &11445158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1385,6 +1393,18 @@ Prefab:
       propertyPath: m_Drag
       value: 1.05
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: shotArray.Array.data[1]
+      value: 
+      objectReference: {fileID: 100000, guid: cf12f693b8fbd7740b4d42477316217b, type: 3}
+    - target: {fileID: 0}
+      propertyPath: shotArray.Array.data[0]
+      value: 
+      objectReference: {fileID: 100000, guid: 4c005af3d91b39849be83ef5ac106a37, type: 3}
+    - target: {fileID: 0}
+      propertyPath: shotArray.Array.data[2]
+      value: 
+      objectReference: {fileID: 100000, guid: b5e1eadcbefcb6b4da93cc0a85949ffe, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172846}

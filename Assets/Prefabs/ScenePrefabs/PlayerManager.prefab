@@ -11,7 +11,6 @@ GameObject:
   - 114: {fileID: 11481780}
   - 114: {fileID: 11440790}
   - 114: {fileID: 11402588}
-  - 114: {fileID: 11411806}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: PlayerManager
@@ -45,37 +44,22 @@ MonoBehaviour:
   speed: 20
   fireTime: 0.05
   tilt: 0
-  shot: {fileID: 0}
   shotSpawn: {fileID: 0}
   fireRate: 1
   shootSound: {fileID: 0}
   sFire: P1_Fire
---- !u!114 &11411806
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 196618}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9357b8960b03004eab064c046c41d52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
-  fireTime: 0.05
-  tilt: 0
-  shot: {fileID: 0}
-  shotSpawn: {fileID: 0}
-  fireRate: 1
-  shootSound: {fileID: 0}
-  sFire: P1_Fire
+  _shot: {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
+  shotArray:
+  - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
+  - {fileID: 156848, guid: 303a61ef965c0634ca6293d9aa7914fd, type: 2}
+  - {fileID: 196346, guid: 9a242a37a086da847b023a6115a09ae6, type: 2}
 --- !u!114 &11440790
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196618}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a38d93fbb21cdf41911aaf39ce72b1d, type: 3}
   m_Name: 
@@ -85,7 +69,6 @@ MonoBehaviour:
   m_Moving: 0
   hitsBeforeDeath: 5
   health: 100
-  m_JumpHeight: 5
   verticalAxis: _Vertical
   horizontalAxis: _Horizontal
   rotationAxisX: Rotation_X
@@ -101,6 +84,7 @@ MonoBehaviour:
   m_eCurrentPlayerState: 0
   m_eCurrentClassState: 0
   m_playerID: 0
+  fJumpForce: 25
 --- !u!114 &11481780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,18 +104,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  v3PlayerPosition: {x: 0, y: 0, z: 0}
   m_CameraControl: {fileID: 0}
-  r_Player1: {fileID: 0}
-  r_Player2: {fileID: 0}
-  uiPlayerConArray:
-  - {fileID: 0}
-  - {fileID: 0}
+  r_Broc1: {fileID: 2100000, guid: f60ff4533313e4a44b99b91cccd2e1b3, type: 2}
+  r_Broc2: {fileID: 2100000, guid: 6203dc9d850308944ba12511a92a0bf0, type: 2}
   r_PlayerController: {fileID: 11440790}
-  uiPlayerShootArray:
-  - {fileID: 0}
-  - {fileID: 0}
   r_PlayerShooting: {fileID: 11402588}
+  shotArray:
+  - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
+  - {fileID: 156848, guid: 303a61ef965c0634ca6293d9aa7914fd, type: 2}
+  - {fileID: 196346, guid: 9a242a37a086da847b023a6115a09ae6, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

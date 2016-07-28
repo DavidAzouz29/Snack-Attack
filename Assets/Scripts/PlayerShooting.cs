@@ -21,7 +21,6 @@ public class PlayerShooting : MonoBehaviour
     public float fireTime = 0.05f;
 	public float tilt;
 
-    public GameObject shot;
 	public Transform shotSpawn;
 	public float fireRate; // how long we wait before firing another bullet
 
@@ -31,9 +30,17 @@ public class PlayerShooting : MonoBehaviour
     //-------------------------------------
     // PRIVATE INSTANCE VARIABLES
     //-------------------------------------
+    // Shots
     private float nextFire;
     private Vector3 SpawnPosition;
     private Quaternion SpawnRotation;
+    [SerializeField]
+    private GameObject _shot;
+    // A way to store the different shots based on class
+    [SerializeField]
+    private GameObject[] shotArray = new GameObject[PlayerManager.MAX_PLAYERS];
+    private PlayerManager r_PlayerMan;
+    private PlayerController r_PlayerCon;
     //-------------------------------------
     // Use this for initialization
     //-------------------------------------
@@ -41,6 +48,9 @@ public class PlayerShooting : MonoBehaviour
     {
         SpawnPosition = shotSpawn.position;
         SpawnRotation = Quaternion.Euler(0, 180, 0) * transform.rotation;
+        r_PlayerMan = GetComponent<PlayerManager>();
+        r_PlayerCon = GetComponent<PlayerController>();
+        shotArray = r_PlayerMan.GetShotArray();
     }
 
     //-------------------------------------
@@ -54,10 +64,39 @@ public class PlayerShooting : MonoBehaviour
         // Hacky way of getting players firing
         if (Input.GetButton(sFire) && Time.time > nextFire)
         {
+            GameObject shot = null;
+            // Spawn *type* of projectile based of player class
+            switch (r_PlayerCon.m_eCurrentClassState)
+            {
+                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
+                    {
+                        shot = shotArray[0];
+                        break;
+                    }
+                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
+                    {
+                        shot = shotArray[1];
+                        break;
+                    }
+                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
+                    {
+                        shot = shotArray[2];
+                        break;
+                    }
+                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA:
+                    {
+                        shot = shotArray[3];
+                        break;
+                    }
+                default:
+                    {
+                        Debug.LogError("Character animation not set up");
+                        break;
+                    }
+            }
             nextFire = Time.time + fireRate;
             GameObject _shot = (GameObject)Instantiate(shot, SpawnPosition, SpawnRotation);
             _shot.GetComponent<BulletScript>().m_Parent = gameObject;
-
         }
     }
 

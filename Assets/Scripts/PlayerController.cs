@@ -25,7 +25,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    public const uint MAX_PLAYERS = 3; //TODO: more than two players?
+    public const uint MAX_PLAYERS = PlayerManager.MAX_PLAYERS; //TODO: more than two players?
 
     // PRIVATE VARIABLES [MenuItem ("MyMenu/Do Something")]
     [Header("Movement")]
@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
                     }
                 case E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
                     {
-                        animator.CrossFade("water melomon Jump", 0);
+                        animator.CrossFade("water melomon Jump anim", 0);
                         break;
                     }
                 case E_CLASS_STATE.E_CLASS_STATE_KARATEA:
@@ -195,7 +195,8 @@ public class PlayerController : MonoBehaviour
                         break;
                     }
             }
-                animator.SetBool("Idling", false);
+
+            animator.SetBool("Idling", false);
             animator.SetBool("Walking", false);
             //rb.velocity = new Vector3(0, -fJumpForce * Time.deltaTime, 0); //transform.velocity.y -= fJumpForce * a_deltaTime;// fMovementSpeed * a_deltaTime;
             //fJumpForceMax -= 1.0f;
