@@ -1241,11 +1241,15 @@ MonoBehaviour:
   speed: 20
   fireTime: 0.05
   tilt: 0
-  shot: {fileID: 121434, guid: 75647a5edc70c4e43944bdd34166c1e0, type: 2}
   shotSpawn: {fileID: 480450}
   fireRate: 0.3
   shootSound: {fileID: 0}
   sFire: 
+  _shot: {fileID: 0}
+  shotArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &11453520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1417,8 +1421,12 @@ MonoBehaviour:
   m_Updated: 0
   r_ParticleSystem: {fileID: 0}
   m_Threshold: 0
-  m_BlobObject: {fileID: 144692, guid: 5ed4bc4f1c59b7747b666c04b58aceba, type: 2}
+  m_BlobObject: {fileID: 121828, guid: 2a08d68452969ef4f84cb9d14527c539, type: 2}
   m_CreatedBlobs: []
+  blobsArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!136 &13663612
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1710,6 +1718,10 @@ Prefab:
       propertyPath: m_Drag
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_BlobObject
+      value: 
+      objectReference: {fileID: 121828, guid: 2a08d68452969ef4f84cb9d14527c539, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 118960}

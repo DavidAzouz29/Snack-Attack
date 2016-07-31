@@ -60,17 +60,4 @@ public class RoundTimer : MonoBehaviour {
     {
         return m_TimeRemaining;
     }
-
-    //void SetUpCameraAndSpawns()
-    //{
-
-    //    m_PlayerManager.m_CameraControl.m_Targets = new Transform[2]; //assigns the maximum characters the camera should track
-
-    //    for (int i = 0; i < 2; i++)
-    //    {
-    //        // assign the target transforms for the camera to track
-    //        m_PlayerManager.m_CameraControl.m_Targets[i] = m_Players[i].transform;
-    //    }
-    //}
-
 }
