@@ -8,10 +8,11 @@ public class Killbox : MonoBehaviour {
 
     public GameObject m_SpawnManagerObject;
     private SpawnManager m_SpawnManager;
-    public List<GameObject> m_PlayerSpawnList, m_BlobSpawnList;
+    public List<GameObject> m_PlayerSpawnList, m_BlobSpawnList, m_TakenSpawnList;
 
     private Vector3 m_BlobPos;
-    
+
+    private float m_ResetTime = 2.0f;
     private bool m_Respawning;
     private GameObject m_Player;
 
@@ -22,13 +23,12 @@ public class Killbox : MonoBehaviour {
         m_BlobSpawnList = m_SpawnManager.m_BlobSpawns;
     }
 
-    void OnTriggerEnter(Collider _col)
+    void OnTriggerEnter(Collider _col) // Entering the killbox will kill the player, move them to a spawn, and respawn their blobs if need be.
     {
         if(_col.gameObject.tag == "Player")
         {
             m_Player = _col.gameObject;
             // Kill and respawn the player
-            m_Player.transform.position = m_PlayerSpawnList[Random.Range(0, m_PlayerSpawnList.Count)].transform.position;
 
             int _pow = m_Player.GetComponent<BossBlobs>().m_Power;
             // Get player power here, spawn blobs they would have lost.
@@ -36,8 +36,6 @@ public class Killbox : MonoBehaviour {
             {
                 float _toDrop = _pow / 20;
                 int _drop = Mathf.RoundToInt(_toDrop);
-
-                Debug.Log(_drop);
 
                 for (int i = 0; i < _drop; i++)
                 {
@@ -66,7 +64,9 @@ public class Killbox : MonoBehaviour {
             StartCoroutine(IRespawn(m_Player));
             m_Player = null;
         }
+
     }
+
 
     Vector3 BlobSpawn(int _a)
     {
@@ -109,6 +109,7 @@ public class Killbox : MonoBehaviour {
 
     public IEnumerator IRespawn(GameObject _player)
     {
+        m_SpawnManager.RespawnPlayerPosition(_player);
         _player.SetActive(false);
 
         yield return new WaitForSeconds(m_SpawnManager.m_PlayerRespawnTime);
