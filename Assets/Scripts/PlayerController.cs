@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
     public string Jump = "_Jump";
     [HideInInspector]
     public bool m_IsBoss = false;
+    [HideInInspector]
+    public string m_PlayerTag = "NoPlayerAttached";
 
     Animator animator;
     public PlayerShooting m_ShootingManager;
@@ -117,6 +119,35 @@ public class PlayerController : MonoBehaviour
         Fire = "_Fire";
         Melee = "_Melee";
         Jump = "_Jump";
+
+        switch (m_eCurrentClassState)
+        {
+            case E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
+                {
+                    m_PlayerTag = "Rockyroad";
+                    break;
+                }
+            case E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
+                {
+                    m_PlayerTag = "Brocolion";
+                    break;
+                }
+            case E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
+                {
+                    m_PlayerTag = "Watermelomon";
+                    break;
+                }
+            case E_CLASS_STATE.E_CLASS_STATE_KARATEA:
+                {
+                    m_PlayerTag = "Caulilion";
+                    break;
+                }
+            default:
+                {
+                    Debug.LogError("No Character Attached");
+                    break;
+                }
+        }
 
         // Loops through our players and assigns variables for input from different controllers
         for (uint i = 0; i < MAX_PLAYERS; ++i)

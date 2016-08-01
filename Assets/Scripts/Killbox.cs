@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -29,6 +30,7 @@ public class Killbox : MonoBehaviour {
             m_Player = _col.gameObject;
             // Kill and respawn the player
             m_Player.transform.position = m_PlayerSpawnList[Random.Range(0, m_PlayerSpawnList.Count)].transform.position;
+            GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
 
             int _pow = m_Player.GetComponent<BossBlobs>().m_Power;
             // Get player power here, spawn blobs they would have lost.

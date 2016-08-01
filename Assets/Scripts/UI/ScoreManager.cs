@@ -14,13 +14,14 @@ public class ScoreManager : MonoBehaviour {
 	int changeCounter = 0;
 
 	void Start() {
-	}
+
+    }
 
 	/// <summary>
 	/// Init this instance.
 	/// </summary>
 	void Init() {
-		if(playerScores != null)
+        if (playerScores != null)
 			return;
 
 		playerScores = new Dictionary<string, Dictionary<string, int>>();
@@ -71,7 +72,7 @@ public class ScoreManager : MonoBehaviour {
 	public void ChangeScore(string username, string scoreType, int amount) {
 		Init ();
 		int currScore = GetScore(username, scoreType);
-		SetScore(username, scoreType, currScore + amount);
+		SetScore(username, scoreType, (currScore + amount));
 	}
 
 	public string[] GetPlayerNames() {
@@ -107,5 +108,25 @@ public class ScoreManager : MonoBehaviour {
 		
 		Debug.Log (  GetScore("quill18", "kills") );
 	}
+
+    public void PrototypeStartup()
+    {
+        //Rockyroad Setup
+        SetScore("Rockyroad", "kills", 0);
+        SetScore("Rockyroad", "deaths", 0);
+        SetScore("Rockyroad", "assists", 0);
+        //Brocolion Setup
+        SetScore("Brocolion", "kills", 0);
+        SetScore("Brocolion", "deaths", 0);
+        SetScore("Brocolion", "assists", 0);
+        //Watermelomon Setup
+        SetScore("Watermelomon", "kills", 0);
+        SetScore("Watermelomon", "deaths", 0);
+        SetScore("Watermelomon", "assists", 0);
+        //Caulilion Setup
+        SetScore("Caulilion", "kills", 0);
+        SetScore("Caulilion", "deaths", 0);
+        SetScore("Caulilion", "assists", 0);
+    }
 
 }

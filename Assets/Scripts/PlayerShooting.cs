@@ -41,6 +41,7 @@ public class PlayerShooting : MonoBehaviour
     private GameObject[] shotArray = new GameObject[PlayerManager.MAX_PLAYERS];
     private PlayerManager r_PlayerMan;
     private PlayerController r_PlayerCon;
+    private string m_PlayerTag = "NoPlayerAttached";
     //-------------------------------------
     // Use this for initialization
     //-------------------------------------
@@ -71,21 +72,25 @@ public class PlayerShooting : MonoBehaviour
                 case PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
                     {
                         shot = shotArray[0];
+                        m_PlayerTag = "Rockyroad";
                         break;
                     }
                 case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
                     {
                         shot = shotArray[1];
+                        m_PlayerTag = "Brocolion";
                         break;
                     }
                 case PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
                     {
                         shot = shotArray[2];
+                        m_PlayerTag = "Watermelomon";
                         break;
                     }
                 case PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA:
                     {
                         shot = shotArray[3];
+                        m_PlayerTag = "Karatea";
                         break;
                     }
                 default:
@@ -97,6 +102,7 @@ public class PlayerShooting : MonoBehaviour
             nextFire = Time.time + fireRate;
             GameObject _shot = (GameObject)Instantiate(shot, SpawnPosition, SpawnRotation);
             _shot.GetComponent<BulletScript>().m_Parent = gameObject;
+            _shot.GetComponent<BulletScript>().m_playerTag = m_PlayerTag;
         }
     }
 
