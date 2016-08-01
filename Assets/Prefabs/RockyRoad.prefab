@@ -49,6 +49,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &120848
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22404472}
+  - 222: {fileID: 22297378}
+  - 114: {fileID: 11438078}
+  m_Layer: 0
+  m_Name: SkullImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &121980
 GameObject:
   m_ObjectHideFlags: 1
@@ -621,6 +638,7 @@ MonoBehaviour:
   m_Updated: 0
   r_ParticleSystem: {fileID: 0}
   m_Threshold: 0
+  r_UIBoss: {fileID: 0}
   m_BlobObject: {fileID: 144692, guid: 5ed4bc4f1c59b7747b666c04b58aceba, type: 2}
   m_CreatedBlobs: []
   blobsArray:
@@ -651,7 +669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.77205884, g: 0.16463022, b: 0.16463022, a: 0.5882353}
+  m_Color: {r: 0.5595335, g: 1, b: 0.25735295, a: 0.5882353}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -678,7 +696,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   c_BossSlider: {fileID: 0}
+  c_SkullImage: {fileID: 11438078}
   deleteMe: 0
+--- !u!114 &11438078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: ffe690b1774f48b45b7f40ea89eb6c7c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &11442798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -709,7 +755,6 @@ MonoBehaviour:
   fireRate: 0.3
   shootSound: {fileID: 0}
   sFire: 
-  _shot: {fileID: 0}
   shotArray:
   - {fileID: 100000, guid: 4c005af3d91b39849be83ef5ac106a37, type: 3}
   - {fileID: 100000, guid: cf12f693b8fbd7740b4d42477316217b, type: 3}
@@ -925,6 +970,7 @@ MonoBehaviour:
   Melee: _Melee
   Jump: _Jump
   m_IsBoss: 0
+  m_PlayerTag: NoPlayerAttached
   m_ShootingManager: {fileID: 11444456}
   dizzyBirds: {fileID: 0}
   r_weapon: {fileID: 0}
@@ -2554,6 +2600,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143094}
+--- !u!222 &22297378
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120848}
 --- !u!223 &22394448
 Canvas:
   m_ObjectHideFlags: 1
@@ -2572,6 +2624,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!224 &22404472
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120848}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 22416682}
+  m_RootOrder: 2
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 2, y: 2}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22413106
 RectTransform:
   m_ObjectHideFlags: 1
@@ -2602,6 +2671,7 @@ RectTransform:
   m_Children:
   - {fileID: 22434146}
   - {fileID: 22413106}
+  - {fileID: 22404472}
   m_Father: {fileID: 483440}
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
