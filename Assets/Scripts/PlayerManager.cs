@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     // PUBLIC VARIABLES
     //----------------------------------
 	[Header("Hold Players")]
-    public const uint MAX_PLAYERS = 3; // TODO: change to 4
+    public const uint MAX_PLAYERS = 4;
     public GameObject r_PlayerRockyroad;    // Referance to a player.
     public GameObject r_PlayerBroccolion;   // Referance to a player.
     public GameObject r_PlayerWatermelomon; // Referance to a player.
@@ -47,6 +47,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     public PlayerShooting r_PlayerShooting; // Referance to a player.
 
     public GameObject[] shotArray = new GameObject[MAX_PLAYERS];
+    public GameObject[] blobArray = new GameObject[MAX_PLAYERS];
 
     //----------------------------------
     // PRIVATE VARIABLES
@@ -74,6 +75,11 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     public GameObject[] GetShotArray()
     {
         return shotArray;
+    }
+
+    public GameObject[] GetBlobArray()
+    {
+        return blobArray;
     }
 
     // TODO: Player Array is 0 - this is being called in (RoundTimer) Update not Start like it once was,
@@ -108,7 +114,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             else if (i == 3)
             {
                 r_Player = r_PlayerBroccolion; //TODO: r_Player = r_PlayerKaraTea;
-                playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA;
+                playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION;
                 curMat = r_Broc2;
                 //shotArray[3].GetComponentsInChildren<SkinnedMeshRenderer>();
             }

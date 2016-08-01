@@ -3624,14 +3624,6 @@ Prefab:
       propertyPath: m_CameraControl
       value: 
       objectReference: {fileID: 1709162974}
-    - target: {fileID: 11481780, guid: 243a937f6e1a35346880dd2cc668e3b0, type: 2}
-      propertyPath: r_PlayerRockyroad
-      value: 
-      objectReference: {fileID: 172846, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
-    - target: {fileID: 11481780, guid: 243a937f6e1a35346880dd2cc668e3b0, type: 2}
-      propertyPath: r_PlayerKaraTea
-      value: 
-      objectReference: {fileID: 118960, guid: 616d226787f5fe04c802a377b696ce1b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 243a937f6e1a35346880dd2cc668e3b0, type: 2}
   m_IsPrefabParent: 0
@@ -5057,11 +5049,18 @@ Prefab:
       value: 
       objectReference: {fileID: 2100000, guid: 96e740301c99d3240994898e08c07b3a, type: 2}
     - target: {fileID: 100000, guid: d5443aaa0cf3ff44ba33d35436593d1f, type: 3}
+<<<<<<< HEAD
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: d5443aaa0cf3ff44ba33d35436593d1f, type: 3}
+=======
+      propertyPath: m_TagString
+      value: Bench
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+>>>>>>> dc1f29ab410f84c94c2c9919ddaef1d8b7844870
   m_ParentPrefab: {fileID: 100100000, guid: d5443aaa0cf3ff44ba33d35436593d1f, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &1250470441 stripped
@@ -7013,18 +7012,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11491296, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
-      propertyPath: m_PlayerManager
-      value: 
-      objectReference: {fileID: 797644394}
     - target: {fileID: 11408802, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
       propertyPath: r_PlayerManager
       value: 
       objectReference: {fileID: 797644394}
     - target: {fileID: 11491296, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
-      propertyPath: m_TimePerRound
-      value: 60
-      objectReference: {fileID: 0}
+      propertyPath: m_PlayerManager
+      value: 
+      objectReference: {fileID: 797644394}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
   m_IsPrefabParent: 0
@@ -7326,7 +7321,11 @@ Transform:
   - {fileID: 524613680}
   - {fileID: 1383361314}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 7
+=======
+  m_RootOrder: 6
+>>>>>>> dc1f29ab410f84c94c2c9919ddaef1d8b7844870
 --- !u!1 &2027170584
 GameObject:
   m_ObjectHideFlags: 0

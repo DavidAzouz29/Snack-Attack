@@ -77,7 +77,7 @@ public class BossBlobs : MonoBehaviour {
         r_PlayerMan = FindObjectOfType<PlayerManager>();
         r_PlayerCon = GetComponent<PlayerController>();
         r_ParticleSystem = GetComponent<ParticleSystem>();
-        blobsArray = r_PlayerMan.GetShotArray();
+        blobsArray = r_PlayerMan.GetBlobArray();
         //m_Blobs initialise
     }
 
@@ -146,6 +146,7 @@ public class BossBlobs : MonoBehaviour {
                     if (m_Power < m_CurrentThreshold)
                     {
                         Drop(m_Threshold);
+                        r_ParticleSystem.Play();
                     }
                 }
             }
@@ -155,6 +156,45 @@ public class BossBlobs : MonoBehaviour {
     public void Drop(Thresholds _t)
     {
         GameObject _curBlob = null;
+<<<<<<< HEAD
+=======
+        // Spawn *type* of projectile based of player class
+        switch (r_PlayerCon.m_eCurrentClassState)
+        {
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
+                {
+                    _curBlob = blobsArray[0];
+                    break;
+                }
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
+                {
+                    _curBlob = blobsArray[1];
+                    break;
+                }
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
+                {
+                    _curBlob = blobsArray[2];
+                    break;
+                }
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA:
+                {
+                    _curBlob = blobsArray[0]; //TODO:
+                    break;
+                }
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
+                {
+                    _curBlob = blobsArray[3];
+                    //shot.GetComponent<MeshRenderer>().material.mainTexture = r_Coli;
+                    //shot.GetComponent<MeshRenderer>().material.SetColor("_SpecColor", Color.white);
+                    break;
+                }
+            default:
+                {
+                    Debug.LogError("Character animation not set up");
+                    break;
+                }
+        }
+>>>>>>> dc1f29ab410f84c94c2c9919ddaef1d8b7844870
 
         switch (_t)
         {
@@ -243,7 +283,10 @@ public class BossBlobs : MonoBehaviour {
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
                 rb.AddExplosionForce(Random.Range(5.0f, 15.0f), _explosionPos, _radius, 5.0f, ForceMode.Impulse);
                 rb.tag = "Blob"; // Reset the tag so forces aren't applied to it again.
+<<<<<<< HEAD
                 //r_ParticleSystem.Play();
+=======
+>>>>>>> dc1f29ab410f84c94c2c9919ddaef1d8b7844870
             }
         }
     }

@@ -10,12 +10,12 @@ GameObject:
   - 4: {fileID: 460814}
   - 33: {fileID: 3372560}
   - 23: {fileID: 2380502}
-  - 114: {fileID: 11428994}
   - 65: {fileID: 6588822}
   - 54: {fileID: 5434742}
+  - 114: {fileID: 11483458}
   m_Layer: 0
   m_Name: Icream Blob
-  m_TagString: Projectile
+  m_TagString: SpawningBlob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.30944514, y: 0.333577, z: 0.32599714}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11428994
+--- !u!114 &11483458
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -100,11 +100,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 137888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eced2adc46717994698acb658d27ba17, type: 3}
+  m_Script: {fileID: 11500000, guid: 029061a22e442c74e93175a640474e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
-  m_Parent: {fileID: 0}
+  m_PowerToGive: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -114,7 +113,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Projectile
+      value: SpawningBlob
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsKinematic

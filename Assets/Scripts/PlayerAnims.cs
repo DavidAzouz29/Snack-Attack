@@ -46,9 +46,9 @@ public class PlayerAnims : MonoBehaviour {
         AttackToWalk();
         //IdleToJump();
         //JumpToIdle();
-        if (Input.GetButtonDown(m_PC.Melee))
+        if (Input.GetButtonDown(m_PC.Fire))
         {
-            Attack();
+            FireAnim();
         }
 
         m_PreviousPos = transform.position;
@@ -59,10 +59,9 @@ public class PlayerAnims : MonoBehaviour {
 
     }
 
-    void Attack()
+    void FireAnim()
     {
-        m_Anim.SetTrigger("Attack");
-        
+        m_Anim.SetTrigger("Attack"); //TODO: change to Fire        
     }
 
     //---------------------------
