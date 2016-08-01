@@ -473,8 +473,8 @@ InputManager:
     m_Name: P4_Horizontal
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: k
-    positiveButton: i
+    negativeButton: j
+    positiveButton: l
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
@@ -537,8 +537,8 @@ InputManager:
     m_Name: P4_Vertical
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: j
-    positiveButton: l
+    negativeButton: k
+    positiveButton: i
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
@@ -646,6 +646,38 @@ InputManager:
     axis: 3
     joyNum: 3
   - serializedVersion: 3
+    m_Name: P4_Rotation_X
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.19
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 3
+    joyNum: 4
+  - serializedVersion: 3
+    m_Name: P4_Rotation_Y
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.19
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 3
+    joyNum: 4
+  - serializedVersion: 3
     m_Name: P1_Fire
     descriptiveName: 
     descriptiveNegativeName: 
@@ -668,7 +700,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick 2 button 4
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: right shift
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -684,7 +716,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick 3 button 4
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: '[5]'
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -693,6 +725,22 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 3
+  - serializedVersion: 3
+    m_Name: P4_Fire
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick 4 button 4
+    altNegativeButton: 
+    altPositiveButton: o
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 4
   - serializedVersion: 3
     m_Name: P1_Jump
     descriptiveName: 
@@ -742,6 +790,22 @@ InputManager:
     axis: 0
     joyNum: 3
   - serializedVersion: 3
+    m_Name: P4_Jump
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick 4 button 0
+    altNegativeButton: 
+    altPositiveButton: u
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 4
+  - serializedVersion: 3
     m_Name: P1_Melee
     descriptiveName: 
     descriptiveNegativeName: 
@@ -789,3 +853,19 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 3
+  - serializedVersion: 3
+    m_Name: P4_Melee
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick 4 button 5
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 4
