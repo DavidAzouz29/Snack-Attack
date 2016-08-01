@@ -87,7 +87,6 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
 			PlayerController.E_CLASS_STATE playerState = PlayerController.E_CLASS_STATE.E_PLAYER_STATE_COUNT;
             Material curMat = null;
             // Position characters randomly on the floor
-            v3PlayerPosition = m_PlayerSpawns[Random.Range(0, (int)MAX_PLAYERS)].transform.position;
             // if it's the first player, set them to character 'x', second to 'y' etc.
             if (i == 0)
             {
@@ -114,7 +113,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
                 //shotArray[3].GetComponentsInChildren<SkinnedMeshRenderer>();
             }
             
-			Object j = Instantiate(r_Player, v3PlayerPosition, r_Player.transform.rotation);
+			Object j = Instantiate(r_Player, m_PlayerSpawns[(int)i].transform.position, r_Player.transform.rotation);
 			j.name = "Character " + (i + 1);
 			// Chooses which mesh to display
 			SkinnedMeshRenderer mesh = ((GameObject)j).GetComponentInChildren<SkinnedMeshRenderer>();
