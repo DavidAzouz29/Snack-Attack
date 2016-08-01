@@ -262,6 +262,7 @@ public class BossBlobs : MonoBehaviour {
 
             case Thresholds.SMALL:
                 // Kill
+                m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
                 break;
             default:
                 break;
@@ -304,7 +305,6 @@ public class BossBlobs : MonoBehaviour {
         m_Threshold = Thresholds.REGULAR;
         m_Power = 100;
         m_CurrentThreshold = m_Blobs.RegularThresh;
-        transform.localScale = new Vector3(1, 1, 1);
+        transform.localScale = new Vector3(m_ScaleLevel[2], m_ScaleLevel[2], m_ScaleLevel[2]);
     }
-
 }
