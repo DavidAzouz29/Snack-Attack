@@ -48,10 +48,9 @@ MonoBehaviour:
   fireRate: 1
   shootSound: {fileID: 0}
   sFire: P1_Fire
-  _shot: {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   shotArray:
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
-  - {fileID: 156848, guid: 303a61ef965c0634ca6293d9aa7914fd, type: 2}
+  - {fileID: 0}
   - {fileID: 196346, guid: 9a242a37a086da847b023a6115a09ae6, type: 2}
 --- !u!114 &11440790
 MonoBehaviour:
@@ -77,6 +76,7 @@ MonoBehaviour:
   Melee: _Melee
   Jump: _Jump
   m_IsBoss: 0
+  m_PlayerTag: NoPlayerAttached
   m_ShootingManager: {fileID: 11402588}
   dizzyBirds: {fileID: 0}
   r_weapon: {fileID: 0}
@@ -99,8 +99,9 @@ MonoBehaviour:
   r_PlayerRockyroad: {fileID: 172846, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
   r_PlayerBroccolion: {fileID: 118960, guid: 75eb26eef60e91146acc81bd6fcb688e, type: 2}
   r_PlayerWatermelomon: {fileID: 199350, guid: a0db3c4eb6e028a42ad09b9f2573921d, type: 2}
-  r_PlayerKaraTea: {fileID: 0}
+  r_PlayerKaraTea: {fileID: 118960, guid: 75eb26eef60e91146acc81bd6fcb688e, type: 2}
   r_Players:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -110,9 +111,15 @@ MonoBehaviour:
   r_PlayerController: {fileID: 11440790}
   r_PlayerShooting: {fileID: 11402588}
   shotArray:
+  - {fileID: 137888, guid: 10888fd41fc0ca043a421fffad8a7601, type: 2}
+  - {fileID: 121828, guid: a39ad8d34cfd4154da09d9e3ca146128, type: 2}
+  - {fileID: 196346, guid: e9b5c2fe24cadc44d8d2bea22a05d0db, type: 2}
+  - {fileID: 171102, guid: be2bd3aeae0da094c9dc35431943af96, type: 2}
+  blobArray:
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
-  - {fileID: 156848, guid: 303a61ef965c0634ca6293d9aa7914fd, type: 2}
+  - {fileID: 121828, guid: 2a08d68452969ef4f84cb9d14527c539, type: 2}
   - {fileID: 196346, guid: 9a242a37a086da847b023a6115a09ae6, type: 2}
+  - {fileID: 171102, guid: 29ebb2f8bdbc3384780c3e6cdea6176a, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

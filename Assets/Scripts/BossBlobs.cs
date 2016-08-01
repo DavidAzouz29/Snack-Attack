@@ -49,12 +49,14 @@ public class BossBlobs : MonoBehaviour {
     };
 
     public Blobs m_Blobs;
+    //public UIBossLevel r_UIBoss;
 
     /*
         Could turn this into a list, for different characters and have different
         prefabs for different bosses. Eg; Watermelon slices for watermelon boss blobs.
     */
-    public GameObject m_BlobObject; 
+    public GameObject m_BlobObject; // this is used to spawn a blob based on class 		    public GameObject m_BlobObject; 
+    private GameObject _curBlob; // buffer storage
 
     [HideInInspector]
     public List<GameObject> m_CreatedBlobs; // Used to manage the instantiated blobs, and to only explode those.
@@ -77,7 +79,8 @@ public class BossBlobs : MonoBehaviour {
         r_PlayerMan = FindObjectOfType<PlayerManager>();
         r_PlayerCon = GetComponent<PlayerController>();
         r_ParticleSystem = GetComponent<ParticleSystem>();
-        blobsArray = r_PlayerMan.GetShotArray();
+        blobsArray = r_PlayerMan.GetBlobArray();
+        //r_UIBoss = GetComponentInChildren<UIBossLevel>();
         //m_Blobs initialise
     }
 
@@ -137,46 +140,53 @@ public class BossBlobs : MonoBehaviour {
             BulletScript _script = _col.gameObject.GetComponent<BulletScript>();
             if (_script.m_Parent != null)
             {
-
                 if (_script.m_Parent != gameObject)
                 {
                     // Will need to get the damage of the projectile here
                     Destroy(_col.gameObject); // Destroy the projectile
 
-                    m_Power = m_Power - 30; // Power - Damage recieved
+                    m_Power = m_Power - 10; // Power - Damage recieved
                     if (m_Power < m_CurrentThreshold)
                     {
-                        Drop(m_Threshold);
+                        Drop(m_Threshold, _col);
+                        r_ParticleSystem.Play();
                     }
                 }
             }
         }
     }
 
-    public void Drop(Thresholds _t)
+    public void Drop(Thresholds _t, Collision _col)
     {
-        GameObject _curBlob = null;
+        //GameObject _curBlob = null;
         // Spawn *type* of projectile based of player class
         switch (r_PlayerCon.m_eCurrentClassState)
         {
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
                 {
-                    _curBlob = blobsArray[0];
+                    m_BlobObject = blobsArray[0];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
                 {
-                    _curBlob = blobsArray[1];
+                    m_BlobObject = blobsArray[1];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
                 {
-                    _curBlob = blobsArray[2];
+                    m_BlobObject = blobsArray[2];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA:
                 {
-                    _curBlob = blobsArray[3];
+                    m_BlobObject = blobsArray[0]; //TODO:
+                    break;
+                }
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
+                {
+                    m_BlobObject = blobsArray[3];
+                    //shot.GetComponent<MeshRenderer>().material.mainTexture = r_Coli;
+                    //shot.GetComponent<MeshRenderer>().material.SetColor("_SpecColor", Color.white);
                     break;
                 }
             default:
@@ -190,6 +200,7 @@ public class BossBlobs : MonoBehaviour {
         {
             #region GIANT
             case Thresholds.GIANT:
+
                 for (int i = 0; i < m_Blobs.GiantDrop; i++)
                 {
                     int a = i * (360 / m_Blobs.GiantDrop);
@@ -205,8 +216,9 @@ public class BossBlobs : MonoBehaviour {
                 gameObject.transform.localScale = new Vector3(m_ScaleLevel[1], m_ScaleLevel[1], m_ScaleLevel[1]);
 
                 m_CurrentThreshold = m_Blobs.BigThresh;
-                m_Power = 150;
                 m_Threshold = Thresholds.BIG;
+
+                //r_UIBoss.SkullOn();
                 break;
             #endregion
 
@@ -225,7 +237,7 @@ public class BossBlobs : MonoBehaviour {
 
                 // Everytime a player goes down a threshold, lower their scale by .25
                 gameObject.transform.localScale = new Vector3(m_ScaleLevel[2], m_ScaleLevel[2], m_ScaleLevel[2]);
-                m_Power = 100;
+                m_CurrentThreshold = m_Blobs.RegularThresh;
                 m_Threshold = Thresholds.REGULAR;
                 break;
             #endregion
@@ -245,18 +257,26 @@ public class BossBlobs : MonoBehaviour {
 
                 // Everytime a player goes down a threshold, lower their scale by .25
                 gameObject.transform.localScale = new Vector3(m_ScaleLevel[3], m_ScaleLevel[3], m_ScaleLevel[3]);
-
-                m_Power = 75;
+                
                 m_CurrentThreshold = m_Blobs.SmallThresh;
                 m_Threshold = Thresholds.SMALL;
+
+                //r_UIBoss.SkullOff();
                 break;
             #endregion
 
             case Thresholds.SMALL:
                 // Kill
+                Debug.Log(_col.gameObject.GetComponent<BulletScript>().m_playerTag);
+                // Add a point to the boss if we were killed by a boss
+                //if (_col.gameObject.GetComponent<PlayerController>().m_IsBoss) { }
+                GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<BulletScript>().m_playerTag, "kills", 1);
+                GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
                 m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
+                //r_UIBoss.SkullOff();
                 break;
             default:
+                //r_UIBoss.SkullOff();
                 break;
         }
     }
@@ -273,7 +293,7 @@ public class BossBlobs : MonoBehaviour {
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
                 rb.AddExplosionForce(Random.Range(5.0f, 15.0f), _explosionPos, _radius, 5.0f, ForceMode.Impulse);
                 rb.tag = "Blob"; // Reset the tag so forces aren't applied to it again.
-                r_ParticleSystem.Play();
+                //r_ParticleSystem.Play();
             }
         }
     }
@@ -287,7 +307,7 @@ public class BossBlobs : MonoBehaviour {
         Vector3 _position;
 
         _position.x = _center.x + _radius * Mathf.Sin(_angle * Mathf.Deg2Rad);
-        _position.y = _center.y;
+        _position.y = _center.y + 2.0f;
         _position.z = _center.z + _radius * Mathf.Cos(_angle * Mathf.Deg2Rad);
 
         return _position;

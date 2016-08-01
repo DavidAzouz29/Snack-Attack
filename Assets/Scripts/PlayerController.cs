@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
     public string Jump = "_Jump";
     [HideInInspector]
     public bool m_IsBoss = false;
+    //[HideInInspector]
+    public string m_PlayerTag = "NoPlayerAttached";
 
     Animator animator;
     public PlayerShooting m_ShootingManager;
@@ -79,6 +81,9 @@ public class PlayerController : MonoBehaviour
         E_CLASS_STATE_BROCCOLION,
         E_CLASS_STATE_WATERMELOMON,
         E_CLASS_STATE_KARATEA,
+        E_CLASS_STATE_PATTYCAKE,
+        E_CLASS_STATE_CAUILILION,
+        E_CLASS_STATE_ROCKMELOMON,
 
         E_PLAYER_STATE_COUNT,
     };
@@ -100,8 +105,8 @@ public class PlayerController : MonoBehaviour
     //float fMovementSpeed = 10.0f; // forward and back movement speed
     //float fMovementSpeedSlowDown = 8.0f; // slow down our speed if going uphill
     //float fRotationSpeed = 1.0f; // turn speed
-    public float fJumpForce = 25.0f;
-    float fJumpForceMax = 50.0f;// *2;
+    public float fJumpForce = 12.0f;
+    float fJumpForceMax = 24.0f;// *2;
     private Vector3 m_PreviousPos;
 
     // Use this for initialization
@@ -117,6 +122,40 @@ public class PlayerController : MonoBehaviour
         Fire = "_Fire";
         Melee = "_Melee";
         Jump = "_Jump";
+
+        switch (m_eCurrentClassState)
+        {
+            case E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
+                {
+                    m_PlayerTag = "Rockyroad";
+                    break;
+                }
+            case E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
+                {
+                    m_PlayerTag = "Brocolion";
+                    break;
+                }
+            case E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
+                {
+                    m_PlayerTag = "Watermelomon";
+                    break;
+                }
+            case E_CLASS_STATE.E_CLASS_STATE_KARATEA:
+                {
+                    m_PlayerTag = "Karatea";
+                    break;
+                }
+            case E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
+                {
+                    m_PlayerTag = "Caulilion";
+                    break;
+                }
+            default:
+                {
+                    Debug.LogError("No Character Attached");
+                    break;
+                }
+        }
 
         // Loops through our players and assigns variables for input from different controllers
         for (uint i = 0; i < MAX_PLAYERS; ++i)
@@ -176,17 +215,23 @@ public class PlayerController : MonoBehaviour
                     }
                 case E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
                     {
-                        animator.CrossFade("Brocco_LEAP", 0);
+                        animator.CrossFade("Brocco_Leap", 0);
                         break;
                     }
                 case E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
                     {
-                        animator.CrossFade("water melomon Jump anim", 0);
+                        animator.CrossFade("Watermelomon_Jump", 0);
                         break;
                     }
                 case E_CLASS_STATE.E_CLASS_STATE_KARATEA:
                     {
                         animator.CrossFade("", 0);
+                        break;
+                    }
+                    // CauiliLION is a skinned version of BroccoLION
+                case E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
+                    {
+                        animator.CrossFade("Brocco_Leap", 0);
                         break;
                     }
                 default:

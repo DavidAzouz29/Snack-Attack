@@ -7,8 +7,9 @@ public class WindowManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// turns the scoreboard off during playtime.
-		scoreBoard.SetActive (false);
+        // turns the scoreboard off during playtime.
+        scoreBoard.SetActive(true);
+        scoreBoard.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -18,8 +19,8 @@ public class WindowManager : MonoBehaviour {
         {
             scoreBoard.SetActive(true);
         }
-		//if(Input.GetKeyDown(KeyCode.Tab)) {
-		//	scoreBoard.SetActive( !scoreBoard.activeSelf );
-		//}
+		if(Input.GetKeyDown(KeyCode.Tab)) {
+			scoreBoard.SetActive( !scoreBoard.activeSelf );
+		}
 	}
 }
