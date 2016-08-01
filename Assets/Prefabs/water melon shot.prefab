@@ -12,8 +12,8 @@ GameObject:
   - 23: {fileID: 2391422}
   - 95: {fileID: 9526930}
   - 114: {fileID: 11447292}
-  - 65: {fileID: 6587326}
   - 54: {fileID: 5475922}
+  - 135: {fileID: 13578232}
   m_Layer: 0
   m_Name: water melon shot
   m_TagString: Projectile
@@ -28,8 +28,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196346}
   m_LocalRotation: {x: 6.123234e-17, y: 1, z: -6.123234e-17, w: -6.123234e-17}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 54.540985, y: 54.540985, z: 54.540985}
+  m_LocalPosition: {x: -9.29869, y: 9.46, z: -16.766058}
+  m_LocalScale: {x: 90, y: 90, z: 90}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -81,18 +81,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &6587326
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 196346}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.00905878, y: 0.008252764, z: 0.004771209}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &9526930
 Animator:
   serializedVersion: 3
@@ -123,6 +111,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 40
   m_Parent: {fileID: 0}
+--- !u!135 &13578232
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.00452939
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

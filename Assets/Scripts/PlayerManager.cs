@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     // PUBLIC VARIABLES
     //----------------------------------
 	[Header("Hold Players")]
-    public const uint MAX_PLAYERS = 3; // TODO: change to 4
+    public const uint MAX_PLAYERS = 4;
     public GameObject r_PlayerRockyroad;    // Referance to a player.
     public GameObject r_PlayerBroccolion;   // Referance to a player.
     public GameObject r_PlayerWatermelomon; // Referance to a player.
@@ -47,6 +47,11 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     public PlayerShooting r_PlayerShooting; // Referance to a player.
 
     public GameObject[] shotArray = new GameObject[MAX_PLAYERS];
+<<<<<<< HEAD
+=======
+    public GameObject[] blobArray = new GameObject[MAX_PLAYERS];
+
+>>>>>>> 44c0a8774624805b9614d2a3b21d320f8e048f63
     //----------------------------------
     // PRIVATE VARIABLES
     //----------------------------------
@@ -75,6 +80,11 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
         return shotArray;
     }
 
+    public GameObject[] GetBlobArray()
+    {
+        return blobArray;
+    }
+
     // TODO: Player Array is 0 - this is being called in (RoundTimer) Update not Start like it once was,
     // as there are 0 players in the array GameManager script is playing up
     public void CreatePlayers()
@@ -87,7 +97,6 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
 			PlayerController.E_CLASS_STATE playerState = PlayerController.E_CLASS_STATE.E_PLAYER_STATE_COUNT;
             Material curMat = null;
             // Position characters randomly on the floor
-            v3PlayerPosition = m_PlayerSpawns[Random.Range(0, (int)MAX_PLAYERS)].transform.position;
             // if it's the first player, set them to character 'x', second to 'y' etc.
             if (i == 0)
             {
@@ -109,12 +118,12 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             else if (i == 3)
             {
                 r_Player = r_PlayerBroccolion; //TODO: r_Player = r_PlayerKaraTea;
-                playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA;
+                playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION;
                 curMat = r_Broc2;
                 //shotArray[3].GetComponentsInChildren<SkinnedMeshRenderer>();
             }
             
-			Object j = Instantiate(r_Player, v3PlayerPosition, r_Player.transform.rotation);
+			Object j = Instantiate(r_Player, m_PlayerSpawns[(int)i].transform.position, r_Player.transform.rotation);
 			j.name = "Character " + (i + 1);
 			// Chooses which mesh to display
 			SkinnedMeshRenderer mesh = ((GameObject)j).GetComponentInChildren<SkinnedMeshRenderer>();

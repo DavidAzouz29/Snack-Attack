@@ -6,6 +6,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 // viewed http://unity3d.com/learn/tutorials/projects/space-shooter-tutorial
 // http://unity3d.com/learn/tutorials/modules/beginner/live-training-archive/object-pooling
+// TODO:
+// - Set Textures but use same models
+// shot.GetComponent<MeshRenderer>().material.SetColor("_SpecColor", Color.white);
+// 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 using UnityEngine;
@@ -27,6 +31,9 @@ public class PlayerShooting : MonoBehaviour
     public AudioClip shootSound;
     public string sFire;
 
+    //public Texture r_Broc;
+    //public Texture r_Coli;
+
     //-------------------------------------
     // PRIVATE INSTANCE VARIABLES
     //-------------------------------------
@@ -36,12 +43,18 @@ public class PlayerShooting : MonoBehaviour
     private Quaternion SpawnRotation;
     [SerializeField]
     private GameObject _shot;
+    private PlayerManager r_PlayerMan;
+    private PlayerController r_PlayerCon;
     // A way to store the different shots based on class
     [SerializeField]
     private GameObject[] shotArray = new GameObject[PlayerManager.MAX_PLAYERS];
+<<<<<<< HEAD
     private PlayerManager r_PlayerMan;
     private PlayerController r_PlayerCon;
     private string m_PlayerTag = "NoPlayerAttached";
+=======
+    
+>>>>>>> 44c0a8774624805b9614d2a3b21d320f8e048f63
     //-------------------------------------
     // Use this for initialization
     //-------------------------------------
@@ -78,7 +91,12 @@ public class PlayerShooting : MonoBehaviour
                 case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
                     {
                         shot = shotArray[1];
+<<<<<<< HEAD
                         m_PlayerTag = "Brocolion";
+=======
+                        //shot.GetComponent<MeshRenderer>().material.mainTexture = 
+                        //r_PlayerMan.GetPlayer(1).GetComponentInChildren<SkinnedMeshRenderer>().material.mainTexture;
+>>>>>>> 44c0a8774624805b9614d2a3b21d320f8e048f63
                         break;
                     }
                 case PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
@@ -87,7 +105,7 @@ public class PlayerShooting : MonoBehaviour
                         m_PlayerTag = "Watermelomon";
                         break;
                     }
-                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA:
+                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
                     {
                         shot = shotArray[3];
                         m_PlayerTag = "Karatea";
@@ -95,6 +113,7 @@ public class PlayerShooting : MonoBehaviour
                     }
                 default:
                     {
+                        shot = shotArray[0];
                         Debug.LogError("Character animation not set up");
                         break;
                     }

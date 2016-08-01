@@ -7,6 +7,8 @@ public class SpawnManager : MonoBehaviour {
     public GameObject m_PlayerSpawnPrefab, m_BlobSpawnPrefab;
 
     public List<GameObject> m_PlayerSpawns, m_BlobSpawns;
+    [SerializeField]
+    private float[] m_SpawnTimes;
 
     public float m_PlayerRespawnTime = 2.0f;
     private float m_ResetTime;
@@ -14,7 +16,48 @@ public class SpawnManager : MonoBehaviour {
     void Awake()
     {
         m_ResetTime = m_PlayerRespawnTime;
+        m_SpawnTimes = new float[m_PlayerSpawns.Count];
+        for (int i = 0; i < m_SpawnTimes.Length; i++)
+        {
+            m_SpawnTimes[i] = m_PlayerRespawnTime;
+        }
     }
+
+    void Update()
+    {
+        for (int i = 0; i < m_SpawnTimes.Length; i++)
+        {
+            if (m_SpawnTimes[i] < m_PlayerRespawnTime && m_SpawnTimes[i] > 0)
+                m_SpawnTimes[i] -= Time.deltaTime;
+            else if (m_SpawnTimes[i] <= 0)
+                m_SpawnTimes[i] = m_PlayerRespawnTime;
+        }
+    }
+
+    public void RespawnPlayerPosition(GameObject _player)
+    {
+        bool _chosen = false;
+
+        while(!_chosen)
+        {
+            int _rand = Random.Range(0, m_PlayerSpawns.Count);
+            if(m_SpawnTimes[_rand] < m_PlayerRespawnTime) // If the chosen spawn is cooling down
+            {
+                continue; // Chosen rand had been taken
+            }
+
+            else if(m_SpawnTimes[_rand] == m_PlayerRespawnTime)
+            {
+                _player.transform.position = m_PlayerSpawns[_rand].transform.position;
+                m_SpawnTimes[_rand] = m_SpawnTimes[_rand] - 0.1f;
+                _chosen = true;
+                break;
+            }
+        }
+
+    }
+
+
 
     public void CreatePlayerSpawn()
     {
