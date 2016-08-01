@@ -1050,7 +1050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &194044
 GameObject:
   m_ObjectHideFlags: 1
@@ -2255,7 +2255,7 @@ MonoBehaviour:
   m_eCurrentPlayerState: 0
   m_eCurrentClassState: 0
   m_playerID: 0
-  fJumpForce: 25
+  fJumpForce: 7
 --- !u!114 &11428122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4395,6 +4395,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Mass
       value: 12.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: fJumpForce
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

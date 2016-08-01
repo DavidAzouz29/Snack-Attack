@@ -49,7 +49,7 @@ public class BossBlobs : MonoBehaviour {
     };
 
     public Blobs m_Blobs;
-    public UIBossLevel r_UIBoss;
+    //public UIBossLevel r_UIBoss;
 
     /*
         Could turn this into a list, for different characters and have different
@@ -80,7 +80,7 @@ public class BossBlobs : MonoBehaviour {
         r_PlayerCon = GetComponent<PlayerController>();
         r_ParticleSystem = GetComponent<ParticleSystem>();
         blobsArray = r_PlayerMan.GetBlobArray();
-        r_UIBoss = GetComponentInChildren<UIBossLevel>();
+        //r_UIBoss = GetComponentInChildren<UIBossLevel>();
         //m_Blobs initialise
     }
 
@@ -218,7 +218,7 @@ public class BossBlobs : MonoBehaviour {
                 m_CurrentThreshold = m_Blobs.BigThresh;
                 m_Threshold = Thresholds.BIG;
 
-                r_UIBoss.SkullOn();
+                //r_UIBoss.SkullOn();
                 break;
             #endregion
 
@@ -261,7 +261,7 @@ public class BossBlobs : MonoBehaviour {
                 m_CurrentThreshold = m_Blobs.SmallThresh;
                 m_Threshold = Thresholds.SMALL;
 
-                r_UIBoss.SkullOff();
+                //r_UIBoss.SkullOff();
                 break;
             #endregion
 
@@ -269,16 +269,14 @@ public class BossBlobs : MonoBehaviour {
                 // Kill
                 Debug.Log(_col.gameObject.GetComponent<BulletScript>().m_playerTag);
                 // Add a point to the boss if we were killed by a boss
-                if (_col.gameObject.GetComponent<PlayerController>().m_IsBoss)
-                {
-                    GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<BulletScript>().m_playerTag, "kills", 1);
-                }
+                //if (_col.gameObject.GetComponent<PlayerController>().m_IsBoss) { }
+                GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<BulletScript>().m_playerTag, "kills", 1);
                 GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
                 m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
-                r_UIBoss.SkullOff();
+                //r_UIBoss.SkullOff();
                 break;
             default:
-                r_UIBoss.SkullOff();
+                //r_UIBoss.SkullOff();
                 break;
         }
     }
