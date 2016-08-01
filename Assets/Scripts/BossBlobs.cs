@@ -137,13 +137,12 @@ public class BossBlobs : MonoBehaviour {
             BulletScript _script = _col.gameObject.GetComponent<BulletScript>();
             if (_script.m_Parent != null)
             {
-
                 if (_script.m_Parent != gameObject)
                 {
                     // Will need to get the damage of the projectile here
                     Destroy(_col.gameObject); // Destroy the projectile
 
-                    m_Power = m_Power - 30; // Power - Damage recieved
+                    m_Power = m_Power - 10; // Power - Damage recieved
                     if (m_Power < m_CurrentThreshold)
                     {
                         Drop(m_Threshold);
@@ -156,40 +155,12 @@ public class BossBlobs : MonoBehaviour {
     public void Drop(Thresholds _t)
     {
         GameObject _curBlob = null;
-        // Spawn *type* of projectile based of player class
-        switch (r_PlayerCon.m_eCurrentClassState)
-        {
-            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
-                {
-                    _curBlob = blobsArray[0];
-                    break;
-                }
-            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
-                {
-                    _curBlob = blobsArray[1];
-                    break;
-                }
-            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
-                {
-                    _curBlob = blobsArray[2];
-                    break;
-                }
-            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA:
-                {
-                    _curBlob = blobsArray[3];
-                    break;
-                }
-            default:
-                {
-                    Debug.LogError("Character animation not set up");
-                    break;
-                }
-        }
 
         switch (_t)
         {
             #region GIANT
             case Thresholds.GIANT:
+
                 for (int i = 0; i < m_Blobs.GiantDrop; i++)
                 {
                     int a = i * (360 / m_Blobs.GiantDrop);
@@ -205,8 +176,8 @@ public class BossBlobs : MonoBehaviour {
                 gameObject.transform.localScale = new Vector3(m_ScaleLevel[1], m_ScaleLevel[1], m_ScaleLevel[1]);
 
                 m_CurrentThreshold = m_Blobs.BigThresh;
-                m_Power = 150;
                 m_Threshold = Thresholds.BIG;
+
                 break;
             #endregion
 
@@ -225,7 +196,7 @@ public class BossBlobs : MonoBehaviour {
 
                 // Everytime a player goes down a threshold, lower their scale by .25
                 gameObject.transform.localScale = new Vector3(m_ScaleLevel[2], m_ScaleLevel[2], m_ScaleLevel[2]);
-                m_Power = 100;
+                m_CurrentThreshold = m_Blobs.RegularThresh;
                 m_Threshold = Thresholds.REGULAR;
                 break;
             #endregion
@@ -245,8 +216,7 @@ public class BossBlobs : MonoBehaviour {
 
                 // Everytime a player goes down a threshold, lower their scale by .25
                 gameObject.transform.localScale = new Vector3(m_ScaleLevel[3], m_ScaleLevel[3], m_ScaleLevel[3]);
-
-                m_Power = 75;
+                
                 m_CurrentThreshold = m_Blobs.SmallThresh;
                 m_Threshold = Thresholds.SMALL;
                 break;
@@ -273,7 +243,7 @@ public class BossBlobs : MonoBehaviour {
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
                 rb.AddExplosionForce(Random.Range(5.0f, 15.0f), _explosionPos, _radius, 5.0f, ForceMode.Impulse);
                 rb.tag = "Blob"; // Reset the tag so forces aren't applied to it again.
-                r_ParticleSystem.Play();
+                //r_ParticleSystem.Play();
             }
         }
     }
@@ -287,7 +257,7 @@ public class BossBlobs : MonoBehaviour {
         Vector3 _position;
 
         _position.x = _center.x + _radius * Mathf.Sin(_angle * Mathf.Deg2Rad);
-        _position.y = _center.y;
+        _position.y = _center.y + 2.0f;
         _position.z = _center.z + _radius * Mathf.Cos(_angle * Mathf.Deg2Rad);
 
         return _position;
