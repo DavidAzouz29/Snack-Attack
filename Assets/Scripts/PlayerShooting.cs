@@ -41,20 +41,12 @@ public class PlayerShooting : MonoBehaviour
     private float nextFire;
     private Vector3 SpawnPosition;
     private Quaternion SpawnRotation;
-    [SerializeField]
-    private GameObject _shot;
-    private PlayerManager r_PlayerMan;
-    private PlayerController r_PlayerCon;
     // A way to store the different shots based on class
     [SerializeField]
     private GameObject[] shotArray = new GameObject[PlayerManager.MAX_PLAYERS];
-<<<<<<< HEAD
     private PlayerManager r_PlayerMan;
     private PlayerController r_PlayerCon;
     private string m_PlayerTag = "NoPlayerAttached";
-=======
-    
->>>>>>> 44c0a8774624805b9614d2a3b21d320f8e048f63
     //-------------------------------------
     // Use this for initialization
     //-------------------------------------
@@ -91,12 +83,9 @@ public class PlayerShooting : MonoBehaviour
                 case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
                     {
                         shot = shotArray[1];
-<<<<<<< HEAD
                         m_PlayerTag = "Brocolion";
-=======
                         //shot.GetComponent<MeshRenderer>().material.mainTexture = 
                         //r_PlayerMan.GetPlayer(1).GetComponentInChildren<SkinnedMeshRenderer>().material.mainTexture;
->>>>>>> 44c0a8774624805b9614d2a3b21d320f8e048f63
                         break;
                     }
                 case PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:

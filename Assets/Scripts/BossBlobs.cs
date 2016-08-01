@@ -145,7 +145,7 @@ public class BossBlobs : MonoBehaviour {
                     m_Power = m_Power - 10; // Power - Damage recieved
                     if (m_Power < m_CurrentThreshold)
                     {
-                        Drop(m_Threshold);
+                        Drop(m_Threshold, _col);
                         r_ParticleSystem.Play();
                     }
                 }
@@ -153,11 +153,9 @@ public class BossBlobs : MonoBehaviour {
         }
     }
 
-    public void Drop(Thresholds _t)
+    public void Drop(Thresholds _t, Collision _col)
     {
         GameObject _curBlob = null;
-<<<<<<< HEAD
-=======
         // Spawn *type* of projectile based of player class
         switch (r_PlayerCon.m_eCurrentClassState)
         {
@@ -194,7 +192,6 @@ public class BossBlobs : MonoBehaviour {
                     break;
                 }
         }
->>>>>>> dc1f29ab410f84c94c2c9919ddaef1d8b7844870
 
         switch (_t)
         {
@@ -264,6 +261,8 @@ public class BossBlobs : MonoBehaviour {
 
             case Thresholds.SMALL:
                 // Kill
+                GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<PlayerController>().m_PlayerTag, "kills", 1);
+                GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
                 m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
                 break;
             default:
@@ -283,10 +282,7 @@ public class BossBlobs : MonoBehaviour {
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
                 rb.AddExplosionForce(Random.Range(5.0f, 15.0f), _explosionPos, _radius, 5.0f, ForceMode.Impulse);
                 rb.tag = "Blob"; // Reset the tag so forces aren't applied to it again.
-<<<<<<< HEAD
                 //r_ParticleSystem.Play();
-=======
->>>>>>> dc1f29ab410f84c94c2c9919ddaef1d8b7844870
             }
         }
     }

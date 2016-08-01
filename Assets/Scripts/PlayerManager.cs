@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     // PUBLIC VARIABLES
     //----------------------------------
 	[Header("Hold Players")]
-    public const uint MAX_PLAYERS = 4;
+    public const uint MAX_PLAYERS = 3;
     public GameObject r_PlayerRockyroad;    // Referance to a player.
     public GameObject r_PlayerBroccolion;   // Referance to a player.
     public GameObject r_PlayerWatermelomon; // Referance to a player.
@@ -47,11 +47,8 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     public PlayerShooting r_PlayerShooting; // Referance to a player.
 
     public GameObject[] shotArray = new GameObject[MAX_PLAYERS];
-<<<<<<< HEAD
-=======
     public GameObject[] blobArray = new GameObject[MAX_PLAYERS];
 
->>>>>>> 44c0a8774624805b9614d2a3b21d320f8e048f63
     //----------------------------------
     // PRIVATE VARIABLES
     //----------------------------------

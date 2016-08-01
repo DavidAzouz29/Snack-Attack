@@ -30,11 +30,8 @@ public class Killbox : MonoBehaviour {
         {
             m_Player = _col.gameObject;
             // Kill and respawn the player
-<<<<<<< HEAD
             m_Player.transform.position = m_PlayerSpawnList[Random.Range(0, m_PlayerSpawnList.Count)].transform.position;
             GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
-=======
->>>>>>> 44c0a8774624805b9614d2a3b21d320f8e048f63
 
             int _pow = m_Player.GetComponent<BossBlobs>().m_Power;
             // Get player power here, spawn blobs they would have lost.
