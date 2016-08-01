@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 
     private int m_RandomPlayer;
     private float m_BossScale;
-    // Use this for initialization
+
     public void SetupBoss ()
     {
         //Generate Random player

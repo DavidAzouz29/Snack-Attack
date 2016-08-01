@@ -5,11 +5,14 @@ public class BulletScript : MonoBehaviour {
 
     public float speed;
     private float time = 5;
+    [HideInInspector]
+    public string m_playerTag = "NoPlayerAttached";
 
     public GameObject m_Parent;
 
     void Update()
     {
+        Debug.Log(m_playerTag);
 		transform.position += transform.forward * speed * Time.deltaTime;
         Destroy(gameObject, time);
     }

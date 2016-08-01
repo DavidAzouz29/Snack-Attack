@@ -41,14 +41,12 @@ public class PlayerShooting : MonoBehaviour
     private float nextFire;
     private Vector3 SpawnPosition;
     private Quaternion SpawnRotation;
-    [SerializeField]
-    private GameObject _shot;
-    private PlayerManager r_PlayerMan;
-    private PlayerController r_PlayerCon;
     // A way to store the different shots based on class
     [SerializeField]
     private GameObject[] shotArray = new GameObject[PlayerManager.MAX_PLAYERS];
-    
+    private PlayerManager r_PlayerMan;
+    private PlayerController r_PlayerCon;
+    private string m_PlayerTag = "NoPlayerAttached";
     //-------------------------------------
     // Use this for initialization
     //-------------------------------------
@@ -79,11 +77,13 @@ public class PlayerShooting : MonoBehaviour
                 case PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
                     {
                         shot = shotArray[0];
+                        m_PlayerTag = "Rockyroad";
                         break;
                     }
                 case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
                     {
                         shot = shotArray[1];
+                        m_PlayerTag = "Brocolion";
                         //shot.GetComponent<MeshRenderer>().material.mainTexture = 
                         //r_PlayerMan.GetPlayer(1).GetComponentInChildren<SkinnedMeshRenderer>().material.mainTexture;
                         break;
@@ -91,11 +91,13 @@ public class PlayerShooting : MonoBehaviour
                 case PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
                     {
                         shot = shotArray[2];
+                        m_PlayerTag = "Watermelomon";
                         break;
                     }
                 case PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
                     {
                         shot = shotArray[3];
+                        m_PlayerTag = "Karatea";
                         break;
                     }
                 default:
@@ -108,6 +110,7 @@ public class PlayerShooting : MonoBehaviour
             nextFire = Time.time + fireRate;
             GameObject _shot = (GameObject)Instantiate(shot, SpawnPosition, SpawnRotation);
             _shot.GetComponent<BulletScript>().m_Parent = gameObject;
+            _shot.GetComponent<BulletScript>().m_playerTag = m_PlayerTag;
         }
     }
 
