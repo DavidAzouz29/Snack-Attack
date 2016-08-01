@@ -54,7 +54,8 @@ public class BossBlobs : MonoBehaviour {
         Could turn this into a list, for different characters and have different
         prefabs for different bosses. Eg; Watermelon slices for watermelon boss blobs.
     */
-    public GameObject m_BlobObject; 
+    public GameObject m_BlobObject; // this is used to spawn a blob based on class 		    public GameObject m_BlobObject; 
+    private GameObject _curBlob; // buffer storage
 
     [HideInInspector]
     public List<GameObject> m_CreatedBlobs; // Used to manage the instantiated blobs, and to only explode those.
@@ -155,33 +156,33 @@ public class BossBlobs : MonoBehaviour {
 
     public void Drop(Thresholds _t, Collision _col)
     {
-        GameObject _curBlob = null;
+        //GameObject _curBlob = null;
         // Spawn *type* of projectile based of player class
         switch (r_PlayerCon.m_eCurrentClassState)
         {
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
                 {
-                    _curBlob = blobsArray[0];
+                    m_BlobObject = blobsArray[0];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
                 {
-                    _curBlob = blobsArray[1];
+                    m_BlobObject = blobsArray[1];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
                 {
-                    _curBlob = blobsArray[2];
+                    m_BlobObject = blobsArray[2];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA:
                 {
-                    _curBlob = blobsArray[0]; //TODO:
+                    m_BlobObject = blobsArray[0]; //TODO:
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
                 {
-                    _curBlob = blobsArray[3];
+                    m_BlobObject = blobsArray[3];
                     //shot.GetComponent<MeshRenderer>().material.mainTexture = r_Coli;
                     //shot.GetComponent<MeshRenderer>().material.SetColor("_SpecColor", Color.white);
                     break;
@@ -261,7 +262,8 @@ public class BossBlobs : MonoBehaviour {
 
             case Thresholds.SMALL:
                 // Kill
-                GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<PlayerController>().m_PlayerTag, "kills", 1);
+                Debug.Log(_col.gameObject.GetComponent<BulletScript>().m_playerTag);
+                GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<BulletScript>().m_playerTag, "kills", 1);
                 GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
                 m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
                 break;

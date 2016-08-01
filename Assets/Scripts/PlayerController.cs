@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     public string Jump = "_Jump";
     [HideInInspector]
     public bool m_IsBoss = false;
-    [HideInInspector]
+    //[HideInInspector]
     public string m_PlayerTag = "NoPlayerAttached";
 
     Animator animator;
@@ -141,6 +141,11 @@ public class PlayerController : MonoBehaviour
                     break;
                 }
             case E_CLASS_STATE.E_CLASS_STATE_KARATEA:
+                {
+                    m_PlayerTag = "Karatea";
+                    break;
+                }
+            case E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
                 {
                     m_PlayerTag = "Caulilion";
                     break;

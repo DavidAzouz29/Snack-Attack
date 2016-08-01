@@ -48,7 +48,6 @@ MonoBehaviour:
   fireRate: 1
   shootSound: {fileID: 0}
   sFire: P1_Fire
-  _shot: {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   shotArray:
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   - {fileID: 0}
@@ -77,6 +76,7 @@ MonoBehaviour:
   Melee: _Melee
   Jump: _Jump
   m_IsBoss: 0
+  m_PlayerTag: NoPlayerAttached
   m_ShootingManager: {fileID: 11402588}
   dizzyBirds: {fileID: 0}
   r_weapon: {fileID: 0}

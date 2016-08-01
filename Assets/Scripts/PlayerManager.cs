@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     // PUBLIC VARIABLES
     //----------------------------------
 	[Header("Hold Players")]
-    public const uint MAX_PLAYERS = 3;
+    public const uint MAX_PLAYERS = 4;
     public GameObject r_PlayerRockyroad;    // Referance to a player.
     public GameObject r_PlayerBroccolion;   // Referance to a player.
     public GameObject r_PlayerWatermelomon; // Referance to a player.
