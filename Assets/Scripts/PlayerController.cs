@@ -192,6 +192,7 @@ public class PlayerController : MonoBehaviour
                         animator.CrossFade("", 0);
                         break;
                     }
+                    // CauiliLION is a skinned version of BroccoLION
                 case E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
                     {
                         animator.CrossFade("Brocco_Leap", 0);
