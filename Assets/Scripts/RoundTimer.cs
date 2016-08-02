@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -22,6 +23,8 @@ public class RoundTimer : MonoBehaviour {
     [SerializeField]
     private PlayerManager m_PlayerManager;
 
+    public GameObject m_Window;
+
     void Start()
     {
         m_PlayerManager = FindObjectOfType<PlayerManager>();
@@ -44,7 +47,7 @@ public class RoundTimer : MonoBehaviour {
             if (m_TimeRemaining <= 0.0f)
             {
                 m_RoundStarted = false;
-                Time.timeScale = 0;
+                Time.timeScale = 0.0f;
             }
             else if(!m_Spawned)
             {
@@ -52,6 +55,17 @@ public class RoundTimer : MonoBehaviour {
 
                 m_Spawned = true;
                 m_PlayerManager.CreatePlayers();
+            }
+        }
+
+        if (GetTimeRemaining() <= 0)
+        {
+            if (Input.GetButton("Pause"))
+            {
+                //m_Window.SetActive(false);
+                m_Spawned = false;
+                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                //Time.timeScale = 1.0f;
             }
         }
     }

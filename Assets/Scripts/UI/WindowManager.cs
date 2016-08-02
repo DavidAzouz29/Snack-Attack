@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class WindowManager : MonoBehaviour {
@@ -13,8 +14,8 @@ public class WindowManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+    {
         if (Time.timeScale == 0)
         {
             scoreBoard.SetActive(true);
@@ -23,4 +24,17 @@ public class WindowManager : MonoBehaviour {
 			scoreBoard.SetActive( !scoreBoard.activeSelf );
 		}
 	}
+
+    public void Replay()
+    {
+        scoreBoard.SetActive(true);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1.0f;
+    }
+
+    public void Quit()
+    {
+        //SceneManager.
+        Application.Quit();
+    }
 }

@@ -2542,15 +2542,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Thresholds: c800000096000000640000004b000000
-  m_BlobsToDrop: 04000000030000000200000001000000
-  m_PowerToGive: 0f0000000a0000000f00000014000000
+  m_BlobsToDrop: 01000000020000000300000004000000
+  m_PowerToGive: 140000000f0000000a00000005000000
   m_ScaleLevel:
   - 2
   - 1.5
   - 1
   - 0.75
   m_CurrentThreshold: 0
-  m_Power: 0
+  m_Power: 100
   m_PowerMax: 200
   m_Updated: 0
   r_ParticleSystem: {fileID: 0}
@@ -4399,6 +4399,42 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: fJumpForce
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Power
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_BlobsToDrop.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_BlobsToDrop.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_BlobsToDrop.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_BlobsToDrop.Array.data[3]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_PowerToGive.Array.data[0]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_PowerToGive.Array.data[1]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_PowerToGive.Array.data[2]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_PowerToGive.Array.data[3]
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -12,7 +12,6 @@ public class BulletScript : MonoBehaviour {
 
     void Update()
     {
-        Debug.Log(m_playerTag);
 		transform.position += transform.forward * speed * Time.deltaTime;
         Destroy(gameObject, time);
     }

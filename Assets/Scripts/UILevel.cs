@@ -9,6 +9,9 @@ public class UILevel : MonoBehaviour {
     [SerializeField]
     private Text r_text;
 
+    float m_Mins;
+    float m_Secs;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -18,6 +21,13 @@ public class UILevel : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        r_text.text = r_RoundTimer.GetTimeRemaining().ToString("f2");
+        GetTime();
+        r_text.text = (m_Mins.ToString() + ":" + m_Secs.ToString() );
+    }
+
+    void GetTime()
+    {
+        m_Mins = Mathf.Floor(r_RoundTimer.GetTimeRemaining() / 60);
+        m_Secs = Mathf.Round(r_RoundTimer.GetTimeRemaining() % 60);
     }
 }

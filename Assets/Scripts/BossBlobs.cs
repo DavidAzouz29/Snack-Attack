@@ -72,10 +72,10 @@ public class BossBlobs : MonoBehaviour {
         m_Killbox = FindObjectOfType<Killbox>();
         InitializeStruct();
 
-        m_Threshold = Thresholds.GIANT;
-        m_Power = m_PowerMax;
-        m_CurrentThreshold = m_Blobs.GiantThresh;
-        transform.localScale = new Vector3(2,2,2);
+        m_Threshold = Thresholds.REGULAR;
+        m_Power = 100;
+        m_CurrentThreshold = m_Blobs.RegularThresh;
+        transform.localScale = new Vector3(m_ScaleLevel[2], m_ScaleLevel[2], m_ScaleLevel[2]);
         r_PlayerMan = FindObjectOfType<PlayerManager>();
         r_PlayerCon = GetComponent<PlayerController>();
         r_ParticleSystem = GetComponent<ParticleSystem>();
@@ -143,14 +143,20 @@ public class BossBlobs : MonoBehaviour {
                 if (_script.m_Parent != gameObject)
                 {
                     // Will need to get the damage of the projectile here
-                    Destroy(_col.gameObject); // Destroy the projectile
 
-                    m_Power = m_Power - 10; // Power - Damage recieved
+                    m_Power = m_Power - 15; // Power - Damage recieved
                     if (m_Power < m_CurrentThreshold)
                     {
                         Drop(m_Threshold, _col);
                         r_ParticleSystem.Play();
                     }
+                    if(m_Power <= 0)
+                    {
+                        m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
+                        GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<BulletScript>().m_playerTag, "kills", 1);
+                        GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
+                    }
+                    Destroy(_col.gameObject); // Destroy the projectile
                 }
             }
         }
@@ -267,12 +273,10 @@ public class BossBlobs : MonoBehaviour {
 
             case Thresholds.SMALL:
                 // Kill
-                Debug.Log(_col.gameObject.GetComponent<BulletScript>().m_playerTag);
                 // Add a point to the boss if we were killed by a boss
                 //if (_col.gameObject.GetComponent<PlayerController>().m_IsBoss) { }
-                GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<BulletScript>().m_playerTag, "kills", 1);
-                GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
-                m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
+
+                
                 //r_UIBoss.SkullOff();
                 break;
             default:

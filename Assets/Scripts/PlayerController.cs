@@ -256,11 +256,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+
         if (Input.GetButton("Pause"))
         {
             // equal to the state we're not (true will equal not true (which is false))
-            isPaused = !isPaused;
-            Time.timeScale = 0.01f;
+            //isPaused = !isPaused;
+            //Time.timeScale = 0.01f;
         }
         // if we're not paused and our timescale is modified
         if (!isPaused && Time.timeScale != 1)
@@ -317,11 +318,11 @@ public class PlayerController : MonoBehaviour
         }
 
         // if we topple over
-        if (Input.GetButton("Reset"))
-        {
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, 0.2f);
-			m_eCurrentPlayerState = E_PLAYER_STATE.E_PLAYER_STATE_ALIVE;
-        }
+       // if (Input.GetButton("Reset"))
+       // {
+       //     transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, 0.2f);
+		//	m_eCurrentPlayerState = E_PLAYER_STATE.E_PLAYER_STATE_ALIVE;
+       // }
 
         if (health <= 0)
         {

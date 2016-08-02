@@ -29,13 +29,14 @@ public class Killbox : MonoBehaviour {
         if(_col.gameObject.tag == "Player")
         {
             m_Player = _col.gameObject;
+            GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(m_Player.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
+
             // Kill and respawn the player
-            m_Player.transform.position = m_PlayerSpawnList[Random.Range(0, m_PlayerSpawnList.Count)].transform.position;
-            GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
+            //GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
 
             int _pow = m_Player.GetComponent<BossBlobs>().m_Power;
             // Get player power here, spawn blobs they would have lost.
-            if (_pow >= 150)
+            if (_pow >= 110)
             {
                 float _toDrop = _pow / 20;
                 int _drop = Mathf.RoundToInt(_toDrop);
@@ -50,6 +51,7 @@ public class Killbox : MonoBehaviour {
             }
 
             m_Respawning = true;
+
 
         }
         else if(_col.gameObject.tag == "Blob")
