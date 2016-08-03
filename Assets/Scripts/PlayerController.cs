@@ -25,7 +25,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    public const uint MAX_PLAYERS = PlayerManager.MAX_PLAYERS; //TODO: more than two players?
+    public const uint MAX_PLAYERS = PlayerManager.MAX_PLAYERS;
 
     // PRIVATE VARIABLES [MenuItem ("MyMenu/Do Something")]
     [Header("Movement")]
@@ -46,8 +46,6 @@ public class PlayerController : MonoBehaviour
 	public string Fire = "_Fire";
 	public string Melee = "_Melee";
     public string Jump = "_Jump";
-    [HideInInspector]
-    public bool m_IsBoss = false;
     //[HideInInspector]
     public string m_PlayerTag = "NoPlayerAttached";
 
@@ -106,8 +104,10 @@ public class PlayerController : MonoBehaviour
     //float fMovementSpeedSlowDown = 8.0f; // slow down our speed if going uphill
     //float fRotationSpeed = 1.0f; // turn speed
     public float fJumpForce = 12.0f;
+    public float fGravity = 9.8f;
     float fJumpForceMax = 24.0f;// *2;
     private Vector3 m_PreviousPos;
+    private float charYvel;
 
     // Use this for initialization
     void Start ()
@@ -192,18 +192,22 @@ public class PlayerController : MonoBehaviour
             ///rb.velocity = new Vector3(0, 0.1f, 0);
             //fJumpForce = fJumpForceMax;
             isOnGround = true;
+            charYvel = 0;
             animator.SetBool("Jumping", false);
         }
         // Falling
         else
         {
-            float charYvel = rb.velocity.y;
+            charYvel = rb.velocity.y;
             //rb.velocity = new Vector3(0, charYvel += Physics.gravity.y * Time.deltaTime, 0); //m_characterYvelocity += m_playerGravity * a_deltaTime;
             isOnGround = false;
         }
         if (Input.GetButton(Jump) && isOnGround)
         {
-            rb.MovePosition(rb.position + transform.up * fJumpForce * Time.deltaTime);
+            //rb.MovePosition(rb.position + transform.up * fJumpForce * Time.deltaTime);
+            charYvel = fJumpForce;
+            charYvel -= fGravity * Time.deltaTime;
+            rb.MovePosition(rb.position + transform.up * charYvel * Time.deltaTime);
             isOnGround = false;
             animator.SetBool("Jumping", true);
             switch (m_eCurrentClassState)
@@ -390,7 +394,7 @@ public class PlayerController : MonoBehaviour
         //r_weapon.SetActive(false);
         Destroy(this.gameObject);
         r_gameOverPanel.SetActive(true); 
-        Time.timeScale = 0;
+        Time.timeScale = 0.00001f;
         // After three seconds, return to menu
         Invoke("ReturnToMenu", 1);
         Debug.Log("Bomb Effect");
@@ -401,27 +405,11 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    #region Change States
-    public E_PLAYER_STATE ChangeStateBoss()
+    // this is the function that should be used
+    public void SetPlayerState(E_PLAYER_STATE a_ePlayerState)
     {
-        return E_PLAYER_STATE.E_PLAYER_STATE_BOSS;
+        m_eCurrentPlayerState = a_ePlayerState;
     }
-
-    public E_PLAYER_STATE ChangeStateTeamup()
-    {
-        return E_PLAYER_STATE.E_PLAYER_STATE_TEAMUP;
-    }
-
-    public E_PLAYER_STATE ChangeStateDead()
-    {
-        return E_PLAYER_STATE.E_PLAYER_STATE_DEAD;
-    }
-
-    public void SetPlayerStateDead(uint a_uiPlayerStateDead)
-    {
-        m_eCurrentPlayerState = (E_PLAYER_STATE)a_uiPlayerStateDead;
-    }
-    #endregion
 
     public uint GetPlayerID()
     {

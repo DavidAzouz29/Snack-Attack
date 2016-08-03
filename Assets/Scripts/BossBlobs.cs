@@ -206,7 +206,7 @@ public class BossBlobs : MonoBehaviour {
         {
             #region GIANT
             case Thresholds.GIANT:
-
+                r_PlayerCon.SetPlayerState(PlayerController.E_PLAYER_STATE.E_PLAYER_STATE_BOSS);
                 for (int i = 0; i < m_Blobs.GiantDrop; i++)
                 {
                     int a = i * (360 / m_Blobs.GiantDrop);
@@ -274,7 +274,11 @@ public class BossBlobs : MonoBehaviour {
             case Thresholds.SMALL:
                 // Kill
                 // Add a point to the boss if we were killed by a boss
-                //if (_col.gameObject.GetComponent<PlayerController>().m_IsBoss) { }
+                /*if (_col.gameObject.GetComponent<PlayerController>().m_eCurrentPlayerState
+                    == PlayerController.E_PLAYER_STATE.E_PLAYER_STATE_BOSS)
+                {
+
+                } */
 
                 
                 //r_UIBoss.SkullOff();
