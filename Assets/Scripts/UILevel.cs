@@ -21,13 +21,20 @@ public class UILevel : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        GetTime();
-        r_text.text = (m_Mins.ToString() + ":" + m_Secs.ToString() );
+        SetClockText();
+
+
     }
 
-    void GetTime()
+    void SetClockText()
     {
-        m_Mins = Mathf.Floor(r_RoundTimer.GetTimeRemaining() / 60);
-        m_Secs = Mathf.Round(r_RoundTimer.GetTimeRemaining() % 60);
+        m_Mins = Mathf.Floor(r_RoundTimer.GetTimeRemaining() / 60); // Get Minutes Remaining
+        m_Secs = Mathf.Floor(r_RoundTimer.GetTimeRemaining() % 60);  // Get Seconds Remaining
+
+        r_text.text = (m_Mins.ToString() + ":" + m_Secs.ToString()); // Display the time remaining
+        if (m_Secs < 10.0f) // If seconds aren't in the 10s, display a 0 before the second.
+        {
+            r_text.text = (m_Mins.ToString() + ":" + "0" + m_Secs.ToString());
+        }
     }
 }
