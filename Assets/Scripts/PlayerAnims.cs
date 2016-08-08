@@ -46,9 +46,13 @@ public class PlayerAnims : MonoBehaviour {
         AttackToWalk();
         //IdleToJump();
         //JumpToIdle();
-        if (Input.GetButtonDown(m_PC.Fire))
+        if (Input.GetButtonDown(m_PC.Attack1))
         {
-            FireAnim();
+            AttackAnim1();
+        }
+        if (Input.GetButtonDown(m_PC.Attack2))
+        {
+            AttackAnim2();
         }
 
         m_PreviousPos = transform.position;
@@ -59,9 +63,14 @@ public class PlayerAnims : MonoBehaviour {
 
     }
 
-    void FireAnim()
+    void AttackAnim1()
     {
-        m_Anim.SetTrigger("Attack"); //TODO: change to Fire        
+        m_Anim.SetTrigger("Attack1");       
+    }
+
+    void AttackAnim2()
+    {
+        m_Anim.SetTrigger("Attack2");
     }
 
     //---------------------------

@@ -35,6 +35,7 @@ public class WindowManager : MonoBehaviour {
     public void Quit()
     {
         //SceneManager.
+        Debug.Log("Quit");
         Application.Quit();
     }
 }

@@ -38,25 +38,24 @@ public class PlayerController : MonoBehaviour
     public int hitsBeforeDeath = 5;
     public int health = 100;
     
-    // these will change for each player  
+    // these will change for each player 
+    [Header("KeyBinds")] 
     public string verticalAxis = "_Vertical";
     public string horizontalAxis = "_Horizontal";
-    public string rotationAxisX = "_Rotation_X";
-	public string rotationAxisY = "_Rotation_Y";
-	public string Fire = "_Fire";
-	public string Melee = "_Melee";
+	public string Attack1 = "Attack1";
+	public string Attack2 = "Attack2";
     public string Jump = "_Jump";
-    //[HideInInspector]
+    [HideInInspector]
     public string m_PlayerTag = "NoPlayerAttached";
 
     Animator animator;
     public PlayerShooting m_ShootingManager;
 
-    public AudioSource dizzyBirds;
+    //public AudioSource dizzyBirds;
     //public GameManager 
-    [Header("Weapon")]
-    public GameObject r_weapon;
-    public GameObject r_gameOverPanel;
+    //[Header("Weapon")]
+    //public GameObject r_weapon;
+    //public GameObject r_gameOverPanel;
     //public GameObject r_bombExplosionParticleEffect;
     //choosing player states
     [HideInInspector]
@@ -75,7 +74,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public enum E_CLASS_STATE
     {
-        E_CLASS_STATE_ROCKYROAD, //ice-cream
+        E_CLASS_STATE_ROCKYROAD,
         E_CLASS_STATE_BROCCOLION,
         E_CLASS_STATE_WATERMELOMON,
         E_CLASS_STATE_KARATEA,
@@ -94,15 +93,11 @@ public class PlayerController : MonoBehaviour
     bool isPaused = false;
     // Health
     private int healthDeduct = 0;
-    //private healthBar healthBars;
 
     // used for jumping
     Rigidbody rb;
     //private float m_JumpHeight = 5;
     bool isOnGround; // set to true if we are on the ground
-    //float fMovementSpeed = 10.0f; // forward and back movement speed
-    //float fMovementSpeedSlowDown = 8.0f; // slow down our speed if going uphill
-    //float fRotationSpeed = 1.0f; // turn speed
     public float fJumpForce = 12.0f;
     public float fGravity = 9.8f;
     float fJumpForceMax = 24.0f;// *2;
@@ -117,10 +112,8 @@ public class PlayerController : MonoBehaviour
 
         verticalAxis = "_Vertical";
         horizontalAxis = "_Horizontal";
-        rotationAxisX = "_Rotation_X";
-        rotationAxisY = "_Rotation_Y";
-        Fire = "_Fire";
-        Melee = "_Melee";
+        Attack1 = "_Attack1";
+        Attack2 = "_Attack2";
         Jump = "_Jump";
 
         switch (m_eCurrentClassState)
@@ -164,14 +157,12 @@ public class PlayerController : MonoBehaviour
             {
                 verticalAxis = "P" + (i + 1) + verticalAxis; //"_Vertical";
                 horizontalAxis = "P" + (i + 1) + horizontalAxis; // "_Horizontal";
-                rotationAxisX = "P" + (i + 1) + rotationAxisX; // "_Rotation_X";
-                rotationAxisY = "P" + (i + 1) + rotationAxisY; // "_Rotation_Y";
-				Fire = "P" + (i + 1) + Fire;
-                Melee = "P" + (i + 1) + Melee;
+                Attack1 = "P" + (i + 1) + Attack1;
+                Attack2 = "P" + (i + 1) + Attack2;
                 Jump = "P" + (i + 1) + Jump;
             }
         }
-        m_ShootingManager.SetFire(Fire);
+        //m_ShootingManager.SetFire(Fire);
         //TODO: healthBars = FindObjectOfType<healthBar> ();
         healthDeduct = health / hitsBeforeDeath;
         animator = GetComponent<Animator>(); //GetComponentInChildren<Animator> ();
@@ -285,8 +276,6 @@ public class PlayerController : MonoBehaviour
         //creating a variable that gets the input axis
         float moveHorizontal = Input.GetAxis(horizontalAxis);
         float moveVertical = Input.GetAxis(verticalAxis);
-        float moveRotationX = Input.GetAxis(rotationAxisX);
-        float moveRotationY = Input.GetAxis(rotationAxisY);
 
         // Movement
         if ((moveHorizontal < -fRot || moveHorizontal > fRot ||
@@ -298,41 +287,19 @@ public class PlayerController : MonoBehaviour
             movementDirection = Quaternion.Euler(0, 45, 0) * movementDirection;
             Vector3 pos = transform.position + movementDirection * playerSpeed * Time.deltaTime;
             transform.position = Vector3.Lerp (transform.position, pos, 0.2f);
-
-            //Debug.Log("HELP");
-            //animator.SetBool("Walking", true);
-            //c_walk.CrossFade("Walk");
+            transform.forward = new Vector3(-moveVertical, 0.0f, moveHorizontal);
+            transform.forward = Quaternion.Euler(0, -45, 0) * transform.forward;
         }
         // we're not moving so play the idle animation
         else
         {
             m_Moving = false;
-            //animator.SetBool ("Walking", false);
-            //c_idle.Play ("idle");
         }
-
-        // If we are rotating
-        // Rotation/ Direction with the (right) analog stick
-        if ((moveRotationX < -fRot || moveRotationX > fRot ||
-            moveRotationY < -fRot || moveRotationY > fRot) && isPaused == false)
-        {
-            transform.forward = new Vector3(moveRotationX, 0.0f, moveRotationY);
-            transform.forward = Quaternion.Euler(0, -45, 0) * transform.forward;
-            //Debug.LogFormat("{0}", m_playerID);
-        }
-
-        // if we topple over
-       // if (Input.GetButton("Reset"))
-       // {
-       //     transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, 0.2f);
-		//	m_eCurrentPlayerState = E_PLAYER_STATE.E_PLAYER_STATE_ALIVE;
-       // }
 
         if (health <= 0)
         {
             m_eCurrentPlayerState = E_PLAYER_STATE.E_PLAYER_STATE_DEAD;
             //DO STUFF
-            //animator.SetBool("Dead", true);
         }
 
         //Switches between player states
@@ -350,7 +317,7 @@ public class PlayerController : MonoBehaviour
             case E_PLAYER_STATE.E_PLAYER_STATE_BOSS:
                 {
                     //gameObject.GetComponent<BossBlobs>().enabled = true;
-                    r_weapon.SetActive(true);
+                    //r_weapon.SetActive(true);
                     //Debug.Log("Boss");
                     break;
                 }
@@ -393,7 +360,7 @@ public class PlayerController : MonoBehaviour
     {
         //r_weapon.SetActive(false);
         Destroy(this.gameObject);
-        r_gameOverPanel.SetActive(true); 
+        //r_gameOverPanel.SetActive(true); 
         Time.timeScale = 0.00001f;
         // After three seconds, return to menu
         Invoke("ReturnToMenu", 1);
@@ -421,14 +388,6 @@ public class PlayerController : MonoBehaviour
         m_playerID = a_uiPlayerID; 
     }
 
-    // Upon Collision TODO: is this still needed?
-    /*void OnCollisionEnter()
-    {
-        Vector3 v3PreviousPos = transform.localPosition;
-        transform.parent.position = transform.localPosition;
-        transform.position = v3PreviousPos;
-    } */
-
 
     void OnCollisionEnter(Collision a_collision)
     {
@@ -436,7 +395,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("PC: HIT");
             health -= healthDeduct; //20?
-            dizzyBirds.Play();
+            //dizzyBirds.Play();
 
             float healthFraction = 1.0f - (float)health / 100;
             healthFraction = Mathf.Lerp(0, 5, healthFraction);

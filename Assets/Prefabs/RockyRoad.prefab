@@ -220,7 +220,6 @@ GameObject:
   - 65: {fileID: 6513834}
   - 136: {fileID: 13691700}
   - 114: {fileID: 11496878}
-  - 114: {fileID: 11444456}
   - 33: {fileID: 3301232}
   - 95: {fileID: 9520308}
   - 114: {fileID: 11442798}
@@ -275,9 +274,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 467054}
+  - 135: {fileID: 13523118}
+  - 114: {fileID: 11499456}
   m_Layer: 9
   m_Name: Left_Fist_JNT
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -498,7 +499,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175530}
   m_LocalRotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -6.123234e-17}
-  m_LocalPosition: {x: -0.4732568, y: 7.105427e-16, z: 1.563194e-15}
+  m_LocalPosition: {x: -0.109, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 440048}
@@ -744,28 +745,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 9520308}
---- !u!114 &11444456
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9357b8960b03004eab064c046c41d52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
-  fireTime: 0.05
-  tilt: 0
-  shotSpawn: {fileID: 455838}
-  fireRate: 0.3
-  shootSound: {fileID: 0}
-  sFire: 
-  shotArray:
-  - {fileID: 100000, guid: 4c005af3d91b39849be83ef5ac106a37, type: 3}
-  - {fileID: 100000, guid: cf12f693b8fbd7740b4d42477316217b, type: 3}
-  - {fileID: 100000, guid: b5e1eadcbefcb6b4da93cc0a85949ffe, type: 3}
 --- !u!114 &11445158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -971,21 +950,39 @@ MonoBehaviour:
   health: 100
   verticalAxis: _Vertical
   horizontalAxis: _Horizontal
-  rotationAxisX: _Rotation_X
-  rotationAxisY: _Rotation_Y
-  Fire: _Fire
-  Melee: _Melee
+  Attack1: Attack1
+  Attack2: Attack2
   Jump: _Jump
-  m_IsBoss: 0
   m_PlayerTag: NoPlayerAttached
-  m_ShootingManager: {fileID: 11444456}
-  dizzyBirds: {fileID: 0}
-  r_weapon: {fileID: 0}
-  r_gameOverPanel: {fileID: 0}
+  m_ShootingManager: {fileID: 0}
   m_eCurrentPlayerState: 0
   m_eCurrentClassState: 0
   m_playerID: 0
   fJumpForce: 5
+  fGravity: 9.8
+--- !u!114 &11499456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &13523118
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175530}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.35
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13691700
 CapsuleCollider:
   m_ObjectHideFlags: 1

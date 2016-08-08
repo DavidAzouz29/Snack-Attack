@@ -136,8 +136,8 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
 			// -------------------------------------------------------------
 			r_PlayerController = ((GameObject)j).GetComponent<PlayerController>();
 			r_PlayerController.SetPlayerID(i);
-			r_PlayerShooting = ((GameObject)j).GetComponent<PlayerShooting>();
-			r_PlayerShooting.SetFire("P" + (i + 1) + "_Fire");
+			//r_PlayerShooting = ((GameObject)j).GetComponent<PlayerShooting>();
+			//r_PlayerShooting.SetFire("P" + (i + 1) + "_Attack1");
 
 			uiPlayerConArray[i] = r_PlayerController;
 			uiPlayerConArray[i].m_eCurrentClassState = playerState;

@@ -211,7 +211,7 @@ public class BossBlobs : MonoBehaviour {
                 {
                     int a = i * (360 / m_Blobs.GiantDrop);
                     _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
-                    _curBlob.GetComponent<BlobManager>().m_PowerToGive = m_Blobs.GiantPower;
+                    _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.GiantPower;
                     m_CreatedBlobs.Add(_curBlob);
                 }
                 // Apply Explosion
@@ -234,7 +234,7 @@ public class BossBlobs : MonoBehaviour {
                 {
                     int a = i * (360 / m_Blobs.BigDrop);
                     _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
-                    _curBlob.GetComponent<BlobManager>().m_PowerToGive = m_Blobs.BigPower;
+                    _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.BigPower;
                     m_CreatedBlobs.Add(_curBlob);
                 }
                 // Apply Explosion
@@ -254,7 +254,7 @@ public class BossBlobs : MonoBehaviour {
                 {
                     int a = i * (360 / m_Blobs.RegularDrop);
                     _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
-                    _curBlob.GetComponent<BlobManager>().m_PowerToGive = m_Blobs.RegularPower;
+                    _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.RegularPower;
                     m_CreatedBlobs.Add(_curBlob);
                 }
                 // Apply Explosion
