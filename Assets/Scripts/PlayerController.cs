@@ -98,11 +98,20 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     //private float m_JumpHeight = 5;
     bool isOnGround; // set to true if we are on the ground
+<<<<<<< HEAD
     public float fJumpForce = 12.0f;
     public float fGravity = 9.8f;
     float fJumpForceMax = 24.0f;// *2;
+=======
+    //float fMovementSpeed = 10.0f; // forward and back movement speed
+    //float fMovementSpeedSlowDown = 8.0f; // slow down our speed if going uphill
+    //float fRotationSpeed = 1.0f; // turn speed
+    public float fJumpForce = 8.0f; // TODO: this is being set in start for all characters
+    //public float fGravity = 9.8f;
+    //float fJumpForceMax = 24.0f;// *2;
+>>>>>>> 5bf110a65a52c16998fe04bfc262f27f048f8c9d
     private Vector3 m_PreviousPos;
-    private float charYvel;
+    //private float charYvel;
 
     // Use this for initialization
     void Start ()
@@ -169,7 +178,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //jump
         //fMovementSpeedSlowDown = fMovementSpeed - 2.0f;
-        fJumpForceMax = fJumpForce;// *2;
+        fJumpForce = 8.0f;
+        //fJumpForceMax = fJumpForce;// *2;
         m_PreviousPos = transform.position;
     }
 
@@ -183,22 +193,24 @@ public class PlayerController : MonoBehaviour
             ///rb.velocity = new Vector3(0, 0.1f, 0);
             //fJumpForce = fJumpForceMax;
             isOnGround = true;
-            charYvel = 0;
+            //charYvel = 0;
             animator.SetBool("Jumping", false);
         }
         // Falling
         else
         {
-            charYvel = rb.velocity.y;
+            //charYvel = rb.velocity.y;
             //rb.velocity = new Vector3(0, charYvel += Physics.gravity.y * Time.deltaTime, 0); //m_characterYvelocity += m_playerGravity * a_deltaTime;
             isOnGround = false;
         }
-        if (Input.GetButton(Jump) && isOnGround)
+        if (Input.GetButtonDown(Jump) && isOnGround)
         {
             //rb.MovePosition(rb.position + transform.up * fJumpForce * Time.deltaTime);
-            charYvel = fJumpForce;
+            /*charYvel = fJumpForce;
             charYvel -= fGravity * Time.deltaTime;
-            rb.MovePosition(rb.position + transform.up * charYvel * Time.deltaTime);
+            rb.MovePosition(rb.position + transform.up * charYvel * Time.deltaTime); */
+
+            rb.AddForce(0, fJumpForce, 0, ForceMode.Impulse);
             isOnGround = false;
             animator.SetBool("Jumping", true);
             switch (m_eCurrentClassState)
