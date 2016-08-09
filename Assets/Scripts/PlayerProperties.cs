@@ -34,7 +34,6 @@ public interface IClass
 
     // Need one:
     PlayerController r_PC { get; set; }
-    PlayerShooting r_PS { get; set; }
 
     Animator c_Animator { get; set; }
     PlayerAnims r_PA { get; set; }

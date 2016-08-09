@@ -24,8 +24,8 @@ public class GrabAndDrop : MonoBehaviour
 	Vector3 previousGrabPosition;
 
     private WeaponScript weapon;
-    private uint m_playerID = 0;
-    private Animator c_Animator;
+    //private uint m_playerID = 0;
+    //private Animator c_Animator;
 
     //private bool isFirst = true;
     //	public float chargeTime= 0; 
@@ -33,7 +33,7 @@ public class GrabAndDrop : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        c_Animator = GetComponentInChildren<Animator>();
+        //c_Animator = GetComponentInChildren<Animator>();
     }
 
 	void TryGrabObject (GameObject grabObject)

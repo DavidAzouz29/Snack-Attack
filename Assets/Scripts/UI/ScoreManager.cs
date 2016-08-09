@@ -4,22 +4,14 @@ using System.Linq;
 
 public class ScoreManager : MonoBehaviour {
 
-	// The map we're building is going to look like:
-	//
-	//	LIST OF USERS -> A User -> LIST OF SCORES for that user
-	//
-
 	Dictionary< string, Dictionary<string, int> > playerScores;
-
 	int changeCounter = 0;
 
 	void Start() {
 
     }
 
-	/// <summary>
-	/// Init this instance.
-	/// </summary>
+	// Init this instance.
 	void Init() {
         if (playerScores != null)
 			return;
@@ -63,12 +55,7 @@ public class ScoreManager : MonoBehaviour {
 		playerScores[username][scoreType] = value;
 	}
 
-	/// <summary>
-	/// Changes the score.
-	/// </summary>
-	/// <param name="username">Username.</param>
-	/// <param name="scoreType">Score type.</param>
-	/// <param name="amount">Amount.</param>
+	// Changes the score.
 	public void ChangeScore(string username, string scoreType, int amount) {
 		Init ();
 		int currScore = GetScore(username, scoreType);
@@ -82,7 +69,6 @@ public class ScoreManager : MonoBehaviour {
 	
 	public string[] GetPlayerNames(string sortingScoreType) {
 		Init ();
-
 		return playerScores.Keys.OrderByDescending( n => GetScore(n, sortingScoreType) ).ToArray();
 	}
 
@@ -90,43 +76,15 @@ public class ScoreManager : MonoBehaviour {
 		return changeCounter;
 	}
 
-	public void DEBUG_ADD_KILL_TO_QUILL() {
-		ChangeScore("quill18", "kills", 1);
-	}
-	
-	public void DEBUG_INITIAL_SETUP() {
-		SetScore("quill18", "kills", 0);
-		SetScore("quill18", "assists", 345);
-		
-		SetScore("bob", "kills", 1000);
-		SetScore("bob", "deaths", 14345);
-		
-		SetScore("AAAAAA", "kills", 3);
-		SetScore("BBBBBB", "kills", 2);
-		SetScore("CCCCCC", "kills", 1);
-		
-		
-		Debug.Log (  GetScore("quill18", "kills") );
-	}
-
     public void PrototypeStartup()
     {
-        //Rockyroad Setup
-        SetScore("Rockyroad", "kills", 0);
-        SetScore("Rockyroad", "deaths", 0);
-        SetScore("Rockyroad", "assists", 0);
-        //Brocolion Setup
-        SetScore("Brocolion", "kills", 0);
-        SetScore("Brocolion", "deaths", 0);
-        SetScore("Brocolion", "assists", 0);
-        //Watermelomon Setup
-        SetScore("Watermelomon", "kills", 0);
-        SetScore("Watermelomon", "deaths", 0);
-        SetScore("Watermelomon", "assists", 0);
-        //Caulilion Setup
-        SetScore("Caulilion", "kills", 0);
-        SetScore("Caulilion", "deaths", 0);
-        SetScore("Caulilion", "assists", 0);
+        for (int i = 0; i < 4; i++)
+        {
+            //Player Setup
+            SetScore("Player "+ (i+ 1), "kills", 0);
+            SetScore("Player " + (i + 1), "deaths", 0);
+            SetScore("Player " + (i + 1), "assists", 0);
+        }
     }
 
 }

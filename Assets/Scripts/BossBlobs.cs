@@ -135,30 +135,28 @@ public class BossBlobs : MonoBehaviour {
 
     void OnCollisionEnter(Collision _col)
     {
-        if(_col.gameObject.tag == "Projectile")
-        {
-            BulletScript _script = _col.gameObject.GetComponent<BulletScript>();
-            if (_script.m_Parent != null)
+        //if (_col.gameObject != gameObject.GetComponentInChildren<PlayerCollision>().gameObject)
+        //{
+            if (_col.gameObject.tag == "Melee")
             {
-                if (_script.m_Parent != gameObject)
+                Debug.Log("WeaponTrigger");
+                if (_col.gameObject.GetComponent<PlayerCollision>().isActive)
                 {
-                    // Will need to get the damage of the projectile here
-
-                    m_Power = m_Power - 15; // Power - Damage recieved
+                    Debug.Log("WeaponActive");
+                    m_Power = m_Power - _col.gameObject.GetComponent<PlayerCollision>().damage; // Power - Damage recieved
                     if (m_Power < m_CurrentThreshold)
                     {
                         Drop(m_Threshold, _col);
                         r_ParticleSystem.Play();
                     }
-                    if(m_Power <= 0)
+                    if (m_Power <= 0)
                     {
                         m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
-                        GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<BulletScript>().m_playerTag, "kills", 1);
+                        GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<PlayerController>().m_PlayerTag, "kills", 1);
                         GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
                     }
-                    Destroy(_col.gameObject); // Destroy the projectile
                 }
-            }
+            //}
         }
     }
 
@@ -185,7 +183,7 @@ public class BossBlobs : MonoBehaviour {
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA:
                 {
-                    m_BlobObject = blobsArray[0]; //TODO:
+                    m_BlobObject = blobsArray[0];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
