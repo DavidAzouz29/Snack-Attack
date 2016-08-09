@@ -298,7 +298,7 @@ public class PlayerController : MonoBehaviour
             m_Moving = true;
             // TOOD: rb.AddForce(Vector3.up);
             Vector3 movementDirection = new Vector3 (moveHorizontal, 0.0f, moveVertical);
-            movementDirection = Quaternion.Euler(0, 45, 0) * movementDirection;
+//            movementDirection = Quaternion.Euler(0, 45, 0) * movementDirection;
             Vector3 pos = transform.position + movementDirection * playerSpeed * Time.deltaTime;
             transform.position = Vector3.Lerp (transform.position, pos, 0.2f);
 

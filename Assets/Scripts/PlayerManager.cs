@@ -86,7 +86,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     // as there are 0 players in the array GameManager script is playing up
     public void CreatePlayers()
     {
-        GameObject.Find("Scoreboard").GetComponent<ScoreManager>().PrototypeStartup();
+        GameObject.Find("Scoreboard Canvas").GetComponent<ScoreManager>().PrototypeStartup();
         m_CameraControl.m_Targets = new Transform[MAX_PLAYERS]; //assigns the maximum characters the camera should track
         //Loop through and create our players.
         for (uint i = 0; i < MAX_PLAYERS; ++i)
