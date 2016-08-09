@@ -11,6 +11,7 @@
 /// - Menu and related systems working 	- David Azouz 11/04/16
 /// - Remaining comments added 		- David Azouz 11/04/16
 /// - Credits added					- David Azouz 12/04/16
+/// - Player and Level Select added	- David Azouz 9/08/16
 /// 
 /// </summary>
 
@@ -24,12 +25,16 @@ public class MenuScript : MonoBehaviour
     //----------------------------------
     // PUBLIC VARIABLES
     //----------------------------------
-    public GameObject controlsPanel; //Store a reference to the Game Object ControlsPanel
-    public GameObject creditsPanel; //Store a reference to the Game Object ControlsPanel
+    public GameObject playerSelectPanel;//Store a reference to the Game Object Player Select
+    public GameObject levelSelectPanel; //Store a reference to the Game Object Level Select
+    public GameObject controlsPanel;    //Store a reference to the Game Object ControlsPanel
+    public GameObject creditsPanel;     //Store a reference to the Game Object ControlsPanel
 
     //----------------------------------
     // PRIVATE VARIABLES
     //----------------------------------
+    private bool isPlayerSelect = false;
+    private bool isLevelSelect = false;
     private bool isControls = false;
     private bool isCredits = false;
 
@@ -52,6 +57,30 @@ public class MenuScript : MonoBehaviour
 	}
 
     #region Panels
+    /// <summary>
+    /// Shows/ hides the 'Player Select' panel 
+    /// </summary>
+    public void TogglePlayerSelect()
+    {
+        // toggle Player Select true/ false
+        isPlayerSelect = !isPlayerSelect;
+        // set the Player Select panel on/ off
+        playerSelectPanel.SetActive(isPlayerSelect);
+    }
+
+    /// <summary>
+    /// Shows/ hides the 'Level Select' panel
+    /// Should be enabled after the Player Select
+    /// stage is complete.
+    /// </summary>
+    public void ToggleLevelSelect()
+    {
+        // toggle Level Select true/ false
+        isLevelSelect = !isLevelSelect;
+        // set the Level Select panel on/ off
+        levelSelectPanel.SetActive(isLevelSelect);
+    }
+
     ///-----------------------------------
     /// <summary> 
     /// Shows/ hides the 'controls' panel
