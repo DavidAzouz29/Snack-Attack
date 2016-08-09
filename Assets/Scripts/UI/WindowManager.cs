@@ -34,6 +34,8 @@ public class WindowManager : MonoBehaviour {
 
     public void Quit()
     {
+        //SceneManager.
+        Debug.Log("Quit");
         //If we are running in a standalone build of the game
 #if UNITY_STANDALONE
         //Quit the application

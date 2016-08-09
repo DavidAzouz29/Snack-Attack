@@ -19,49 +19,48 @@ using System.Collections;
 
 public class PlayerAnims : MonoBehaviour {
 
-    public Animator m_Anim; // 
-
+    public Animator m_Anim;
     private PlayerController m_PC;
-
     private bool m_Idling, m_Walking, m_Attacking, m_isJumping;
-
-    private Vector3 m_PreviousPos; // TODO: get previous pos from m_PC?
+    private Vector3 m_PreviousPos;
 
     void Start()
     {
         // Player Controller script is attached to our game object anyway.
-        m_PC = GetComponent<PlayerController>(); //FindObjectOfType<PlayerController>();
+        m_PC = GetComponent<PlayerController>();
         m_Anim = GetComponent<Animator>();
         m_Idling = true;
         m_isJumping = false;
         m_PreviousPos = transform.position;
     }
 
-
     void FixedUpdate()
     {
+        if (Input.GetButtonDown(m_PC.Attack1))
+        {
+            AttackAnim1();
+        }
+        if (Input.GetButtonDown(m_PC.Attack2))
+        {
+            AttackAnim2();
+        }
+        if (!gameObject.GetComponent<PlayerController>().isOnGround)
+        {
+            m_isJumping = true;
+        }
+        else
+        {
+            m_isJumping = false;
+            m_Anim.SetBool("Jumping", false);
+        }
         IdleToWalk();
         WalkToIdle();
         AttackToIdle();
         AttackToWalk();
-        //IdleToJump();
-        //JumpToIdle();
-        if (Input.GetButtonDown(m_PC.Fire))
-        {
-            FireAnim();
-        }
 
+        IdleToJump();
+        WalkToJump();
         m_PreviousPos = transform.position;
-    }
-
-    void ChangeStates()
-    {
-
-    }
-
-    void FireAnim()
-    {
-        m_Anim.SetTrigger("Attack"); //TODO: change to Fire        
     }
 
     //---------------------------
@@ -79,7 +78,6 @@ public class PlayerAnims : MonoBehaviour {
             m_Walking = true;
         }
     }
-
     void IdleToJump()
     {
         if (m_isJumping)
@@ -89,7 +87,6 @@ public class PlayerAnims : MonoBehaviour {
             m_Walking = false; // this is so the animation doesn't play
         }
     }
-
     //---------------------------
     // Walk
     //---------------------------
@@ -103,7 +100,6 @@ public class PlayerAnims : MonoBehaviour {
             m_Walking = false;
         }
     }
-
     void WalkToJump()
     {
         if (m_isJumping)
@@ -113,7 +109,6 @@ public class PlayerAnims : MonoBehaviour {
             m_Walking = false; // this is so the animation doesn't play
         }
     }
-
     //---------------------------
     // Attack
     //---------------------------
@@ -126,7 +121,6 @@ public class PlayerAnims : MonoBehaviour {
             m_Anim.SetTrigger("AttackToIdle");
         }
     }
-
     void AttackToWalk()
     {
         if (m_Walking)
@@ -136,14 +130,20 @@ public class PlayerAnims : MonoBehaviour {
             m_Anim.SetTrigger("AttackToWalk");
         }
     }
-
     void AttackToJump()
     {
         m_Anim.SetBool("Jumping", true);
         m_Anim.SetTrigger("AttackToJump");
         m_isJumping = true;
     }
-
+    void AttackAnim1()
+    {
+        m_Anim.SetTrigger("Attack1");       
+    }
+    void AttackAnim2()
+    {
+        m_Anim.SetTrigger("Attack2");
+    }
     //---------------------------
     // Jump To
     //---------------------------
@@ -159,11 +159,10 @@ public class PlayerAnims : MonoBehaviour {
         m_Anim.SetBool("Walking", true);
         m_isJumping = false;
     }
-    //TODO: Set Triggers?
-    /*void JumpToAttack()
+    void JumpToAttack()
     {
         m_Anim.SetBool("Jumping", false);
         m_Anim.SetBool("Walking", true);
         m_isJumping = false;
-    } */
+    } 
 }

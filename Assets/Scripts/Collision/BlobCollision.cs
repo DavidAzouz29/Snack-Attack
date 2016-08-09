@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BlobManager : MonoBehaviour {
+public class BlobCollision : MonoBehaviour {
 
     public int m_PowerToGive = 0; // Based off scale percentage. Giant Thresh = 2.0f scale, which is 200 total power.
 
