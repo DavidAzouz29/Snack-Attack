@@ -70,20 +70,16 @@ MonoBehaviour:
   health: 100
   verticalAxis: _Vertical
   horizontalAxis: _Horizontal
-  rotationAxisX: Rotation_X
-  rotationAxisY: Rotation_X
-  Fire: _Fire
-  Melee: _Melee
+  Attack1: _Attack1
+  Attack2: _Attack2
   Jump: _Jump
   m_PlayerTag: NoPlayerAttached
-  m_ShootingManager: {fileID: 11402588}
-  dizzyBirds: {fileID: 0}
-  r_weapon: {fileID: 0}
-  r_gameOverPanel: {fileID: 0}
   m_eCurrentPlayerState: 0
   m_eCurrentClassState: 0
-  m_playerID: 0
+  isOnGround: 0
   fJumpForce: 25
+  fGravity: 9.8
+  m_playerID: 0
 --- !u!114 &11481780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,20 +101,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_CameraControl: {fileID: 0}
-  r_Broc1: {fileID: 2100000, guid: f60ff4533313e4a44b99b91cccd2e1b3, type: 2}
-  r_Broc2: {fileID: 2100000, guid: 6203dc9d850308944ba12511a92a0bf0, type: 2}
   r_PlayerController: {fileID: 11440790}
-  r_PlayerShooting: {fileID: 11402588}
-  shotArray:
-  - {fileID: 137888, guid: 10888fd41fc0ca043a421fffad8a7601, type: 2}
-  - {fileID: 121828, guid: a39ad8d34cfd4154da09d9e3ca146128, type: 2}
-  - {fileID: 196346, guid: e9b5c2fe24cadc44d8d2bea22a05d0db, type: 2}
-  - {fileID: 171102, guid: be2bd3aeae0da094c9dc35431943af96, type: 2}
   blobArray:
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   - {fileID: 121828, guid: 2a08d68452969ef4f84cb9d14527c539, type: 2}
   - {fileID: 196346, guid: 9a242a37a086da847b023a6115a09ae6, type: 2}
   - {fileID: 171102, guid: 29ebb2f8bdbc3384780c3e6cdea6176a, type: 2}
+  m_LightAttack: 0
+  m_HeavyAttack: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -25,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.1372154, y: 8.618087, z: -8.950476}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5bd30bf0856f449a391f1870acaf60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r_PlayerManager: {fileID: 11440896}
+  r_PlayerManager: {fileID: 0}
 --- !u!114 &11440896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -82,15 +82,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a86d698baa9bf6438183b16356d8632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TimePerRound: 180
+  m_TimePerRound: 300
   m_TimeRemaining: 0
   m_RoundCountdownTime: 5
   m_Players:
-  - {fileID: 0}
+  - {fileID: 172846, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
   - {fileID: 118960, guid: 75eb26eef60e91146acc81bd6fcb688e, type: 2}
   - {fileID: 199350, guid: a0db3c4eb6e028a42ad09b9f2573921d, type: 2}
   - {fileID: 118960, guid: 75eb26eef60e91146acc81bd6fcb688e, type: 2}
-  m_PlayerManager: {fileID: 11440896}
+  m_PlayerManager: {fileID: 0}
   m_Window: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour
     [Header("KeyBinds")] 
     public string verticalAxis = "_Vertical";
     public string horizontalAxis = "_Horizontal";
-	public string Attack1 = "Attack1";
-	public string Attack2 = "Attack2";
+	public string Attack1 = "_Attack1";
+	public string Attack2 = "_Attack2";
     public string Jump = "_Jump";
     [HideInInspector]
     public string m_PlayerTag = "NoPlayerAttached";
@@ -192,8 +192,8 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis(verticalAxis);
 
         // Movement
-        if ((moveHorizontal < -fRot || moveHorizontal > fRot ||
-                  moveVertical < -fRot || moveVertical > fRot) && isPaused == false)
+        // was (moveHorizontal < -fRot || moveHorizontal > fRot)
+        if (Mathf.Abs(moveHorizontal) > fRot || Mathf.Abs(moveVertical) > fRot && isPaused == false)
         {
             m_Moving = true;
             // TOOD: rb.AddForce(Vector3.up);
