@@ -548,7 +548,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4.66, y: -1.15, z: -7.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 442090}
@@ -596,8 +596,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8, y: 0.93, z: 1.2}
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Size: {x: 1.9691954, y: 0.51602554, z: 0.8534291}
+  m_Center: {x: 0.032781124, y: 0.9035194, z: -0.010177612}
 --- !u!81 &8196566
 AudioListener:
   m_ObjectHideFlags: 1
@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Updated: 0
   r_ParticleSystem: {fileID: 0}
   m_Threshold: 0
-  m_BlobObject: {fileID: 144692, guid: 5ed4bc4f1c59b7747b666c04b58aceba, type: 2}
+  m_BlobObject: {fileID: 0}
   m_CreatedBlobs: []
   blobsArray:
   - {fileID: 0}
@@ -996,9 +996,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2.12
+  m_Height: 1.75
   m_Direction: 1
-  m_Center: {x: 0, y: 0.65, z: 0}
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!137 &13777984
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
