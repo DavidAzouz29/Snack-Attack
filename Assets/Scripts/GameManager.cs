@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour {
     private int m_RandomPlayer;
     private float m_BossScale;
 
+    void Start()
+    {
+        r_PlayerManager = FindObjectOfType<PlayerManager>();
+    }
+
     public void SetupBoss ()
     {
         //Generate Random player
