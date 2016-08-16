@@ -144,6 +144,7 @@ public class PlayerAnims : MonoBehaviour {
     void AttackAnim2()
     {
         m_Anim.SetTrigger("Attack2");
+        m_Anim.SetBool("AttackTrigger", true);
     }
     //---------------------------
     // Jump To

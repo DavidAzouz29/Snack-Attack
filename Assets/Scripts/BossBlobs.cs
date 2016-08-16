@@ -30,7 +30,7 @@ public class BossBlobs : MonoBehaviour {
     public ParticleSystem r_ParticleSystem;
 
     private Killbox m_Killbox;
-
+    private bool activeWeaponCheck;
 
     public enum Thresholds
     {
@@ -73,6 +73,7 @@ public class BossBlobs : MonoBehaviour {
     {
         AttackIgnore = GetComponentInChildren<SphereCollider>();
         Physics.IgnoreCollision(gameObject.GetComponent<BoxCollider>(), AttackIgnore);
+        //if (gameObject.GetComponent<CapsuleCollider>() != null)
         Physics.IgnoreCollision(gameObject.GetComponent<CapsuleCollider>(), AttackIgnore);
         m_Killbox = FindObjectOfType<Killbox>();
         InitializeStruct();
@@ -128,13 +129,25 @@ public class BossBlobs : MonoBehaviour {
         {
             m_Updated = false;
             if (m_Power >= m_Thresholds[0]) // if power >= 200
+            {
                 transform.localScale = new Vector3(m_ScaleLevel[0], m_ScaleLevel[0], m_ScaleLevel[0]);
+                gameObject.GetComponent<Animator>().SetBool("Boss", true);
+            }
             else if (m_Power >= m_Thresholds[1])
+            {
                 transform.localScale = new Vector3(m_ScaleLevel[1], m_ScaleLevel[1], m_ScaleLevel[1]);
+                gameObject.GetComponent<Animator>().SetBool("Boss", false);
+            }
             else if (m_Power >= m_Thresholds[2])
+            {
                 transform.localScale = new Vector3(m_ScaleLevel[2], m_ScaleLevel[2], m_ScaleLevel[2]);
+                gameObject.GetComponent<Animator>().SetBool("Boss", false);
+            }
             else if (m_Power >= m_Thresholds[3])
+            {
                 transform.localScale = new Vector3(m_ScaleLevel[3], m_ScaleLevel[3], m_ScaleLevel[3]);
+                gameObject.GetComponent<Animator>().SetBool("Boss", false);
+            }
         }
     }
 
@@ -142,14 +155,16 @@ public class BossBlobs : MonoBehaviour {
     {
         if (_col.gameObject.tag == "Weapon")
         {
+            Debug.Log("Trigger");
             if (_col.gameObject.GetComponent<PlayerCollision>().weaponIsActive)
             {
+                Debug.Log("Active");
                 m_Power = m_Power - _col.gameObject.GetComponent<PlayerCollision>().damage; // Power - Damage recieved
                 if (m_Power < m_CurrentThreshold)
                 {
                     Debug.Log("Dropping blobs");
                     Drop(m_Threshold);
-                    r_ParticleSystem.Play();
+                    //r_ParticleSystem.Play();
                 }
                 if (m_Power <= 0)
                 {

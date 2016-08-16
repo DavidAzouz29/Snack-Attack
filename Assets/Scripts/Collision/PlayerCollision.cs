@@ -25,7 +25,7 @@ public class PlayerCollision : MonoBehaviour {
         {
             m_Timer += Time.deltaTime;
         }
-        if(m_Timer > 0.3)
+        if(m_Timer > 1)
         {
             weaponIsActive = false;
             m_TimerEnabled = false;

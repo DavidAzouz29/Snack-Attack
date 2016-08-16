@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour
             Vector3 pos = transform.position + movementDirection * playerSpeed * Time.deltaTime;
             transform.position = Vector3.Lerp (transform.position, pos, 0.2f);
             transform.forward = new Vector3(-moveVertical, 0.0f, moveHorizontal);
-            transform.forward = Quaternion.Euler(0, -90, 0) * transform.forward;
+            transform.forward = Quaternion.Euler(0, -270, 0) * transform.forward;
         }
         // we're not moving so play the idle animation
         else
