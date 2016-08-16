@@ -5,15 +5,20 @@
 /// Date Created: 15/08/2016
 /// Date Modified: 8/2016
 /// ----------------------------------
-/// Brief: Sorts the Levels and 
+/// Brief: Sorts the order Levels are presented on Level Select Screen
 /// viewed: https://msdn.microsoft.com/en-us/library/bb341731(v=vs.110).aspx
 /// https://docs.unity3d.com/Manual/AnimationScripting.html
+/// https://docs.unity3d.com/Manual/animeditor-AnimationCurves.html
 /// 
 /// *Edit*
 /// - Sorting the menu - David Azouz 15/08/2016
+/// - Tint applied, offset - David Azouz 16/08/2016
 /// TODO:
 /// - Because it's Button - it's still using the Axis name
 /// - make offset, tint, animation, sorting work
+/// - remove alpha
+/// - Animation? over Animator
+/// - Change from keycode to "Button"
 /// </summary>
 /// ----------------------------------
 
@@ -25,17 +30,20 @@ using System.Linq;
 
 public class MenuSorting : MonoBehaviour
 {
-    public Vector2 centre; // TOOD: private
+    [SerializeField]
+    private Transform centre; // TOOD: private
     public Vector3 offset; // TOOD: private
-    public Animation c_fadeAndSwipe;
+    //public Animation c_fadeAndSwipe;
+    [SerializeField]
+    public Animator[] c_fadeAndSwipe = new Animator[LEVEL_COUNT];
 
-    private AnimationState fadeLeft;
-    private AnimationState fadeRight;
+    //private AnimationClip fadeLeft;
+    //private AnimationClip fadeRight; //AnimationState
 
     const ushort LEVEL_COUNT = 5;
     const ushort SHOW_COUNT = 3; // how many levels to show (hide the rest)
     [SerializeField]
-    ushort currentLevel = 0;
+    int currentLevel = 0;
     //[SerializeField]
     public GameObject[] r_LevelsCount = new GameObject[LEVEL_COUNT]; //TOOD: private? Designers drag on or one prefab?
     [SerializeField]
@@ -46,6 +54,7 @@ public class MenuSorting : MonoBehaviour
     private float moveVertical;
 
     // Our tints
+    //const float panelAlpha = 0.7f;
     Color colorClear = Color.white;
     Color colorMid   = Color.HSVToRGB(0.0f, 16.0f, 92.0f);
     Color colorDark  = Color.gray;
@@ -53,41 +62,56 @@ public class MenuSorting : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        //colorClear.a = colorMid.a = colorDark.a = panelAlpha; // TODO: remove alpha
         //r_Levels = GetComponentsInChildren<GameObject>();
-        centre = new Vector2(20.0f, -75.0f);
-        offset = new Vector2(45.0f, 30.0f);
-        c_fadeAndSwipe = GetComponentInChildren<Animation>();
-        fadeLeft = c_fadeAndSwipe["UILevelSelectFadeLeft"]; //fadeLeft = c_fadeAndSwipe.GetClip("UILevelSelectFadeLeft");
-        fadeRight = c_fadeAndSwipe["UILevelSelectFadeRight"];
+        //c_fadeAndSwipe.GetClip("UILevelSelectFadeLeft").legacy = true;
+        //c_fadeAndSwipe.GetClip("UILevelSelectFadeRight").legacy = true;
+        //fadeLeft = c_fadeAndSwipe.GetClip("UILevelSelectFadeLeft"); ////c_fadeAndSwipe["UILevelSelectFadeRight"];
+        //fadeRight = c_fadeAndSwipe.GetClip("UILevelSelectFadeRight"); //c_fadeAndSwipe["UILevelSelectFadeRight"];
         currentLevel = 0;
 
+        for (short i = 0; i < LEVEL_COUNT; ++i)
+        {
+            // Get each animation component
+            c_fadeAndSwipe[i] = r_LevelsCount[i].GetComponent<Animator>();
+            //r_LevelsCount[i].SetActive(false);
+        }
+
+        // turn everything we're not using, turn off (the screen)
+        /*for (int i = SHOW_COUNT; i < LEVEL_COUNT; ++i)
+        {
+            r_LevelsCount[i].SetActive(false);
+        } */
+
         // Proceed to "Show" the next (3/ SHOW_COUNT) levels from our current level
-        for (ushort i = currentLevel; i < SHOW_COUNT; ++i)
+        for (int i = currentLevel; i < SHOW_COUNT; ++i)
         {
             r_LevelsShow[i] = r_LevelsCount[currentLevel + i];
             r_LevelsShow[i].SetActive(true);
         }
-
+        
         FixLayout();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Left/ Down Button
-        if(Input.GetButtonDown("Horizontal"))
+        // Left/ Down Button "Horizontal"?
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
+            c_fadeAndSwipe[currentLevel].Play("UIFadeLeft");
+            c_fadeAndSwipe[SHOW_COUNT - 1].Play("UIFadeRight");
             MenuLeft();
             Debug.Log("Menu_Left");
-            //fadeRight.enabled = false;
         }
 
-        // Right/ Up Button
-        if (Input.GetButtonDown("Vertical"))
+        // Right/ Up Button Input.GetButtonDown("Vertical") 
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow))
         {
+            c_fadeAndSwipe[currentLevel].Play("UIFadeRight");
+            c_fadeAndSwipe[SHOW_COUNT - 1].Play("UIFadeLeft");
             MenuRight();
             Debug.Log("Menu_Right");
-            //fadeRight.enabled = false;
         }
         /*
         // Analog sticks
@@ -121,18 +145,13 @@ public class MenuSorting : MonoBehaviour
     /// </summary>
     void MenuLeft()
     {
-        if(currentLevel > 0)
-        {
-            currentLevel--;
-        }
-        // if less than 0
-        else
+        currentLevel--;
+        if (currentLevel < 0)
         {
             // loop back around to the 'end'
             currentLevel = LEVEL_COUNT - 1;
         }
         MenuCycle(false); //GameObjectExtensions.SortChildren(this.gameObject);
-        //fadeLeft.enabled = true;
     }
 
     /// <summary>
@@ -140,18 +159,13 @@ public class MenuSorting : MonoBehaviour
     /// </summary>
     void MenuRight()
     {
-        if (currentLevel < LEVEL_COUNT)
-        {
-            currentLevel++;
-        }
-        // if greater than the end
-        else
+        currentLevel++;
+        if (currentLevel >= LEVEL_COUNT)
         {
             // loop back around to the 'front'
             currentLevel = 0;
         }
         MenuCycle(true);
-        //fadeRight.enabled = true;
     }
 
     /// <summary>
@@ -166,25 +180,20 @@ public class MenuSorting : MonoBehaviour
         {
             r_LevelsShow[i].SetActive(false);
         } */
+        
+        // Proceed to "Show" the next (3/ SHOW_COUNT) levels from our current level
+        for (ushort i = 0; i < SHOW_COUNT; ++i)
+        {
+            r_LevelsShow[i] = r_LevelsCount[(i + currentLevel) % LEVEL_COUNT];
+        }
 
         if (isRight)
         {
-            // Proceed to "Show" the next (3/ SHOW_COUNT) levels from our current level
-            for (ushort i = currentLevel; i < SHOW_COUNT; ++i)
-            {
-                r_LevelsShow[0] = r_LevelsCount[i];
-                Debug.Log("Menu_Right");
-            }
+            Debug.Log("Menu_C_Right");
         }
-        // left
         else
         {
-            // Proceed to "Show" the next (3/ SHOW_COUNT) levels from our current level
-            for (ushort i = 0; i > SHOW_COUNT; --i)
-            {
-                r_LevelsShow[0] = r_LevelsCount[i];
-                Debug.Log("Menu_Left");
-            }
+            Debug.Log("Menu_C_Left");
         }
 
         FixLayout();
@@ -193,13 +202,22 @@ public class MenuSorting : MonoBehaviour
     void FixLayout()
     {
         // ---------------------------
-        // Hacky way of applying tint
+        // Hacky way of applying properties
         // ---------------------------
         // Offset Position
         // ---------------------------
-        r_LevelsShow[0].GetComponent<RectTransform>().position = centre;
-        r_LevelsShow[1].GetComponent<RectTransform>().position = r_LevelsShow[0].GetComponent<RectTransform>().position += offset;
-        r_LevelsShow[2].GetComponent<RectTransform>().position = r_LevelsShow[1].GetComponent<RectTransform>().position += offset;
+        r_LevelsShow[0].GetComponent<RectTransform>().position = centre.position;
+        r_LevelsShow[1].GetComponent<RectTransform>().position = r_LevelsShow[0].GetComponent<RectTransform>().position + offset;
+        r_LevelsShow[2].GetComponent<RectTransform>().position = r_LevelsShow[1].GetComponent<RectTransform>().position + offset;
+
+        // --------------------------
+        // Change visible order
+        // --------------------------
+        r_LevelsShow[0].transform.SetAsLastSibling();
+        r_LevelsShow[1].transform.SetSiblingIndex(r_LevelsShow[0].transform.GetSiblingIndex() - 1);
+        r_LevelsShow[2].transform.SetSiblingIndex(r_LevelsShow[1].transform.GetSiblingIndex() - 1);
+        r_LevelsCount[3].SetActive(false);
+        r_LevelsCount[4].SetActive(false);
 
         // ---------------------------
         // Tint
