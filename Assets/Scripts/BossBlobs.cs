@@ -7,6 +7,7 @@ public class BossBlobs : MonoBehaviour {
     /*
     Whoever is currently the boss, when going below a certain ppwer threshold, should drop blobs around them.
     */
+    public Collider AttackIgnore;
 
     [Tooltip("Use these to specify at what Power the boss drops its blobs.")]
     public List<int> m_Thresholds = new List<int>(new int[] { 200, 150, 100, 75 });
@@ -20,8 +21,8 @@ public class BossBlobs : MonoBehaviour {
     [Tooltip("The scale of each different power level")]
     public List<float> m_ScaleLevel = new List<float>(new float[] { 2.0f, 1.5f, 1.0f, 0.75f });
     
-    public int m_CurrentThreshold;
 
+    public int m_CurrentThreshold;
     // Power (Boss)
     public int m_Power;
     public int m_PowerMax = 200;
@@ -29,6 +30,7 @@ public class BossBlobs : MonoBehaviour {
     public ParticleSystem r_ParticleSystem;
 
     private Killbox m_Killbox;
+
 
     public enum Thresholds
     {
@@ -69,6 +71,9 @@ public class BossBlobs : MonoBehaviour {
 
     void Start()
     {
+        AttackIgnore = GetComponentInChildren<SphereCollider>();
+        Physics.IgnoreCollision(gameObject.GetComponent<BoxCollider>(), AttackIgnore);
+        Physics.IgnoreCollision(gameObject.GetComponent<CapsuleCollider>(), AttackIgnore);
         m_Killbox = FindObjectOfType<Killbox>();
         InitializeStruct();
 
@@ -133,34 +138,30 @@ public class BossBlobs : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter(Collision _col)
+    void OnTriggerEnter(Collider _col)
     {
-        //if (_col.gameObject != gameObject.GetComponentInChildren<PlayerCollision>().gameObject)
-        //{
-            if (_col.gameObject.tag == "Melee")
+        if (_col.gameObject.tag == "Weapon")
+        {
+            if (_col.gameObject.GetComponent<PlayerCollision>().weaponIsActive)
             {
-                Debug.Log("WeaponTrigger");
-                if (_col.gameObject.GetComponent<PlayerCollision>().isActive)
+                m_Power = m_Power - _col.gameObject.GetComponent<PlayerCollision>().damage; // Power - Damage recieved
+                if (m_Power < m_CurrentThreshold)
                 {
-                    Debug.Log("WeaponActive");
-                    m_Power = m_Power - _col.gameObject.GetComponent<PlayerCollision>().damage; // Power - Damage recieved
-                    if (m_Power < m_CurrentThreshold)
-                    {
-                        Drop(m_Threshold, _col);
-                        r_ParticleSystem.Play();
-                    }
-                    if (m_Power <= 0)
-                    {
-                        m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
-                        GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<PlayerController>().m_PlayerTag, "kills", 1);
-                        GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
-                    }
+                    Debug.Log("Dropping blobs");
+                    Drop(m_Threshold);
+                    r_ParticleSystem.Play();
                 }
-            //}
+                if (m_Power <= 0)
+                {
+                    m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
+                    GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponentInParent<PlayerController>().m_PlayerTag, "kills", 1);
+                    GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
+                }
+            }
         }
     }
 
-    public void Drop(Thresholds _t, Collision _col)
+    public void Drop(Thresholds _t)
     {
         //GameObject _curBlob = null;
         // Spawn *type* of projectile based of player class

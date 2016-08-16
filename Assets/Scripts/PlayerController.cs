@@ -103,40 +103,6 @@ public class PlayerController : MonoBehaviour
         Attack2 = "_Attack2";
         Jump = "_Jump";
 
-        switch (m_eCurrentClassState)
-        {
-            case E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
-                {
-                    m_PlayerTag = "Rockyroad";
-                    break;
-                }
-            case E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
-                {
-                    m_PlayerTag = "Brocolion";
-                    break;
-                }
-            case E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
-                {
-                    m_PlayerTag = "Watermelomon";
-                    break;
-                }
-            case E_CLASS_STATE.E_CLASS_STATE_KARATEA:
-                {
-                    m_PlayerTag = "Karatea";
-                    break;
-                }
-            case E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
-                {
-                    m_PlayerTag = "Caulilion";
-                    break;
-                }
-            default:
-                {
-                    Debug.LogError("No Character Attached");
-                    break;
-                }
-        }
-
         // Loops through our players and assigns variables for input from different controllers
         for (uint i = 0; i < MAX_PLAYERS; ++i)
         {
@@ -147,6 +113,7 @@ public class PlayerController : MonoBehaviour
                 Attack1 = "P" + (i + 1) + Attack1;
                 Attack2 = "P" + (i + 1) + Attack2;
                 Jump = "P" + (i + 1) + Jump;
+                m_PlayerTag = "Player " + (i + 1);
             }
         }
         //m_ShootingManager.SetFire(Fire);
@@ -202,15 +169,7 @@ public class PlayerController : MonoBehaviour
             Vector3 pos = transform.position + movementDirection * playerSpeed * Time.deltaTime;
             transform.position = Vector3.Lerp (transform.position, pos, 0.2f);
             transform.forward = new Vector3(-moveVertical, 0.0f, moveHorizontal);
-            transform.forward = Quaternion.Euler(0, -45, 0) * transform.forward;
-        }
-        if (Input.GetButtonDown(Attack1))
-        {
-            gameObject.GetComponentInChildren<PlayerCollision>().isActive = true;
-        }
-        if (Input.GetButtonDown(Attack2))
-        {
-            gameObject.GetComponentInChildren<PlayerCollision>().isActive = true;
+            transform.forward = Quaternion.Euler(0, -90, 0) * transform.forward;
         }
         // we're not moving so play the idle animation
         else

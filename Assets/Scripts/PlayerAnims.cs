@@ -36,11 +36,11 @@ public class PlayerAnims : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (Input.GetButtonDown(m_PC.Attack1))
+        if (Input.GetButtonDown(m_PC.Attack1) && !m_Anim.GetBool("AttackTrigger"))
         {
             AttackAnim1();
         }
-        if (Input.GetButtonDown(m_PC.Attack2))
+        if (Input.GetButtonDown(m_PC.Attack2) && !m_Anim.GetBool("AttackTrigger"))
         {
             AttackAnim2();
         }
@@ -138,7 +138,8 @@ public class PlayerAnims : MonoBehaviour {
     }
     void AttackAnim1()
     {
-        m_Anim.SetTrigger("Attack1");       
+        m_Anim.SetTrigger("Attack1");
+        m_Anim.SetBool("AttackTrigger", true);       
     }
     void AttackAnim2()
     {

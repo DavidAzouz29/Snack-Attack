@@ -1,22 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerCollision : MonoBehaviour {
 
     public int damage;
-    public bool isActive;
+    public bool weaponIsActive;
     public bool isHeavyAttack;
     //Attack Timer
     private float m_Timer = 0;
     private bool m_TimerEnabled = false;
     void Start()
     {
-        isActive = false;
+        weaponIsActive = false;
     }
 
     void Update()
     {
-        if (isActive)
+        if (weaponIsActive)
         {
             m_TimerEnabled = true;
         }
@@ -24,9 +25,9 @@ public class PlayerCollision : MonoBehaviour {
         {
             m_Timer += Time.deltaTime;
         }
-        if(m_Timer > 1)
+        if(m_Timer > 0.3)
         {
-            isActive = false;
+            weaponIsActive = false;
             m_TimerEnabled = false;
             m_Timer = 0.0f;
         }

@@ -223,10 +223,10 @@ GameObject:
   - 33: {fileID: 3301232}
   - 95: {fileID: 9520308}
   - 114: {fileID: 11442798}
-  - 114: {fileID: 11403754}
   - 81: {fileID: 8196566}
   - 198: {fileID: 19801432}
   - 199: {fileID: 19972134}
+  - 114: {fileID: 11407882}
   m_Layer: 9
   m_Name: RockyRoad
   m_TagString: Player
@@ -548,7 +548,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.66, y: -1.15, z: -7.98}
+  m_LocalPosition: {x: -11.07, y: 15.181, z: -6.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 442090}
@@ -622,7 +622,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11403754
+--- !u!114 &11407002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeac210ca39225b458bb07429e573f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UseRelativeRotation: 1
+--- !u!114 &11407882
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -633,6 +645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 788bfc9064e44ce42b91aff6ddaf742f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackIgnore: {fileID: 0}
   m_Thresholds: c800000096000000640000004b000000
   m_BlobsToDrop: 01000000020000000300000004000000
   m_PowerToGive: 140000000f0000000a00000005000000
@@ -653,18 +666,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &11407002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeac210ca39225b458bb07429e573f2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UseRelativeRotation: 1
 --- !u!114 &11422614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -971,8 +972,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  isActive: 0
+  damage: 15
+  weaponIsActive: 0
   isHeavyAttack: 0
 --- !u!135 &13523118
 SphereCollider:

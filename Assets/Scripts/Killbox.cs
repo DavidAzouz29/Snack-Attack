@@ -29,7 +29,7 @@ public class Killbox : MonoBehaviour {
         if(_col.gameObject.tag == "Player")
         {
             m_Player = _col.gameObject;
-            GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(m_Player.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
+            GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>().ChangeScore(m_Player.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
 
             // Kill and respawn the player
             //GameObject.Find("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
