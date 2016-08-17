@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 477546}
   - 114: {fileID: 11481780}
   - 114: {fileID: 11440790}
-  - 114: {fileID: 11402588}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: PlayerManager
@@ -30,28 +29,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11402588
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 196618}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9357b8960b03004eab064c046c41d52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
-  fireTime: 0.05
-  tilt: 0
-  shotSpawn: {fileID: 0}
-  fireRate: 1
-  shootSound: {fileID: 0}
-  sFire: P1_Fire
-  shotArray:
-  - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
-  - {fileID: 0}
-  - {fileID: 196346, guid: 9a242a37a086da847b023a6115a09ae6, type: 2}
 --- !u!114 &11440790
 MonoBehaviour:
   m_ObjectHideFlags: 1
