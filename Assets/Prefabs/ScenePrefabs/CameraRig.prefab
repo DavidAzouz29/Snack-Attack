@@ -43,8 +43,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174818}
-  m_LocalRotation: {x: 0.23911764, y: 0.36964384, z: -0.099045776, w: 0.8923991}
-  m_LocalPosition: {x: -2.6, y: 5.9, z: -2.2}
+  m_LocalRotation: {x: 0.19509035, y: 0, z: 0, w: 0.9807853}
+  m_LocalPosition: {x: 11.62, y: 2, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 494434}
@@ -71,7 +71,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
+  m_BackGroundColor: {r: 0.7970372, g: 0.8216371, b: 0.8602941, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -80,7 +80,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 77
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -124,10 +124,10 @@ MonoBehaviour:
   tweakMode: 0
   screenBlendMode: 1
   hdr: 0
-  sepBlurSpread: 1.5
+  sepBlurSpread: 0.9
   useSrcAlphaAsMask: 0
   bloomIntensity: 0.5
-  bloomThreshold: 0.5
+  bloomThreshold: 0.75
   bloomBlurIterations: 2
   lensflares: 0
   hollywoodFlareBlurIterations: 2
@@ -162,10 +162,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0923359e9e352a4b9b11c7b7161ad67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Radius: 0.65
+  m_Radius: 0.17
   m_SampleCount: 1
   m_OcclusionIntensity: 0.6
-  m_Blur: 3
+  m_Blur: 2
   m_Downsampling: 2
   m_OcclusionAttenuation: 0.3
   m_MinZ: 0.029
@@ -183,8 +183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DampTime: 0.4
-  m_ScreenEdgeBuffer: 7.5
-  m_MinSize: 10
+  m_ScreenEdgeBuffer: 6
+  m_MinSize: 5
   m_Targets: []
 --- !u!124 &12437646
 Behaviour:
