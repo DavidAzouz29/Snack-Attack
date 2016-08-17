@@ -31,8 +31,8 @@ using System.Linq;
 public class MenuSorting : MonoBehaviour
 {
     [SerializeField]
-    private Transform centre; // TOOD: private
-    public Vector3 offset; // TOOD: private
+    private Transform centre; // TODO: private
+    public Vector3 offset; // TODO: private
     //public Animation c_fadeAndSwipe;
     [SerializeField]
     public Animator[] c_fadeAndSwipe = new Animator[LEVEL_COUNT];
@@ -87,7 +87,7 @@ public class MenuSorting : MonoBehaviour
         for (int i = currentLevel; i < SHOW_COUNT; ++i)
         {
             r_LevelsShow[i] = r_LevelsCount[currentLevel + i];
-            r_LevelsShow[i].SetActive(true);
+            r_LevelsShow[i].GetComponent<Image>().gameObject.SetActive(true);
         }
         
         FixLayout();
@@ -101,6 +101,7 @@ public class MenuSorting : MonoBehaviour
         {
             c_fadeAndSwipe[currentLevel].Play("UIFadeLeft");
             c_fadeAndSwipe[SHOW_COUNT - 1].Play("UIFadeRight");
+            UnityEditor.EditorApplication.isPaused = true;
             MenuLeft();
             Debug.Log("Menu_Left");
         }
@@ -175,16 +176,14 @@ public class MenuSorting : MonoBehaviour
     /// <param name="isRight">Are we moving right?</param>
     void MenuCycle(bool isRight)
     {
-        /*// Turn everything off
-        for (ushort i = 0; i < LEVEL_COUNT; ++i)
-        {
-            r_LevelsShow[i].SetActive(false);
-        } */
-        
         // Proceed to "Show" the next (3/ SHOW_COUNT) levels from our current level
         for (ushort i = 0; i < SHOW_COUNT; ++i)
         {
             r_LevelsShow[i] = r_LevelsCount[(i + currentLevel) % LEVEL_COUNT];
+            if (!r_LevelsShow[i].GetComponent<Image>().IsActive())
+            {
+                r_LevelsShow[i].GetComponent<Image>().gameObject.SetActive(true);
+            }
         }
 
         if (isRight)
@@ -203,21 +202,21 @@ public class MenuSorting : MonoBehaviour
     {
         // ---------------------------
         // Hacky way of applying properties
-        // ---------------------------
-        // Offset Position
-        // ---------------------------
-        r_LevelsShow[0].GetComponent<RectTransform>().position = centre.position;
-        r_LevelsShow[1].GetComponent<RectTransform>().position = r_LevelsShow[0].GetComponent<RectTransform>().position + offset;
-        r_LevelsShow[2].GetComponent<RectTransform>().position = r_LevelsShow[1].GetComponent<RectTransform>().position + offset;
-
         // --------------------------
         // Change visible order
         // --------------------------
         r_LevelsShow[0].transform.SetAsLastSibling();
         r_LevelsShow[1].transform.SetSiblingIndex(r_LevelsShow[0].transform.GetSiblingIndex() - 1);
         r_LevelsShow[2].transform.SetSiblingIndex(r_LevelsShow[1].transform.GetSiblingIndex() - 1);
-        r_LevelsCount[3].SetActive(false);
-        r_LevelsCount[4].SetActive(false);
+        r_LevelsCount[3].GetComponent<Image>().gameObject.SetActive(false);
+        r_LevelsCount[4].GetComponent<Image>().gameObject.SetActive(false);
+
+        // ---------------------------
+        // Offset Position
+        // ---------------------------
+        r_LevelsShow[0].GetComponent<RectTransform>().position = centre.position;
+        r_LevelsShow[1].GetComponent<RectTransform>().position = r_LevelsShow[0].GetComponent<RectTransform>().position + offset;
+        r_LevelsShow[2].GetComponent<RectTransform>().position = r_LevelsShow[1].GetComponent<RectTransform>().position + offset;
 
         // ---------------------------
         // Tint
