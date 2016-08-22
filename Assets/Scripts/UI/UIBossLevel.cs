@@ -9,7 +9,9 @@ public class UIBossLevel : MonoBehaviour {
 
     public Slider c_BossSlider;
     public Image c_SkullImage;
-    public float deleteMe;
+    public Image c_WheelImage;
+    [SerializeField]
+    private float deleteMe; // used to determine the value of "boss"
     private BossBlobs r_BossBlobs;
 
 	// Use this for initialization
@@ -17,6 +19,7 @@ public class UIBossLevel : MonoBehaviour {
     {
         c_BossSlider = GetComponentInChildren<Slider>();
         r_BossBlobs = GetComponentInParent<BossBlobs>();
+
     }
 	
 	// Update is called once per frame
