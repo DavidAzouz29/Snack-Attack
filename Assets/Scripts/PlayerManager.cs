@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     public int m_LightAttack = 0;
     public int m_HeavyAttack = 0;
 
-    public Color c_ColYellow;
+    public Color c_ColPlayer2;
 
     //----------------------------------
     // PRIVATE VARIABLES
@@ -88,25 +88,25 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             {
                 r_Player = r_PlayerRockyroad;
 				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
-                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.red;
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.magenta;
             }
             else if (i == 1)
             {
                 r_Player = r_PlayerBroccolion;
 				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION;
-                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = c_ColYellow; // Color.yellow;
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.red;
             }
             else if (i == 2)
             {
                 r_Player = r_PlayerWatermelomon;
 				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON;
-                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.green;
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.green; //c_ColPlayer2
             }
             else if (i == 3)
             {
                 r_Player = r_PlayerBroccolion; //TODO: r_Player = r_PlayerKaraTea;
                 playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION;
-                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.blue;
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.cyan;
             }
 
             Object j = Instantiate(r_Player, m_PlayerSpawns[(int)i].transform.position, r_Player.transform.rotation);
