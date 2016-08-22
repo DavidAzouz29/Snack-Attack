@@ -9,6 +9,10 @@
 /// viewed: https://unity3d.com/learn/tutorials/projects/roll-a-ball/moving-the-player
 /// http://wiki.unity3d.com/index.php?title=Xbox360Controller
 /// http://answers.unity3d.com/questions/788043/is-it-possible-to-translate-an-object-diagonally-a.html
+/// Bouncey/ Tramp degree of difficulty 
+/// http://www.motionscript.com/articles/bounce-and-overshoot.html#calc-overshoot
+/// https://youtu.be/J6EEninU8g0
+/// https://docs.google.com/document/d/12ymsMLNA0oiIZc8_iXS9zuEMUH1NGV1zbvwnHkm21DM/edit
 /// *Edit*
 /// - Player state machine - David Azouz 20/06/2016
 /// - Player moving at a 45 degree angle - David Azouz 20/06/2016
@@ -275,6 +279,17 @@ public class PlayerController : MonoBehaviour
         if (a_collision.transform.tag == "Bench")
         {
             isOnGround = true;
+        }
+
+        // Bouncey objects
+        if (a_collision.transform.tag == "Bounce")
+        {
+            float amp = 80;
+            float freq = 1;
+            float decay = 1;
+
+            float t = Time.time;// - inPoint; //TODO: 
+            amp *= Mathf.Sin(t * freq * Mathf.PI * 2) / Mathf.Exp(t * decay);
         }
     }
 }
