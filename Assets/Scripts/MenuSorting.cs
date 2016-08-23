@@ -101,7 +101,7 @@ public class MenuSorting : MonoBehaviour
         {
             c_fadeAndSwipe[currentLevel].Play("UIFadeLeft");
             c_fadeAndSwipe[SHOW_COUNT - 1].Play("UIFadeRight");
-            UnityEditor.EditorApplication.isPaused = true;
+            //UnityEditor.EditorApplication.isPaused = true;
             MenuLeft();
             Debug.Log("Menu_Left");
         }
