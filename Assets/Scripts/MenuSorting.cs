@@ -46,8 +46,8 @@ public class MenuSorting : MonoBehaviour
     int currentLevel = 0;
     //[SerializeField]
     public GameObject[] r_LevelsCount = new GameObject[LEVEL_COUNT]; //TOOD: private? Designers drag on or one prefab?
-    [SerializeField]
-    private GameObject[] r_LevelsShow = new GameObject[SHOW_COUNT]; // Show only (3)
+    //[SerializeField]
+    //private GameObject[] r_LevelsShow = new GameObject[SHOW_COUNT]; // Show only (3)
     // Movement
     private float fSensitivity = 0.2f;
     private float moveHorizontal;
@@ -78,19 +78,19 @@ public class MenuSorting : MonoBehaviour
         }
 
         // turn everything we're not using, turn off (the screen)
-        /*for (int i = SHOW_COUNT; i < LEVEL_COUNT; ++i)
+        for (int i = SHOW_COUNT; i < LEVEL_COUNT; ++i)
         {
             r_LevelsCount[i].SetActive(false);
-        } */
+        }
 
         // Proceed to "Show" the next (3/ SHOW_COUNT) levels from our current level
         for (int i = currentLevel; i < SHOW_COUNT; ++i)
         {
-            r_LevelsShow[i] = r_LevelsCount[currentLevel + i];
-            r_LevelsShow[i].GetComponent<Image>().gameObject.SetActive(true);
+            //r_LevelsShow[i] = r_LevelsCount[currentLevel + i];
+            r_LevelsCount[i].GetComponent<Image>().gameObject.SetActive(true);
         }
         
-        FixLayout();
+        //FixLayout();
     }
 
     // Update is called once per frame
@@ -101,7 +101,7 @@ public class MenuSorting : MonoBehaviour
         {
             c_fadeAndSwipe[currentLevel].Play("UIFadeLeft");
             c_fadeAndSwipe[SHOW_COUNT - 1].Play("UIFadeRight");
-            UnityEditor.EditorApplication.isPaused = true;
+            //UnityEditor.EditorApplication.isPaused = true;
             MenuLeft();
             Debug.Log("Menu_Left");
         }
@@ -177,12 +177,16 @@ public class MenuSorting : MonoBehaviour
     void MenuCycle(bool isRight)
     {
         // Proceed to "Show" the next (3/ SHOW_COUNT) levels from our current level
-        for (ushort i = 0; i < SHOW_COUNT; ++i)
+        for (int i = currentLevel; i < SHOW_COUNT; ++i)
         {
-            r_LevelsShow[i] = r_LevelsCount[(i + currentLevel) % LEVEL_COUNT];
-            if (!r_LevelsShow[i].GetComponent<Image>().IsActive())
+            //r_LevelsShow[i] = r_LevelsCount[(i + currentLevel) % LEVEL_COUNT];
+            if(i > LEVEL_COUNT)
             {
-                r_LevelsShow[i].GetComponent<Image>().gameObject.SetActive(true);
+                i = 0;
+            }
+            if (!r_LevelsCount[i].GetComponent<Image>().IsActive())
+            {
+                r_LevelsCount[i].GetComponent<Image>().gameObject.SetActive(true);
             }
         }
 
@@ -203,27 +207,63 @@ public class MenuSorting : MonoBehaviour
         // ---------------------------
         // Hacky way of applying properties
         // --------------------------
+        // Position and Color
+        r_LevelsCount[currentLevel].GetComponent<RectTransform>().position = centre.position;
+        r_LevelsCount[currentLevel].GetComponent<Image>().color = colorClear;
+        int prevLevel = 0;
+
+        // ---------------------------
         // Change visible order
         // --------------------------
-        r_LevelsShow[0].transform.SetAsLastSibling();
+        for (int i = currentLevel; i < SHOW_COUNT; i++, prevLevel++)
+        {
+            //Debug.Log("Level " + i);
+            prevLevel = currentLevel;
+            if (i > LEVEL_COUNT)
+            {
+                i = 0;
+            }
+            if (prevLevel <= 0)
+            {
+                prevLevel = LEVEL_COUNT + 1;
+            }
+            //r_LevelsCount[i].transform.SetAsLastSibling();
+            r_LevelsCount[i].transform.SetAsFirstSibling();
+            // if we're not the first one, don't move the pos
+            if (i != 0)
+            {
+                r_LevelsCount[i].GetComponent<RectTransform>().position = r_LevelsCount[prevLevel - 1].GetComponent<RectTransform>().position + offset;
+            }
+            if (i == currentLevel + 1)
+            {
+                r_LevelsCount[currentLevel + 1].GetComponent<Image>().color = colorMid;
+            }
+            if (i == currentLevel + 2)
+            {
+                r_LevelsCount[currentLevel + 2].GetComponent<Image>().color = colorDark;
+            }
+            Debug.Log("Level " + i);
+            Debug.Log("PrevLevel " + prevLevel);
+        }
+        /*r_LevelsShow[0].transform.SetAsLastSibling();
         r_LevelsShow[1].transform.SetSiblingIndex(r_LevelsShow[0].transform.GetSiblingIndex() - 1);
-        r_LevelsShow[2].transform.SetSiblingIndex(r_LevelsShow[1].transform.GetSiblingIndex() - 1);
+        r_LevelsShow[2].transform.SetSiblingIndex(r_LevelsShow[1].transform.GetSiblingIndex() - 1); 
         r_LevelsCount[3].GetComponent<Image>().gameObject.SetActive(false);
-        r_LevelsCount[4].GetComponent<Image>().gameObject.SetActive(false);
+        r_LevelsCount[4].GetComponent<Image>().gameObject.SetActive(false); */
 
         // ---------------------------
         // Offset Position
         // ---------------------------
-        r_LevelsShow[0].GetComponent<RectTransform>().position = centre.position;
-        r_LevelsShow[1].GetComponent<RectTransform>().position = r_LevelsShow[0].GetComponent<RectTransform>().position + offset;
-        r_LevelsShow[2].GetComponent<RectTransform>().position = r_LevelsShow[1].GetComponent<RectTransform>().position + offset;
+        //r_LevelsCount[currentLevel    ].GetComponent<RectTransform>().position = centre.position;
+        //r_LevelsCount[currentLevel + 1].GetComponent<RectTransform>().position = r_LevelsCount[currentLevel     ].GetComponent<RectTransform>().position + offset;
+        //r_LevelsCount[currentLevel + 2].GetComponent<RectTransform>().position = r_LevelsCount[currentLevel + 1].GetComponent<RectTransform>().position + offset;
 
         // ---------------------------
         // Tint
         // ---------------------------
-        r_LevelsShow[0].GetComponent<Image>().color = colorClear;
-        r_LevelsShow[1].GetComponent<Image>().color = colorMid;
-        r_LevelsShow[2].GetComponent<Image>().color = colorDark;
+        //r_LevelsCount[currentLevel].GetComponent<Image>().color = colorClear;
+        //r_LevelsCount[currentLevel + 1].GetComponent<Image>().color = colorMid;
+        //r_LevelsCount[currentLevel + 2].GetComponent<Image>().color = colorDark;
     }
     #endregion
 }
