@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Score manager.
+/// TODO: watch the video on how this should be used 
+/// viewed: Quill18 https://youtu.be/gjFsrVWQaQw 
+/// Notes:
+/// - Look in PlayerScoreList for displaying scores on the U.I.
+/// </summary>
+
+using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
