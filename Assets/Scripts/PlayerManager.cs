@@ -90,25 +90,25 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             {
                 r_Player = r_Player_1;
 				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
-                //r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.magenta;
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.magenta;
             }
             else if (i == 1)
             {
                 r_Player = r_Player_2;
 				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
-                //r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.red;
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.red;
             }
             else if (i == 2)
             {
                 r_Player = r_Player_3;
 				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
-                //r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.green; //c_ColPlayer2
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.green; //c_ColPlayer2
             }
             else if (i == 3)
             {
                 r_Player = r_Player_4; //TODO: r_Player = r_PlayerKaraTea;
                 playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
-                //r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.cyan;
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.cyan;
             }
 
             Object j = Instantiate(r_Player, m_PlayerSpawns[(int)i].transform.position, r_Player.transform.rotation);
