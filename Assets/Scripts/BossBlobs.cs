@@ -339,16 +339,6 @@ public class BossBlobs : MonoBehaviour {
 
             #region SMALL
             case Thresholds.SMALL:
-                for (int i = 0; i < m_Blobs.RegularDrop; i++)
-                {
-                    int a = i * (360 / m_Blobs.RegularDrop);
-                    _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
-                    _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.RegularPower;
-                    m_CreatedBlobs.Add(_curBlob);
-                }
-                // Apply Explosion
-                ExplodeBlobs();
-                m_CreatedBlobs.Clear();
                 break;
             #endregion
 
