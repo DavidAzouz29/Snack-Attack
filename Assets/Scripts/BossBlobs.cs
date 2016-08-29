@@ -177,12 +177,16 @@ public class BossBlobs : MonoBehaviour {
             //Check if its an active hit
             if (_col.gameObject.GetComponent<PlayerCollision>().weaponIsActive)
             {
-                //Check if we're blocking
-                if (!m_LocalAnim.m_Anim.GetBool("Blocking"))
+                //checked if we are blocking Blocking
+                if (m_LocalAnim.m_Anim.GetBool("Blocking"))
                 {
-                    //check if its a boss heavy attack
+                    //If Blocking
+
+                    //Check Heavy Attack
                     if (_col.gameObject.GetComponent<PlayerCollision>().isHeavyAttack)
                     {
+                        //If Heacy Attack
+
                         //check if its a boss heavy attack
                         if (m_ColliderAnim.m_Anim.GetBool("Boss"))
                         {
@@ -200,8 +204,10 @@ public class BossBlobs : MonoBehaviour {
                                 GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
                             }
                         }
+                        //Else End Block
                         else
                         {
+                            
                             m_LocalAnim.m_Anim.SetTrigger("BlockEnd");
                             m_LocalAnim.m_Anim.SetBool("Blocking", false);
                         }
@@ -367,17 +373,17 @@ public class BossBlobs : MonoBehaviour {
 
     public void Respawn()
     {
-        m_Threshold = Thresholds.REGULAR;
-        m_Power = 150;
-        m_CurrentThreshold = m_Blobs.RegularThresh;
+        m_Threshold = Thresholds.SMALL;
+        m_Power = 36;
+        m_CurrentThreshold = m_Blobs.SmallThresh;
         transform.localScale = new Vector3(m_ScaleLevel[1], m_ScaleLevel[1], m_ScaleLevel[1]);
         gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
-        gameObject.transform.FindChild("Neut").gameObject.SetActive(true);
-        gameObject.transform.FindChild("Neut").gameObject.GetComponent<Animator>().SetBool("Boss", false);
-        gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
+        gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
+        gameObject.transform.FindChild("Weak").gameObject.SetActive(true);
+        gameObject.transform.FindChild("Weak").gameObject.GetComponent<Animator>().SetBool("Boss", false);
         gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", false);
-        gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
+        gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
 
-        m_TransitionState = TransitionState.NEUT;
+        m_TransitionState = TransitionState.WEAK;
     }
 }

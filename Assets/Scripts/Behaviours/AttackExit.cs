@@ -9,11 +9,13 @@ public class AttackExit : StateMachineBehaviour {
         animator.SetBool("AttackTrigger", false);
         animator.SetBool("Attacking1", false);
         animator.SetBool("Attacking2", false);
+        animator.SetBool("Blocking", false);
         PlayerCollision[] temp;
         temp = animator.gameObject.GetComponentsInChildren<PlayerCollision>();
         for (int i = 0; i < temp.Length; i++)
         {
             temp[i].weaponIsActive = false;
+            temp[i].isHeavyAttack = false;
         }
     }
 
