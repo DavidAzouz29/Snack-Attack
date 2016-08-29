@@ -284,9 +284,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 414282}
+  - 135: {fileID: 13548576}
+  - 114: {fileID: 11422290}
   m_Layer: 0
   m_Name: TBodyType_Left_Fist_JNT
-  m_TagString: Untagged
+  m_TagString: Weapon2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1001,9 +1003,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 485642}
+  - 135: {fileID: 13574360}
+  - 114: {fileID: 11410460}
   m_Layer: 0
   m_Name: TBodyType_Right_Fist_JNT
-  m_TagString: Untagged
+  m_TagString: Weapon1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1723,7 +1727,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107578}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.791775, y: 4.718551, z: 3.7408018}
+  m_LocalPosition: {x: 5.24, y: -0.73, z: -13.664797}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22432824}
@@ -2201,7 +2205,7 @@ Animator:
   m_GameObject: {fileID: 107780}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3271554ac29ea8942be034ae41de2978, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a3b29c94b096ef64898c624db5fc0576, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2282,6 +2286,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11410460
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 15
+  weaponIsActive: 0
+  isHeavyAttack: 0
 --- !u!114 &11413706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2360,6 +2378,20 @@ MonoBehaviour:
   fJumpForce: 5
   fGravity: 9.8
   m_playerID: 0
+--- !u!114 &11422290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 15
+  weaponIsActive: 0
+  isHeavyAttack: 0
 --- !u!114 &11430586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2660,6 +2692,30 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.3
   m_Center: {x: 0.2, y: 0, z: 0}
+--- !u!135 &13548576
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116744}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &13574360
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13585316
 SphereCollider:
   m_ObjectHideFlags: 1
