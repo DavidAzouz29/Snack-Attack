@@ -26,6 +26,7 @@ public class AttackEnter : StateMachineBehaviour {
                 if (temp[i].gameObject.tag == "Weapon2" && animator.GetBool("Attacking2"))
                 {
                     temp[i].weaponIsActive = true;
+                    temp[i].isHeavyAttack = true;
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class BossBlobs : MonoBehaviour {
 
@@ -31,6 +32,7 @@ public class BossBlobs : MonoBehaviour {
 
     private Killbox m_Killbox;
     private bool activeWeaponCheck;
+    private int m_KillCounter = 1;
 
     public enum Thresholds
     {
@@ -133,16 +135,17 @@ public class BossBlobs : MonoBehaviour {
         if (m_Updated)
         {
             m_Updated = false;
-            if (m_Power >= m_Thresholds[0]) // if power >= 150
+            if (m_Power >= m_Thresholds[0]) // if power >= 200
             {
                 transform.localScale = new Vector3(m_ScaleLevel[0], m_ScaleLevel[0], m_ScaleLevel[0]);
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(true);
-                gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>().SetBool("Boss", false);
+                gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>().SetBool("Boss", true);
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
                 gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", true);
                 m_TransitionState = TransitionState.BOSS;
+                m_Threshold = Thresholds.BIG;
             }
             else if (m_Power >= m_Thresholds[1])
             {
@@ -153,6 +156,7 @@ public class BossBlobs : MonoBehaviour {
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
                 m_TransitionState = TransitionState.NEUT;
+                m_Threshold = Thresholds.REGULAR;
             }
             else if (m_Power >= m_Thresholds[2])
             {
@@ -163,6 +167,7 @@ public class BossBlobs : MonoBehaviour {
                 gameObject.transform.FindChild("Weak").gameObject.GetComponent<Animator>().SetBool("Boss", false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
                 m_TransitionState = TransitionState.WEAK;
+                m_Threshold = Thresholds.SMALL;
             }
         }
     }
@@ -177,12 +182,16 @@ public class BossBlobs : MonoBehaviour {
             //Check if its an active hit
             if (_col.gameObject.GetComponent<PlayerCollision>().weaponIsActive)
             {
-                //Check if we're blocking
-                if (!m_LocalAnim.m_Anim.GetBool("Blocking"))
+                //checked if we are blocking Blocking
+                if (m_LocalAnim.m_Anim.GetBool("Blocking"))
                 {
-                    //check if its a boss heavy attack
+                    //If Blocking
+
+                    //Check Heavy Attack
                     if (_col.gameObject.GetComponent<PlayerCollision>().isHeavyAttack)
                     {
+                        //If Heacy Attack
+
                         //check if its a boss heavy attack
                         if (m_ColliderAnim.m_Anim.GetBool("Boss"))
                         {
@@ -196,12 +205,13 @@ public class BossBlobs : MonoBehaviour {
                             if (m_Power <= 0)
                             {
                                 m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
-                                GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponentInParent<PlayerController>().m_PlayerTag, "kills", 1);
-                                GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
+                                UpdateScore(_col);
                             }
                         }
+                        //Else End Block
                         else
                         {
+                            
                             m_LocalAnim.m_Anim.SetTrigger("BlockEnd");
                             m_LocalAnim.m_Anim.SetBool("Blocking", false);
                         }
@@ -219,8 +229,7 @@ public class BossBlobs : MonoBehaviour {
                     if (m_Power <= 0)
                     {
                         m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
-                        GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>().ChangeScore(_col.gameObject.GetComponentInParent<PlayerController>().m_PlayerTag, "kills", 1);
-                        GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
+                        UpdateScore(_col);
                     }
                 }
             }
@@ -231,6 +240,7 @@ public class BossBlobs : MonoBehaviour {
     {
         //GameObject _curBlob = null;
         // Spawn *type* of projectile based of player class
+        #region Blobs
         switch (r_PlayerCon.m_eCurrentClassState)
         {
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
@@ -266,6 +276,7 @@ public class BossBlobs : MonoBehaviour {
                     break;
                 }
         }
+        #endregion
 
         switch (_t)
         {
@@ -326,8 +337,21 @@ public class BossBlobs : MonoBehaviour {
                 break;
             #endregion
 
+            #region SMALL
             case Thresholds.SMALL:
+                for (int i = 0; i < m_Blobs.RegularDrop; i++)
+                {
+                    int a = i * (360 / m_Blobs.RegularDrop);
+                    _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
+                    _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.RegularPower;
+                    m_CreatedBlobs.Add(_curBlob);
+                }
+                // Apply Explosion
+                ExplodeBlobs();
+                m_CreatedBlobs.Clear();
                 break;
+            #endregion
+
             default:
                 break;
         }
@@ -335,6 +359,7 @@ public class BossBlobs : MonoBehaviour {
 
     public void ExplodeBlobs()
     {
+        Debug.Log("Spawning Blobs");
         float _radius = 3.0f;
         Vector3 _explosionPos = transform.position;
         Collider[] _colliders = Physics.OverlapSphere(_explosionPos, _radius);
@@ -367,17 +392,27 @@ public class BossBlobs : MonoBehaviour {
 
     public void Respawn()
     {
-        m_Threshold = Thresholds.REGULAR;
-        m_Power = 150;
-        m_CurrentThreshold = m_Blobs.RegularThresh;
-        transform.localScale = new Vector3(m_ScaleLevel[1], m_ScaleLevel[1], m_ScaleLevel[1]);
+        m_Threshold = Thresholds.SMALL;
+        m_Power = 66;
+        m_CurrentThreshold = m_Blobs.SmallThresh;
+        transform.localScale = new Vector3(m_ScaleLevel[2], m_ScaleLevel[2], m_ScaleLevel[2]);
         gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
-        gameObject.transform.FindChild("Neut").gameObject.SetActive(true);
-        gameObject.transform.FindChild("Neut").gameObject.GetComponent<Animator>().SetBool("Boss", false);
-        gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
+        gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
+        gameObject.transform.FindChild("Weak").gameObject.SetActive(true);
+        gameObject.transform.FindChild("Weak").gameObject.GetComponent<Animator>().SetBool("Boss", false);
         gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", false);
-        gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
+        gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
 
-        m_TransitionState = TransitionState.NEUT;
+        m_TransitionState = TransitionState.WEAK;
+    }
+
+    public void UpdateScore(Collider _col)
+    {
+        ScoreManager myScore = GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>();
+        myScore.ChangeScore(_col.gameObject.GetComponentInParent<PlayerController>().m_PlayerTag, "kills", 1);
+        GameObject.FindGameObjectWithTag(_col.gameObject.GetComponentInParent<PlayerController>().m_PlayerTag + " Score").GetComponent<Text>().text = m_KillCounter.ToString();
+        m_KillCounter++;
+        GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
     }
 }
+
