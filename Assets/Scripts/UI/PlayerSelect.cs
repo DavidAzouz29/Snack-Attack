@@ -22,7 +22,6 @@
 /// ----------------------------------
 
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -33,7 +32,6 @@ public class PlayerSelect : MonoBehaviour
 	public ArrayLayout playerButtons;
 	public float fSensitivity = 2.0f;
 	public Button c_LevelSelect;
-	public EventSystem c_EventSystem;
 
 	private const int MAX_CLASS_COUNT = 2; //PlayerController.E_CLASS_STATE.E_PLAYER_STATE_COUNT
 	public MeshRenderer[,] c_Classes = new MeshRenderer[PlayerManager.MAX_PLAYERS, MAX_CLASS_COUNT];
@@ -57,15 +55,11 @@ public class PlayerSelect : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		//c_EventSystem = FindObjectOfType<EventSystem> ();
 		for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++) 
 		{
 			playersConfirmed [i] = false;
 			// Start 1-4 Coroutines to check for player input - each on their own "thread*"
 			StartCoroutine (PlayerInput (i));
-			// TODO: enable each player to have an (Event System)/ selected button
-			//c_EventSystem.firstSelectedGameObject = playerButtons.playerRows [i].row [i].gameObject;
-			//c_EventSystem.GetComponent<StandaloneInputModule> ().horizontalAxis = "P" + i + "_Horizontal";
 		}		
 	}
 

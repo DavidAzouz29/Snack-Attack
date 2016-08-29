@@ -22,11 +22,31 @@ using UnityEngine;
 using System.Collections;
 
 [CreateAssetMenu (menuName = "PlayerBuilds/MonopedeBuild")]
-public class MonopedeBuild : PlayerBuild, IClass
+public class MonopedeBuild : PlayerBuild
 {
 	public override E_BUILD_STATE eCurrentBuildState { get; set; }
 	public override void Initialize(GameObject obj)
 	{
-		int i = 0;
-	}
+        // Name
+        switch(eCurrentClassState)
+        {
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
+                {
+                    aName = "RockyRoad";
+                    break;
+                }
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PATTYCAKE:
+                {
+                    aName = "PrincessCake";
+                    break;
+                }
+        }
+
+        c_rb = obj.GetComponent<Rigidbody>();
+        c_Animator = obj.GetComponent<Animator>();
+
+        r_PC = obj.GetComponent<PlayerController>();
+        r_PA = obj.GetComponent<PlayerAnims>();
+        r_BB = obj.GetComponent<BossBlobs>();
+    }
 }

@@ -11,7 +11,7 @@
 /// - 	- David Azouz 11/04/16
 /// - Players have unique material - David Azouz 21/06/16
 /// - Functionality mostly added - David Azouz 27/08/16 2 hours
-/// 
+/// - Change from Mesh and Skinned... to different GameObjects we're switching between.
 /// TODO:
 /// - change remove const from MAX_PLAYERS
 /// - removed contents from Player Controller and add here
@@ -27,7 +27,7 @@ using System.Collections;
 /// Think of interfaces as "Tags" - e.g. Inventory
  
 // Every Class will have
-public interface IClass
+/*public interface IClass
 {
     uint MAX_PLAYERS { get; set; } // Make 4
 
@@ -37,8 +37,8 @@ public interface IClass
 	Rigidbody c_rb { get; set; }
 
 	// Accounts for weak, neutral, boss meshes
-	MeshFilter[] c_MeshFilter { get; set; }
-	SkinnedMeshRenderer[] c_SkinnedMeshRenderer { get; set; }
+	//MeshFilter[] c_MeshFilter { get; set; }
+	//SkinnedMeshRenderer[] c_SkinnedMeshRenderer { get; set; }
 	// Which material/ skin will they have?
 	Material[] c_MatA { get; set; } // Characters main texture
 	Material[] c_MatB { get; set; } // Characters alternate texture
@@ -55,22 +55,23 @@ public interface IClass
     BossBlobs r_BB { get; set; }
 
 	//void Create();
-}
+} */
 
 // Properties every class (Monopede, Quadruped etc) will contain.
 // The Interface inforces this rule.
-public abstract class PlayerBuild : ScriptableObject, IClass
+public abstract class PlayerBuild : ScriptableObject
 {
 	public string aName = "New Class";
 	public uint MAX_PLAYERS { get; set; } //
-	public PlayerController.E_CLASS_STATE eCurrentClassState { get; set; }
+	public GameObject[] c_States { get; set; } // boss, neut, weak Game Objects we're switching between
+    public PlayerController.E_CLASS_STATE eCurrentClassState { get; set; }
 	public Rigidbody c_rb { get; set; }
 	public Animator c_Animator { get; set; }
-	public MeshFilter[] c_MeshFilter { get; set; }
-	public SkinnedMeshRenderer[] c_SkinnedMeshRenderer { get; set; }
+    //public MeshFilter[] c_MeshFilter { get; set; }
+    //public SkinnedMeshRenderer[] c_SkinnedMeshRenderer { get; set; }
 
-	// Which material will they have?
-	public Material[] c_MatA { get; set; } // Characters main texture
+    // Which material will they have?
+    public Material[] c_MatA { get; set; } // Characters main texture
 	public Material[] c_MatB { get; set; } // Characters alternate texture
 
 	public ParticleSystem c_Splat { get; set; } // for the splat
@@ -85,9 +86,9 @@ public abstract class PlayerBuild : ScriptableObject, IClass
 
 	public enum E_BUILD_STATE
 	{
-		E_BUILD_STATE_MONOPEDE, // 1 leg
-		E_BUILD_STATE_BIPEDAL,	// 2 legs, humanoid
-		E_BUILD_STATE_QUADRUPED,	// 4 legs
+		E_BUILD_STATE_MONOPEDE,  // 1 leg
+		E_BUILD_STATE_BIPEDAL,	 // 2 legs, humanoid
+		E_BUILD_STATE_QUADRUPED, // 4 legs
 
 		E_BUILD_STATE_COUNT,
 	};
@@ -98,10 +99,10 @@ public abstract class PlayerBuild : ScriptableObject, IClass
 
 	void Start()
 	{
-		int iPLayerStates = 3;
-		c_MeshFilter = new MeshFilter[iPLayerStates];
-		c_SkinnedMeshRenderer = new SkinnedMeshRenderer[iPLayerStates];
-		c_MatA = new Material[iPLayerStates];
-		c_MatB = new Material[iPLayerStates];
+		int iPlayerStates = 3;
+		//c_MeshFilter = new MeshFilter[iPLayerStates];
+		//c_SkinnedMeshRenderer = new SkinnedMeshRenderer[iPLayerStates];
+		c_MatA = new Material[iPlayerStates];
+		c_MatB = new Material[iPlayerStates];
 	}
 }
