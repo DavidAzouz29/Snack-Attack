@@ -131,7 +131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &107780
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,8 +2143,8 @@ Rigidbody:
   m_GameObject: {fileID: 107578}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1.05
-  m_AngularDrag: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -2227,8 +2227,8 @@ MonoBehaviour:
   AttackIgnore:
   - {fileID: 0}
   m_Thresholds: c800000096000000640000004b000000
-  m_BlobsToDrop: 01000000020000000300000004000000
-  m_PowerToGive: 140000000f0000000a00000005000000
+  m_BlobsToDrop: 02000000020000000100000001000000
+  m_PowerToGive: 05000000050000000500000005000000
   m_ScaleLevel:
   - 2
   - 1.5
@@ -2359,7 +2359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a38d93fbb21cdf41911aaf39ce72b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 55
+  playerSpeed: 35
   speedBoost: 6
   m_Moving: 0
   hitsBeforeDeath: 5
@@ -2375,7 +2375,7 @@ MonoBehaviour:
   m_eCurrentPlayerState: 0
   m_eCurrentClassState: 0
   isOnGround: 0
-  fJumpForce: 5
+  fJumpForce: 9
   fGravity: 9.8
   m_playerID: 0
 --- !u!114 &11422290
@@ -2666,7 +2666,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.37
+  m_Radius: 0.5
   m_Center: {x: 0.2, y: -0, z: 0}
 --- !u!135 &13519914
 SphereCollider:
@@ -2678,7 +2678,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.37
+  m_Radius: 0.5
   m_Center: {x: -0.3, y: -0, z: 0}
 --- !u!135 &13540822
 SphereCollider:
@@ -2702,7 +2702,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13574360
 SphereCollider:
@@ -2714,7 +2714,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13585316
 SphereCollider:
@@ -3009,7 +3009,7 @@ RectTransform:
   m_Father: {fileID: 22411194}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3099,7 +3099,7 @@ RectTransform:
   m_Father: {fileID: 22412562}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3109,7 +3109,51 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playerSpeed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_BlobsToDrop.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_BlobsToDrop.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_BlobsToDrop.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_BlobsToDrop.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_PowerToGive.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_PowerToGive.Array.data[1]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_PowerToGive.Array.data[2]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: fJumpForce
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 107578}
