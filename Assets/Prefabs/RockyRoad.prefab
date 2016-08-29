@@ -104,6 +104,7 @@ GameObject:
   - 224: {fileID: 22461092}
   - 222: {fileID: 22272374}
   - 114: {fileID: 11456262}
+  - 114: {fileID: 11443442}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -2312,7 +2313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5595335, g: 1, b: 0.25735295, a: 0.5882353}
+  m_Color: {r: 0, g: 1, b: 1, a: 0.528}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2508,6 +2509,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11443442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 0.03, y: 0.03}
+  m_UseGraphicAlpha: 1
 --- !u!114 &11443714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2582,7 +2597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.3137255}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.547}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2608,9 +2623,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d3451ee2456f843a84dd384bddc65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  c_BossSlider: {fileID: 0}
+  c_BossSlider: {fileID: 11443714}
   c_SkullImage: {fileID: 11438070}
-  c_WheelImage: {fileID: 0}
+  c_WheelImage: {fileID: 11413706}
   deleteMe: 0
 --- !u!114 &11479832
 MonoBehaviour:
