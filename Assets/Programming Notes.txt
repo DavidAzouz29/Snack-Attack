@@ -1,6 +1,7 @@
 How to use a system:
 
 - Players
+A Game Manager handles the time for a round and the creation of players through the Player Manager.
 A Player Manager must be in the scene and is responsible for creating Players.
 To quickly make adjustments to a Player - use the Menu Bar "Player Game Object" to add a (Player) prefab. Remember to remove this for the final game.
 
@@ -21,3 +22,9 @@ Tips:
 Notes:
 - If the code is common between lots of different objects: use inheritance
 - unique to each dif ob but use same funcs: use interfaces (inherit from multiple interfaces)
+
+- Go to Skinned Mesh Renderer
+- Shader -> MyShader/Cel
+- Drag Texture for lighting
+
+Interfaces vs. abstract classes https://msdn.microsoft.com/en-AU/library/scsyfw1d(v=vs.71).aspx http://stackoverflow.com/questions/56867/interface-vs-base-class 
