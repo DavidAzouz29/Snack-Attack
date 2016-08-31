@@ -33,7 +33,7 @@ public class PlayerSelect : MonoBehaviour
 	public float fSensitivity = 2.0f;
 	public Button c_LevelSelect;
 
-	private const int MAX_CLASS_COUNT = 2; //PlayerController.E_CLASS_STATE.E_PLAYER_STATE_COUNT
+    private const int MAX_CLASS_COUNT = (int)PlayerBuild.E_CLASS_STATE.E_CLASS_BASE_STATE_COUNT;
 	public MeshRenderer[,] c_Classes = new MeshRenderer[PlayerManager.MAX_PLAYERS, MAX_CLASS_COUNT];
 	// For which player
 	[SerializeField] private int[] iCurrentClassSelection = new int[PlayerManager.MAX_PLAYERS];
@@ -118,7 +118,8 @@ public class PlayerSelect : MonoBehaviour
 			// All players are ready
 			else 
 			{
-				LevelSelect ();
+                StopAllCoroutines(); //TODO: does this break things?
+                LevelSelect ();
 			}
 		}	
 	}
