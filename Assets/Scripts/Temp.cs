@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class BossBlobs : MonoBehaviour
+public class Temp : MonoBehaviour
 {
 
     /*
     Whoever is currently the boss, when going below a certain ppwer threshold, should drop blobs around them.
     */
-    public Collider[] IgnoreAttacksFrom;
+    public Collider[] AttackIgnore;
 
     [Tooltip("Use these to specify at what Power the boss drops its blobs.")]
-    public List<int> BossDropThreshold = new List<int>(new int[] { 200, 132, 66 });
+    public List<int> m_Thresholds = new List<int>(new int[] { 200, 132, 66 });
 
     [Tooltip("Use these to specify how many blobs to drop")]
     public List<int> m_BlobsToDrop = new List<int>(new int[] { 3, 2, 1 });
@@ -20,7 +21,7 @@ public class BossBlobs : MonoBehaviour
     public List<int> m_PowerToGive = new List<int>(new int[] { 5, 10, 15, 20 });
 
     [Tooltip("The scale of each different power level")]
-    public List<float> m_PowerLevelScale = new List<float>(new float[] { 1.5f, 1.0f, 0.75f });
+    public List<float> m_ScaleLevel = new List<float>(new float[] { 1.5f, 1.0f, 0.75f });
 
 
     public int m_CurrentThreshold;
@@ -73,11 +74,11 @@ public class BossBlobs : MonoBehaviour
         Could turn this into a list, for different characters and have different
         prefabs for different bosses. Eg; Watermelon slices for watermelon boss blobs.
     */
-    public GameObject m_SpawnableBlob; // this is used to spawn a blob based on class 		    public GameObject m_BlobObject; 
+    public GameObject m_BlobObject; // this is used to spawn a blob based on class 		    public GameObject m_BlobObject; 
     private GameObject _curBlob; // buffer storage
 
     [HideInInspector]
-    public List<GameObject> m_BlobsCreated; // Used to manage the instantiated blobs, and to only explode those.
+    public List<GameObject> m_CreatedBlobs; // Used to manage the instantiated blobs, and to only explode those.
 
     private PlayerManager r_PlayerMan;
     private PlayerController r_PlayerCon;
@@ -87,7 +88,7 @@ public class BossBlobs : MonoBehaviour
 
     void Start()
     {
-        IgnoreAttacksFrom = GetComponentsInChildren<SphereCollider>();
+        AttackIgnore = GetComponentsInChildren<SphereCollider>();
         //for(int i = 0; i < AttackIgnore.Length; i++)
         //{
         //   Physics.IgnoreCollision(gameObject.GetComponent<BoxCollider>(), AttackIgnore[i]);
@@ -100,7 +101,7 @@ public class BossBlobs : MonoBehaviour
         m_TransitionState = TransitionState.NEUT;
         m_Power = 132;
         m_CurrentThreshold = m_Blobs.RegularThresh;
-        transform.localScale = new Vector3(m_PowerLevelScale[1], m_PowerLevelScale[1], m_PowerLevelScale[1]);
+        transform.localScale = new Vector3(m_ScaleLevel[1], m_ScaleLevel[1], m_ScaleLevel[1]);
         r_PlayerMan = FindObjectOfType<PlayerManager>();
         r_PlayerCon = GetComponent<PlayerController>();
         r_ParticleSystem = GetComponent<ParticleSystem>();
@@ -121,13 +122,13 @@ public class BossBlobs : MonoBehaviour
         m_Blobs.RegularPower = m_PowerToGive[1];
         m_Blobs.SmallPower = m_PowerToGive[2];
 
-        m_Blobs.BigScale = m_PowerLevelScale[0];
-        m_Blobs.RegularScale = m_PowerLevelScale[1];
-        m_Blobs.SmallScale = m_PowerLevelScale[2];
+        m_Blobs.BigScale = m_ScaleLevel[0];
+        m_Blobs.RegularScale = m_ScaleLevel[1];
+        m_Blobs.SmallScale = m_ScaleLevel[2];
 
-        m_Blobs.BigThresh = BossDropThreshold[0];
-        m_Blobs.RegularThresh = BossDropThreshold[1];
-        m_Blobs.SmallThresh = BossDropThreshold[2];
+        m_Blobs.BigThresh = m_Thresholds[0];
+        m_Blobs.RegularThresh = m_Thresholds[1];
+        m_Blobs.SmallThresh = m_Thresholds[2];
     }
 
     void Update()
@@ -154,9 +155,9 @@ public class BossBlobs : MonoBehaviour
         if (m_Updated)
         {
             m_Updated = false;
-            if (m_Power >= BossDropThreshold[0]) // if power >= 200
+            if (m_Power >= m_Thresholds[0]) // if power >= 200
             {
-                transform.localScale = new Vector3(m_PowerLevelScale[0], m_PowerLevelScale[0], m_PowerLevelScale[0]);
+                transform.localScale = new Vector3(m_ScaleLevel[0], m_ScaleLevel[0], m_ScaleLevel[0]);
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(true);
                 gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>().SetBool("Boss", true);
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
@@ -166,9 +167,9 @@ public class BossBlobs : MonoBehaviour
                 m_TransitionState = TransitionState.BOSS;
                 m_Threshold = Thresholds.BIG;
             }
-            else if (m_Power >= BossDropThreshold[1])
+            else if (m_Power >= m_Thresholds[1])
             {
-                transform.localScale = new Vector3(m_PowerLevelScale[1], m_PowerLevelScale[1], m_PowerLevelScale[1]);
+                transform.localScale = new Vector3(m_ScaleLevel[1], m_ScaleLevel[1], m_ScaleLevel[1]);
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(true);
                 gameObject.transform.FindChild("Neut").gameObject.GetComponent<Animator>().SetBool("Boss", false);
@@ -177,9 +178,9 @@ public class BossBlobs : MonoBehaviour
                 m_TransitionState = TransitionState.NEUT;
                 m_Threshold = Thresholds.REGULAR;
             }
-            else if (m_Power >= BossDropThreshold[2])
+            else if (m_Power >= m_Thresholds[2])
             {
-                transform.localScale = new Vector3(m_PowerLevelScale[2], m_PowerLevelScale[2], m_PowerLevelScale[2]);
+                transform.localScale = new Vector3(m_ScaleLevel[2], m_ScaleLevel[2], m_ScaleLevel[2]);
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(true);
@@ -255,27 +256,27 @@ public class BossBlobs : MonoBehaviour
         {
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
                 {
-                    m_SpawnableBlob = blobsArray[0];
+                    m_BlobObject = blobsArray[0];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
                 {
-                    m_SpawnableBlob = blobsArray[1];
+                    m_BlobObject = blobsArray[1];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
                 {
-                    m_SpawnableBlob = blobsArray[2];
+                    m_BlobObject = blobsArray[2];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA:
                 {
-                    m_SpawnableBlob = blobsArray[0];
+                    m_BlobObject = blobsArray[0];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
                 {
-                    m_SpawnableBlob = blobsArray[3];
+                    m_BlobObject = blobsArray[3];
                     //shot.GetComponent<MeshRenderer>().material.mainTexture = r_Coli;
                     //shot.GetComponent<MeshRenderer>().material.SetColor("_SpecColor", Color.white);
                     break;
@@ -295,16 +296,16 @@ public class BossBlobs : MonoBehaviour
                 for (int i = 0; i < m_Blobs.BigDrop; i++)
                 {
                     int a = i * (360 / m_Blobs.BigDrop);
-                    _curBlob = (GameObject)Instantiate(m_SpawnableBlob, BlobSpawn(a), Quaternion.identity);
+                    _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
                     _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.BigPower;
-                    m_BlobsCreated.Add(_curBlob);
+                    m_CreatedBlobs.Add(_curBlob);
                 }
                 // Apply Explosion
                 ExplodeBlobs();
-                m_BlobsCreated.Clear();
+                m_CreatedBlobs.Clear();
 
                 // Everytime a player goes down a threshold, lower their scale by .25
-                gameObject.transform.localScale = new Vector3(m_PowerLevelScale[1], m_PowerLevelScale[1], m_PowerLevelScale[1]);
+                gameObject.transform.localScale = new Vector3(m_ScaleLevel[1], m_ScaleLevel[1], m_ScaleLevel[1]);
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(true);
                 gameObject.transform.FindChild("Neut").gameObject.GetComponent<Animator>().SetBool("Boss", false);
@@ -323,16 +324,16 @@ public class BossBlobs : MonoBehaviour
                 for (int i = 0; i < m_Blobs.RegularDrop; i++)
                 {
                     int a = i * (360 / m_Blobs.RegularDrop);
-                    _curBlob = (GameObject)Instantiate(m_SpawnableBlob, BlobSpawn(a), Quaternion.identity);
+                    _curBlob = (GameObject)Instantiate(m_BlobObject, BlobSpawn(a), Quaternion.identity);
                     _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.RegularPower;
-                    m_BlobsCreated.Add(_curBlob);
+                    m_CreatedBlobs.Add(_curBlob);
                 }
                 // Apply Explosion
                 ExplodeBlobs();
-                m_BlobsCreated.Clear();
+                m_CreatedBlobs.Clear();
 
                 // Everytime a player goes down a threshold, lower their scale by .25
-                gameObject.transform.localScale = new Vector3(m_PowerLevelScale[2], m_PowerLevelScale[2], m_PowerLevelScale[2]);
+                gameObject.transform.localScale = new Vector3(m_ScaleLevel[2], m_ScaleLevel[2], m_ScaleLevel[2]);
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(true);
@@ -394,7 +395,7 @@ public class BossBlobs : MonoBehaviour
         m_Threshold = Thresholds.SMALL;
         m_Power = 66;
         m_CurrentThreshold = m_Blobs.SmallThresh;
-        transform.localScale = new Vector3(m_PowerLevelScale[2], m_PowerLevelScale[2], m_PowerLevelScale[2]);
+        transform.localScale = new Vector3(m_ScaleLevel[2], m_ScaleLevel[2], m_ScaleLevel[2]);
         gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
         gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
         gameObject.transform.FindChild("Weak").gameObject.SetActive(true);

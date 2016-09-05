@@ -122,17 +122,17 @@ GameObject:
   - 4: {fileID: 450434}
   - 54: {fileID: 5405808}
   - 114: {fileID: 11417940}
-  - 114: {fileID: 11400916}
   - 114: {fileID: 11431622}
   - 65: {fileID: 6544930}
   - 136: {fileID: 13662256}
+  - 114: {fileID: 11407036}
   m_Layer: 0
   m_Name: RockyRoad
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &107780
 GameObject:
   m_ObjectHideFlags: 0
@@ -2214,40 +2214,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11400916
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 107578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 788bfc9064e44ce42b91aff6ddaf742f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackIgnore:
-  - {fileID: 0}
-  m_Thresholds: c800000096000000640000004b000000
-  m_BlobsToDrop: 02000000020000000100000001000000
-  m_PowerToGive: 05000000050000000500000005000000
-  m_ScaleLevel:
-  - 2
-  - 1.5
-  - 1
-  - 0.75
-  m_CurrentThreshold: 0
-  m_Power: 100
-  m_PowerMax: 200
-  m_Updated: 0
-  r_ParticleSystem: {fileID: 0}
-  m_Threshold: 0
-  m_TransitionState: 0
-  m_BlobObject: {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
-  m_CreatedBlobs: []
-  blobsArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &11402712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2260,6 +2226,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UseRelativeRotation: 1
+--- !u!114 &11407036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02786f7aaf5691641883d5702139a2ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreAttacksFrom: []
+  BossDropThreshold: c80000008400000042000000
+  m_BlobsToDrop: 030000000200000001000000
+  m_PowerToGive: 050000000a0000000f00000014000000
+  m_PowerLevelScale:
+  - 1.5
+  - 1
+  - 0.75
+  m_CurrentThreshold: 0
+  m_Power: 0
+  m_PowerMax: 150
+  m_Updated: 0
+  r_ParticleSystem: {fileID: 0}
+  m_EmissionThreshold: 0
+  m_ModelMeshRenderers:
+  - {fileID: 13712398}
+  - {fileID: 13756246}
+  - {fileID: 13752088}
+  m_Threshold: 0
+  m_TransitionState: 0
+  m_SpawnableBlob: {fileID: 0}
+  m_BlobsCreated: []
+  blobsArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &11407460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2301,6 +2305,7 @@ MonoBehaviour:
   damage: 15
   weaponIsActive: 0
   isHeavyAttack: 0
+  m_ParentTransform: {fileID: 0}
 --- !u!114 &11413706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2313,7 +2318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 1, a: 0.528}
+  m_Color: {r: 0.4, g: 0.18, b: 0.58, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2393,6 +2398,7 @@ MonoBehaviour:
   damage: 15
   weaponIsActive: 0
   isHeavyAttack: 0
+  m_ParentTransform: {fileID: 0}
 --- !u!114 &11430586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2407,6 +2413,7 @@ MonoBehaviour:
   damage: 15
   weaponIsActive: 0
   isHeavyAttack: 0
+  m_ParentTransform: {fileID: 0}
 --- !u!114 &11431622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2434,6 +2441,7 @@ MonoBehaviour:
   damage: 15
   weaponIsActive: 0
   isHeavyAttack: 0
+  m_ParentTransform: {fileID: 450434}
 --- !u!114 &11438070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2585,6 +2593,7 @@ MonoBehaviour:
   damage: 15
   weaponIsActive: 0
   isHeavyAttack: 0
+  m_ParentTransform: {fileID: 0}
 --- !u!114 &11456262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2641,6 +2650,7 @@ MonoBehaviour:
   damage: 15
   weaponIsActive: 0
   isHeavyAttack: 0
+  m_ParentTransform: {fileID: 0}
 --- !u!114 &11490560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2655,6 +2665,7 @@ MonoBehaviour:
   damage: 15
   weaponIsActive: 0
   isHeavyAttack: 0
+  m_ParentTransform: {fileID: 450434}
 --- !u!114 &11499678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2766,7 +2777,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: aa42d13660121664fb25bdeb535896a3, type: 2}
+  - {fileID: 2100000, guid: 3af30194c3646724384b44d7b5a01512, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -3024,7 +3035,7 @@ RectTransform:
   m_Father: {fileID: 22411194}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3114,7 +3125,7 @@ RectTransform:
   m_Father: {fileID: 22412562}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
