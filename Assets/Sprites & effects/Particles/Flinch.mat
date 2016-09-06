@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: splat mat
+  m_Name: Flinch
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHATEST_ON _EMISSION _METALLICGLOSSMAP _SPECGLOSSMAP
+  m_ShaderKeywords: _ALPHATEST_ON _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: 2450
   stringTagMap:
@@ -20,7 +20,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 2331361074614c240ba03f8d2618960b, type: 3}
+          m_Texture: {fileID: 2800000, guid: 4a517af4d503c3d43b29419dd6528041, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -70,20 +70,13 @@ Material:
           name: _DetailAlbedoMap
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 100, y: 100}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _MetallicGlossMap
         second:
-          m_Texture: {fileID: 2800000, guid: c7d1bdd7b4841ba4a92fd1b9a039ab6f, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _SpecGlossMap
-        second:
-          m_Texture: {fileID: 2800000, guid: f7c6aa01d52e07a4393d7a65301d9c74, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -98,11 +91,7 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: 0.5
-      data:
-        first:
-          name: PixelSnap
-        second: 0
+        second: 0.064
       data:
         first:
           name: _Parallax
@@ -114,7 +103,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 1
+        second: 0
       data:
         first:
           name: _BumpScale
@@ -139,24 +128,12 @@ Material:
         first:
           name: _Metallic
         second: 0
-      data:
-        first:
-          name: _InvFade
-        second: 1
     m_Colors:
       data:
         first:
           name: _EmissionColor
-        second: {r: 1.323, g: 0, b: 0, a: 1}
+        second: {r: 1, g: 0.8482759, b: 0, a: 1}
       data:
         first:
           name: _Color
-        second: {r: 1, g: 0.6985294, b: 0.6985294, a: 1}
-      data:
-        first:
-          name: _SpecColor
-        second: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-      data:
-        first:
-          name: _TintColor
-        second: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+        second: {r: 1, g: 1, b: 1, a: 1}
