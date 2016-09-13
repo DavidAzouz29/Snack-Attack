@@ -28,12 +28,11 @@ public class BossBlobs : MonoBehaviour
     public int m_Power;
     public int m_PowerMax = 150;
     public bool m_Updated = false;
-    public ParticleSystem r_ParticleSystem;
+    public int m_Knockback = 150;
 
     private Killbox m_Killbox;
     private bool activeWeaponCheck;
     private int m_KillCounter = 1;
-    private int m_Knockback = 150;
 
     //Emission Color Varriables
     private Color m_EmissionColor;
@@ -103,7 +102,6 @@ public class BossBlobs : MonoBehaviour
         transform.localScale = new Vector3(m_PowerLevelScale[1], m_PowerLevelScale[1], m_PowerLevelScale[1]);
         r_PlayerMan = FindObjectOfType<PlayerManager>();
         r_PlayerCon = GetComponent<PlayerController>();
-        r_ParticleSystem = GetComponent<ParticleSystem>();
         blobsArray = r_PlayerMan.GetBlobArray();
         m_EmissionColor = new Color(0.3f, 0.6f, 0.6f);
         m_EmissionTimer = 0f;
@@ -216,16 +214,7 @@ public class BossBlobs : MonoBehaviour
                         {
                             //Stun player and apply damage
                             m_LocalAnim.m_Anim.SetTrigger("Stunned");
-                            m_Power = m_Power - _col.gameObject.GetComponent<PlayerCollision>().damage; // Power - Damage recieved
-                            if (m_Power < m_CurrentThreshold)
-                            {
-                                Drop(m_Threshold);
-                            }
-                            if (m_Power <= 0)
-                            {
-                                m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
-                                UpdateScore(_col);
-                            }
+                            ApplyDamage(_col);
                         }
                         //Else End Block
                         else
@@ -349,6 +338,16 @@ public class BossBlobs : MonoBehaviour
 
             #region SMALL
             case Thresholds.SMALL:
+                for (int i = 0; i < m_Blobs.RegularDrop; i++)
+                {
+                    int a = i * (360 / m_Blobs.RegularDrop);
+                    _curBlob = (GameObject)Instantiate(m_SpawnableBlob, BlobSpawn(a), Quaternion.identity);
+                    _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.RegularPower;
+                    m_BlobsCreated.Add(_curBlob);
+                }
+                // Apply Explosion
+                ExplodeBlobs();
+                m_BlobsCreated.Clear();
                 break;
             #endregion
 
