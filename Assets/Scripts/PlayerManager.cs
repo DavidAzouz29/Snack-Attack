@@ -27,12 +27,10 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     //----------------------------------
 	[Header("Hold Players")]
     public const uint MAX_PLAYERS = 4;
-    //Player referances
-    public GameObject r_Player_1;
-    public GameObject r_Player_2;
-    public GameObject r_Player_3;
-    public GameObject r_Player_4;
-
+    public GameObject r_PlayerRockyroad;    // Referance to a player.
+    public GameObject r_PlayerBroccolion;   // Referance to a player.
+    public GameObject r_PlayerWatermelomon; // Referance to a player.
+    public GameObject r_PlayerKaraTea;      // Referance to a player.
     [SerializeField]
     GameObject[] r_Players = new GameObject[MAX_PLAYERS]; // Used for camera FOV
     public CameraControl m_CameraControl;
@@ -44,7 +42,10 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     public int m_LightAttack = 0;
     public int m_HeavyAttack = 0;
 
+    public Color c_ColPlayer1;
     public Color c_ColPlayer2;
+    public Color c_ColPlayer3;
+    public Color c_ColPlayer4;
 
     //----------------------------------
     // PRIVATE VARIABLES
@@ -88,27 +89,27 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             // if it's the first player, set them to character 'x', second to 'y' etc.
             if (i == 0)
             {
-                r_Player = r_Player_1;
+                r_Player = r_PlayerRockyroad;
 				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
-                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.red;
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = c_ColPlayer1; //Color.red;
             }
             else if (i == 1)
             {
-                r_Player = r_Player_2;
-				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
-                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.blue;
+                r_Player = r_PlayerBroccolion;
+				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION;
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = c_ColPlayer2; // cyan
             }
             else if (i == 2)
             {
-                r_Player = r_Player_3;
-				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
-                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.green; //c_ColPlayer2
+                r_Player = r_PlayerWatermelomon;
+				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON;
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = c_ColPlayer3; // green
             }
             else if (i == 3)
             {
-                r_Player = r_Player_4; //TODO: r_Player = r_PlayerKaraTea;
-                playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
-                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = new Color(0.4f, 0.18f, 0.58f);
+                r_Player = r_PlayerBroccolion; //TODO: r_Player = r_PlayerKaraTea;
+                playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION;
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = c_ColPlayer4; // new Color(0.37f, 0, 0.5f, 1);// magenta;
             }
 
             Object j = Instantiate(r_Player, m_PlayerSpawns[(int)i].transform.position, r_Player.transform.rotation);
@@ -118,6 +119,8 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
 			// -------------------------------------------------------------
 			r_PlayerController = ((GameObject)j).GetComponent<PlayerController>();
 			r_PlayerController.SetPlayerID(i);
+			//r_PlayerShooting = ((GameObject)j).GetComponent<PlayerShooting>();
+			//r_PlayerShooting.SetFire("P" + (i + 1) + "_Attack1");
 
 			uiPlayerConArray[i] = r_PlayerController;
 			uiPlayerConArray[i].m_eCurrentClassState = playerState;

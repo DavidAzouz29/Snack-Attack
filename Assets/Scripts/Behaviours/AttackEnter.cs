@@ -8,27 +8,9 @@ public class AttackEnter : StateMachineBehaviour {
     {
         PlayerCollision[] temp;
         temp = animator.gameObject.GetComponentsInChildren<PlayerCollision>();
-        if (animator.GetBool("Boss") && animator.GetBool("Attacking2"))
+        for (int i = 0; i < temp.Length; i++)
         {
-            for (int i = 0; i < temp.Length; i++)
-            {
-                    temp[i].weaponIsActive = true;
-            }
-        }
-        else
-        {
-            for (int i = 0; i < temp.Length; i++)
-            {
-                if (temp[i].gameObject.tag == "Weapon1" && animator.GetBool("Attacking1"))
-                {
-                    temp[i].weaponIsActive = true;
-                }
-                if (temp[i].gameObject.tag == "Weapon2" && animator.GetBool("Attacking2"))
-                {
-                    temp[i].weaponIsActive = true;
-                    temp[i].isHeavyAttack = true;
-                }
-            }
+            temp[i].weaponIsActive = true;
         }
     }
 
