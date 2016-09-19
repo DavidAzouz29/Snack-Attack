@@ -4,10 +4,11 @@ using System.Collections;
 
 public class UILevel : MonoBehaviour {
 
-    public RoundTimer r_RoundTimer;
+	public RoundTimer r_RoundTimer;
+	public Text[] r_PlayerScoresText = new Text[PlayerManager.MAX_PLAYERS];
 
     [SerializeField]
-    private Text r_text;
+    private Text c_timer;
 
     float m_Mins;
     float m_Secs;
@@ -15,7 +16,7 @@ public class UILevel : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        //r_text.GetComponentInChildren<Text>();
+		//r_text.GetComponentInChildren<Text>();
     }
 	
 	// Update is called once per frame
@@ -30,10 +31,10 @@ public class UILevel : MonoBehaviour {
         m_Mins = Mathf.Floor(r_RoundTimer.GetTimeRemaining() / 60); // Get Minutes Remaining
         m_Secs = Mathf.Floor(r_RoundTimer.GetTimeRemaining() % 60);  // Get Seconds Remaining
 
-        r_text.text = (m_Mins.ToString() + ":" + m_Secs.ToString()); // Display the time remaining
+        c_timer.text = (m_Mins.ToString() + ":" + m_Secs.ToString()); // Display the time remaining
         if (m_Secs < 10.0f) // If seconds aren't in the 10s, display a 0 before the second.
         {
-            r_text.text = (m_Mins.ToString() + ":" + "0" + m_Secs.ToString());
+            c_timer.text = (m_Mins.ToString() + ":" + "0" + m_Secs.ToString());
         }
     }
 }
