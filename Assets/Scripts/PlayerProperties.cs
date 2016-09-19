@@ -19,26 +19,26 @@ using System.Collections;
 
 // Classes must "Implement" features of a Interface(s)
 // which class our characters are a part of
-//public interface IClass
-//{
-//    uint MAX_PLAYERS { get; set; } // Make 4
+public interface IClass
+{
+    uint MAX_PLAYERS { get; set; } // Make 4
 
-//    PlayerController.E_CLASS_STATE playerState { get; set; } // what class are we?
-//    GameObject player { get; set; } // which model we will be
-//    ParticleSystem splat { get; set; } // for the splat
-//    GameObject[] shotArray { get; set; } // Which blobs/ projectiles we'll fire
+    PlayerController.E_CLASS_STATE playerState { get; set; } // what class are we?
+    GameObject player { get; set; } // which model we will be
+    ParticleSystem splat { get; set; } // for the splat
+    GameObject[] shotArray { get; set; } // Which blobs/ projectiles we'll fire
 
-//    // Which material will they have?
-//    Material matA { get; set; }
-//    Material matB { get; set; }
+    // Which material will they have?
+    Material matA { get; set; }
+    Material matB { get; set; }
 
-//    // Need one:
-//    PlayerController r_PC { get; set; }
+    // Need one:
+    PlayerController r_PC { get; set; }
 
-//    Animator c_Animator { get; set; }
-//    PlayerAnims r_PA { get; set; }
-//    BossBlobs r_BB { get; set; }
-//}
+    Animator c_Animator { get; set; }
+    PlayerAnims r_PA { get; set; }
+    BossBlobs r_BB { get; set; }
+}
 
 /*public class PlayerProperties : ScriptableObject//, IClass
 {

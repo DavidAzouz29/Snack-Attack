@@ -23,6 +23,7 @@ public class UILevel : MonoBehaviour {
     {
         SetClockText();
 
+
     }
 
     void SetClockText()
