@@ -11,23 +11,20 @@
 /// http://itween.pixelplacement.com/documentation.php
 /// http://blog.pastelstudios.com/2015/09/07/unity-tips-tricks-multiple-event-systems-single-scene-unity-5-1/
 /// 2D Arrays on Inspector https://youtu.be/uoHc-Lz9Lsc 
-/// Generics https://youtu.be/ZrjCG0Fu5Ew
 /// *Edit*
 /// - Player Select almost happening with individual controllers - David Azouz 28/08/2016
-/// - Player able to switch between models - David Azouz 12/09/2016
-/// - - David Azouz /09/2016
+/// -  - David Azouz 28/08/2016
 /// 
 /// TODO:
-/// - //UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(playerButtons.playerColsButton[a_player].coloumn[0].gameObject);  - /8/2016
-/// - Make a function (for the content within left and right)
-/// -
+/// -  - /8/2016
+/// - 
 /// </summary>
 /// ----------------------------------
 
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
-//using System.Collections.Generic;
 
 public class PlayerSelect : MonoBehaviour
 {
@@ -36,28 +33,39 @@ public class PlayerSelect : MonoBehaviour
 	public ArrayLayout playerButtons;
 	public float fSensitivity = 2.0f;
 	public Button c_LevelSelect;
+	public EventSystem c_EventSystem;
 
-    private const int MAX_CLASS_COUNT = (int)PlayerBuild.E_CLASS_STATE.E_CLASS_BASE_STATE_COUNT;
-    // ------------------------------------
-    // Used to hold the different characters we can play as.
-    // Mesh, MeshRenderer, and Animation
-    // ------------------
-    public GameObject[] c_Characters = new GameObject[MAX_CLASS_COUNT - 1];
-
-    // For which player
-    [SerializeField] private int[] iCurrentClassSelection = new int[PlayerManager.MAX_PLAYERS];
+	private const int MAX_CLASS_COUNT = 2; //PlayerController.E_CLASS_STATE.E_PLAYER_STATE_COUNT
+	public MeshRenderer[,] c_Classes = new MeshRenderer[PlayerManager.MAX_PLAYERS, MAX_CLASS_COUNT];
+	// For which player
+	[SerializeField] private int[] iCurrentClassSelection = new int[PlayerManager.MAX_PLAYERS];
 	// used for when players have confirmed their character selection
 	[SerializeField] bool[] playersConfirmed = new bool[PlayerManager.MAX_PLAYERS];
-    
+
+	/*//OnLevelWasLoaded is called after a new scene has finished loading
+	void OnLevelWasLoaded ()
+	{
+		//If there is no EventSystem (needed for UI interactivity) present
+		if(!FindObjectOfType<EventSystem>())
+		{
+			GameObject obj = new GameObject("EventSystem");
+			//And adds the required components
+			obj.AddComponent<EventSystem>();
+		}
+	} */
 
 	// Use this for initialization
 	void Start () 
 	{
+		//c_EventSystem = FindObjectOfType<EventSystem> ();
 		for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++) 
 		{
-            playersConfirmed[i] = false;
+			playersConfirmed [i] = false;
 			// Start 1-4 Coroutines to check for player input - each on their own "thread*"
 			StartCoroutine (PlayerInput (i));
+			// TODO: enable each player to have an (Event System)/ selected button
+			//c_EventSystem.firstSelectedGameObject = playerButtons.playerRows [i].row [i].gameObject;
+			//c_EventSystem.GetComponent<StandaloneInputModule> ().horizontalAxis = "P" + i + "_Horizontal";
 		}		
 	}
 
@@ -109,15 +117,14 @@ public class PlayerSelect : MonoBehaviour
 		for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++) 
 		{
 			// if all players are not ready
-			if (playersConfirmed [i] == false) 
+			if (!playersConfirmed [i] == true) 
 			{
 				break;
 			} 
 			// All players are ready
 			else 
 			{
-                StopAllCoroutines(); //TODO: does this break things?
-                LevelSelect ();
+				LevelSelect ();
 			}
 		}	
 	}
@@ -129,55 +136,33 @@ public class PlayerSelect : MonoBehaviour
 		//TODO: "Ready" animation?
 	}
 
-    // '0' based
-    public void PlayerSelectLeft(int a_player)
-    {
-        // Move one left
-        iCurrentClassSelection[a_player] -= 1;
-        if (iCurrentClassSelection[a_player] < 0)
-        {
-            iCurrentClassSelection[a_player] = (int)PlayerManager.MAX_PLAYERS - 1;
-        }
-        //
-        CharacterSelection(a_player);
+	// '0' based
+	public void PlayerSelectLeft(int a_player)
+	{
+		// Move one left
+		iCurrentClassSelection[a_player] -= 1;
+		if (iCurrentClassSelection[a_player] < 0) 
+		{
+			iCurrentClassSelection[a_player] = MAX_CLASS_COUNT;
+		}
+		c_Classes [a_player, iCurrentClassSelection[a_player]].gameObject.SetActive(true);
+	}
 
-    }
-
-    // '0' based
-    public void PlayerSelectRight(int a_player)
+	// '0' based
+	public void PlayerSelectRight(int a_player)
 	{
 		// Move one right
 		iCurrentClassSelection[a_player] += 1;
-		if (iCurrentClassSelection[a_player] >= (int)PlayerManager.MAX_PLAYERS) 
+		if (iCurrentClassSelection[a_player] > MAX_CLASS_COUNT) 
 		{
 			iCurrentClassSelection[a_player] = 0;
 		}
-        //
-        CharacterSelection(a_player);
+		c_Classes [a_player, iCurrentClassSelection[a_player]].gameObject.SetActive(true);
+	}
 
-    }
-
-    void LevelSelect()
+	void LevelSelect()
 	{
 		c_LevelSelect.Select ();
 		// confirm (click)
 	}
-
-    void CharacterSelection(int a_player)
-    {
-        //UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(playerButtons.playerColsButton[a_player].coloumn[0].gameObject);
-        // 
-        GameObject c_currChar = c_Characters[iCurrentClassSelection[a_player]];
-        GameObject characterSlot = transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject;
-        MeshFilter characterMFilter = characterSlot.GetComponent<MeshFilter>();
-        Renderer characterRenderer = characterSlot.GetComponent<Renderer>();
-        Animator characterAnimator = characterSlot.GetComponent<Animator>();
-        characterMFilter.sharedMesh = c_currChar.GetComponent<MeshFilter>().sharedMesh;
-        characterRenderer.sharedMaterial = c_currChar.GetComponent<Renderer>().sharedMaterial;
-        characterAnimator.runtimeAnimatorController = c_currChar.GetComponent<Animator>().runtimeAnimatorController;
-        characterAnimator.avatar = c_currChar.GetComponent<Animator>().avatar;
-
-        characterSlot.transform.rotation = c_currChar.transform.rotation;
-        characterSlot.transform.localScale = c_currChar.transform.localScale;
-    }
 }

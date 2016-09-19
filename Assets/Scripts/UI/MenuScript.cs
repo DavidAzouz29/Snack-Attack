@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// Author: 		David Azouz
 /// Date Created: 	11/04/16
-/// Date Modified: 	11/04/16
+/// Date Modified: 	27/08/16
 /// --------------------------------------------------
 /// Brief: A Menu Script class that interprets data to present on the U.I.
 /// viewed https://www.youtube.com/watch?v=y3OZXMxsrUI
@@ -12,36 +12,38 @@
 /// - Remaining comments added 		- David Azouz 11/04/16
 /// - Credits added					- David Azouz 12/04/16
 /// - Player and Level Select added	- David Azouz 9/08/16
+/// - Per Player U.I. Navigation (Player Select) - David Azouz 27/08/16
+/// - 
 /// 
 /// </summary>
 
 using UnityEngine;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MenuScript : MonoBehaviour
 {
     //----------------------------------
-    // PUBLIC VARIABLES
+    // PUBLIC VARIABLES //TODO: make Panel?
     //----------------------------------
     public GameObject playerSelectPanel;//Store a reference to the Game Object Player Select
     public GameObject levelSelectPanel; //Store a reference to the Game Object Level Select
     public GameObject controlsPanel;    //Store a reference to the Game Object ControlsPanel
     public GameObject creditsPanel;     //Store a reference to the Game Object ControlsPanel
 
-    //----------------------------------
-    // PRIVATE VARIABLES
+	//----------------------------------
+    // PRIVATE VARIABLES //TODO: delete?
     //----------------------------------
     private bool isPlayerSelect = false;
     private bool isLevelSelect = false;
     private bool isControls = false;
     private bool isCredits = false;
 
-    // Use this for initialization
+	// Use this for initialization
     /*void Start ()
     {
-	
+		
 	} */
 	
 	// Update is called once per frame
@@ -63,9 +65,9 @@ public class MenuScript : MonoBehaviour
     public void TogglePlayerSelect()
     {
         // toggle Player Select true/ false
-        isPlayerSelect = !isPlayerSelect;
+        //isPlayerSelect = !isPlayerSelect;
         // set the Player Select panel on/ off
-        playerSelectPanel.SetActive(isPlayerSelect);
+		playerSelectPanel.SetActive(!playerSelectPanel.activeSelf); //isPlayerSelect
     }
 
     /// <summary>
@@ -76,9 +78,9 @@ public class MenuScript : MonoBehaviour
     public void ToggleLevelSelect()
     {
         // toggle Level Select true/ false
-        isLevelSelect = !isLevelSelect;
+        //isLevelSelect = !isLevelSelect;
         // set the Level Select panel on/ off
-        levelSelectPanel.SetActive(isLevelSelect);
+		levelSelectPanel.SetActive(!levelSelectPanel.activeSelf);
     }
 
     ///-----------------------------------
@@ -89,9 +91,9 @@ public class MenuScript : MonoBehaviour
     public void ToggleControlsView()
     {
         // toggle controls true/ false
-        isControls = !isControls;
+        //isControls = !isControls;
         // set the controls panel on/ off
-        controlsPanel.SetActive(isControls);
+		controlsPanel.SetActive(!controlsPanel.activeSelf);
     }
 
     ///-----------------------------------
@@ -104,7 +106,7 @@ public class MenuScript : MonoBehaviour
         // toggle credits true/ false
         isCredits = !isCredits;
         // set the credits panel on/ off
-        creditsPanel.SetActive(isCredits);
+		creditsPanel.SetActive(!creditsPanel.activeSelf);
     }
     #endregion
 

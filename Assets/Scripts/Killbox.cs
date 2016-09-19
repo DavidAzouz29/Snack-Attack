@@ -44,7 +44,7 @@ public class Killbox : MonoBehaviour {
                 for (int i = 0; i < _drop; i++)
                 {
                     int a = i * (360 / _drop);
-                    GameObject _blob = (GameObject)Instantiate(m_Player.GetComponent<BossBlobs>().m_BlobObject, BlobSpawn(a), Quaternion.identity);
+                    GameObject _blob = (GameObject)Instantiate(m_Player.GetComponent<BossBlobs>().m_SpawnableBlob, BlobSpawn(a), Quaternion.identity);
                     _blob.GetComponent<BlobCollision>().m_PowerToGive = m_BlobPower;
                 }
                 ExplodeBlobs();
