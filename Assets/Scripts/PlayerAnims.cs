@@ -20,8 +20,6 @@ using System.Collections;
 public class PlayerAnims : MonoBehaviour {
 
     public Animator m_Anim;
-    public BossBlobs.TransitionState m_TransitionState; //TODO ADD BOSS ATTACKS
-
     private PlayerController m_PC;
     private bool m_Idling, m_Walking, m_Attacking, m_isJumping;
     private Vector3 m_PreviousPos;
@@ -30,23 +28,10 @@ public class PlayerAnims : MonoBehaviour {
     {
         // Player Controller script is attached to our game object anyway.
         m_PC = GetComponent<PlayerController>();
+        m_Anim = GetComponent<Animator>();
         m_Idling = true;
         m_isJumping = false;
         m_PreviousPos = transform.position;
-        switch (m_TransitionState)
-        {
-            case BossBlobs.TransitionState.BOSS:
-                m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
-                break;
-            case BossBlobs.TransitionState.NEUT:
-                m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
-                break;
-            case BossBlobs.TransitionState.WEAK:
-                m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
-                break;
-        }
-        
-
     }
 
     void FixedUpdate()
@@ -58,16 +43,6 @@ public class PlayerAnims : MonoBehaviour {
         if (Input.GetButtonDown(m_PC.Attack2) && !m_Anim.GetBool("AttackTrigger"))
         {
             AttackAnim2();
-        }
-        if (Input.GetButtonDown(m_PC.Block) && !m_Anim.GetBool("Blocking"))
-        {
-            m_Anim.SetTrigger("BlockStart");
-            m_Anim.SetBool("Blocking", true);
-        }
-        if (Input.GetButtonUp(m_PC.Block) && m_Anim.GetBool("Blocking"))
-        {
-            m_Anim.SetTrigger("BlockEnd");
-            m_Anim.SetBool("Blocking", false);
         }
         if (!gameObject.GetComponent<PlayerController>().isOnGround)
         {
@@ -163,14 +138,12 @@ public class PlayerAnims : MonoBehaviour {
     }
     void AttackAnim1()
     {
-        m_Anim.SetBool("Attack1", true);
-        m_Anim.SetBool("Attacking1", true);
+        m_Anim.SetTrigger("Attack1");
         m_Anim.SetBool("AttackTrigger", true);       
     }
     void AttackAnim2()
     {
-        m_Anim.SetBool("Attack2", true);
-        m_Anim.SetBool("Attacking2", true);
+        m_Anim.SetTrigger("Attack2");
         m_Anim.SetBool("AttackTrigger", true);
     }
     //---------------------------
