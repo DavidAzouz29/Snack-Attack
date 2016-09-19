@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     public string Jump = "_Jump";
     [HideInInspector]
     public string m_PlayerTag = "NoPlayerAttached";
+    public bool m_Blocking;
     //choosing player states
     [HideInInspector]
     public enum E_PLAYER_STATE
