@@ -7,6 +7,7 @@ public class PlayerCollision : MonoBehaviour {
     public int damage;
     public bool weaponIsActive;
     public bool isHeavyAttack;
+    public Transform m_ParentTransform;
     //Attack Timer
     private float m_Timer = 0;
     private bool m_TimerEnabled = false;

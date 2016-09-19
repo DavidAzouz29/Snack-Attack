@@ -49,8 +49,10 @@ public class PlayerController : MonoBehaviour
 	public string Attack1 = "_Attack1";
 	public string Attack2 = "_Attack2";
     public string Jump = "_Jump";
+    public string Block = "_Block";
     [HideInInspector]
     public string m_PlayerTag = "NoPlayerAttached";
+    public bool m_Blocking = false;
     //choosing player states
     [HideInInspector]
     public enum E_PLAYER_STATE
@@ -106,6 +108,7 @@ public class PlayerController : MonoBehaviour
         Attack1 = "_Attack1";
         Attack2 = "_Attack2";
         Jump = "_Jump";
+        Block = "_Block";
 
         // Loops through our players and assigns variables for input from different controllers
         for (uint i = 0; i < MAX_PLAYERS; ++i)
@@ -117,6 +120,7 @@ public class PlayerController : MonoBehaviour
                 Attack1 = "P" + (i + 1) + Attack1;
                 Attack2 = "P" + (i + 1) + Attack2;
                 Jump = "P" + (i + 1) + Jump;
+                Block = "P" + (i + 1) + Block;
                 m_PlayerTag = "Player " + (i + 1);
             }
         }
@@ -127,7 +131,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //jump
         //fMovementSpeedSlowDown = fMovementSpeed - 2.0f;
-        fJumpForce = 8.0f;
+        fJumpForce = 5.0f;
         //fJumpForceMax = fJumpForce;// *2;
         m_PreviousPos = transform.position;
     }
@@ -137,15 +141,7 @@ public class PlayerController : MonoBehaviour
     {
         // Jumping
         // if we're on or close to the ground
-        if ((m_PreviousPos.y - transform.position.y) < 0.3f)
-        {
-            isOnGround = true;
-        }
         // Falling
-        else
-        {
-            isOnGround = false;
-        }
         if (Input.GetButtonDown(Jump) && isOnGround)
         {
             rb.AddForce(0, fJumpForce, 0, ForceMode.Impulse);
@@ -173,7 +169,7 @@ public class PlayerController : MonoBehaviour
             Vector3 pos = transform.position + movementDirection * playerSpeed * Time.deltaTime;
             transform.position = Vector3.Lerp (transform.position, pos, 0.2f);
             transform.forward = new Vector3(-moveVertical, 0.0f, moveHorizontal);
-            transform.forward = Quaternion.Euler(0, -270, 0) * transform.forward;
+            transform.forward = Quaternion.Euler(0, 90, 0) * transform.forward;
         }
         // we're not moving so play the idle animation
         else
@@ -276,7 +272,7 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter(Collision a_collision)
     {
         // make jump work
-        if (a_collision.transform.tag == "Bench")
+        if (a_collision.transform.tag == "StaticObject")
         {
             isOnGround = true;
         }
