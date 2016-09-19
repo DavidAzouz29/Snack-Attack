@@ -11,19 +11,23 @@
 /// http://itween.pixelplacement.com/documentation.php
 /// http://blog.pastelstudios.com/2015/09/07/unity-tips-tricks-multiple-event-systems-single-scene-unity-5-1/
 /// 2D Arrays on Inspector https://youtu.be/uoHc-Lz9Lsc 
+/// Generics https://youtu.be/ZrjCG0Fu5Ew
 /// *Edit*
 /// - Player Select almost happening with individual controllers - David Azouz 28/08/2016
-/// -  - David Azouz 28/08/2016
+/// - Player able to switch between models - David Azouz 12/09/2016
+/// - - David Azouz /09/2016
 /// 
 /// TODO:
-/// -  - /8/2016
-/// - 
+/// - //UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(playerButtons.playerColsButton[a_player].coloumn[0].gameObject);  - /8/2016
+/// - Make a function (for the content within left and right)
+/// -
 /// </summary>
 /// ----------------------------------
 
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+//using System.Collections.Generic;
 
 public class PlayerSelect : MonoBehaviour
 {
@@ -34,30 +38,24 @@ public class PlayerSelect : MonoBehaviour
 	public Button c_LevelSelect;
 
     private const int MAX_CLASS_COUNT = (int)PlayerBuild.E_CLASS_STATE.E_CLASS_BASE_STATE_COUNT;
-	public MeshRenderer[,] c_Classes = new MeshRenderer[PlayerManager.MAX_PLAYERS, MAX_CLASS_COUNT];
-	// For which player
-	[SerializeField] private int[] iCurrentClassSelection = new int[PlayerManager.MAX_PLAYERS];
+    // ------------------------------------
+    // Used to hold the different characters we can play as.
+    // Mesh, MeshRenderer, and Animation
+    // ------------------
+    public GameObject[] c_Characters = new GameObject[MAX_CLASS_COUNT - 1];
+
+    // For which player
+    [SerializeField] private int[] iCurrentClassSelection = new int[PlayerManager.MAX_PLAYERS];
 	// used for when players have confirmed their character selection
 	[SerializeField] bool[] playersConfirmed = new bool[PlayerManager.MAX_PLAYERS];
-
-	/*//OnLevelWasLoaded is called after a new scene has finished loading
-	void OnLevelWasLoaded ()
-	{
-		//If there is no EventSystem (needed for UI interactivity) present
-		if(!FindObjectOfType<EventSystem>())
-		{
-			GameObject obj = new GameObject("EventSystem");
-			//And adds the required components
-			obj.AddComponent<EventSystem>();
-		}
-	} */
+    
 
 	// Use this for initialization
 	void Start () 
 	{
 		for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++) 
 		{
-			playersConfirmed [i] = false;
+            playersConfirmed[i] = false;
 			// Start 1-4 Coroutines to check for player input - each on their own "thread*"
 			StartCoroutine (PlayerInput (i));
 		}		
@@ -111,7 +109,7 @@ public class PlayerSelect : MonoBehaviour
 		for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++) 
 		{
 			// if all players are not ready
-			if (!playersConfirmed [i] == true) 
+			if (playersConfirmed [i] == false) 
 			{
 				break;
 			} 
@@ -131,33 +129,55 @@ public class PlayerSelect : MonoBehaviour
 		//TODO: "Ready" animation?
 	}
 
-	// '0' based
-	public void PlayerSelectLeft(int a_player)
-	{
-		// Move one left
-		iCurrentClassSelection[a_player] -= 1;
-		if (iCurrentClassSelection[a_player] < 0) 
-		{
-			iCurrentClassSelection[a_player] = MAX_CLASS_COUNT;
-		}
-		c_Classes [a_player, iCurrentClassSelection[a_player]].gameObject.SetActive(true);
-	}
+    // '0' based
+    public void PlayerSelectLeft(int a_player)
+    {
+        // Move one left
+        iCurrentClassSelection[a_player] -= 1;
+        if (iCurrentClassSelection[a_player] < 0)
+        {
+            iCurrentClassSelection[a_player] = (int)PlayerManager.MAX_PLAYERS - 1;
+        }
+        //
+        CharacterSelection(a_player);
 
-	// '0' based
-	public void PlayerSelectRight(int a_player)
+    }
+
+    // '0' based
+    public void PlayerSelectRight(int a_player)
 	{
 		// Move one right
 		iCurrentClassSelection[a_player] += 1;
-		if (iCurrentClassSelection[a_player] > MAX_CLASS_COUNT) 
+		if (iCurrentClassSelection[a_player] >= (int)PlayerManager.MAX_PLAYERS) 
 		{
 			iCurrentClassSelection[a_player] = 0;
 		}
-		c_Classes [a_player, iCurrentClassSelection[a_player]].gameObject.SetActive(true);
-	}
+        //
+        CharacterSelection(a_player);
 
-	void LevelSelect()
+    }
+
+    void LevelSelect()
 	{
 		c_LevelSelect.Select ();
 		// confirm (click)
 	}
+
+    void CharacterSelection(int a_player)
+    {
+        //UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(playerButtons.playerColsButton[a_player].coloumn[0].gameObject);
+        // 
+        GameObject c_currChar = c_Characters[iCurrentClassSelection[a_player]];
+        GameObject characterSlot = transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject;
+        MeshFilter characterMFilter = characterSlot.GetComponent<MeshFilter>();
+        Renderer characterRenderer = characterSlot.GetComponent<Renderer>();
+        Animator characterAnimator = characterSlot.GetComponent<Animator>();
+        characterMFilter.sharedMesh = c_currChar.GetComponent<MeshFilter>().sharedMesh;
+        characterRenderer.sharedMaterial = c_currChar.GetComponent<Renderer>().sharedMaterial;
+        characterAnimator.runtimeAnimatorController = c_currChar.GetComponent<Animator>().runtimeAnimatorController;
+        characterAnimator.avatar = c_currChar.GetComponent<Animator>().avatar;
+
+        characterSlot.transform.rotation = c_currChar.transform.rotation;
+        characterSlot.transform.localScale = c_currChar.transform.localScale;
+    }
 }
