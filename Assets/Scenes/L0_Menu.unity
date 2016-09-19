@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692558, g: 0.49678743, b: 0.57508624, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692546, g: 0.49678695, b: 0.5750854, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -540,103 +540,23 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114000011818406508, guid: 47ee762f1b5e089499c81138ee56d8a3,
-        type: 2}
-      propertyPath: eventSystem
+    - target: {fileID: 11493094, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: c_Characters.Array.data[0]
       value: 
-      objectReference: {fileID: 2095405672}
-    - target: {fileID: 114000014045759738, guid: 47ee762f1b5e089499c81138ee56d8a3,
-        type: 2}
-      propertyPath: eventSystem
+      objectReference: {fileID: 303425256}
+    - target: {fileID: 11493094, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: c_Characters.Array.data[1]
       value: 
-      objectReference: {fileID: 357562776}
-    - target: {fileID: 114000012543564344, guid: 47ee762f1b5e089499c81138ee56d8a3,
-        type: 2}
-      propertyPath: eventSystem
+      objectReference: {fileID: 1905935387}
+    - target: {fileID: 11493094, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: c_Characters.Array.data[2]
       value: 
-      objectReference: {fileID: 1317588008}
-    - target: {fileID: 114000013647109370, guid: 47ee762f1b5e089499c81138ee56d8a3,
-        type: 2}
-      propertyPath: eventSystem
+      objectReference: {fileID: 1823490495}
+    - target: {fileID: 11493094, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: c_Characters.Array.data[3]
       value: 
-      objectReference: {fileID: 2095405672}
-    - target: {fileID: 114000011422350648, guid: 47ee762f1b5e089499c81138ee56d8a3,
-        type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 2139049767}
-    - target: {fileID: 114000010116294524, guid: 47ee762f1b5e089499c81138ee56d8a3,
-        type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 357562776}
-    - target: {fileID: 114000011650629240, guid: 47ee762f1b5e089499c81138ee56d8a3,
-        type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 1317588008}
-    - target: {fileID: 114000013277950144, guid: 47ee762f1b5e089499c81138ee56d8a3,
-        type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 2139049767}
-    - target: {fileID: 22389310, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 2036625685}
-    - target: {fileID: 11493122, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 2095405672}
-    - target: {fileID: 11488350, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 2139049767}
-    - target: {fileID: 11484814, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 2095405672}
-    - target: {fileID: 11471948, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 357562776}
-    - target: {fileID: 11454450, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 357562776}
-    - target: {fileID: 11452628, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 2139049767}
-    - target: {fileID: 11450366, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 2139049767}
-    - target: {fileID: 11447434, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 357562776}
-    - target: {fileID: 11447406, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 2139049767}
-    - target: {fileID: 11430664, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 1317588008}
-    - target: {fileID: 11428822, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 1317588008}
-    - target: {fileID: 11426528, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 1317588008}
-    - target: {fileID: 11420288, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 1317588008}
-    - target: {fileID: 11411622, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      objectReference: {fileID: 454533036}
+    - target: {fileID: 11406202, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 2095405672}
@@ -644,7 +564,103 @@ Prefab:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 357562776}
-    - target: {fileID: 11406202, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+    - target: {fileID: 11411622, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 2095405672}
+    - target: {fileID: 11420288, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 1317588008}
+    - target: {fileID: 11426528, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 1317588008}
+    - target: {fileID: 11428822, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 1317588008}
+    - target: {fileID: 11430664, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 1317588008}
+    - target: {fileID: 11447406, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 2139049767}
+    - target: {fileID: 11447434, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 357562776}
+    - target: {fileID: 11450366, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 2139049767}
+    - target: {fileID: 11452628, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 2139049767}
+    - target: {fileID: 11454450, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 357562776}
+    - target: {fileID: 11471948, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 357562776}
+    - target: {fileID: 11484814, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 2095405672}
+    - target: {fileID: 11488350, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 2139049767}
+    - target: {fileID: 11493122, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 2095405672}
+    - target: {fileID: 22389310, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2036625685}
+    - target: {fileID: 114000013277950144, guid: 47ee762f1b5e089499c81138ee56d8a3,
+        type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 2139049767}
+    - target: {fileID: 114000011650629240, guid: 47ee762f1b5e089499c81138ee56d8a3,
+        type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 1317588008}
+    - target: {fileID: 114000010116294524, guid: 47ee762f1b5e089499c81138ee56d8a3,
+        type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 357562776}
+    - target: {fileID: 114000011422350648, guid: 47ee762f1b5e089499c81138ee56d8a3,
+        type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 2139049767}
+    - target: {fileID: 114000013647109370, guid: 47ee762f1b5e089499c81138ee56d8a3,
+        type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 2095405672}
+    - target: {fileID: 114000012543564344, guid: 47ee762f1b5e089499c81138ee56d8a3,
+        type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 1317588008}
+    - target: {fileID: 114000014045759738, guid: 47ee762f1b5e089499c81138ee56d8a3,
+        type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 357562776}
+    - target: {fileID: 114000011818406508, guid: 47ee762f1b5e089499c81138ee56d8a3,
+        type: 2}
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 2095405672}

@@ -33,12 +33,16 @@ public class PlayerSelect : MonoBehaviour
 	public ArrayLayout playerButtons;
 	public float fSensitivity = 2.0f;
 	public Button c_LevelSelect;
-	public EventSystem c_EventSystem;
 
-	private const int MAX_CLASS_COUNT = 2; //PlayerController.E_CLASS_STATE.E_PLAYER_STATE_COUNT
-	public MeshRenderer[,] c_Classes = new MeshRenderer[PlayerManager.MAX_PLAYERS, MAX_CLASS_COUNT];
-	// For which player
-	[SerializeField] private int[] iCurrentClassSelection = new int[PlayerManager.MAX_PLAYERS];
+	private const int MAX_CLASS_COUNT = (int)PlayerBuild.E_CLASS_STATE.E_CLASS_BASE_STATE_COUNT;
+    // ------------------------------------
+    // Used to hold the different characters we can play as.
+    // Mesh, MeshRenderer, and Animation
+    // ------------------
+    public GameObject[] c_Characters = new GameObject[MAX_CLASS_COUNT - 1];
+
+    // For which player
+    [SerializeField] private int[] iCurrentClassSelection = new int[PlayerManager.MAX_PLAYERS];
 	// used for when players have confirmed their character selection
 	[SerializeField] bool[] playersConfirmed = new bool[PlayerManager.MAX_PLAYERS];
 
@@ -57,16 +61,12 @@ public class PlayerSelect : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		//c_EventSystem = FindObjectOfType<EventSystem> ();
-		for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++) 
-		{
-			playersConfirmed [i] = false;
-			// Start 1-4 Coroutines to check for player input - each on their own "thread*"
-			StartCoroutine (PlayerInput (i));
-			// TODO: enable each player to have an (Event System)/ selected button
-			//c_EventSystem.firstSelectedGameObject = playerButtons.playerRows [i].row [i].gameObject;
-			//c_EventSystem.GetComponent<StandaloneInputModule> ().horizontalAxis = "P" + i + "_Horizontal";
-		}		
+        for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+        {
+            playersConfirmed[i] = false;
+            // Start 1-4 Coroutines to check for player input - each on their own "thread*"
+            StartCoroutine(PlayerInput(i));
+        }		
 	}
 
 	//Coroutine, which gets Started in "Start()" and runs over the whole game to check for player input
@@ -124,7 +124,8 @@ public class PlayerSelect : MonoBehaviour
 			// All players are ready
 			else 
 			{
-				LevelSelect ();
+                StopAllCoroutines(); //TODO: does this break things?
+                LevelSelect();
 			}
 		}	
 	}
@@ -143,26 +144,46 @@ public class PlayerSelect : MonoBehaviour
 		iCurrentClassSelection[a_player] -= 1;
 		if (iCurrentClassSelection[a_player] < 0) 
 		{
-			iCurrentClassSelection[a_player] = MAX_CLASS_COUNT;
-		}
-		c_Classes [a_player, iCurrentClassSelection[a_player]].gameObject.SetActive(true);
-	}
+            iCurrentClassSelection[a_player] = (int)PlayerManager.MAX_PLAYERS - 1;
+        }
+        //
+        CharacterSelection(a_player);
+    }
 
 	// '0' based
 	public void PlayerSelectRight(int a_player)
 	{
 		// Move one right
 		iCurrentClassSelection[a_player] += 1;
-		if (iCurrentClassSelection[a_player] > MAX_CLASS_COUNT) 
-		{
-			iCurrentClassSelection[a_player] = 0;
-		}
-		c_Classes [a_player, iCurrentClassSelection[a_player]].gameObject.SetActive(true);
-	}
+        if (iCurrentClassSelection[a_player] >= (int)PlayerManager.MAX_PLAYERS)
+        {
+            iCurrentClassSelection[a_player] = 0;
+        }
+        //
+        CharacterSelection(a_player);
+    }
 
 	void LevelSelect()
 	{
 		c_LevelSelect.Select ();
 		// confirm (click)
 	}
+
+    void CharacterSelection(int a_player)
+    {
+        //UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(playerButtons.playerColsButton[a_player].coloumn[0].gameObject);
+        // 
+        GameObject c_currChar = c_Characters[iCurrentClassSelection[a_player]];
+        GameObject characterSlot = transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject;
+        MeshFilter characterMFilter = characterSlot.GetComponent<MeshFilter>();
+        Renderer characterRenderer = characterSlot.GetComponent<Renderer>();
+        Animator characterAnimator = characterSlot.GetComponent<Animator>();
+        characterMFilter.sharedMesh = c_currChar.GetComponent<MeshFilter>().sharedMesh;
+        characterRenderer.sharedMaterial = c_currChar.GetComponent<Renderer>().sharedMaterial;
+        characterAnimator.runtimeAnimatorController = c_currChar.GetComponent<Animator>().runtimeAnimatorController;
+        characterAnimator.avatar = c_currChar.GetComponent<Animator>().avatar;
+
+        characterSlot.transform.rotation = c_currChar.transform.rotation;
+        characterSlot.transform.localScale = c_currChar.transform.localScale;
+    }
 }
