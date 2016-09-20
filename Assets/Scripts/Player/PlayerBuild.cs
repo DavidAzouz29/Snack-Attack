@@ -11,7 +11,7 @@
 /// - 	- David Azouz 11/04/16
 /// - Players have unique material - David Azouz 21/06/16
 /// - Functionality mostly added - David Azouz 27/08/16 2 hours
-/// 
+/// - Change from Mesh and Skinned... to different GameObjects we're switching between.
 /// TODO:
 /// - change remove const from MAX_PLAYERS
 /// - removed contents from Player Controller and add here
@@ -25,9 +25,9 @@ using System.Collections;
 /// Classes must "Implement" features of a Interface(s)
 /// which class our characters are a part of.
 /// Think of interfaces as "Tags" - e.g. Inventory
- 
+
 // Every Class will have
-public interface IClass
+/*public interface IClass
 {
     uint MAX_PLAYERS { get; set; } // Make 4
 
@@ -37,8 +37,8 @@ public interface IClass
 	Rigidbody c_rb { get; set; }
 
 	// Accounts for weak, neutral, boss meshes
-	MeshFilter[] c_MeshFilter { get; set; }
-	SkinnedMeshRenderer[] c_SkinnedMeshRenderer { get; set; }
+	//MeshFilter[] c_MeshFilter { get; set; }
+	//SkinnedMeshRenderer[] c_SkinnedMeshRenderer { get; set; }
 	// Which material/ skin will they have?
 	Material[] c_MatA { get; set; } // Characters main texture
 	Material[] c_MatB { get; set; } // Characters alternate texture
@@ -55,53 +55,160 @@ public interface IClass
     BossBlobs r_BB { get; set; }
 
 	//void Create();
-}
+} */
 
 // Properties every class (Monopede, Quadruped etc) will contain.
 // The Interface inforces this rule.
-public abstract class PlayerBuild : ScriptableObject, IClass
+public abstract class PlayerBuild : ScriptableObject
 {
-	public string aName = "New Class";
-	public uint MAX_PLAYERS { get; set; } //
-	public PlayerController.E_CLASS_STATE eCurrentClassState { get; set; }
-	public Rigidbody c_rb { get; set; }
-	public Animator c_Animator { get; set; }
-	public MeshFilter[] c_MeshFilter { get; set; }
-	public SkinnedMeshRenderer[] c_SkinnedMeshRenderer { get; set; }
+    public string aName = "New Class";
+    //public uint MAX_PLAYERS { get; set; } //
+    public GameObject[] c_States { get; set; } // boss, neut, weak Game Objects we're switching between
+    public Rigidbody c_rb { get; set; }
+    public Animator c_Animator { get; set; }
+    //public MeshFilter[] c_MeshFilter { get; set; }
+    //public SkinnedMeshRenderer[] c_SkinnedMeshRenderer { get; set; }
 
-	// Which material will they have?
-	public Material[] c_MatA { get; set; } // Characters main texture
-	public Material[] c_MatB { get; set; } // Characters alternate texture
+    // Which material will they have?
+    public Material[] c_MatA { get; set; } // Characters main texture
+    public Material[] c_MatB { get; set; } // Characters alternate texture
 
-	public ParticleSystem c_Splat { get; set; } // for the splat
-	public GameObject[] c_ShotArray { get; set; } // Which blobs/ projectiles we'll fire
+    public GameObject[] c_ShotArray { get; set; } // Which blobs/ projectiles we'll fire
+    public GameObject[] c_BlobArray { get; set; } // Which blobs we'll drop
+    //-------------------------------
+    // Particle systems
+    //-------------------------------
+    public ParticleSystem c_Splat { get; set; } // for the splat
 
-	public Image c_PlayerIcon { get; set; }
+    public Image c_PlayerIcon { get; set; }
+    public Image[] c_PlayerIcons { get; set; }
+    // This is used for the (ring) U.I. and punch emission colour
+    public Color c_PlayerColour { get; set; }
 
-	// Need one:
-	public PlayerController r_PC { get; set; }
-	public PlayerAnims r_PA { get; set; }
-	public BossBlobs r_BB { get; set; }
+    // Need one each:
+    public PlayerController r_PC { get; set; }
+    public PlayerAnims r_PA { get; set; }
+    public BossBlobs r_BB { get; set; }
+    public UIBossLevel r_UIBL { get; set; }
 
-	public enum E_BUILD_STATE
-	{
-		E_BUILD_STATE_MONOPEDE, // 1 leg
-		E_BUILD_STATE_BIPEDAL,	// 2 legs, humanoid
-		E_BUILD_STATE_QUADRUPED,	// 4 legs
+    //-------------------------------
+    // Player variables
+    // based on Boss State
+    //-------------------------------
+    public float[] fMovementSpeed { get; set; }
+    //public float[] fJumpForce { get; set; }
+    // Combat
+    // Damage values
+    public float[] fAttackLight { get; set; }
+    public float[] fAttackHeavy { get; set; }
+    // Block Damage modifier
+    public float[] fAttackBlock { get; set; }
+    // amount of boss blobs we will drop to
+    public float[] fBossBlobs { get; set; }
 
-		E_BUILD_STATE_COUNT,
-	};
-	public abstract E_BUILD_STATE eCurrentBuildState { get; set; }
+    //-------------------------------
+    // Current values
+    //-------------------------------
+    public float currMovementSpeed { get; set; }
+    public float currAttackLight { get; set; }
+    public float currAttackHeavy { get; set; }
+    public float currAttackBlock { get; set; }
+    public float currBossBlobs { get; set; }
 
-	//public void Create(){	}
-	public abstract void Initialize(GameObject obj);
+    //-------------------------------
+    // Player "States"
+    //-------------------------------
+    #region Build State
+    public enum E_BUILD_STATE
+    {
+        E_BUILD_STATE_MONOPEDE,  // 1 leg
+        E_BUILD_STATE_BIPEDAL,   // 2 legs, humanoid
+        E_BUILD_STATE_QUADRUPED, // 4 legs
 
-	void Start()
-	{
-		int iPLayerStates = 3;
-		c_MeshFilter = new MeshFilter[iPLayerStates];
-		c_SkinnedMeshRenderer = new SkinnedMeshRenderer[iPLayerStates];
-		c_MatA = new Material[iPLayerStates];
-		c_MatB = new Material[iPLayerStates];
-	}
+        E_BUILD_STATE_COUNT,
+    };
+    public abstract E_BUILD_STATE eCurrentBuildState { get; set; }
+    #endregion
+
+    #region Class State
+    public enum E_CLASS_STATE
+    {
+        E_CLASS_STATE_ROCKYROAD,    // Monopede
+        E_CLASS_STATE_PRINCESSCAKE, // Monopede
+        E_CLASS_STATE_BROCCOLION,   // Quadruped
+        E_CLASS_STATE_WATERMELOMON, // Bipedal
+        E_CLASS_STATE_KARATEA,      // Bipedal
+
+        E_CLASS_BASE_STATE_COUNT,
+
+        E_CLASS_STATE_CHRISCHERRYCONE,  // Monopede
+        E_CLASS_STATE_PRINCETORTE,      // Monopede GATEAUX
+        E_CLASS_STATE_CAUILILION,       // Quadruped
+        E_CLASS_STATE_ROCKMELOMON,      // Bipedal
+        E_CLASS_STATE_COFFIN,           // Bipedal
+
+        E_CLASS_ALT_STATE_COUNT,
+    };
+    public abstract E_CLASS_STATE eCurrentClassState { get; set; }
+    //public PlayerController.E_CLASS_STATE eCurrentClassState { get; set; }
+    #endregion
+
+    #region Boss State
+    // 
+    public enum E_BOSS_STATE
+    {
+        E_BOSS_STATE_WEAK_E,    // (empty) when we spawn in-game/ runtime
+        E_BOSS_STATE_WEAK,      // When we spawn for the first time
+        E_BOSS_STATE_NEUTRAL,   // Spawn in as (start of game)
+        E_BOSS_STATE_BOSS,      // They are the biggest form
+        E_BOSS_STATE_BOSS_F,    // (full) can not absorb any more boss blobs
+
+        E_BOSS_STATE_COUNT,
+    };
+    public abstract E_BOSS_STATE eCurrentBossState { get; set; }
+    #endregion
+
+    //-------------------------------
+    // Functions for subclasses
+    //-------------------------------
+    //public void Create(){	}
+    public abstract void Initialize(GameObject obj);
+    //
+    public abstract void Update();
+
+    //-------------------------------
+    // Protected Variables
+    //-------------------------------
+    protected const uint MAX_PLAYERS = 4;
+    protected const uint PLAYER_STATES = 5;
+
+    //-------------------------------
+    // Private Variables
+    //-------------------------------
+    float maxBossBlobs = 200.0f;
+
+    void Start()
+    {
+        //c_MeshFilter = new MeshFilter[iPLayerStates];
+        //c_SkinnedMeshRenderer = new SkinnedMeshRenderer[iPLayerStates];
+        c_MatA = new Material[PLAYER_STATES];
+        c_MatB = new Material[PLAYER_STATES];
+
+        eCurrentBossState = E_BOSS_STATE.E_BOSS_STATE_NEUTRAL;
+        // invalidating the data
+        eCurrentBuildState = E_BUILD_STATE.E_BUILD_STATE_COUNT;
+        eCurrentClassState = E_CLASS_STATE.E_CLASS_ALT_STATE_COUNT;
+
+        fMovementSpeed = new float[PLAYER_STATES];
+        fAttackLight = new float[PLAYER_STATES];
+        fAttackHeavy = new float[PLAYER_STATES];
+        fAttackBlock = new float[PLAYER_STATES];
+        fBossBlobs = new float[PLAYER_STATES];
+
+        currMovementSpeed = fMovementSpeed[(int)E_BOSS_STATE.E_BOSS_STATE_NEUTRAL];
+        currAttackLight = fAttackLight[(int)E_BOSS_STATE.E_BOSS_STATE_NEUTRAL];
+        currAttackHeavy = fAttackHeavy[(int)E_BOSS_STATE.E_BOSS_STATE_NEUTRAL];
+        currAttackBlock = fAttackBlock[(int)E_BOSS_STATE.E_BOSS_STATE_NEUTRAL];
+        currBossBlobs = fBossBlobs[(int)E_BOSS_STATE.E_BOSS_STATE_NEUTRAL];
+    }
 }
