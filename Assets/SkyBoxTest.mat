@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: SkyBoxTest
-  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 104, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -15,6 +15,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
+    - first:
+        name: _BackTex
+      second:
+        m_Texture: {fileID: 2800000, guid: c381c2d3a7be03a4bbec5248d7690f2c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - first:
         name: _BumpMap
       second:
@@ -40,9 +46,27 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
+        name: _DownTex
+      second:
+        m_Texture: {fileID: 2800000, guid: c381c2d3a7be03a4bbec5248d7690f2c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _EmissionMap
       second:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _FrontTex
+      second:
+        m_Texture: {fileID: 2800000, guid: c381c2d3a7be03a4bbec5248d7690f2c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _LeftTex
+      second:
+        m_Texture: {fileID: 2800000, guid: c381c2d3a7be03a4bbec5248d7690f2c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -70,9 +94,21 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
+        name: _RightTex
+      second:
+        m_Texture: {fileID: 2800000, guid: c381c2d3a7be03a4bbec5248d7690f2c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _Tex
       second:
         m_Texture: {fileID: 8900000, guid: 724e5e27ee1bba4469d21060af744413, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _UpTex
+      second:
+        m_Texture: {fileID: 2800000, guid: c381c2d3a7be03a4bbec5248d7690f2c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -93,7 +129,7 @@ Material:
       second: 0
     - first:
         name: _Exposure
-      second: 1.3
+      second: 1
     - first:
         name: _GlossMapScale
       second: 1
@@ -117,7 +153,7 @@ Material:
       second: 0.02
     - first:
         name: _Rotation
-      second: 0
+      second: 23
     - first:
         name: _SmoothnessTextureChannel
       second: 0
