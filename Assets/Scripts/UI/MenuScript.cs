@@ -14,7 +14,8 @@
 /// - Player and Level Select added	- David Azouz 9/08/16
 /// - Per Player U.I. Navigation (Player Select) - David Azouz 27/08/16
 /// - 
-/// 
+/// TODO:
+/// - get rid of isPlayerSelect etc
 /// </summary>
 
 using UnityEngine;
@@ -27,6 +28,7 @@ public class MenuScript : MonoBehaviour
     //----------------------------------
     // PUBLIC VARIABLES //TODO: make Panel?
     //----------------------------------
+    public GameObject c_titleScreenPanel;//Store a reference to the Game Object Title Screen
     public GameObject playerSelectPanel;//Store a reference to the Game Object Player Select
     public GameObject levelSelectPanel; //Store a reference to the Game Object Level Select
     public GameObject controlsPanel;    //Store a reference to the Game Object ControlsPanel
@@ -40,14 +42,17 @@ public class MenuScript : MonoBehaviour
     private bool isControls = false;
     private bool isCredits = false;
 
-	// Use this for initialization
+    private int iLevelSelection = 0;
+    private int iTimeSelection = 0;
+
+    // Use this for initialization
     /*void Start ()
     {
 		
 	} */
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         // If 'C' is pressed...
         if(Input.GetKeyUp(KeyCode.C))
@@ -59,6 +64,16 @@ public class MenuScript : MonoBehaviour
 	}
 
     #region Panels
+    /// <summary>
+    /// Shows/ hides the 'Title Screen' panel 
+    /// Includes title and menu buttons
+    /// </summary>
+    public void ToggleTitleScreen()
+    {
+        // set the Title Screen panel on/ off
+        c_titleScreenPanel.SetActive(!c_titleScreenPanel.activeSelf);
+    }
+
     /// <summary>
     /// Shows/ hides the 'Player Select' panel 
     /// </summary>
@@ -110,10 +125,46 @@ public class MenuScript : MonoBehaviour
     }
     #endregion
 
+    // Sets what level to play
+    public void SetLevelSelection(int a_selection)
+    {
+        iLevelSelection = a_selection;
+    }
     // Load the level to play the game
     public void LoadLevel()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(iLevelSelection);
+    }
+
+    // Selects time duration for a round
+    public void TimerSelection(int a_time)
+    {
+        switch (a_time)
+        {
+            // One minute
+            case 0:
+                {
+                    iTimeSelection = 60;
+                    break;
+                }
+            // Three Minutes
+            case 1:
+                {
+                    iTimeSelection = 180; Debug.Log("MS.cs Time Sel: " + iTimeSelection);
+                    break;
+                }
+            // Five Minutes
+            case 2:
+                {
+                    iTimeSelection = 350;
+                    break;
+                }
+            default:
+                {
+                    iTimeSelection = 60;
+                    break;
+                }
+        }
     }
 
     // If the player wants to play again, reload the currently loaded level.

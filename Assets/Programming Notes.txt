@@ -8,7 +8,8 @@ To quickly make adjustments to a Player - use the Menu Bar "Player Game Object" 
 - U.I. Scoreboard courtesy of http://quill18.com/unity_tutorials/Scoreboard%20Tutorial.zip 
 Unity 3d Tutorial: Making a Scoreboard #1  https://youtu.be/gjFsrVWQaQw
 
-Camera Zoom from Tanks!: https://bitbucket.org/richardfine/scriptableobjectdemo 
+Camera Zoom and U.I. concept from Tanks!: https://bitbucket.org/richardfine/scriptableobjectdemo 
+http://blog.pastelstudios.com/2015/09/07/unity-tips-tricks-multiple-event-systems-single-scene-unity-5-1/ 
 
 TODO:
 - For character team ups https://unity3d.com/learn/tutorials/topics/scripting/interfaces 
@@ -21,3 +22,9 @@ Tips:
 Notes:
 - If the code is common between lots of different objects: use inheritance
 - unique to each dif ob but use same funcs: use interfaces (inherit from multiple interfaces)
+
+- Go to Skinned Mesh Renderer
+- Shader -> MyShader/Cel
+- Drag Texture for lighting
+
+Interfaces vs. abstract classes https://msdn.microsoft.com/en-AU/library/scsyfw1d(v=vs.71).aspx http://stackoverflow.com/questions/56867/interface-vs-base-class 

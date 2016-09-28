@@ -16,6 +16,7 @@
 /// -  - David Azouz 28/08/2016
 /// 
 /// TODO:
+/// - cache a few of the "GetComponent"'s - 
 /// -  - /8/2016
 /// - 
 /// </summary>
@@ -61,9 +62,10 @@ public class PlayerSelect : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-        for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+        for (int i = 0; i <= PlayerManager.MAX_PLAYERS - 1; ++i)
         {
             playersConfirmed[i] = false;
+            CharacterSelection(i);
             // Start 1-4 Coroutines to check for player input - each on their own "thread*"
             StartCoroutine(PlayerInput(i));
         }		
@@ -174,12 +176,30 @@ public class PlayerSelect : MonoBehaviour
         //UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(playerButtons.playerColsButton[a_player].coloumn[0].gameObject);
         // 
         GameObject c_currChar = c_Characters[iCurrentClassSelection[a_player]];
-        GameObject characterSlot = transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject;
-        MeshFilter characterMFilter = characterSlot.GetComponent<MeshFilter>();
-        Renderer characterRenderer = characterSlot.GetComponent<Renderer>();
+        GameObject characterSlot = null;
+        if (iCurrentClassSelection[a_player] <= 1)
+        {
+            if(!transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject.activeInHierarchy)
+            {
+                transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject.SetActive(true);
+            }
+            characterSlot = transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject;
+            transform.GetChild(0).GetChild(a_player).GetChild(2).gameObject.SetActive(false);
+        }
+        // TODO: please clean this up once character names are known MAX_CLASS_COUNT
+        else if (iCurrentClassSelection[a_player] >= 2)
+        {
+            if (!transform.GetChild(0).GetChild(a_player).GetChild(2).gameObject.activeInHierarchy)
+            {
+                transform.GetChild(0).GetChild(a_player).GetChild(2).gameObject.SetActive(true);
+            }
+            characterSlot = transform.GetChild(0).GetChild(a_player).GetChild(2).gameObject;
+            transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject.SetActive(false);
+        }
+        SkinnedMeshRenderer characterSkinnedRenderer = characterSlot.GetComponentInChildren<SkinnedMeshRenderer>();
         Animator characterAnimator = characterSlot.GetComponent<Animator>();
-        characterMFilter.sharedMesh = c_currChar.GetComponent<MeshFilter>().sharedMesh;
-        characterRenderer.sharedMaterial = c_currChar.GetComponent<Renderer>().sharedMaterial;
+        characterSkinnedRenderer.sharedMaterial = c_currChar.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial;
+        characterSkinnedRenderer.sharedMesh = c_currChar.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh;
         characterAnimator.runtimeAnimatorController = c_currChar.GetComponent<Animator>().runtimeAnimatorController;
         characterAnimator.avatar = c_currChar.GetComponent<Animator>().avatar;
 
