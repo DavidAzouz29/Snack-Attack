@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4124b06505bdf842a9484210e31bc78, type: 3}
+  m_Name: Default game settings
+  m_EditorClassIdentifier: 
+  players:
+  - ClassName: Rocky Road
+    Color: {r: 0.89019614, g: 0.47450984, b: 0.42352945, a: 1}
+    eBaseClassState: 0
+    characterMaterial: {fileID: 2100000, guid: 4fd4b8905f60abe4eac4876ca180b475, type: 2}
+    BrainName: Rocky Road
+  - ClassName: Mint Chop Chip
+    Color: {r: 0.7372549, g: 0.9215687, b: 0.43529415, a: 1}
+    eBaseClassState: 0
+    characterMaterial: {fileID: 2100000, guid: 7d26a8bc66cca514a819f1a0bcafc85b, type: 2}
+    BrainName: MintChopChip
+  - ClassName: Cookie Crunch
+    Color: {r: 0.77205884, g: 0.5053618, b: 0.028384497, a: 1}
+    eBaseClassState: 0
+    characterMaterial: {fileID: 2100000, guid: 088ac9e6e00c4f34ba9618f556f460c9, type: 2}
+    BrainName: CookieCrunch
+  - ClassName: Rainbow Warrior
+    Color: {r: 0.909804, g: 0.3764706, b: 0.7847465, a: 1}
+    eBaseClassState: 0
+    characterMaterial: {fileID: 2100000, guid: 0987ba98df0de0f4cbaa73de4fdb966e, type: 2}
+    BrainName: RainbowWarrior
+  - ClassName: Princess Cake
+    Color: {r: 0.41960788, g: 0.6627451, b: 0.8470589, a: 1}
+    eBaseClassState: 1
+    characterMaterial: {fileID: 2100000, guid: 86c8cc67f76667749a03ea477b28a0f8, type: 2}
+    BrainName: PrincessCake
+  - ClassName: Patty Cake
+    Color: {r: 0.6039216, g: 0.37647063, b: 0.909804, a: 1}
+    eBaseClassState: 1
+    characterMaterial: {fileID: 2100000, guid: 6780998c93d698649bf1cadbe9d8b401, type: 2}
+    BrainName: PattyCake
+  availableBrains:
+  - {fileID: 11400000, guid: eca22e818df90994480e3620018ee6ad, type: 2}
+  - {fileID: 11400000, guid: fc51682f2e604344a97380d6ffffe479, type: 2}
+  - {fileID: 11400000, guid: 6be363a89a6d0b2438d5deb0a50c13f1, type: 2}
+  - {fileID: 11400000, guid: eb55704d6741ff74a861b7fdb8d7d10b, type: 2}
+  - {fileID: 11400000, guid: f3647b8865a99bb4286f871666f4b72c, type: 2}
+  - {fileID: 11400000, guid: c673ca173deb58f4297580c1a0e8b8de, type: 2}
+  NumberOfRounds: 1
+  iRoundTimerChoice: 180

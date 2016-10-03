@@ -131,25 +131,58 @@ public abstract class PlayerBuild : ScriptableObject
     #endregion
 
     #region Class State
-    public enum E_CLASS_STATE
+    public enum E_ROCKYROAD_STATE
     {
-        E_CLASS_STATE_ROCKYROAD,    // Monopede
-        E_CLASS_STATE_PRINCESSCAKE, // Monopede
-        E_CLASS_STATE_BROCCOLION,   // Quadruped
-        E_CLASS_STATE_WATERMELOMON, // Bipedal
-        E_CLASS_STATE_KARATEA,      // Bipedal
+        // Rocky Road // Monopede
+        E_ROCKYROAD_STATE_ROCKYROAD,
+        E_ROCKYROAD_STATE_MINTCHOPCHIP, //=10,
+        E_ROCKYROAD_STATE_COOKIECRUNCH,
+        E_ROCKYROAD_STATE_RAINBOWWARRIOR,
 
-        E_CLASS_BASE_STATE_COUNT,
+        E_ROCKYROAD_BASE_ROCKYROAD_COUNT,
+    }
 
-        E_CLASS_STATE_CHRISCHERRYCONE,  // Monopede
-        E_CLASS_STATE_PRINCETORTE,      // Monopede GATEAUX
-        E_CLASS_STATE_CAUILILION,       // Quadruped
-        E_CLASS_STATE_ROCKMELOMON,      // Bipedal
-        E_CLASS_STATE_COFFIN,           // Bipedal
+    public enum E_PRINCESSCAKE_STATE
+    {
+        // Princess Cake // Monopede
+        E_PRINCESSCAKE_STATE_PRINCESSCAKE,
+        E_PRINCESSCAKE_STATE_PATTYCAKE,
+        //E_PRINCESSCAKE_STATE_PRINCETORTE,
+        //E_PRINCESSCAKE_STATE_PRINCEGATEAUX,
 
-        E_CLASS_ALT_STATE_COUNT,
+        E_PRINCESSCAKE_BASE_PRINCESSCAKE_COUNT,
+    }
+
+    public enum E_CHEESYPIZZA_STATE
+    {
+        // Cheesy Pizza // Monopede
+        E_CHEESYPIZZA_STATE_CHEESYPIZZA,
+        //E_CHEESYPIZZA_STATE_GREASYPIZZA,
+        //E_CHEESYPIZZA_STATE_CHEESYPASTA,
+        //E_CHEESYPIZZA_STATE_GREASYPASTA,
+
+        E_CHEESYPIZZA_BASE_CHEESYPIZZA_COUNT,
+    }
+
+    public enum E_BASE_CLASS_STATE
+    {
+        /// <summary>
+        /// Classes must have an even amount of skins per base class. i.e. 2, 4, 6 etc.
+        /// Base classes: Rocky Road, Princess Cake, Cheesy Pizza
+        /// </summary>
+        E_BASE_CLASS_STATE_ROCKYROAD,
+        E_BASE_CLASS_STATE_PRINCESSCAKE,
+        E_BASE_CLASS_STATE_CHEESYPIZZA,
+
+        // Counts
+        E_BASE_CLASS_STATE_BASE_COUNT,
+        //E_CLASS_BASE_ROCKYROAD_COUNT = E_ROCKYROAD_STATE.E_ROCKYROAD_BASE_ROCKYROAD_COUNT,
+        E_BASE_CLASS_BASE_PRINCESSCAKE_COUNT = E_ROCKYROAD_STATE.E_ROCKYROAD_BASE_ROCKYROAD_COUNT + E_PRINCESSCAKE_STATE.E_PRINCESSCAKE_BASE_PRINCESSCAKE_COUNT,
+        E_BASE_CLASS_BASE_CHEESYPIZZA_COUNT = E_BASE_CLASS_BASE_PRINCESSCAKE_COUNT + E_CHEESYPIZZA_STATE.E_CHEESYPIZZA_BASE_CHEESYPIZZA_COUNT,
+        E_BASE_CLASS_STATE_TOTAL_COUNT = E_ROCKYROAD_STATE.E_ROCKYROAD_BASE_ROCKYROAD_COUNT + E_PRINCESSCAKE_STATE.E_PRINCESSCAKE_BASE_PRINCESSCAKE_COUNT,
+        
     };
-    public abstract E_CLASS_STATE eCurrentClassState { get; set; }
+    public abstract E_BASE_CLASS_STATE eCurrentBaseClassState { get; set; }
     //public PlayerController.E_CLASS_STATE eCurrentClassState { get; set; }
     #endregion
 
@@ -197,7 +230,7 @@ public abstract class PlayerBuild : ScriptableObject
         eCurrentBossState = E_BOSS_STATE.E_BOSS_STATE_NEUTRAL;
         // invalidating the data
         eCurrentBuildState = E_BUILD_STATE.E_BUILD_STATE_COUNT;
-        eCurrentClassState = E_CLASS_STATE.E_CLASS_ALT_STATE_COUNT;
+        eCurrentBaseClassState = E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_BASE_COUNT;
 
         fMovementSpeed = new float[PLAYER_STATES];
         fAttackLight = new float[PLAYER_STATES];

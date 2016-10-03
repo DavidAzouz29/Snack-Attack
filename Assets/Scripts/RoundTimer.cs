@@ -1,11 +1,16 @@
-﻿using UnityEngine;
+﻿///<summary>
+///
+/// Timer selectable - David Azouz 1/10/16
+/// </summary>
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
 public class RoundTimer : MonoBehaviour {
 
-    public float m_TimePerRound = 60.0f;
+    //public float m_TimePerRound = 60.0f;
 
     [SerializeField]
     private float m_TimeRemaining;
@@ -30,8 +35,12 @@ public class RoundTimer : MonoBehaviour {
         m_PlayerManager = FindObjectOfType<PlayerManager>();
         m_PlayerSpawns = FindObjectOfType<SpawnManager>().m_PlayerSpawns;
 
-        m_TimeRemaining = m_TimePerRound;
+        m_TimeRemaining = 60.0f;
+    }
 
+    void OnLevelWasLoaded()
+    {
+        m_TimeRemaining = GameSettings.Instance.iRoundTimerChoice;
     }
 
     void Update()

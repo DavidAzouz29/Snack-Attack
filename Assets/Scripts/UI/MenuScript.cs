@@ -13,9 +13,10 @@
 /// - Credits added					- David Azouz 12/04/16
 /// - Player and Level Select added	- David Azouz 9/08/16
 /// - Per Player U.I. Navigation (Player Select) - David Azouz 27/08/16
+/// - Clean up - David Azouz 1/10/16
 /// - 
 /// TODO:
-/// - get rid of isPlayerSelect etc
+/// - 
 /// </summary>
 
 using UnityEngine;
@@ -37,22 +38,10 @@ public class MenuScript : MonoBehaviour
 	//----------------------------------
     // PRIVATE VARIABLES //TODO: delete?
     //----------------------------------
-    private bool isPlayerSelect = false;
-    private bool isLevelSelect = false;
-    private bool isControls = false;
-    private bool isCredits = false;
-
     private int iLevelSelection = 0;
-    private int iTimeSelection = 0;
-
-    // Use this for initialization
-    /*void Start ()
-    {
-		
-	} */
 
     // Update is called once per frame
-    void Update ()
+    /*void Update ()
     {
         // If 'C' is pressed...
         if(Input.GetKeyUp(KeyCode.C))
@@ -61,7 +50,7 @@ public class MenuScript : MonoBehaviour
             ToggleControlsView();
             //Debug.Log("isCon: " + isControls);
         }
-	}
+	} */
 
     #region Panels
     /// <summary>
@@ -79,8 +68,6 @@ public class MenuScript : MonoBehaviour
     /// </summary>
     public void TogglePlayerSelect()
     {
-        // toggle Player Select true/ false
-        //isPlayerSelect = !isPlayerSelect;
         // set the Player Select panel on/ off
 		playerSelectPanel.SetActive(!playerSelectPanel.activeSelf); //isPlayerSelect
     }
@@ -92,8 +79,6 @@ public class MenuScript : MonoBehaviour
     /// </summary>
     public void ToggleLevelSelect()
     {
-        // toggle Level Select true/ false
-        //isLevelSelect = !isLevelSelect;
         // set the Level Select panel on/ off
 		levelSelectPanel.SetActive(!levelSelectPanel.activeSelf);
     }
@@ -105,8 +90,6 @@ public class MenuScript : MonoBehaviour
     ///-----------------------------------
     public void ToggleControlsView()
     {
-        // toggle controls true/ false
-        //isControls = !isControls;
         // set the controls panel on/ off
 		controlsPanel.SetActive(!controlsPanel.activeSelf);
     }
@@ -118,8 +101,6 @@ public class MenuScript : MonoBehaviour
     ///-----------------------------------
     public void ToggleCreditsView()
     {
-        // toggle credits true/ false
-        isCredits = !isCredits;
         // set the credits panel on/ off
 		creditsPanel.SetActive(!creditsPanel.activeSelf);
     }
@@ -136,32 +117,38 @@ public class MenuScript : MonoBehaviour
         SceneManager.LoadScene(iLevelSelection);
     }
 
+    // 
+    public int GetLevelSelection()
+    {
+        return iLevelSelection;
+    }
+
     // Selects time duration for a round
-    public void TimerSelection(int a_time)
+    public void SetTimerSelection(int a_time)
     {
         switch (a_time)
         {
             // One minute
             case 0:
                 {
-                    iTimeSelection = 60;
+                    GameSettings.Instance.SetRoundTimer(60);
                     break;
                 }
             // Three Minutes
             case 1:
                 {
-                    iTimeSelection = 180; Debug.Log("MS.cs Time Sel: " + iTimeSelection);
+                    GameSettings.Instance.SetRoundTimer(180); Debug.Log("MS.cs Time Sel: " + GameSettings.Instance.iRoundTimerChoice);
                     break;
                 }
             // Five Minutes
             case 2:
                 {
-                    iTimeSelection = 350;
+                    GameSettings.Instance.SetRoundTimer(350);
                     break;
                 }
             default:
                 {
-                    iTimeSelection = 60;
+                    GameSettings.Instance.SetRoundTimer(60);
                     break;
                 }
         }

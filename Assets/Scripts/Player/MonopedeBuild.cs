@@ -27,25 +27,25 @@ public class MonopedeBuild : PlayerBuild
 {
     //
     public override E_BUILD_STATE eCurrentBuildState { get; set; }
-    public override E_CLASS_STATE eCurrentClassState { get; set; }
+    public override E_BASE_CLASS_STATE eCurrentBaseClassState { get; set; }
     public override E_BOSS_STATE eCurrentBossState { get; set; }
 
     //
     public override void Initialize(GameObject obj)
     {
         // We list only the Monopede build character names
-        switch (eCurrentClassState)
+        switch (eCurrentBaseClassState)
         {
-            case E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
+            case E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
                 {
                     aName = "RockyRoad";
-                    c_PlayerIcon = c_PlayerIcons[(int)E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD];
+                    c_PlayerIcon = c_PlayerIcons[(int)E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD];
                     break;
                 }
-            case E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE:
+            case E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
                 {
                     aName = "PrincessCake";
-                    c_PlayerIcon = c_PlayerIcons[(int)E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE];
+                    c_PlayerIcon = c_PlayerIcons[(int)E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE];
                     break;
                 }
         }
