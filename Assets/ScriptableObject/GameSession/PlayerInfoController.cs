@@ -6,14 +6,15 @@ public class PlayerInfoController : MonoBehaviour
 	public int PlayerIndex;
 	public UnityEngine.UI.Button PlayerColor;
 	public UnityEngine.UI.Text c_PlayerBrain;
-    public GameSettings m_ActiveGameSettings;
+    [SerializeField] private GameSettings m_ActiveGameSettings;
 
-    private MainMenuController _mainMenu;
+    //private MainMenuController _mainMenu;
 	private GameSettings.PlayerInfo _player;
 	public void Awake()
 	{
-		_mainMenu = GetComponentInParent<MainMenuController>();
-	}
+		//_mainMenu = GetComponentInParent<MainMenuController>();
+        m_ActiveGameSettings = GetComponentInParent<MainMenuController>().GameSettingsTemplate;
+    }
 
 	public void Refresh()
 	{
@@ -30,11 +31,11 @@ public class PlayerInfoController : MonoBehaviour
 
     }
 
-	public void OnCycleColor()
+	/*public void OnCycleColor()
 	{
 		_player.Color = _mainMenu.GetNextColor(_player.Color);
 		Refresh();
-	}
+	} */
 
     // Left
     public void OnPreviousBrain()

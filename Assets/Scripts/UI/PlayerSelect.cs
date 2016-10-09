@@ -41,6 +41,7 @@ public class PlayerSelect : MonoBehaviour
     // Mesh, MeshRenderer, and Animation
     // ------------------
     public GameObject[] c_Characters = new GameObject[MAX_CLASS_COUNT];
+    public GameObject c_eventSystems;
 
     // For which player
     [SerializeField] private int[] iCurrentClassSelection = new int[PlayerManager.MAX_PLAYERS];
@@ -208,5 +209,46 @@ public class PlayerSelect : MonoBehaviour
 
         characterSlot.transform.rotation = c_currChar.transform.rotation;
         characterSlot.transform.localScale = c_currChar.transform.localScale;
+    }
+
+    public void PlayerSelectPanel(bool isActive)
+    {
+        // toggle the PS panel on/ off
+        if (!gameObject.activeSelf && isActive)
+        {
+            this.gameObject.SetActive(true);
+        }
+
+        // Player Select Panel is turned off
+        /*if (!isActive)
+        {
+            c_eventSystems.transform.GetChild(c_eventSystems.transform.childCount - 1).gameObject.SetActive(true);
+            // Set the Selected GameObject in the Event System.
+            // Due to "back to main menu" and "forward to level select"
+        }
+        else
+        {
+            // turn the main event system off if we're in the PS
+            c_eventSystems.transform.GetChild(c_eventSystems.transform.childCount - 1).gameObject.SetActive(false);
+        }*/
+
+        // Player Select Panel is turned on/ off
+        for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+        {
+            GameObject go = c_eventSystems.transform.GetChild(i).gameObject;
+            go.SetActive(isActive);
+            // if PS is turned on
+            if (go.activeSelf)
+            {
+                go.GetComponent<MyEventSystem>().SetSelectedGameObject(
+                transform.GetChild(0).GetChild(i).GetChild(1).GetChild(1).gameObject);
+            }
+        }
+
+        if (!isActive)
+        {
+            gameObject.SetActive(false);
+        }
+
     }
 }

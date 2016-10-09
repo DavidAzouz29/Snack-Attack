@@ -31,7 +31,7 @@ public class GameSettings : ScriptableObject
 				if (!_cachedBrain && !String.IsNullOrEmpty(BrainName))
 				{
                     // TODO: get rid of hack
-					_cachedBrain = Instance.availableBrains.FirstOrDefault(b => b.name == BrainName);
+					//_cachedBrain = Instance.availableBrains.FirstOrDefault(b => b.name == BrainName);
 				}
 				return _cachedBrain;
 			}
