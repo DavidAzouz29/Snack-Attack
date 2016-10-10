@@ -5,25 +5,52 @@ using System.Collections;
 public class WindowManager : MonoBehaviour {
 
 	public GameObject scoreBoard;
+	public GameObject c_TimesUpRay;
+	public GameObject c_TimesUpText;
+    public float fScoreboardDelay = 1.0f;
 
 	// Use this for initialization
 	void Start () {
         // turns the scoreboard off during playtime.
         scoreBoard.SetActive(true);
+        c_TimesUpRay.SetActive(true);
+        c_TimesUpText.SetActive(true);
         scoreBoard.SetActive(false);
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        c_TimesUpRay.SetActive(false);
+        c_TimesUpText.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
-        if (Time.timeScale == 0)
+		if(Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.JoystickButton6))
         {
-            scoreBoard.SetActive(true);
-        }
-		if(Input.GetKeyDown(KeyCode.Tab)) {
 			scoreBoard.SetActive( !scoreBoard.activeSelf );
-		}
+            if (scoreBoard.activeSelf)
+            {
+                Time.timeScale = 0.01f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
+        }
 	}
+    
+    public void TimesUp()
+    {
+        Time.timeScale = 1f;
+        c_TimesUpRay.SetActive(true);
+        c_TimesUpText.SetActive(true);
+        Invoke("ScoreboardEndGame", fScoreboardDelay);
+    }
+
+    void ScoreboardEndGame()
+    {
+        c_TimesUpRay.SetActive(false);
+        c_TimesUpText.SetActive(false);
+        scoreBoard.SetActive(true);
+    }
 
     public void Replay()
     {
@@ -32,20 +59,9 @@ public class WindowManager : MonoBehaviour {
         Time.timeScale = 1.0f;
     }
 
-    public void Quit()
+    public void QuitToMenu()
     {
-        //SceneManager.
-        Debug.Log("Quit");
-        //If we are running in a standalone build of the game
-#if UNITY_STANDALONE
-        //Quit the application
-        Application.Quit();
-#endif
-
-        //If we are running in the editor
-#if UNITY_EDITOR
-        //Stop playing the scene
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1.0f;
     }
 }

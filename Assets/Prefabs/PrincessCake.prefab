@@ -349,6 +349,7 @@ GameObject:
   - 114: {fileID: 11497748}
   - 65: {fileID: 6538442}
   - 136: {fileID: 13667634}
+  - 114: {fileID: 114000012991333766}
   m_Layer: 0
   m_Name: PrincessCake
   m_TagString: Player
@@ -780,7 +781,7 @@ MonoBehaviour:
   m_eCurrentPlayerState: 0
   m_eCurrentClassState: 0
   isOnGround: 0
-  fJumpForce: 5
+  fJumpForce: 12
   fGravity: 9.8
   m_playerID: 0
 --- !u!114 &11435424
@@ -2601,6 +2602,44 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114000012991333766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02786f7aaf5691641883d5702139a2ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreAttacksFrom: []
+  BossDropThreshold: c80000008400000042000000
+  m_BlobsToDrop: 030000000200000001000000
+  m_PowerToGive: 050000000a0000000f00000014000000
+  m_PowerLevelScale:
+  - 1.5
+  - 1
+  - 0.75
+  m_CurrentThreshold: 0
+  m_Power: 0
+  m_PowerMax: 150
+  m_Updated: 0
+  m_Knockback: 250
+  m_EmissionThreshold: 0
+  m_ModelMeshRenderers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_Threshold: 0
+  m_TransitionState: 0
+  m_SpawnableBlob: {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
+  m_BlobsCreated: []
+  blobsArray:
+  - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
+  - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
+  - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
+  - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
 --- !u!114 &114000013423421516
 MonoBehaviour:
   m_ObjectHideFlags: 1

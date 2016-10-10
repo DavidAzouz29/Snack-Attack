@@ -7,11 +7,12 @@ using System.Linq;
 [CreateAssetMenu(menuName= "Brains/Snack Brain", order =0)]
 public abstract class SnackBrain : ScriptableObject
 {
+    protected Color Color;
     // Unique per base class
     protected Animator characterAnimator;
     protected SkinnedMeshRenderer characterSkinnedRenderer;
 
-    protected Color Color;
+    // 
 
     //public virtual void Initialize(SnackThinker snack) { } //base.Initialize(snack);
     public abstract void InitializeBase(SnackThinker snack);

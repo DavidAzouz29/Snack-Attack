@@ -95,7 +95,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             else if (i == 1)
             {
                 r_Player = r_Player_2;
-				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
+				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE;
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.blue;
             }
             else if (i == 2)
@@ -107,7 +107,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             else if (i == 3)
             {
                 r_Player = r_Player_4; //TODO: r_Player = r_PlayerKaraTea;
-                playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
+                playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE;
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = new Color(0.4f, 0.18f, 0.58f);
             }
 

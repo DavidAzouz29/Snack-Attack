@@ -277,9 +277,9 @@ public class BossBlobs : MonoBehaviour
                     m_SpawnableBlob = blobsArray[2];
                     break;
                 }
-            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_KARATEA:
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE:
                 {
-                    m_SpawnableBlob = blobsArray[0];
+                    m_SpawnableBlob = blobsArray[1];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
@@ -306,6 +306,7 @@ public class BossBlobs : MonoBehaviour
                     int a = i * (360 / m_Blobs.BigDrop);
                     _curBlob = (GameObject)Instantiate(m_SpawnableBlob, BlobSpawn(a), Quaternion.identity);
                     _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.BigPower;
+                    _curBlob.transform.rotation = Random.rotation;
                     m_BlobsCreated.Add(_curBlob);
                 }
                 // Apply Explosion
@@ -335,6 +336,7 @@ public class BossBlobs : MonoBehaviour
                     int a = i * (360 / m_Blobs.RegularDrop);
                     _curBlob = (GameObject)Instantiate(m_SpawnableBlob, BlobSpawn(a), Quaternion.identity);
                     _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.RegularPower;
+                    _curBlob.transform.rotation = Random.rotation;
                     m_BlobsCreated.Add(_curBlob);
                 }
                 // Apply Explosion
@@ -365,6 +367,7 @@ public class BossBlobs : MonoBehaviour
                     int a = i * (360 / m_Blobs.RegularDrop);
                     _curBlob = (GameObject)Instantiate(m_SpawnableBlob, BlobSpawn(a), Quaternion.identity);
                     _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.RegularPower;
+                    _curBlob.transform.rotation = Random.rotation;
                     m_BlobsCreated.Add(_curBlob);
                 }
                 // Apply Explosion

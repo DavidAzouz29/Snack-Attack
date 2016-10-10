@@ -35,7 +35,7 @@ public class RoundTimer : MonoBehaviour {
         m_PlayerManager = FindObjectOfType<PlayerManager>();
         m_PlayerSpawns = FindObjectOfType<SpawnManager>().m_PlayerSpawns;
 
-        m_TimeRemaining = 60.0f;
+        m_TimeRemaining = 180.0f;
     }
 
     void OnLevelWasLoaded()
@@ -53,10 +53,16 @@ public class RoundTimer : MonoBehaviour {
         if(m_RoundStarted)
         {
             m_TimeRemaining -= Time.deltaTime;
+            // Time's up and Scoreboard
             if (m_TimeRemaining <= 0.0f)
             {
                 m_RoundStarted = false;
-                Time.timeScale = 0.0f;
+                for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+                {
+                    m_PlayerManager.GetPlayer(0).GetComponent<PlayerController>().enabled = false;
+                }
+                m_Window.GetComponent<WindowManager>().TimesUp();
+                Time.timeScale = 0.5f;
             }
             else if(!m_Spawned)
             {

@@ -60,6 +60,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r_PlayerManager: {fileID: 0}
+  m_StartDelay: 3
+  m_EndDelay: 3
+  m_CameraControl: {fileID: 0}
+  m_MessageText: {fileID: 0}
+  m_SnackPrefab: {fileID: 0}
+  SpawnPoints: []
+  m_ActiveGameSettings: {fileID: 11400000, guid: 5388f55cf06f78246ba003654a5839ae,
+    type: 2}
 --- !u!114 &11440896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -72,9 +80,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r_Player_1: {fileID: 107578, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
-  r_Player_2: {fileID: 107578, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
+  r_Player_2: {fileID: 196634, guid: 44129389ab83a014390464a27ee9f7f1, type: 2}
   r_Player_3: {fileID: 107578, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
-  r_Player_4: {fileID: 107578, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
+  r_Player_4: {fileID: 196634, guid: 44129389ab83a014390464a27ee9f7f1, type: 2}
   r_Players:
   - {fileID: 0}
   - {fileID: 0}
@@ -84,9 +92,9 @@ MonoBehaviour:
   r_PlayerController: {fileID: 0}
   blobArray:
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
+  - {fileID: 137888, guid: 14130ff4c68bc214e8265694a6158660, type: 2}
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
-  - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
-  - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
+  - {fileID: 137888, guid: 14130ff4c68bc214e8265694a6158660, type: 2}
   m_LightAttack: 0
   m_HeavyAttack: 0
   c_ColPlayer2: {r: 0.27930364, g: 0.54228014, b: 0.9044118, a: 1}
@@ -96,7 +104,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147054}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a38d93fbb21cdf41911aaf39ce72b1d, type: 3}
   m_Name: 
@@ -131,14 +139,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a86d698baa9bf6438183b16356d8632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TimePerRound: 300
   m_TimeRemaining: 0
   m_RoundCountdownTime: 5
   m_Players:
   - {fileID: 0}
-  - {fileID: 118960, guid: 75eb26eef60e91146acc81bd6fcb688e, type: 2}
-  - {fileID: 199350, guid: a0db3c4eb6e028a42ad09b9f2573921d, type: 2}
-  - {fileID: 118960, guid: 75eb26eef60e91146acc81bd6fcb688e, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_PlayerManager: {fileID: 0}
   m_Window: {fileID: 0}
 --- !u!1001 &100100000

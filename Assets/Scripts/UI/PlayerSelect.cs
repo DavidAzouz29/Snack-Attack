@@ -187,9 +187,9 @@ public class PlayerSelect : MonoBehaviour
             characterSlot = transform.GetChild(0).GetChild(a_player).GetChild(2).gameObject;
             transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject.SetActive(false);
         }
-        // Cheesy Pizza
+        // Pizza Punk
         else if (//iCurrentClassSelection[a_player] >= (int)PlayerBuild.E_CLASS_STATE.E_CLASS_BASE_PRINCESSCAKE_COUNT &&
-            iCurrentClassSelection[a_player] < (int)PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_BASE_CHEESYPIZZA_COUNT)
+            iCurrentClassSelection[a_player] < (int)PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_BASE_PIZZAPUNK_COUNT)
         {
             // TODO: get child 3 // Set Child 2 to Inactive ^ same for others
             if (!transform.GetChild(0).GetChild(a_player).GetChild(2).gameObject.activeInHierarchy)
