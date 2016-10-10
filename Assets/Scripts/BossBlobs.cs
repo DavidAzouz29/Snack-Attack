@@ -39,7 +39,7 @@ public class BossBlobs : MonoBehaviour
     private float m_EmissionTimer;
     private bool m_EmissionTimerEnabled;
     public float m_EmissionThreshold;
-    public List<SkinnedMeshRenderer> m_ModelMeshRenderers;
+    public SkinnedMeshRenderer[] m_ModelMeshRenderers;
 
     public enum Thresholds
     {
@@ -103,10 +103,28 @@ public class BossBlobs : MonoBehaviour
         r_PlayerMan = FindObjectOfType<PlayerManager>();
         r_PlayerCon = GetComponent<PlayerController>();
         blobsArray = r_PlayerMan.GetBlobArray();
-        m_EmissionColor = new Color(0.3f, 0.6f, 0.6f);
+
+
+        //Material Caching
+
+        gameObject.transform.FindChild("Boss").gameObject.SetActive(true);
+        gameObject.transform.FindChild("Neut").gameObject.SetActive(true);
+        gameObject.transform.FindChild("Weak").gameObject.SetActive(true);
+
+        m_ModelMeshRenderers = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+        for (int i = 0; i < m_ModelMeshRenderers.Length; i++ )
+        {
+            m_ModelMeshRenderers[i].material.GetType();
+        }
+
+        gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
+        gameObject.transform.FindChild("Neut").gameObject.SetActive(true);
+        gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
+
+        m_EmissionColor = new Color(0.35f, 0f, 0f);
         m_EmissionTimer = 0f;
         m_EmissionTimerEnabled = false;
-        m_EmissionThreshold = 2f;
+        m_EmissionThreshold = 0.5f;
     }
 
     void InitializeStruct()
@@ -140,10 +158,12 @@ public class BossBlobs : MonoBehaviour
             m_EmissionTimer += Time.deltaTime;
         if (m_EmissionTimer > m_EmissionThreshold)
         {
-            for (int i = 0; i < m_ModelMeshRenderers.Count; i++)
+            for (int i = 0; i < m_ModelMeshRenderers.Length; i++)
             {
                 m_ModelMeshRenderers[i].material.SetColor("_EmissionColor", Color.black);
             }
+            m_EmissionTimerEnabled = false;
+            m_EmissionTimer = 0f;
         }
     }
 
@@ -300,6 +320,7 @@ public class BossBlobs : MonoBehaviour
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
+                //m_ModelMeshRenderers = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
 
                 m_TransitionState = TransitionState.NEUT;
                 m_CurrentThreshold = m_Blobs.RegularThresh;
@@ -327,6 +348,7 @@ public class BossBlobs : MonoBehaviour
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(true);
                 gameObject.transform.FindChild("Weak").gameObject.GetComponent<Animator>().SetBool("Boss", false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
+                //m_ModelMeshRenderers = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
 
                 m_TransitionState = TransitionState.WEAK;
                 m_CurrentThreshold = m_Blobs.SmallThresh;
@@ -417,15 +439,16 @@ public class BossBlobs : MonoBehaviour
     public void ApplyDamage(Collider _col)
     {
         //Apply Emmision Map
-        Debug.Log("Model renderers " + m_ModelMeshRenderers.Count);
-        for (int i = 0; i < m_ModelMeshRenderers.Count; i++)
+        for (int i = 0; i < m_ModelMeshRenderers.Length; i++)
         {
             m_ModelMeshRenderers[i].material.SetColor("_EmissionColor", m_EmissionColor);
         }
+        m_EmissionTimerEnabled = true;
 
         //Apply Knockback
         Vector3 Dir = _col.GetComponent<PlayerCollision>().m_ParentTransform.position - gameObject.transform.position;
         gameObject.GetComponent<Rigidbody>().AddForce(Dir.normalized * -m_Knockback);
+        gameObject.GetComponent<PlayerAnims>().m_Anim.SetTrigger("Hit");
 
         //Apply Damage
         m_Power = m_Power - _col.gameObject.GetComponent<PlayerCollision>().damage; // Power - Damage recieved
