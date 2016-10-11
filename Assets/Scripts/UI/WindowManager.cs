@@ -23,7 +23,7 @@ public class WindowManager : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-		if(Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.JoystickButton6))
+		if(Input.GetKeyDown(KeyCode.Tab) || Input.GetButton("Pause"))
         {
 			scoreBoard.SetActive( !scoreBoard.activeSelf );
             if (scoreBoard.activeSelf)

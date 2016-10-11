@@ -38,7 +38,7 @@ public class MenuScript : MonoBehaviour
 	//----------------------------------
     // PRIVATE VARIABLES //TODO: delete?
     //----------------------------------
-    private int iLevelSelection = 0;
+    private int iLevelSelection = 1;
 
     // Update is called once per frame
     /*void Update ()
@@ -121,37 +121,6 @@ public class MenuScript : MonoBehaviour
     public int GetLevelSelection()
     {
         return iLevelSelection;
-    }
-
-    // Selects time duration for a round
-    public void SetTimerSelection(int a_time)
-    {
-        switch (a_time)
-        {
-            // One minute
-            case 0:
-                {
-                    GameSettings.Instance.SetRoundTimer(60);
-                    break;
-                }
-            // Three Minutes
-            case 1:
-                {
-                    GameSettings.Instance.SetRoundTimer(180); Debug.Log("MS.cs Time Sel: " + GameSettings.Instance.iRoundTimerChoice);
-                    break;
-                }
-            // Five Minutes
-            case 2:
-                {
-                    GameSettings.Instance.SetRoundTimer(350);
-                    break;
-                }
-            default:
-                {
-                    GameSettings.Instance.SetRoundTimer(60);
-                    break;
-                }
-        }
     }
 
     // If the player wants to play again, reload the currently loaded level.

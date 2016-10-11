@@ -267,9 +267,14 @@ public class BossBlobs : MonoBehaviour
                     m_SpawnableBlob = blobsArray[0];
                     break;
                 }
-            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE:
                 {
                     m_SpawnableBlob = blobsArray[1];
+                    break;
+                }
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PIZZAPUNK:
+                {
+                    m_SpawnableBlob = blobsArray[2];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
@@ -277,14 +282,14 @@ public class BossBlobs : MonoBehaviour
                     m_SpawnableBlob = blobsArray[2];
                     break;
                 }
-            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE:
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
                 {
                     m_SpawnableBlob = blobsArray[1];
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
                 {
-                    m_SpawnableBlob = blobsArray[3];
+                    m_SpawnableBlob = blobsArray[2];
                     //shot.GetComponent<MeshRenderer>().material.mainTexture = r_Coli;
                     //shot.GetComponent<MeshRenderer>().material.SetColor("_SpecColor", Color.white);
                     break;

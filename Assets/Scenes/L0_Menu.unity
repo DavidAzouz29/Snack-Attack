@@ -481,6 +481,7 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 0}
+  c_TrailRenderer: {fileID: 0}
 --- !u!135 &157613099
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -738,6 +739,7 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 0}
+  c_TrailRenderer: {fileID: 0}
 --- !u!1 &211087642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,6 +1132,7 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 0}
+  c_TrailRenderer: {fileID: 0}
 --- !u!135 &311975530
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1714,6 +1717,7 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 0}
+  c_TrailRenderer: {fileID: 0}
 --- !u!1 &492886068
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,6 +2410,7 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 0}
+  c_TrailRenderer: {fileID: 0}
 --- !u!135 &702110661
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2481,6 +2486,7 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 0}
+  c_TrailRenderer: {fileID: 0}
 --- !u!1 &725390565
 GameObject:
   m_ObjectHideFlags: 0
@@ -2701,6 +2707,7 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 0}
+  c_TrailRenderer: {fileID: 0}
 --- !u!135 &773975792
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2792,6 +2799,7 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 0}
+  c_TrailRenderer: {fileID: 0}
 --- !u!135 &783656247
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3042,6 +3050,7 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 0}
+  c_TrailRenderer: {fileID: 0}
 --- !u!135 &856805451
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3216,6 +3225,48 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!1001 &908080416
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000010620411994, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010620411994, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010620411994, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010620411994, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010620411994, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010620411994, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010620411994, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010620411994, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &913093013
 GameObject:
   m_ObjectHideFlags: 0
@@ -4866,6 +4917,16 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012876767962, guid: 47ee762f1b5e089499c81138ee56d8a3,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012876767962, guid: 47ee762f1b5e089499c81138ee56d8a3,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetTimerSelection
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
@@ -7589,6 +7650,7 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 0}
+  c_TrailRenderer: {fileID: 0}
 --- !u!1 &1740658024
 GameObject:
   m_ObjectHideFlags: 0
@@ -7933,6 +7995,7 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 0}
+  c_TrailRenderer: {fileID: 0}
 --- !u!135 &1827580483
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8365,6 +8428,7 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 0}
+  c_TrailRenderer: {fileID: 0}
 --- !u!135 &2012530848
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@
 /// </summary>
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -28,17 +29,15 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
 	[Header("Hold Players")]
     public const uint MAX_PLAYERS = 4;
     //Player referances
-    public GameObject r_Player_1;
-    public GameObject r_Player_2;
-    public GameObject r_Player_3;
-    public GameObject r_Player_4;
+    public GameObject r_Player_Rocky_1;
+    public GameObject r_Player_Princess_2;
+    public GameObject r_Player_Pizza_3;
 
     [SerializeField]
     GameObject[] r_Players = new GameObject[MAX_PLAYERS]; // Used for camera FOV
-    public CameraControl m_CameraControl;
     PlayerController[] uiPlayerConArray = new PlayerController[MAX_PLAYERS];
     public PlayerController r_PlayerController; // Referance to a player.
-    public GameObject[] blobArray = new GameObject[MAX_PLAYERS];
+    public GameObject[] blobArray = new GameObject[(int)PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_BASE_COUNT];
 
     [Header("Attack Damage")]
     public int m_LightAttack = 0;
@@ -50,21 +49,33 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     // PRIVATE VARIABLES
     //----------------------------------
     Vector3 v3PlayerPosition = Vector3.zero;
-    private GameObject r_Player;
+    private GameObject r_Player; // temp
 
     private List<GameObject> m_PlayerSpawns;
 
-    private SpawnManager m_SpawnManager;
 	private GameManager m_GameManager;
+    private SpawnManager m_SpawnManager;
+    private CameraControl m_CameraControl;
+
     // Use this for initialization
     void Start ()
     {
-        m_SpawnManager = FindObjectOfType<SpawnManager>();
 		m_GameManager = FindObjectOfType<GameManager>();
-        m_PlayerSpawns = m_SpawnManager.m_PlayerSpawns;
+        OnLevelWasLoaded();
     }
 
-	public GameObject GetPlayer(int i)
+    void OnLevelWasLoaded()
+    {
+        // Not the main menu
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            m_SpawnManager = FindObjectOfType<SpawnManager>();
+            m_PlayerSpawns = m_SpawnManager.m_PlayerSpawns;
+            m_CameraControl = FindObjectOfType<CameraControl>();
+        }
+    }
+
+    public GameObject GetPlayer(int i)
 	{
 		return r_Players [i];
 	}
@@ -88,25 +99,25 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             // if it's the first player, set them to character 'x', second to 'y' etc.
             if (i == 0)
             {
-                r_Player = r_Player_1;
+                r_Player = r_Player_Rocky_1;
 				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.red;
             }
             else if (i == 1)
             {
-                r_Player = r_Player_2;
+                r_Player = r_Player_Princess_2;
 				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE;
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.blue;
             }
             else if (i == 2)
             {
-                r_Player = r_Player_3;
+                r_Player = r_Player_Rocky_1;
 				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.green; //c_ColPlayer2
             }
             else if (i == 3)
             {
-                r_Player = r_Player_4; //TODO: r_Player = r_PlayerKaraTea;
+                r_Player = r_Player_Princess_2; //TODO: r_Player = r_PlayerKaraTea;
                 playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE;
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = new Color(0.4f, 0.18f, 0.58f);
             }

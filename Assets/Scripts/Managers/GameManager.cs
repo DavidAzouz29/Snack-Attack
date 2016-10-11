@@ -46,6 +46,21 @@ public class GameManager : MonoBehaviour
     private List<SnackThinker> m_Snacks;
 
     public GameSettings m_ActiveGameSettings;
+    void Awake()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            //GameManager[] go = FindObjectsOfType<GameManager>();
+            //if ()
+            //{
+                UnityEditor.PrefabUtility.ResetToPrefabState(this.gameObject);
+                DontDestroyOnLoad(this.gameObject);
+            //}
+            //SceneManager.MoveGameObjectToScene(this.gameObject,
+            //    SceneManager.GetSceneAt(FindObjectOfType<MenuScript>().GetLevelSelection()));
+        }
+    }
+
     void Start()
     {
         r_PlayerManager = FindObjectOfType<PlayerManager>();

@@ -7,7 +7,7 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 454762}
+  - 4: {fileID: 4000010620411994}
   - 114: {fileID: 11408802}
   - 114: {fileID: 11491296}
   - 114: {fileID: 11440896}
@@ -20,19 +20,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &454762
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147054}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1372154, y: 8.618087, z: -8.950476}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
 --- !u!54 &5426002
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -79,22 +66,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3018b43c077382546b330607ef477773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r_Player_1: {fileID: 107578, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
-  r_Player_2: {fileID: 196634, guid: 44129389ab83a014390464a27ee9f7f1, type: 2}
-  r_Player_3: {fileID: 107578, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
-  r_Player_4: {fileID: 196634, guid: 44129389ab83a014390464a27ee9f7f1, type: 2}
+  r_Player_Rocky_1: {fileID: 107578, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
+  r_Player_Princess_2: {fileID: 196634, guid: 44129389ab83a014390464a27ee9f7f1, type: 2}
+  r_Player_Pizza_3: {fileID: 107578, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
   r_Players:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  m_CameraControl: {fileID: 0}
   r_PlayerController: {fileID: 0}
   blobArray:
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   - {fileID: 137888, guid: 14130ff4c68bc214e8265694a6158660, type: 2}
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
-  - {fileID: 137888, guid: 14130ff4c68bc214e8265694a6158660, type: 2}
   m_LightAttack: 0
   m_HeavyAttack: 0
   c_ColPlayer2: {r: 0.27930364, g: 0.54228014, b: 0.9044118, a: 1}
@@ -147,7 +131,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_PlayerManager: {fileID: 0}
-  m_Window: {fileID: 0}
+  m_ScoreBoardWindow: {fileID: 0}
+  c_CountdownText: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -159,3 +144,16 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 147054}
   m_IsPrefabParent: 1
+--- !u!4 &4000010620411994
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147054}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0

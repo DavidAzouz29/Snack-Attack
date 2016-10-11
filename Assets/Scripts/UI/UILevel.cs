@@ -16,11 +16,12 @@ public class UILevel : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-		//r_text.GetComponentInChildren<Text>();
+        r_RoundTimer = FindObjectOfType<RoundTimer>();
+        //r_text.GetComponentInChildren<Text>();
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         SetClockText();
 
