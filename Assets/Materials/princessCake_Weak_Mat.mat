@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: princessCake_Weak_Mat
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: e5e72f8989a4a754db0ff9090d3d4b26, type: 3}
   m_ShaderKeywords: _EMISSION _NORMALMAP
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -101,6 +101,9 @@ Material:
         name: _OcclusionStrength
       second: 1
     - first:
+        name: _Outline
+      second: 0.005
+    - first:
         name: _Parallax
       second: 0.02
     - first:
@@ -124,4 +127,7 @@ Material:
       second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
+      second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _OutlineColor
       second: {r: 0, g: 0, b: 0, a: 1}

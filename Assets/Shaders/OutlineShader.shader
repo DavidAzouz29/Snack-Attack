@@ -232,7 +232,7 @@
 			Blend Zero One
 
 			// uncomment this to hide inner details:
-			//Offset -8, -8
+			Offset -8, -8
 
 			SetTexture[_OutlineColor]{
 			ConstantColor(0,0,0,0)
@@ -251,8 +251,8 @@
 			//Blend SrcAlpha OneMinusSrcAlpha // Normal
 			//Blend One One // Additive
 			Blend One OneMinusDstColor // Soft Additive
-									   //Blend DstColor Zero // Multiplicative
-									   //Blend DstColor SrcColor // 2x Multiplicative
+			//Blend DstColor Zero // Multiplicative
+			//Blend DstColor SrcColor // 2x Multiplicative
 
 			CGPROGRAM
 #pragma vertex vert
@@ -392,7 +392,7 @@
 			Blend Zero One
 
 			// uncomment this to hide inner details:
-			//Offset -8, -8
+			Offset -8, -8
 
 			SetTexture[_OutlineColor]{
 			ConstantColor(0,0,0,0)
@@ -411,8 +411,8 @@
 			//Blend SrcAlpha OneMinusSrcAlpha // Normal
 			//Blend One One // Additive
 			Blend One OneMinusDstColor // Soft Additive
-									   //Blend DstColor Zero // Multiplicative
-									   //Blend DstColor SrcColor // 2x Multiplicative
+			//Blend DstColor Zero // Multiplicative
+			//Blend DstColor SrcColor // 2x Multiplicative
 
 			CGPROGRAM
 #pragma vertex vert

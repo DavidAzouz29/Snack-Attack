@@ -66,6 +66,7 @@ public class BossBlobs : MonoBehaviour
     };
 
     public Blobs m_Blobs;
+    public int PlayerCounter = 0;
     //public UIBossLevel r_UIBoss;
 
     /*
@@ -83,6 +84,7 @@ public class BossBlobs : MonoBehaviour
     [SerializeField]
     private GameObject[] blobsArray = new GameObject[PlayerManager.MAX_PLAYERS];
     private bool m_Respawned = false;
+
 
     void Start()
     {
@@ -115,6 +117,25 @@ public class BossBlobs : MonoBehaviour
         for (int i = 0; i < m_ModelMeshRenderers.Length; i++ )
         {
             m_ModelMeshRenderers[i].material.GetType();
+            switch(PlayerCounter)
+            {
+                case 0:
+                    m_ModelMeshRenderers[i].material.SetColor("_OutlineColor", Color.red);
+                    break;
+                case 1:
+                    m_ModelMeshRenderers[i].material.SetColor("_OutlineColor", Color.blue);
+                    break;
+                case 2:
+                    m_ModelMeshRenderers[i].material.SetColor("_OutlineColor", Color.green);
+                    break;
+                case 3:
+                    m_ModelMeshRenderers[i].material.SetColor("_OutlineColor", new Color(0.4f, 0.18f, 0.58f));
+                    break;
+                default:
+                    break;
+            }
+            m_ModelMeshRenderers[i].material.SetFloat("_Outline", 0.0015f);
+
         }
 
         gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
