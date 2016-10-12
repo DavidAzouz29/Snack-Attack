@@ -102,24 +102,39 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
                 r_Player = r_Player_Rocky_1;
 				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.red;
+                //float[] temp = { Color.red.r, Color.red.g, Color.red.b, Color.red.a };
+                //if (r_Player.GetComponentInChildren<SkinnedMeshRenderer>().material.HasProperty("_OutlineColor"))
+                //{
+                //    Debug.Log("_OutlineColor");
+                //}
+                //if (r_Player.GetComponentInChildren<SkinnedMeshRenderer>().material.HasProperty("Outline Color"))
+                //{
+                //    Debug.Log("Outline Color");
+                //}
             }
             else if (i == 1)
             {
                 r_Player = r_Player_Princess_2;
 				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE;
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.blue;
+                //float[] temp = { Color.blue.r, Color.blue.g, Color.blue.b, Color.blue.a };
+                //r_Player.GetComponent<SkinnedMeshRenderer>().material.SetFloatArray("Outline Color", temp);
             }
             else if (i == 2)
             {
                 r_Player = r_Player_Rocky_1;
 				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
-                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.green; //c_ColPlayer2
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.green;
+                //float[] temp = { Color.green.r, Color.green.g, Color.green.b, Color.green.a };
+                //r_Player.GetComponent<SkinnedMeshRenderer>().material.SetFloatArray("Outline Color", temp);
             }
             else if (i == 3)
             {
                 r_Player = r_Player_Princess_2; //TODO: r_Player = r_PlayerKaraTea;
                 playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE;
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = new Color(0.4f, 0.18f, 0.58f);
+                //float[] temp = { 0.4f, 0.18f, 0.58f, 1 };
+                //r_Player.GetComponent<SkinnedMeshRenderer>().material.SetFloatArray("Outline Color", temp);
             }
 
             Object j = Instantiate(r_Player, m_PlayerSpawns[(int)i].transform.position, r_Player.transform.rotation);
