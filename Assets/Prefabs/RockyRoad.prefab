@@ -215,9 +215,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 491384}
-  - 135: {fileID: 13512982}
   - 114: {fileID: 11431678}
   - 96: {fileID: 96000012431457162}
+  - 136: {fileID: 136000010500430684}
   m_Layer: 0
   m_Name: TBodyType_Right_Wrist_JNT
   m_TagString: Weapon1
@@ -415,9 +415,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 463610}
-  - 135: {fileID: 13519914}
   - 114: {fileID: 11490560}
   - 96: {fileID: 96000012003106374}
+  - 136: {fileID: 136000011298155804}
   m_Layer: 0
   m_Name: TBodyType_Left_Wrist_JNT
   m_TagString: Weapon2
@@ -1609,30 +1609,6 @@ MonoBehaviour:
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 450434}
   c_TrailRenderer: {fileID: 0}
---- !u!135 &13512982
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128146}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0.2, y: -0, z: 0}
---- !u!135 &13519914
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157736}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: -0.3, y: -0, z: 0}
 --- !u!135 &13540822
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -2099,8 +2075,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012976223134}
   - 114: {fileID: 114000014053599226}
-  - 135: {fileID: 135000011127601740}
   - 96: {fileID: 96000010084761234}
+  - 136: {fileID: 136000013168154626}
   m_Layer: 0
   m_Name: TBodyType_Left_Fist_JNT
   m_TagString: Weapon2
@@ -2207,8 +2183,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010192206052}
   - 114: {fileID: 114000014271725874}
-  - 135: {fileID: 135000010031402284}
   - 96: {fileID: 96000013742697790}
+  - 136: {fileID: 136000010370297242}
   m_Layer: 0
   m_Name: TBodyType_Right_Fist_JNT
   m_TagString: Weapon1
@@ -3027,7 +3003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3095,8 +3071,8 @@ MonoBehaviour:
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 450434}
   c_TrailRenderer: {fileID: 0}
---- !u!135 &135000010031402284
-SphereCollider:
+--- !u!136 &136000010370297242
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -3104,11 +3080,38 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135000011127601740
-SphereCollider:
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!136 &136000010500430684
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128146}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 1.2
+  m_Direction: 1
+  m_Center: {x: 0.2, y: 0.3, z: 0}
+--- !u!136 &136000011298155804
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157736}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 1.2
+  m_Direction: 1
+  m_Center: {x: -0.2, y: -0.3, z: 0}
+--- !u!136 &136000013168154626
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -3116,9 +3119,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.6
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!137 &137000013171543794
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
