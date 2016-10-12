@@ -41,6 +41,7 @@ public class PlayerSelect : MonoBehaviour
     // Mesh, MeshRenderer, and Animation
     // ------------------
     public GameObject[] c_Characters = new GameObject[MAX_CLASS_COUNT];
+    public GameSettings c_GameSettings;
     public GameObject c_eventSystems;
 
     // For which player
@@ -49,7 +50,7 @@ public class PlayerSelect : MonoBehaviour
 	[SerializeField] bool[] playersConfirmed = new bool[PlayerManager.MAX_PLAYERS];
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
         for (int i = 0; i <= PlayerManager.MAX_PLAYERS - 1; ++i)
         {
@@ -164,7 +165,7 @@ public class PlayerSelect : MonoBehaviour
     {
         //UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(playerButtons.playerColsButton[a_player].coloumn[0].gameObject);
         // 
-        GameObject c_currChar = c_Characters[iCurrentClassSelection[a_player]];
+        SubClassBrain c_currChar = c_GameSettings.availableBrains[iCurrentClassSelection[a_player]];//c_Characters[iCurrentClassSelection[a_player]];
         GameObject characterSlot = null;
         // Rocky Road
         if (iCurrentClassSelection[a_player] < (int)PlayerBuild.E_ROCKYROAD_STATE.E_ROCKYROAD_BASE_ROCKYROAD_COUNT)
@@ -202,13 +203,13 @@ public class PlayerSelect : MonoBehaviour
 
         SkinnedMeshRenderer characterSkinnedRenderer = characterSlot.GetComponentInChildren<SkinnedMeshRenderer>();
         Animator characterAnimator = characterSlot.GetComponent<Animator>();
-        characterSkinnedRenderer.sharedMaterial = c_currChar.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial;
-        characterSkinnedRenderer.sharedMesh = c_currChar.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh;
-        characterAnimator.runtimeAnimatorController = c_currChar.GetComponent<Animator>().runtimeAnimatorController;
-        characterAnimator.avatar = c_currChar.GetComponent<Animator>().avatar;
+        characterSkinnedRenderer.sharedMaterial = c_currChar.GetMaterial(1);//GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial;
+        characterSkinnedRenderer.sharedMesh = c_currChar.GetStateMesh(1);// GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh;
+        characterAnimator.runtimeAnimatorController = c_currChar.GetAnimatorController(); //GetComponent<Animator>().runtimeAnimatorController;
+        characterAnimator.avatar = c_currChar.GetAnimatorAvatar();// GetComponent<Animator>().avatar;
 
-        characterSlot.transform.rotation = c_currChar.transform.rotation;
-        characterSlot.transform.localScale = c_currChar.transform.localScale;
+        characterSlot.transform.rotation = c_currChar._rotation; //transform.rotation;
+        characterSlot.transform.localScale = new Vector3(c_currChar._localScale, c_currChar._localScale, c_currChar._localScale); // transform.localScale;
     }
 
     public void PlayerSelectPanel(bool isActive)

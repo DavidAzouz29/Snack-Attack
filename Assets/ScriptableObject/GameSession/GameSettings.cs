@@ -52,7 +52,7 @@ public class GameSettings : ScriptableObject
 
 	public List<PlayerInfo> players;
 
-    public SnackBrain[] availableBrains;
+    public SubClassBrain[] availableBrains; //SnackBrain[]
 
     private static GameSettings _instance;
 	public static GameSettings Instance
