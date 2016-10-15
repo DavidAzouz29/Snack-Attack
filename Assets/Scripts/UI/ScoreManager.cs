@@ -15,8 +15,15 @@ public class ScoreManager : MonoBehaviour {
 	Dictionary< string, Dictionary<string, int> > playerScores;
 	int changeCounter = 0;
 
-	void Start() {
-
+	void Start()
+    {
+        for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+        {
+            //Player Setup
+            SetScore(GameSettings.Instance.players[i].ClassName, "kills", 0);
+            SetScore(GameSettings.Instance.players[i].ClassName, "deaths", 0);
+            SetScore(GameSettings.Instance.players[i].ClassName, "assists", 0);
+        }
     }
 
 	// Init this instance.
@@ -84,7 +91,7 @@ public class ScoreManager : MonoBehaviour {
 		return changeCounter;
 	}
 
-    public void PrototypeStartup()
+    /*public void PrototypeStartup()
     {
         for (int i = 0; i < 4; i++)
         {
@@ -93,6 +100,6 @@ public class ScoreManager : MonoBehaviour {
             SetScore("Player " + (i + 1), "deaths", 0);
             SetScore("Player " + (i + 1), "assists", 0);
         }
-    }
+    } */
 
 }

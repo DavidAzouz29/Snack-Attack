@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -7,6 +8,7 @@ public class WindowManager : MonoBehaviour {
 	public GameObject scoreBoard;
 	public GameObject c_TimesUpRay;
 	public GameObject c_TimesUpText;
+    public Button c_ReplayButton;
     public float fScoreboardDelay = 1.0f;
 
 	// Use this for initialization
@@ -23,12 +25,13 @@ public class WindowManager : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-		if(Input.GetKeyDown(KeyCode.Tab) || Input.GetButton("Pause"))
+		if(Input.GetKeyDown(KeyCode.Tab) || Input.GetButtonDown("Pause"))
         {
 			scoreBoard.SetActive( !scoreBoard.activeSelf );
             if (scoreBoard.activeSelf)
             {
                 Time.timeScale = 0.01f;
+                c_ReplayButton.Select();
             }
             else
             {
@@ -50,6 +53,7 @@ public class WindowManager : MonoBehaviour {
         c_TimesUpRay.SetActive(false);
         c_TimesUpText.SetActive(false);
         scoreBoard.SetActive(true);
+        c_ReplayButton.Select();
     }
 
     public void Replay()
@@ -61,7 +65,7 @@ public class WindowManager : MonoBehaviour {
 
     public void QuitToMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(Scene.Menu);
         Time.timeScale = 1.0f;
     }
 }

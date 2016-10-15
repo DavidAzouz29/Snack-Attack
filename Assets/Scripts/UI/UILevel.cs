@@ -10,6 +10,9 @@ public class UILevel : MonoBehaviour {
     [SerializeField]
     private Text c_timer;
 
+    [SerializeField]
+    private Image[] c_playerIcons = new Image[PlayerManager.MAX_PLAYERS];
+
     float m_Mins;
     float m_Secs;
 
@@ -18,6 +21,10 @@ public class UILevel : MonoBehaviour {
     {
         r_RoundTimer = FindObjectOfType<RoundTimer>();
         //r_text.GetComponentInChildren<Text>();
+        for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+        {
+            c_playerIcons[i].sprite = GameSettings.Instance.players[i].Brain.GetIcon();
+        }
     }
 
     // Update is called once per frame
@@ -36,6 +43,10 @@ public class UILevel : MonoBehaviour {
         if (m_Secs < 10.0f) // If seconds aren't in the 10s, display a 0 before the second.
         {
             c_timer.text = (m_Mins.ToString() + ":" + "0" + m_Secs.ToString());
+        }
+        else if (m_Secs <= 0.01f)
+        {
+            c_timer.text = "!!!!";
         }
     }
 }

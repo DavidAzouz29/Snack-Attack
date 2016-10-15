@@ -69,14 +69,26 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public enum E_CLASS_STATE
     {
-        E_CLASS_STATE_ROCKYROAD,
-        E_CLASS_STATE_PRINCESSCAKE,
+        //ROCKYROAD
+        E_CLASS_STATE_RR_ROCKYROAD,
+        E_CLASS_STATE_RR_MINTCHOPCHIP,
+        E_CLASS_STATE_RR_COOKIECRUNCH,
+        E_CLASS_STATE_RR_RAINBOWWARRIOR,
+
+        //PRINCESSCAKE
+        E_CLASS_STATE_PC_PRINCESSCAKE,
+        E_CLASS_STATE_PC_DUCHESSCAKE,
+        E_CLASS_STATE_PC_POUNDCAKE,
+        E_CLASS_STATE_PC_ANGELCAKE,
+
+        //PIZZAPUNK
         E_CLASS_STATE_PIZZAPUNK,
-        E_CLASS_STATE_WATERMELOMON,
-        E_CLASS_STATE_KARATEA,
-        E_CLASS_STATE_BROCCOLION,
-        E_CLASS_STATE_CAUILILION,
-        E_CLASS_STATE_ROCKMELOMON,
+
+        //E_CLASS_STATE_WATERMELOMON,
+        //E_CLASS_STATE_KARATEA,
+        //E_CLASS_STATE_BROCCOLION,
+        //E_CLASS_STATE_CAUILILION,
+        //E_CLASS_STATE_ROCKMELOMON,
 
         E_PLAYER_STATE_COUNT,
     };
@@ -122,7 +134,7 @@ public class PlayerController : MonoBehaviour
                 Attack2 = "P" + (i + 1) + Attack2;
                 Jump = "P" + (i + 1) + Jump;
                 Block = "P" + (i + 1) + Block;
-                m_PlayerTag = "Player " + (i + 1);
+                //m_PlayerTag = "Player " + (i + 1);
             }
         }
         //m_ShootingManager.SetFire(Fire);
@@ -251,7 +263,7 @@ public class PlayerController : MonoBehaviour
 
     void ReturnToMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(Scene.Menu);
     }
 
     // this is the function that should be used
@@ -268,6 +280,11 @@ public class PlayerController : MonoBehaviour
     public void SetPlayerID(uint a_uiPlayerID)
     {
         m_playerID = a_uiPlayerID; 
+    }
+
+    public void SetPlayerTag(string a_tag)
+    {
+        m_PlayerTag = a_tag;
     }
 
     void OnCollisionEnter(Collision a_collision)

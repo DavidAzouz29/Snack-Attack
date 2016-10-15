@@ -14,7 +14,7 @@ public class GameSettings : ScriptableObject
 		public string ClassName; // name to display e.g. "Rocky Road"
         public Color Color;
         public PlayerBuild.E_BASE_CLASS_STATE eBaseClassState;
-        public Material characterMaterial; // skin
+        public PlayerController.E_CLASS_STATE eClassState;
 		
         // Serializing an object reference directly to JSON doesn't do what we want - we just get an InstanceID
 		// which is not stable between sessions. So instead we serialize the string name of the object, and
@@ -31,7 +31,7 @@ public class GameSettings : ScriptableObject
 				if (!_cachedBrain && !String.IsNullOrEmpty(BrainName))
 				{
                     // TODO: get rid of hack
-					//_cachedBrain = Instance.availableBrains.FirstOrDefault(b => b.name == BrainName);
+					_cachedBrain = Instance.availableBrains.FirstOrDefault(b => b.name == BrainName);
 				}
 				return _cachedBrain;
 			}
@@ -39,7 +39,10 @@ public class GameSettings : ScriptableObject
 			{
 				_cachedBrain = value;
 				BrainName = value ? value.name : String.Empty;
-			}
+                ClassName = _cachedBrain.GetClassName();
+                eBaseClassState = _cachedBrain.GetBaseState();
+                eClassState = _cachedBrain.GetClassState();
+            }
 		}
 
 		[SerializeField] private string BrainName;
@@ -81,9 +84,9 @@ public class GameSettings : ScriptableObject
         // Instead, use the AssetDatabase to find them. At runtime, all available brains get loaded by the
         // MainMenuController so it's not a problem outside the editor.
 
-        //availableBrains = UnityEditor.AssetDatabase.FindAssets("t:SnackBrain")
+        //availableBrains = UnityEditor.AssetDatabase.FindAssets("t:SubClassBrain")
         //                .Select(guid => UnityEditor.AssetDatabase.GUIDToAssetPath(guid))
-        //                .Select(path => UnityEditor.AssetDatabase.LoadAssetAtPath<SnackBrain>(path))
+        //                .Select(path => UnityEditor.AssetDatabase.LoadAssetAtPath<SubClassBrain>(path))
         //                .Where(b => b).ToArray();
 #else
 					availableBrains = Resources.FindObjectsOfTypeAll<SnackBrain>();
@@ -96,16 +99,21 @@ public class GameSettings : ScriptableObject
         if (brain == null)
             return availableBrains[0];
 
+        // Where you are now
         int index = Array.FindIndex(availableBrains, b => b == brain);
         if (isRight)
         {
             index++;
-            return (index < (availableBrains.Length - 1)) ? availableBrains[index] : null;
+            return (index <= (availableBrains.Length - 1)) ? availableBrains[index] : availableBrains[0];
         }
         // Player chose left
         else
         {
             index--;
+            if(index < 0) //TODO: correct?
+            {
+                index = availableBrains.Length - 1;
+            }
             return (index >= 0) ? availableBrains[index] : null;
         }
     }

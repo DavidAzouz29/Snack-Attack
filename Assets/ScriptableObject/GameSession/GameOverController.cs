@@ -13,7 +13,7 @@ public class GameOverController : MonoBehaviour
 	public void OnBackToMainMenu()
 	{
 		DestroyImmediate(GameState.Instance);
-		SceneManager.LoadScene(0);
+		SceneManager.LoadScene(Scene.Menu);
 	}
 
 	public void Start()

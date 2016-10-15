@@ -12,29 +12,34 @@ MonoBehaviour:
   m_Name: Test game settings
   m_EditorClassIdentifier: 
   players:
-  - ClassName: 
+  - ClassName: Rocky Road
     Color: {r: 1, g: 1, b: 1, a: 1}
     eBaseClassState: 0
     characterMaterial: {fileID: 0}
-    BrainName: Human 1
-  - ClassName: 
+    BrainName: Rocky Road Brain
+  - ClassName: Princess Cake
+    Color: {r: 0, g: 0, b: 0, a: 1}
+    eBaseClassState: 1
+    characterMaterial: {fileID: 0}
+    BrainName: Princess Cake
+  - ClassName: Mint Chop Chip
     Color: {r: 0, g: 0, b: 0, a: 1}
     eBaseClassState: 0
     characterMaterial: {fileID: 0}
-    BrainName: Human 2
-  - ClassName: 
+    BrainName: Mint Chop Chip
+  - ClassName: Duchess Cake
     Color: {r: 0, g: 0, b: 0, a: 1}
-    eBaseClassState: 0
+    eBaseClassState: 1
     characterMaterial: {fileID: 0}
-    BrainName: 
-  - ClassName: 
-    Color: {r: 0, g: 0, b: 0, a: 1}
-    eBaseClassState: 0
-    characterMaterial: {fileID: 0}
-    BrainName: 
+    BrainName: Duchess Cake
   availableBrains:
-  - {fileID: 11400000, guid: eca22e818df90994480e3620018ee6ad, type: 2}
-  - {fileID: 11400000, guid: fc51682f2e604344a97380d6ffffe479, type: 2}
-  - {fileID: 11400000, guid: f3647b8865a99bb4286f871666f4b72c, type: 2}
+  - {fileID: 11400000, guid: 352c7b0033b1bd94899447204ac1e002, type: 2}
+  - {fileID: 11400000, guid: 58bebc3ba9b82514499c4c09e79216a5, type: 2}
+  - {fileID: 11400000, guid: 189d36b2ec747ae4298f17e677f8c2f4, type: 2}
+  - {fileID: 11400000, guid: 4d63fb63dba6ed44894b09d1d93759f5, type: 2}
+  - {fileID: 11400000, guid: 33d7ce4a4ced566479b5bb5bcae0fad8, type: 2}
+  - {fileID: 11400000, guid: d65af79bbf2584b4fb9d54baec0349e4, type: 2}
+  - {fileID: 11400000, guid: 1d3f6024a53fdf3419ef799284a8f8c1, type: 2}
+  - {fileID: 11400000, guid: c7f81e107841562498759e0d3680c35f, type: 2}
   NumberOfRounds: 1
   iRoundTimerChoice: 0

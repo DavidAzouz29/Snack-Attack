@@ -1,10 +1,18 @@
 How to use a system:
 
+Rules for running:
+- Game Managers within scenes must be used for testing and then turned off. This is due to the GM in the "Splash" screen.
+- Scoreboards must be turned on in scenes.
+- "L!_Splash" is the first scene that should be opened and played to test game loop.
+
 - Players
 A Player Manager must be in the scene and is responsible for creating Players.
 To quickly make adjustments to a Player - use the Menu Bar "Player Game Object" to add a (Player) prefab. Remember to remove this for the final game.
 
 // References 
+- Multiple Event Systems fork: https://bitbucket.org/TobiasPott/ui-5.x/src/b2a12d91a471a0f7967bc03542e80e9dd2027ad5?at=5.0
+	http://blog.pastelstudios.com/2015/09/07/unity-tips-tricks-multiple-event-systems-single-scene-unity-5-1/
+
 - U.I. Scoreboard courtesy of http://quill18.com/unity_tutorials/Scoreboard%20Tutorial.zip 
 Unity 3d Tutorial: Making a Scoreboard #1  https://youtu.be/gjFsrVWQaQw
 
@@ -16,8 +24,9 @@ TODO:
 https://docs.unity3d.com/ScriptReference/ScriptableObject.html 
 Unite Europe 2016 - Overthrowing the MonoBehaviour tyranny in a glorious ScriptableObject revolution https://youtu.be/VBA1QCoEAX4?t=27m24s 
 U.I. render order http://forum.unity3d.com/threads/ui-image-how-to-change-render-order-between-parent-and-child.268340/ 
+
 Tips:
-- Type in "for" and double tab "Tab" to autocomplete
+- Type in "for" and double tap "Tab" to autocomplete
 
 Notes:
 - If the code is common between lots of different objects: use inheritance

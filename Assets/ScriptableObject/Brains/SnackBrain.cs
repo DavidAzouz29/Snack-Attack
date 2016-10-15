@@ -10,6 +10,7 @@ public abstract class SnackBrain : ScriptableObject
     protected Color Color;
     // Unique per base class
     protected PlayerBuild.E_BASE_CLASS_STATE eBaseClassState;
+    protected PlayerController.E_CLASS_STATE eClassState;
     //protected Animator c_charAnimator;
     protected RuntimeAnimatorController c_charAnimatorController;
     protected Avatar c_charAvatar;
@@ -26,17 +27,22 @@ public abstract class SnackBrain : ScriptableObject
     protected PlayerBuild.E_PIZZAPUNK_STATE ePizzaPunkSkinState;
 
     //public virtual void Initialize(SnackThinker snack) { } //base.Initialize(snack);
-    public abstract void InitializeBase(SnackThinker snack);
+    public abstract void InitializeBase();
+    //public abstract void InitializeBase(SnackThinker snack);
     // Used for Sub Classes
     public abstract void Initialize(SnackThinker snack);
+    //public abstract void Initialize(SnackThinker snack);
     // Getters
-    public PlayerBuild.E_BASE_CLASS_STATE GetBaseState() { return eBaseClassState; }
-    public abstract Material GetMaterial(int i);
-    public Mesh[] GetStateMeshes() { return c_charStateMeshes; }
-    public Mesh GetStateMesh(int i) { return c_charStateMeshes[i]; }
-    public Mesh GetBlobMesh() { return c_charBlobMesh; }
-    public RuntimeAnimatorController GetAnimatorController() { return c_charAnimatorController; }
-    public Avatar GetAnimatorAvatar() { return c_charAvatar; }
-    public Sprite GetIcon() { return c_charIcon; }
+    public abstract string GetClassName();
+    public abstract PlayerBuild.E_BASE_CLASS_STATE GetBaseState();
+    public abstract PlayerController.E_CLASS_STATE GetClassState();
+    public abstract Material GetStateMaterial(int i);
+    public abstract Mesh[] GetStateMeshes();
+    public abstract Mesh GetStateMesh(int i);
+    public abstract Material GetBlobMaterial();
+    public abstract Mesh GetBlobMesh();
+    public abstract RuntimeAnimatorController GetAnimatorController();
+    public abstract Avatar GetAnimatorAvatar();
+    public abstract Sprite GetIcon();
     //public abstract void Think(SnackThinker snack);
 }

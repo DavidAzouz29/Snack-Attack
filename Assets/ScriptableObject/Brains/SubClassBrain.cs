@@ -6,8 +6,10 @@ using System;
 public class SubClassBrain : BaseClassBrain
 {
     public BaseClassBrain _baseClassBrain;
+    public int _iBrainID; // Order #
     [SerializeField] protected string _charName;
     [SerializeField] protected Color _Color;
+    [SerializeField] protected PlayerController.E_CLASS_STATE _eClassState;
     [SerializeField] protected Sprite _charIcon;
     [SerializeField] protected Material[] _charStateMaterials = new Material[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT];
     [SerializeField] protected Material _charBlobMaterial;
@@ -19,7 +21,7 @@ public class SubClassBrain : BaseClassBrain
 
     public override void Initialize(SnackThinker snack)
     {
-        //_baseClassBrain.InitializeBase(snack);
+        //_baseClassBrain.InitializeBase();
         eBaseClassState = _baseClassBrain.GetBaseState();
         c_charAnimatorController = _baseClassBrain.GetAnimatorController();
         c_charAvatar = _baseClassBrain.GetAnimatorAvatar();
@@ -31,13 +33,21 @@ public class SubClassBrain : BaseClassBrain
         //eRockyRoadSkinState = PlayerBuild.E_ROCKYROAD_STATE.E_ROCKYROAD_STATE_ROCKYROAD;
         charName = _charName;
         Color = _Color;
+        eClassState = _eClassState;
         c_charIcon = _charIcon;
         c_charBlobMaterial = _charBlobMaterial;
     }
 
-    public override Material GetMaterial(int i)
-    {
-        return _charStateMaterials[i];
-    }
+    public override string GetClassName() { return _charName; }
+    public override PlayerBuild.E_BASE_CLASS_STATE GetBaseState() { return eBaseClassState; }
+    public override PlayerController.E_CLASS_STATE GetClassState() { return eClassState; }
+    public override Material GetStateMaterial(int i) { return _charStateMaterials[i]; }
+    public override Mesh[] GetStateMeshes() { return c_charStateMeshes; }
+    public override Mesh GetStateMesh(int i) { return c_charStateMeshes[i]; }
+    public override Material GetBlobMaterial() { return _charBlobMaterial; }
+    public override Mesh GetBlobMesh() { return c_charBlobMesh; }
+    public override RuntimeAnimatorController GetAnimatorController() { return c_charAnimatorController; }
+    public override Avatar GetAnimatorAvatar() { return c_charAvatar; }
+    public override Sprite GetIcon() { return c_charIcon; }
 
 }

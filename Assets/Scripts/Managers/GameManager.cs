@@ -48,16 +48,20 @@ public class GameManager : MonoBehaviour
     public GameSettings m_ActiveGameSettings;
     void Awake()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+        if (SceneManager.GetActiveScene().buildIndex == Scene.Menu)
         {
             //GameManager[] go = FindObjectsOfType<GameManager>();
             //if ()
             //{
                 UnityEditor.PrefabUtility.ResetToPrefabState(this.gameObject);
-                DontDestroyOnLoad(this.gameObject);
             //}
             //SceneManager.MoveGameObjectToScene(this.gameObject,
             //    SceneManager.GetSceneAt(FindObjectOfType<MenuScript>().GetLevelSelection()));
+        }
+        // Splash
+        else if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 
@@ -146,7 +150,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(1, LoadSceneMode.Single);
+            SceneManager.LoadScene(Scene.Level1Kitchen /*1*/, LoadSceneMode.Single);
         }
     }
 

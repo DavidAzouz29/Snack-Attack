@@ -13,7 +13,7 @@
 /// 2D Arrays on Inspector https://youtu.be/uoHc-Lz9Lsc 
 /// *Edit*
 /// - Player Select almost happening with individual controllers - David Azouz 28/08/2016
-/// -  - David Azouz 28/08/2016
+/// - Cleaned up and unified Player Selection - David Azouz 15/10/2016
 /// 
 /// TODO:
 /// - cache a few of the "GetComponent"'s - 
@@ -26,6 +26,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
+//using System.Linq;
 
 public class PlayerSelect : MonoBehaviour
 {
@@ -35,27 +36,24 @@ public class PlayerSelect : MonoBehaviour
 	public float fSensitivity = 2.0f;
 	public Button c_LevelSelect;
 
-	private const int MAX_CLASS_COUNT = (int)PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_TOTAL_COUNT;
     // ------------------------------------
     // Used to hold the different characters we can play as.
     // Mesh, MeshRenderer, and Animation
     // ------------------
-    public GameObject[] c_Characters = new GameObject[MAX_CLASS_COUNT];
+    //public GameObject[] c_Characters = new GameObject[(int)PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_BASE_COUNT];
     public GameSettings c_GameSettings;
     public GameObject c_eventSystems;
 
     // For which player
-    [SerializeField] private int[] iCurrentClassSelection = new int[PlayerManager.MAX_PLAYERS];
 	// used for when players have confirmed their character selection
 	[SerializeField] bool[] playersConfirmed = new bool[PlayerManager.MAX_PLAYERS];
 
 	// Use this for initialization
-	void Awake () 
+	void Start () //TODO: Awake?
 	{
         for (int i = 0; i <= PlayerManager.MAX_PLAYERS - 1; ++i)
         {
             playersConfirmed[i] = false;
-            CharacterSelection(i);
             // Start 1-4 Coroutines to check for player input - each on their own "thread*"
             StartCoroutine(PlayerInput(i));
         }		
@@ -129,88 +127,11 @@ public class PlayerSelect : MonoBehaviour
 		//TODO: "Ready" animation?
 	}
 
-	// '0' based
-	public void PlayerSelectLeft(int a_player)
-	{
-        // Move one left
-        iCurrentClassSelection[a_player] -= 1;
-		if (iCurrentClassSelection[a_player] < 0) 
-		{
-            iCurrentClassSelection[a_player] = MAX_CLASS_COUNT - 1; Debug.Log("Left");
-        }
-        //
-        CharacterSelection(a_player);
-    }
-
-	// '0' based
-	public void PlayerSelectRight(int a_player)
-	{
-        // Move one right
-        iCurrentClassSelection[a_player] += 1;
-        if (iCurrentClassSelection[a_player] >= MAX_CLASS_COUNT)
-        {
-            iCurrentClassSelection[a_player] = 0; Debug.Log("Right");
-        }
-        //
-        CharacterSelection(a_player);
-    }
-
 	void LevelSelect()
 	{
 		c_LevelSelect.Select ();
 		// confirm (click)
 	}
-
-    void CharacterSelection(int a_player)
-    {
-        //UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(playerButtons.playerColsButton[a_player].coloumn[0].gameObject);
-        // 
-        SubClassBrain c_currChar = c_GameSettings.availableBrains[iCurrentClassSelection[a_player]];//c_Characters[iCurrentClassSelection[a_player]];
-        GameObject characterSlot = null;
-        // Rocky Road
-        if (iCurrentClassSelection[a_player] < (int)PlayerBuild.E_ROCKYROAD_STATE.E_ROCKYROAD_BASE_ROCKYROAD_COUNT)
-        {
-            if(!transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject.activeInHierarchy)
-            {
-                transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject.SetActive(true);
-            }
-            characterSlot = transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject;
-            transform.GetChild(0).GetChild(a_player).GetChild(2).gameObject.SetActive(false);
-        }
-        // Princess Cake
-        else if (//iCurrentClassSelection[a_player] >= (int)PlayerBuild.E_CLASS_STATE.E_CLASS_BASE_ROCKYROAD_COUNT &&
-            iCurrentClassSelection[a_player] < (int)PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_BASE_PRINCESSCAKE_COUNT)
-        {
-            if (!transform.GetChild(0).GetChild(a_player).GetChild(2).gameObject.activeInHierarchy)
-            {
-                transform.GetChild(0).GetChild(a_player).GetChild(2).gameObject.SetActive(true);
-            }
-            characterSlot = transform.GetChild(0).GetChild(a_player).GetChild(2).gameObject;
-            transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject.SetActive(false);
-        }
-        // Pizza Punk
-        else if (//iCurrentClassSelection[a_player] >= (int)PlayerBuild.E_CLASS_STATE.E_CLASS_BASE_PRINCESSCAKE_COUNT &&
-            iCurrentClassSelection[a_player] < (int)PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_BASE_PIZZAPUNK_COUNT)
-        {
-            // TODO: get child 3 // Set Child 2 to Inactive ^ same for others
-            if (!transform.GetChild(0).GetChild(a_player).GetChild(2).gameObject.activeInHierarchy)
-            {
-                transform.GetChild(0).GetChild(a_player).GetChild(2).gameObject.SetActive(true);
-            }
-            characterSlot = transform.GetChild(0).GetChild(a_player).GetChild(2).gameObject;
-            transform.GetChild(0).GetChild(a_player).GetChild(1).gameObject.SetActive(false);
-        }
-
-        SkinnedMeshRenderer characterSkinnedRenderer = characterSlot.GetComponentInChildren<SkinnedMeshRenderer>();
-        Animator characterAnimator = characterSlot.GetComponent<Animator>();
-        characterSkinnedRenderer.sharedMaterial = c_currChar.GetMaterial(1);//GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial;
-        characterSkinnedRenderer.sharedMesh = c_currChar.GetStateMesh(1);// GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh;
-        characterAnimator.runtimeAnimatorController = c_currChar.GetAnimatorController(); //GetComponent<Animator>().runtimeAnimatorController;
-        characterAnimator.avatar = c_currChar.GetAnimatorAvatar();// GetComponent<Animator>().avatar;
-
-        characterSlot.transform.rotation = c_currChar._rotation; //transform.rotation;
-        characterSlot.transform.localScale = new Vector3(c_currChar._localScale, c_currChar._localScale, c_currChar._localScale); // transform.localScale;
-    }
 
     public void PlayerSelectPanel(bool isActive)
     {

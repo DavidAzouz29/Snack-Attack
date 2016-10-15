@@ -15,33 +15,23 @@ MonoBehaviour:
   - ClassName: Rocky Road
     Color: {r: 0.89019614, g: 0.47450984, b: 0.42352945, a: 1}
     eBaseClassState: 0
-    characterMaterial: {fileID: 2100000, guid: 4fd4b8905f60abe4eac4876ca180b475, type: 2}
-    BrainName: Rocky Road
-  - ClassName: Mint Chop Chip
-    Color: {r: 0.7372549, g: 0.9215687, b: 0.43529415, a: 1}
-    eBaseClassState: 0
-    characterMaterial: {fileID: 2100000, guid: 7d26a8bc66cca514a819f1a0bcafc85b, type: 2}
-    BrainName: MintChopChip
-  - ClassName: Cookie Crunch
-    Color: {r: 0.77205884, g: 0.5053618, b: 0.028384497, a: 1}
-    eBaseClassState: 0
-    characterMaterial: {fileID: 2100000, guid: 088ac9e6e00c4f34ba9618f556f460c9, type: 2}
-    BrainName: CookieCrunch
-  - ClassName: Rainbow Warrior
-    Color: {r: 0.909804, g: 0.3764706, b: 0.7847465, a: 1}
-    eBaseClassState: 0
-    characterMaterial: {fileID: 2100000, guid: 0987ba98df0de0f4cbaa73de4fdb966e, type: 2}
-    BrainName: RainbowWarrior
+    eClassState: 0
+    BrainName: Rocky Road Brain
   - ClassName: Princess Cake
     Color: {r: 0.41960788, g: 0.6627451, b: 0.8470589, a: 1}
     eBaseClassState: 1
-    characterMaterial: {fileID: 2100000, guid: 86c8cc67f76667749a03ea477b28a0f8, type: 2}
-    BrainName: PrincessCake
-  - ClassName: Patty Cake
+    eClassState: 4
+    BrainName: Princess Cake Brain
+  - ClassName: Mint Chop Chip
+    Color: {r: 0.7372549, g: 0.9215687, b: 0.43529415, a: 1}
+    eBaseClassState: 0
+    eClassState: 1
+    BrainName: Mint Chop Chip Brain
+  - ClassName: Duchess Cake
     Color: {r: 0.6039216, g: 0.37647063, b: 0.909804, a: 1}
     eBaseClassState: 1
-    characterMaterial: {fileID: 2100000, guid: 6780998c93d698649bf1cadbe9d8b401, type: 2}
-    BrainName: PattyCake
+    eClassState: 5
+    BrainName: Duchess Cake Brain
   availableBrains:
   - {fileID: 11400000, guid: 352c7b0033b1bd94899447204ac1e002, type: 2}
   - {fileID: 11400000, guid: 58bebc3ba9b82514499c4c09e79216a5, type: 2}

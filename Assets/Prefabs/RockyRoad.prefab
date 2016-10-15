@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &102050
 GameObject:
   m_ObjectHideFlags: 1
@@ -1050,7 +1050,7 @@ Transform:
   - {fileID: 481970}
   - {fileID: 408680}
   m_Father: {fileID: 450434}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!4 &441664
 Transform:
   m_ObjectHideFlags: 1
@@ -1105,9 +1105,9 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 224000010783469202}
-  - {fileID: 4000011178135728}
-  - {fileID: 463546}
   - {fileID: 441394}
+  - {fileID: 463546}
+  - {fileID: 4000011178135728}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &451524
@@ -1479,7 +1479,7 @@ MonoBehaviour:
   - {fileID: 13752088}
   m_Threshold: 0
   m_TransitionState: 0
-  PlayerCounter: 2
+  PlayerCounter: 3
   m_SpawnableBlob: {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   m_BlobsCreated: []
   blobsArray:
@@ -1716,7 +1716,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 7d26a8bc66cca514a819f1a0bcafc85b, type: 2}
+  - {fileID: 2100000, guid: 0f5a36c72f48dd4499691e387ea658ff, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2051,7 +2051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000012773509402
 GameObject:
   m_ObjectHideFlags: 1
@@ -2320,7 +2320,7 @@ Transform:
   m_Children:
   - {fileID: 4000013152636274}
   m_Father: {fileID: 450434}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!4 &4000011267311668
 Transform:
   m_ObjectHideFlags: 1
@@ -3004,7 +3004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.4, g: 0.18, b: 0.58, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

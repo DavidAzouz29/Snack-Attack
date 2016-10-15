@@ -26,7 +26,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     //----------------------------------
     // PUBLIC VARIABLES
     //----------------------------------
-	[Header("Hold Players")]
+    [Header("Hold Players")]
     public const uint MAX_PLAYERS = 4;
     //Player referances
     public GameObject r_Player_Rocky_1;
@@ -53,9 +53,10 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
 
     private List<GameObject> m_PlayerSpawns;
 
-	private GameManager m_GameManager;
+    private GameManager m_GameManager;
     private SpawnManager m_SpawnManager;
     private CameraControl m_CameraControl;
+    [SerializeField] private SnackBrain[] m_SnackBrains = new SnackBrain[MAX_PLAYERS];
     public SkinnedMeshRenderer[] m_ModelMeshRenderers;
 
     // Use this for initialization
@@ -67,14 +68,23 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
 
     void OnLevelWasLoaded()
     {
-        // Not the main menu
-        if (SceneManager.GetActiveScene().buildIndex != 0)
+        // Return to Menu more than Splash
+        if (SceneManager.GetActiveScene().buildIndex != Scene.Menu)
         {
-            m_SpawnManager = FindObjectOfType<SpawnManager>();
-            m_PlayerSpawns = m_SpawnManager.m_PlayerSpawns;
-            m_CameraControl = FindObjectOfType<CameraControl>();
+        // Not the splash screen
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+            {
+                m_SpawnManager = FindObjectOfType<SpawnManager>();
+                m_PlayerSpawns = m_SpawnManager.m_PlayerSpawns;
+                m_CameraControl = FindObjectOfType<CameraControl>();
+            }
         }
     }
+
+    public SnackBrain[] GetSnackBrains()
+	{
+		return m_SnackBrains;
+	}
 
     public GameObject GetPlayer(int i)
 	{
@@ -90,56 +100,83 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     // as there are 0 players in the array GameManager script is playing up
     public void CreatePlayers()
     {
-        GameObject.Find("Scoreboard Canvas").GetComponent<ScoreManager>().PrototypeStartup();
+        //GameObject.Find("Scoreboard Canvas").GetComponent<ScoreManager>().PrototypeStartup();
         m_CameraControl.m_Targets = new Transform[MAX_PLAYERS]; //assigns the maximum characters the camera should track
         //Loop through and create our players.
         for (uint i = 0; i < MAX_PLAYERS; ++i)
         {
-			PlayerController.E_CLASS_STATE playerState = PlayerController.E_CLASS_STATE.E_PLAYER_STATE_COUNT;
+            m_SnackBrains[i] = GameSettings.Instance.players[(int)i].Brain;// m_GameManager.m_ActiveGameSettings.players[(int)i].Brain;
+            //PlayerController.E_CLASS_STATE playerState = PlayerController.E_CLASS_STATE.E_PLAYER_STATE_COUNT;
+            SkinnedMeshRenderer[] characterSkinnedRenderers = null;
+            PlayerBuild.E_BASE_CLASS_STATE eBaseState = m_SnackBrains[(int)i].GetBaseState();
+            switch (eBaseState)
+            {
+                case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
+                    {
+                        r_Player = r_Player_Rocky_1;
+                        break;
+                    }
+                case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
+                    {
+                        r_Player = r_Player_Princess_2;
+                        break;
+                    }
+                case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PIZZAPUNK:
+                    {
+                        r_Player = r_Player_Pizza_3;
+                        break;
+                    }
+                default:
+                    {
+                        Debug.LogError("PM: No Base Class.");
+                        break;
+                    }
+            }
+
+            characterSkinnedRenderers = r_Player.GetComponentsInChildren<SkinnedMeshRenderer>();
+            for (int k = 0; k < (int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT; k++)
+            {
+                characterSkinnedRenderers[k].sharedMaterial = m_SnackBrains[(int)i].GetStateMaterial(k);
+                characterSkinnedRenderers[k].sharedMesh = m_SnackBrains[(int)i].GetStateMesh(k);
+            }
+
             // Position characters randomly on the floor
             // if it's the first player, set them to character 'x', second to 'y' etc.
             if (i == 0)
             {
-                r_Player = r_Player_Rocky_1;
-				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.red;
                 r_Player.GetComponent<BossBlobs>().PlayerCounter = 0;
             }
             else if (i == 1)
             {
-                r_Player = r_Player_Princess_2;
-				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE;
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.blue;
                 r_Player.GetComponent<BossBlobs>().PlayerCounter = 1;
             }
             else if (i == 2)
             {
-                r_Player = r_Player_Rocky_1;
-				playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD;
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.green;
                 r_Player.GetComponent<BossBlobs>().PlayerCounter = 2;
 
             }
             else if (i == 3)
             {
-                r_Player = r_Player_Princess_2; //TODO: r_Player = r_PlayerKaraTea;
-                playerState = PlayerController.E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE;
                 Color Player4Color = new Color(0.4f, 0.18f, 0.58f);
-                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Player4Color;
+                r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Player4Color; // m_playerInfo.Brain.Color;
                 r_Player.GetComponent<BossBlobs>().PlayerCounter = 3;
             }
 
             Object j = Instantiate(r_Player, m_PlayerSpawns[(int)i].transform.position, r_Player.transform.rotation);
-			j.name = "Character " + (i + 1);
-			// -------------------------------------------------------------
-			// This allows each instance the ability to move independently
-			// -------------------------------------------------------------
-			r_PlayerController = ((GameObject)j).GetComponent<PlayerController>();
-			r_PlayerController.SetPlayerID(i);
+            j.name = "Character " + (i + 1);
+            // -------------------------------------------------------------
+            // This allows each instance the ability to move independently
+            // -------------------------------------------------------------
+            r_PlayerController = ((GameObject)j).GetComponent<PlayerController>();
+            r_PlayerController.SetPlayerID(i);
+            r_PlayerController.SetPlayerTag(m_SnackBrains[(int)i].GetClassName());
 
-			uiPlayerConArray[i] = r_PlayerController;
-			uiPlayerConArray[i].m_eCurrentClassState = playerState;
-			r_Players[i] = (GameObject)j;
+            uiPlayerConArray[i] = r_PlayerController;
+            uiPlayerConArray[i].m_eCurrentClassState = m_SnackBrains[(int)i].GetClassState();
+            r_Players[i] = (GameObject)j;
         }
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
@@ -147,6 +184,6 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             m_CameraControl.m_Targets[i] = r_Players[i].transform;
         }
 
-		m_GameManager.SetupBoss();
+        m_GameManager.SetupBoss();
     } 
 }

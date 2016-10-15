@@ -16,7 +16,7 @@ public class BaseClassBrain : SnackBrain
     [SerializeField] public float _localScale = 109.1183f;
     [SerializeField] public Quaternion _rotation;
 
-    public override void InitializeBase(SnackThinker snack)
+    public override void InitializeBase()
     {
         eBaseClassState = _eBaseClassState;
         c_charAnimatorController = _charAnimatorController;
@@ -26,7 +26,19 @@ public class BaseClassBrain : SnackBrain
     }
 
     public override void Initialize(SnackThinker snack) { }
-    public override Material GetMaterial(int i) { return c_charStateMaterials[i]; }
+    public override string GetClassName() { return "None"; }
+    public override PlayerBuild.E_BASE_CLASS_STATE GetBaseState() { return _eBaseClassState; }
+    public override PlayerController.E_CLASS_STATE GetClassState() { return PlayerController.E_CLASS_STATE.E_PLAYER_STATE_COUNT; }
+    public override Material GetStateMaterial(int i) { return null; }
+    public override Mesh[] GetStateMeshes() { return _charStateMeshes; }
+    public override Mesh GetStateMesh(int i) { return _charStateMeshes[i]; }
+    public override Material GetBlobMaterial() { return null; }
+    public override Mesh GetBlobMesh() { return _charBlobMesh; }
+    public override RuntimeAnimatorController GetAnimatorController() { return _charAnimatorController; }
+    public override Avatar GetAnimatorAvatar() { return _charAvatar; }
+    public override Sprite GetIcon() { return null; }
+
+
     /*{
         InitializeBase(snack);
         c_charSkinnedRenderer.sharedMaterial = c_charStateMaterials[1];

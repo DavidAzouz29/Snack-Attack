@@ -283,12 +283,18 @@ public class BossBlobs : MonoBehaviour
         #region Blobs
         switch (r_PlayerCon.m_eCurrentClassState)
         {
-            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_ROCKYROAD:
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_ROCKYROAD:
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_MINTCHOPCHIP:
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_COOKIECRUNCH:
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_RAINBOWWARRIOR:
                 {
                     m_SpawnableBlob = blobsArray[0];
                     break;
                 }
-            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PRINCESSCAKE:
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_PRINCESSCAKE:
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_DUCHESSCAKE:
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_POUNDCAKE:
+            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_ANGELCAKE:
                 {
                     m_SpawnableBlob = blobsArray[1];
                     break;
@@ -296,28 +302,14 @@ public class BossBlobs : MonoBehaviour
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PIZZAPUNK:
                 {
                     m_SpawnableBlob = blobsArray[2];
-                    break;
-                }
-            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_WATERMELOMON:
-                {
-                    m_SpawnableBlob = blobsArray[2];
-                    break;
-                }
-            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_BROCCOLION:
-                {
-                    m_SpawnableBlob = blobsArray[1];
-                    break;
-                }
-            case PlayerController.E_CLASS_STATE.E_CLASS_STATE_CAUILILION:
-                {
-                    m_SpawnableBlob = blobsArray[2];
+                    m_SpawnableBlob.GetComponent<MeshRenderer>().material = r_PlayerMan.GetSnackBrains()[1].GetBlobMaterial();
                     //shot.GetComponent<MeshRenderer>().material.mainTexture = r_Coli;
                     //shot.GetComponent<MeshRenderer>().material.SetColor("_SpecColor", Color.white);
                     break;
                 }
             default:
                 {
-                    Debug.LogError("Character animation not set up");
+                    Debug.LogError("BB: Character Blob not set up.");
                     break;
                 }
         }
@@ -459,7 +451,10 @@ public class BossBlobs : MonoBehaviour
     {
         ScoreManager myScore = GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>();
         myScore.ChangeScore(_col.gameObject.GetComponentInParent<PlayerController>().m_PlayerTag, "kills", 1);
-        GameObject.FindGameObjectWithTag(_col.gameObject.GetComponentInParent<PlayerController>().m_PlayerTag + " Score").GetComponent<Text>().text = m_KillCounter.ToString();
+        // Game objects that are tagged
+        GameObject.FindGameObjectWithTag("Player " + //TODO: clean up
+            _col.gameObject.GetComponentInParent<PlayerController>().GetPlayerID()
+            + " Score").GetComponent<Text>().text = m_KillCounter.ToString();
         m_KillCounter++;
         Debug.Log(m_KillCounter);
         GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);

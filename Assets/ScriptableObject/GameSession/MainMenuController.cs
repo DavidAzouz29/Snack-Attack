@@ -19,7 +19,9 @@ public class MainMenuController : MonoBehaviour
 		}
 	}
 
-	void Start () {
+	void Start ()
+    {
+        // TODO: restore?
 		if (System.IO.File.Exists(SavedSettingsPath))
 			GameSettings.LoadFromJSON(SavedSettingsPath);
 		else

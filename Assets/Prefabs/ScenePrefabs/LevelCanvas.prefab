@@ -29,7 +29,7 @@ GameObject:
   - 114: {fileID: 11410176}
   m_Layer: 4
   m_Name: Player1ScoreText
-  m_TagString: Player 1 Score
+  m_TagString: Player 0 Score
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,7 +173,7 @@ GameObject:
   - 114: {fileID: 11419928}
   m_Layer: 4
   m_Name: Player3ScoreText
-  m_TagString: Player 3 Score
+  m_TagString: Player 2 Score
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,7 +191,7 @@ GameObject:
   - 114: {fileID: 11400212}
   m_Layer: 4
   m_Name: Player4ScoreText
-  m_TagString: Player 4 Score
+  m_TagString: Player 3 Score
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,7 +227,7 @@ GameObject:
   - 114: {fileID: 11434380}
   m_Layer: 4
   m_Name: Player2ScoreText
-  m_TagString: Player 2 Score
+  m_TagString: Player 1 Score
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -444,6 +444,11 @@ MonoBehaviour:
   - {fileID: 11408968}
   - {fileID: 11407924}
   c_timer: {fileID: 11434138}
+  c_playerIcons:
+  - {fileID: 11498466}
+  - {fileID: 11470308}
+  - {fileID: 11426336}
+  - {fileID: 11483314}
 --- !u!114 &11410176
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -12,16 +12,17 @@ public class PlayerScoreList : MonoBehaviour {
 	int lastChangeCounter;
 
 	// Use this for initialization
-	void Start () {
-		// TODO: Find is slow - fix for Beta
-		scoreManager = GameObject.FindObjectOfType<ScoreManager>();
-		r_UILevel = GameObject.FindObjectOfType<UILevel>();
-		lastChangeCounter = scoreManager.GetChangeCounter();
+	void Start ()
+    {		
+		scoreManager = GetComponentInParent<ScoreManager>();
+		r_UILevel = GameObject.FindObjectOfType<UILevel>(); // TODO: Find is slow - fix for Beta
+        lastChangeCounter = scoreManager.GetChangeCounter();
 
 		// Set default values
-		//for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++) {
-		//	r_UILevel.r_PlayerScoresText [i].text = "0";
-		//}
+		for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+        {
+			r_UILevel.r_PlayerScoresText [i].text = "0";
+		}
 	}
 	
 	// Update is called once per frame

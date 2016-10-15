@@ -44,15 +44,20 @@ public class RoundTimer : MonoBehaviour {
 
     void OnLevelWasLoaded()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {//m_TimeRemaining = GameSettings.Instance.iRoundTimerChoice;
-            m_PlayerSpawns = FindObjectOfType<SpawnManager>().m_PlayerSpawns;
-            m_ScoreBoardWindow = FindObjectOfType<WindowManager>().gameObject;
-            m_TimeRemaining = m_TimePerRound;
-            m_Spawned = false;
-            m_RoundStarted = true; //TODO: set m_RoundStarted to false for "3,2,1"
-            //c_CountdownText = FindObjectOfType<UILevel>().gameObject.GetComponent<Text>();
-            //StartCoroutine(RoundCountdown());
+        // Return to Menu more than Splash
+        if (SceneManager.GetActiveScene().buildIndex != Scene.Menu)
+        {
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+            {
+                //m_TimeRemaining = GameSettings.Instance.iRoundTimerChoice;
+                m_PlayerSpawns = FindObjectOfType<SpawnManager>().m_PlayerSpawns;
+                m_ScoreBoardWindow = FindObjectOfType<WindowManager>().gameObject;
+                m_TimeRemaining = m_TimePerRound;
+                m_Spawned = false;
+                m_RoundStarted = true; //TODO: set m_RoundStarted to false for "3,2,1"
+                //c_CountdownText = FindObjectOfType<UILevel>().gameObject.GetComponent<Text>();
+                //StartCoroutine(RoundCountdown());
+            }
         }
     }
 
@@ -75,9 +80,12 @@ public class RoundTimer : MonoBehaviour {
     {
         if(Input.GetKeyDown(KeyCode.G) || Input.GetKeyDown(KeyCode.JoystickButton6))
         {
-            if (SceneManager.GetActiveScene().buildIndex != 0)
+            if (SceneManager.GetActiveScene().buildIndex != Scene.Menu)
             {
-                m_RoundStarted = true;
+                if (SceneManager.GetActiveScene().buildIndex != 0)
+                {
+                    m_RoundStarted = true;
+                }
             }
         }
 
