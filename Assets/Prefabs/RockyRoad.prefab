@@ -1479,7 +1479,7 @@ MonoBehaviour:
   - {fileID: 13752088}
   m_Threshold: 0
   m_TransitionState: 0
-  PlayerCounter: 3
+  PlayerCounter: 2
   m_SpawnableBlob: {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   m_BlobsCreated: []
   blobsArray:
@@ -1532,7 +1532,9 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 0}
+  c_SMR: {fileID: 0}
   c_TrailRenderer: {fileID: 0}
+  emissiveMap: {fileID: 0}
 --- !u!114 &11431622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1561,7 +1563,9 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 450434}
+  c_SMR: {fileID: 13756246}
   c_TrailRenderer: {fileID: 0}
+  emissiveMap: {fileID: 0}
 --- !u!114 &11444758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1577,7 +1581,9 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 450434}
+  c_SMR: {fileID: 13752088}
   c_TrailRenderer: {fileID: 0}
+  emissiveMap: {fileID: 0}
 --- !u!114 &11479832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1593,7 +1599,9 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 450434}
+  c_SMR: {fileID: 13752088}
   c_TrailRenderer: {fileID: 0}
+  emissiveMap: {fileID: 0}
 --- !u!114 &11490560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1609,7 +1617,9 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 450434}
+  c_SMR: {fileID: 13756246}
   c_TrailRenderer: {fileID: 0}
+  emissiveMap: {fileID: 0}
 --- !u!135 &13540822
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -1716,7 +1726,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0f5a36c72f48dd4499691e387ea658ff, type: 2}
+  - {fileID: 2100000, guid: 7b455c55149f34d47adf4eb03e3e877c, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3004,7 +3014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4, g: 0.18, b: 0.58, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3055,7 +3065,9 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 450434}
+  c_SMR: {fileID: 137000013171543794}
   c_TrailRenderer: {fileID: 0}
+  emissiveMap: {fileID: 0}
 --- !u!114 &114000014271725874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3071,7 +3083,9 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 450434}
+  c_SMR: {fileID: 137000013171543794}
   c_TrailRenderer: {fileID: 0}
+  emissiveMap: {fileID: 0}
 --- !u!136 &136000010370297242
 CapsuleCollider:
   m_ObjectHideFlags: 1

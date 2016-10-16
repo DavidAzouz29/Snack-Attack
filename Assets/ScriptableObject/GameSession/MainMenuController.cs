@@ -22,9 +22,9 @@ public class MainMenuController : MonoBehaviour
 	void Start ()
     {
         // TODO: restore?
-		if (System.IO.File.Exists(SavedSettingsPath))
+		/*if (System.IO.File.Exists(SavedSettingsPath))
 			GameSettings.LoadFromJSON(SavedSettingsPath);
-		else
+		else //*/
 			GameSettings.InitializeFromDefault(GameSettingsTemplate);
 
 		foreach(var info in GetComponentsInChildren<PlayerInfoController>())

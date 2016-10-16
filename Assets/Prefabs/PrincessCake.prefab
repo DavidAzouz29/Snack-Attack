@@ -801,7 +801,9 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 414588}
+  c_SMR: {fileID: 13717942}
   c_TrailRenderer: {fileID: 0}
+  emissiveMap: {fileID: 0}
 --- !u!114 &11493176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -817,7 +819,9 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 414588}
+  c_SMR: {fileID: 13717942}
   c_TrailRenderer: {fileID: 0}
+  emissiveMap: {fileID: 0}
 --- !u!114 &11497748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -857,7 +861,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0c7286d2b89725a4b9be7bb52309ea76, type: 2}
+  - {fileID: 2100000, guid: 9024587ec87485545af98b85836607f6, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2798,7 +2802,9 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 414588}
+  c_SMR: {fileID: 137000010013304120}
   c_TrailRenderer: {fileID: 0}
+  emissiveMap: {fileID: 0}
 --- !u!114 &114000011123666576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2841,7 +2847,9 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 414588}
+  c_SMR: {fileID: 137000010013304120}
   c_TrailRenderer: {fileID: 0}
+  emissiveMap: {fileID: 0}
 --- !u!114 &114000011627501698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2857,7 +2865,9 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 414588}
+  c_SMR: {fileID: 137000010291755572}
   c_TrailRenderer: {fileID: 0}
+  emissiveMap: {fileID: 0}
 --- !u!114 &114000012126399486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2873,7 +2883,9 @@ MonoBehaviour:
   weaponIsActive: 0
   isHeavyAttack: 0
   m_ParentTransform: {fileID: 414588}
+  c_SMR: {fileID: 137000010291755572}
   c_TrailRenderer: {fileID: 0}
+  emissiveMap: {fileID: 0}
 --- !u!114 &114000012865551002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2921,7 +2933,7 @@ MonoBehaviour:
   - {fileID: 0}
   m_Threshold: 0
   m_TransitionState: 0
-  PlayerCounter: 1
+  PlayerCounter: 3
   m_SpawnableBlob: {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   m_BlobsCreated: []
   blobsArray:
@@ -2962,7 +2974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 1, a: 1}
+  m_Color: {r: 0.4, g: 0.18, b: 0.58, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

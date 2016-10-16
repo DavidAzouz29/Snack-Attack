@@ -16,6 +16,8 @@
 /// - Added Game Loop code - David Azouz 2/10/2016
 /// TODO:
 /// - 
+/// //SceneManager.MoveGameObjectToScene(this.gameObject,
+///    SceneManager.GetSceneAt(FindObjectOfType<MenuScript>().GetLevelSelection()));
 /// </summary>
 /// ----------------------------------
 /// 
@@ -50,13 +52,9 @@ public class GameManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex == Scene.Menu)
         {
-            //GameManager[] go = FindObjectsOfType<GameManager>();
-            //if ()
-            //{
-                UnityEditor.PrefabUtility.ResetToPrefabState(this.gameObject);
-            //}
-            //SceneManager.MoveGameObjectToScene(this.gameObject,
-            //    SceneManager.GetSceneAt(FindObjectOfType<MenuScript>().GetLevelSelection()));
+#if UNITY_EDITOR
+            UnityEditor.PrefabUtility.ResetToPrefabState(this.gameObject);
+#endif
         }
         // Splash
         else if (SceneManager.GetActiveScene().buildIndex == 0)
@@ -73,12 +71,49 @@ public class GameManager : MonoBehaviour
         m_StartWait = new WaitForSeconds(m_StartDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
-     
+        AudioThemeSelection();
+
         //SpawnAllSnacks(); //TODO: restore
         //SetCameraTargets();
 
         // Once the Snacks have been created and the camera is using them as targets, start the game.
         //StartCoroutine(GameLoop());
+    }
+
+    // TODO: move to RoundStarting()
+    public void Init()
+    {
+        AudioThemeSelection();
+        SetupBoss();
+    }
+
+    public void AudioThemeSelection()
+    {
+        AudioSource audioSlot = null;
+        int iScene = SceneManager.GetActiveScene().buildIndex;
+        switch (iScene)
+        {
+            case 0:
+            case 1: //Scene.Menu
+            default:
+                {
+                    // For Splash only
+                    audioSlot = transform.GetChild(2).GetComponentInChildren<AudioSource>();
+                    audioSlot.pitch = Random.Range(0.78f, 1.5f); //TODO: remove
+                    audioSlot.loop = true;
+                    audioSlot.Play();
+                    break;
+                }
+            case 2: // Scene.Level1Kitchen:
+            case 3: // Scene.Level2Banquet:
+                {
+                    transform.GetChild(2).GetComponentInChildren<AudioSource>().enabled = false; //TODO: solve this
+                    audioSlot = transform.GetChild(2).GetChild(iScene - 1).GetComponent<AudioSource>(); Debug.Log("GM: Theme " + iScene);
+                    audioSlot.loop = true;
+                    audioSlot.Play();
+                    break;
+                }
+        }
     }
 
     public void SetupBoss()

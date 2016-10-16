@@ -1,4 +1,19 @@
-﻿using UnityEngine;
+﻿///<summary>
+///
+/// 
+/// **Edit**
+/// - Trail Renderers - David Azouz 11/10/16
+/// - Emission maps - David Azouz 16/10/16
+/// - 
+/// viewed: https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html
+/// http://answers.unity3d.com/questions/914923/standard-shader-emission-control-via-script.html
+/// Notes: Shader.PropertyToID()
+/// emissiveMap = GetComponentInParent<SkinnedMeshRenderer>().sharedMaterial; //TODO: test
+/// 
+/// </summary>
+
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,14 +23,30 @@ public class PlayerCollision : MonoBehaviour {
     public bool weaponIsActive;
     public bool isHeavyAttack;
     public Transform m_ParentTransform;
+    public SkinnedMeshRenderer c_SMR;
     [SerializeField] private TrailRenderer c_TrailRenderer;
+    private uint iPlayerID;
+    //private BossBlobs.TransitionState eTransitionState;
     //Attack Timer
     private float m_Timer = 0;
     private bool m_TimerEnabled = false;
+    [SerializeField]
+    private Material emissiveMap;
+
     void Start()
     {
-        weaponIsActive = false;
-        c_TrailRenderer = GetComponent<TrailRenderer>();
+        // Return to Menu more than Splash
+        if (SceneManager.GetActiveScene().buildIndex != Scene.Menu)
+        {
+            // Not the splash screen
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+            {
+                weaponIsActive = false;
+                c_TrailRenderer = GetComponent<TrailRenderer>();
+                iPlayerID = GetComponentInParent<PlayerController>().GetPlayerID();
+                //eTransitionState = GetComponentInParent<BossBlobs>().m_TransitionState;
+            }
+        }
     }
 
     void Update()
@@ -24,16 +55,22 @@ public class PlayerCollision : MonoBehaviour {
         {
             m_TimerEnabled = true;
             PunchEffects(true);
+            // Emissive map //[(int)eTransitionState]
+            c_SMR.sharedMaterial.SetColor("_EmissionColor", GameSettings.Instance.players[(int)iPlayerID].Color);
         }
+
         if (m_TimerEnabled)
         {
             m_Timer += Time.deltaTime;
         }
-        if(m_Timer > 1)
+        // Turn off
+        if (m_Timer > 1)
         {
             weaponIsActive = false;
             m_TimerEnabled = false;
             PunchEffects(false);
+            // Emissive map //[(int)eTransitionState]
+            c_SMR.sharedMaterial.SetColor("_EmissionColor", Color.black);
             m_Timer = 0.0f;
         }
     }

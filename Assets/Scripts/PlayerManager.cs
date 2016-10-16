@@ -134,9 +134,17 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             }
 
             characterSkinnedRenderers = r_Player.GetComponentsInChildren<SkinnedMeshRenderer>();
+
             for (int k = 0; k < (int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT; k++)
             {
-                characterSkinnedRenderers[k].sharedMaterial = m_SnackBrains[(int)i].GetStateMaterial(k);
+                // hold onto the position
+                Material matSlot = characterSkinnedRenderers[k].sharedMaterial;
+                // set the slot a material
+                matSlot = m_SnackBrains[(int)i].GetStateMaterial(k);
+                matSlot.SetTexture("_EmissionMap",
+                    GameSettings.Instance.players[(int)i].Brain.GetEmissionMaps()[k]);
+                matSlot.SetColor("_EmissionColor", Color.black);
+                characterSkinnedRenderers[k].sharedMaterial = matSlot;
                 characterSkinnedRenderers[k].sharedMesh = m_SnackBrains[(int)i].GetStateMesh(k);
             }
 
@@ -184,6 +192,6 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             m_CameraControl.m_Targets[i] = r_Players[i].transform;
         }
 
-        m_GameManager.SetupBoss();
+        m_GameManager.Init();
     } 
 }

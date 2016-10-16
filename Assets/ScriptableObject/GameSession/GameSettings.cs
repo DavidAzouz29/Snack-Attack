@@ -62,6 +62,10 @@ public class GameSettings : ScriptableObject
 	{
 		get
 		{
+			if (_instance)
+            {
+                return _instance;
+            }
 			if (!_instance)
 				_instance = Resources.FindObjectsOfTypeAll<GameSettings>().FirstOrDefault();
 #if UNITY_EDITOR
@@ -89,7 +93,7 @@ public class GameSettings : ScriptableObject
         //                .Select(path => UnityEditor.AssetDatabase.LoadAssetAtPath<SubClassBrain>(path))
         //                .Where(b => b).ToArray();
 #else
-					availableBrains = Resources.FindObjectsOfTypeAll<SnackBrain>();
+					availableBrains = Resources.FindObjectsOfTypeAll<SubClassBrain>();
 #endif
 
     }
@@ -140,7 +144,7 @@ public class GameSettings : ScriptableObject
 	public static void InitializeFromDefault(GameSettings settings)
 	{
 		if (_instance) DestroyImmediate(_instance);
-		_instance = Instantiate(settings);
+		_instance = Instantiate(settings); // TODO: breaks here
 		_instance.hideFlags = HideFlags.HideAndDontSave;
     }
 

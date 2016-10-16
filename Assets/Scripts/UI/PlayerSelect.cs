@@ -129,7 +129,7 @@ public class PlayerSelect : MonoBehaviour
 
 	void LevelSelect()
 	{
-		c_LevelSelect.Select ();
+		//c_LevelSelect.Select ();
 		// confirm (click)
 	}
 

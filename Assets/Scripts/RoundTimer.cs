@@ -23,8 +23,6 @@ public class RoundTimer : MonoBehaviour {
 
     private List<GameObject> m_PlayerSpawns;
 
-    public List<GameObject> m_Players;
-
     private int m_PlayerCount;
     [SerializeField]
     private PlayerManager m_PlayerManager;

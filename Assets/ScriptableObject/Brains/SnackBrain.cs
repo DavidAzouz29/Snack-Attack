@@ -17,6 +17,7 @@ public abstract class SnackBrain : ScriptableObject
     //protected SkinnedMeshRenderer c_charSkinnedRenderer;
     protected Mesh[] c_charStateMeshes = new Mesh[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT];
     protected Mesh c_charBlobMesh;
+    protected Texture[] c_charEmissionMaps = new Texture[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT];
 
     // Unique per class
     protected Sprite c_charIcon;
@@ -41,6 +42,7 @@ public abstract class SnackBrain : ScriptableObject
     public abstract Mesh GetStateMesh(int i);
     public abstract Material GetBlobMaterial();
     public abstract Mesh GetBlobMesh();
+    public abstract Texture[] GetEmissionMaps();
     public abstract RuntimeAnimatorController GetAnimatorController();
     public abstract Avatar GetAnimatorAvatar();
     public abstract Sprite GetIcon();

@@ -3103,6 +3103,23 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114000011818406508}
+          m_MethodName: Select
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
 --- !u!114 &11433816
 MonoBehaviour:
@@ -5015,6 +5032,17 @@ MonoBehaviour:
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 1000011805733130}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_MethodName: SetSelectedGameObject
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1000012612697238}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -9258,8 +9286,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011704165390}
-  - 135: {fileID: 135000011309309160}
-  - 114: {fileID: 114000013615047322}
   m_Layer: 5
   m_Name: TBodyType_Right_Wrist_JNT
   m_TagString: Weapon1
@@ -9581,8 +9607,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011737409676}
-  - 114: {fileID: 114000010176291682}
-  - 135: {fileID: 135000011182816136}
   m_Layer: 5
   m_Name: TBodyType_Right_Wrist_JNT
   m_TagString: Weapon1
@@ -9763,8 +9787,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012031026572}
-  - 135: {fileID: 135000010800283164}
-  - 114: {fileID: 114000013028005070}
   m_Layer: 5
   m_Name: TBodyType_Left_Wrist_JNT
   m_TagString: Weapon2
@@ -9795,8 +9817,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011287324392}
-  - 135: {fileID: 135000014142890536}
-  - 114: {fileID: 114000013578210812}
   m_Layer: 5
   m_Name: TBodyType_Left_Wrist_JNT
   m_TagString: Weapon2
@@ -9827,8 +9847,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013670588618}
-  - 114: {fileID: 114000014018156562}
-  - 135: {fileID: 135000012688265518}
   m_Layer: 5
   m_Name: TBodyType_Left_Wrist_JNT
   m_TagString: Weapon2
@@ -10730,8 +10748,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011539520978}
-  - 114: {fileID: 114000013317202864}
-  - 135: {fileID: 135000010468634872}
   m_Layer: 5
   m_Name: TBodyType_Right_Wrist_JNT
   m_TagString: Weapon1
@@ -10747,8 +10763,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012456667954}
-  - 114: {fileID: 114000011973674036}
-  - 135: {fileID: 135000013177812150}
   m_Layer: 5
   m_Name: TBodyType_Right_Wrist_JNT
   m_TagString: Weapon1
@@ -10869,8 +10883,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010132975818}
-  - 114: {fileID: 114000013843537314}
-  - 135: {fileID: 135000013314693562}
   m_Layer: 5
   m_Name: TBodyType_Left_Wrist_JNT
   m_TagString: Weapon2
@@ -11040,8 +11052,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012389746450}
-  - 114: {fileID: 114000010340005806}
-  - 135: {fileID: 135000010928366156}
   m_Layer: 5
   m_Name: TBodyType_Left_Wrist_JNT
   m_TagString: Weapon2
@@ -11390,8 +11400,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010514849240}
-  - 135: {fileID: 135000012679664526}
-  - 114: {fileID: 114000012172410860}
   m_Layer: 5
   m_Name: TBodyType_Right_Wrist_JNT
   m_TagString: Weapon1
@@ -11422,8 +11430,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013847920782}
-  - 114: {fileID: 114000010623068422}
-  - 135: {fileID: 135000010613903930}
   m_Layer: 5
   m_Name: TBodyType_Right_Wrist_JNT
   m_TagString: Weapon1
@@ -11439,8 +11445,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010194360016}
-  - 114: {fileID: 114000011570802400}
-  - 135: {fileID: 135000012124835412}
   m_Layer: 5
   m_Name: TBodyType_Left_Wrist_JNT
   m_TagString: Weapon2
@@ -11551,8 +11555,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011904143588}
-  - 135: {fileID: 135000012080172696}
-  - 114: {fileID: 114000011066469674}
   m_Layer: 5
   m_Name: TBodyType_Right_Wrist_JNT
   m_TagString: Weapon1
@@ -11613,8 +11615,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012944597042}
-  - 135: {fileID: 135000010421439164}
-  - 114: {fileID: 114000012463671778}
   m_Layer: 5
   m_Name: TBodyType_Right_Wrist_JNT
   m_TagString: Weapon1
@@ -11913,8 +11913,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010386645042}
-  - 135: {fileID: 135000012701200778}
-  - 114: {fileID: 114000011140227256}
   m_Layer: 5
   m_Name: TBodyType_Left_Wrist_JNT
   m_TagString: Weapon2
@@ -12351,8 +12349,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000014174078282}
-  - 135: {fileID: 135000013666399848}
-  - 114: {fileID: 114000014220674490}
   m_Layer: 5
   m_Name: TBodyType_Left_Wrist_JNT
   m_TagString: Weapon2
@@ -16192,22 +16188,6 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
   m_EffectDistance: {x: 3.19, y: 3.2}
   m_UseGraphicAlpha: 1
---- !u!114 &114000010176291682
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010634572924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000010203727316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16333,22 +16313,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114000010340005806
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012369613838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000010400921814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16668,6 +16632,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: SetSelectedGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1000012612697238}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   eventSystem: {fileID: 0}
@@ -16685,22 +16660,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!114 &114000010623068422
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012879530818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000010688431046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16907,22 +16866,6 @@ MonoBehaviour:
   c_PlayerBrain: {fileID: 114000014173337124}
   m_ActiveGameSettings: {fileID: 11400000, guid: 5388f55cf06f78246ba003654a5839ae,
     type: 2}
---- !u!114 &114000011066469674
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013035920738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000011100537910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16968,22 +16911,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 3:00
---- !u!114 &114000011140227256
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013392145668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000011155380922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17174,22 +17101,6 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &114000011570802400
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012892270810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000011596159074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17680,22 +17591,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!114 &114000011973674036
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011906333210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000011981327600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -18031,22 +17926,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!114 &114000012172410860
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012874647748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000012189175388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -18352,22 +18231,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114000012463671778
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013117962410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000012543564344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -18746,22 +18609,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!114 &114000013028005070
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010821904888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000013039913662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -18963,22 +18810,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0.6397059, g: 0.48970592, b: 0, a: 1}
   m_EffectDistance: {x: 3.61, y: 3.74}
   m_UseGraphicAlpha: 1
---- !u!114 &114000013317202864
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011904135680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000013348985638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19339,22 +19170,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Banquet
---- !u!114 &114000013578210812
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010836366324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000013599326258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19409,22 +19224,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114000013615047322
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010271496480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000013647109370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19641,22 +19440,6 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &114000013843537314
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012148304554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000013919682436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19785,22 +19568,6 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &114000014018156562
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010862037940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000014045759738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19973,22 +19740,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114000014220674490
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013951306220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e591ac5de2f6404f9bcb9840780a387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  weaponIsActive: 0
-  isHeavyAttack: 0
-  m_ParentTransform: {fileID: 0}
-  c_TrailRenderer: {fileID: 0}
 --- !u!114 &114000014257056912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -20003,198 +19754,6 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 0.30147058, b: 0.30147058, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!135 &135000010421439164
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013117962410}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3
-  m_Center: {x: 0.2, y: 0, z: 0}
---- !u!135 &135000010468634872
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011904135680}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0.4, y: 0, z: 0}
---- !u!135 &135000010613903930
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012879530818}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0.4, y: 0, z: 0}
---- !u!135 &135000010800283164
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010821904888}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.27
-  m_Center: {x: -0.2, y: 0, z: 0}
---- !u!135 &135000010928366156
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012369613838}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: -0.4, y: 0, z: 0}
---- !u!135 &135000011182816136
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010634572924}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0.4, y: 0, z: 0}
---- !u!135 &135000011309309160
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010271496480}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3
-  m_Center: {x: 0.2, y: 0, z: 0}
---- !u!135 &135000012080172696
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013035920738}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3
-  m_Center: {x: 0.2, y: 0, z: 0}
---- !u!135 &135000012124835412
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012892270810}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: -0.4, y: 0, z: 0}
---- !u!135 &135000012679664526
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012874647748}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3
-  m_Center: {x: 0.2, y: 0, z: 0}
---- !u!135 &135000012688265518
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010862037940}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: -0.4, y: 0, z: 0}
---- !u!135 &135000012701200778
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013392145668}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.27
-  m_Center: {x: -0.2, y: 0, z: 0}
---- !u!135 &135000013177812150
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011906333210}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0.4, y: 0, z: 0}
---- !u!135 &135000013314693562
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012148304554}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: -0.4, y: 0, z: 0}
---- !u!135 &135000013666399848
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013951306220}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.27
-  m_Center: {x: -0.2, y: 0, z: 0}
---- !u!135 &135000014142890536
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010836366324}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.27
-  m_Center: {x: -0.2, y: 0, z: 0}
 --- !u!137 &137000010082227982
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -20324,7 +19883,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6780998c93d698649bf1cadbe9d8b401, type: 2}
+  - {fileID: 2100000, guid: 9024587ec87485545af98b85836607f6, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}

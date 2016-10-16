@@ -13,8 +13,14 @@ public class BaseClassBrain : SnackBrain
     // Meshes
     [SerializeField] protected Mesh[] _charStateMeshes = new Mesh[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT];
     [SerializeField] protected Mesh _charBlobMesh;
+    [SerializeField] protected Texture[] _charEmissionMaps = new Texture[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT];
     [SerializeField] public float _localScale = 109.1183f;
     [SerializeField] public Quaternion _rotation;
+
+    /*void OnEnable()
+    {
+        InitializeBase();
+    } */
 
     public override void InitializeBase()
     {
@@ -23,6 +29,7 @@ public class BaseClassBrain : SnackBrain
         c_charAvatar = _charAvatar;
         c_charStateMeshes = _charStateMeshes;
         c_charBlobMesh = _charBlobMesh;
+        c_charEmissionMaps = _charEmissionMaps;
     }
 
     public override void Initialize(SnackThinker snack) { }
@@ -34,6 +41,7 @@ public class BaseClassBrain : SnackBrain
     public override Mesh GetStateMesh(int i) { return _charStateMeshes[i]; }
     public override Material GetBlobMaterial() { return null; }
     public override Mesh GetBlobMesh() { return _charBlobMesh; }
+    public override Texture[] GetEmissionMaps() { return _charEmissionMaps; }
     public override RuntimeAnimatorController GetAnimatorController() { return _charAnimatorController; }
     public override Avatar GetAnimatorAvatar() { return _charAvatar; }
     public override Sprite GetIcon() { return null; }
