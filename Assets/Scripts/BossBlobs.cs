@@ -43,15 +43,15 @@ public class BossBlobs : MonoBehaviour
 
     public enum Thresholds
     {
-        BIG,
+        SMALL,
         REGULAR,
-        SMALL
+        BIG,
     }
     public enum TransitionState
     {
-        BOSS,
+        WEAK,
         NEUT,
-        WEAK
+        BOSS,
     }
 
     public Thresholds m_Threshold;
@@ -66,7 +66,7 @@ public class BossBlobs : MonoBehaviour
     };
 
     public Blobs m_Blobs;
-    public int PlayerCounter = 0;
+    public int PlayerCounter = 0; // TODO: Player ID is set up in PlayerManager -> Player Controller
     //public UIBossLevel r_UIBoss;
 
     /*
@@ -145,7 +145,8 @@ public class BossBlobs : MonoBehaviour
         gameObject.transform.FindChild("Neut").gameObject.SetActive(true);
         gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
 
-        m_EmissionColor = new Color(0.35f, 0f, 0f);
+        m_EmissionColor = GameSettings.Instance.players[PlayerCounter].Color;
+        m_EmissionColor.r = 0.35f + m_EmissionColor.r;
         m_EmissionTimer = 0f;
         m_EmissionTimerEnabled = false;
         m_EmissionThreshold = 0.5f;

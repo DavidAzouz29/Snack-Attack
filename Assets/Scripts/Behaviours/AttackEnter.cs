@@ -26,6 +26,7 @@ public class AttackEnter : StateMachineBehaviour {
                 audioSourceSlot = m_GameManager.transform.GetChild(0).GetChild(1).GetComponent<AudioSource>();
                 audioSourceSlot.pitch = Random.Range(fPitchMin, fPitchMax); //audioSourceSlot.loop = true;
                 audioSourceSlot.Play();
+                //TODO: m_GameManager.r_PlayerManager.GetPlayer(0).GetComponent<PlayerController>().enabled = false;
             }
         }
         else
