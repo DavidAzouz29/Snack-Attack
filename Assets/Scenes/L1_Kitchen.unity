@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1496986452}
-  m_IndirectSpecularColor: {r: 0.088279925, g: 0.12166224, b: 0.1279211, a: 1}
+  m_IndirectSpecularColor: {r: 0.0882893, g: 0.12166496, b: 0.12792799, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -365,6 +365,10 @@ Prefab:
     - target: {fileID: 100002, guid: a27d9b490fad77047b2adc4717072cde, type: 3}
       propertyPath: m_Name
       value: JamJar_geo_kitchen (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: a27d9b490fad77047b2adc4717072cde, type: 3}
+      propertyPath: m_TagString
+      value: StaticObject
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a27d9b490fad77047b2adc4717072cde, type: 3}
@@ -1106,6 +1110,10 @@ Prefab:
     - target: {fileID: 400000, guid: 5c171fc04633af44992e36a47fdf4daf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.201
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5c171fc04633af44992e36a47fdf4daf, type: 3}
+      propertyPath: m_TagString
+      value: StaticObject
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c171fc04633af44992e36a47fdf4daf, type: 3}
@@ -2860,9 +2868,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 108306, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100316, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012594141738, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -3730,6 +3742,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 96e740301c99d3240994898e08c07b3a, type: 2}
+    - target: {fileID: 100000, guid: 45c0bf00a9bf9434cb79df10eb448e22, type: 3}
+      propertyPath: m_TagString
+      value: StaticObject
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45c0bf00a9bf9434cb79df10eb448e22, type: 3}
   m_IsPrefabParent: 0
@@ -4481,6 +4497,10 @@ Prefab:
     - target: {fileID: 400000, guid: 5c171fc04633af44992e36a47fdf4daf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.178
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5c171fc04633af44992e36a47fdf4daf, type: 3}
+      propertyPath: m_TagString
+      value: StaticObject
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c171fc04633af44992e36a47fdf4daf, type: 3}
@@ -5389,6 +5409,10 @@ Prefab:
     - target: {fileID: 400000, guid: 5c171fc04633af44992e36a47fdf4daf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 52.595
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5c171fc04633af44992e36a47fdf4daf, type: 3}
+      propertyPath: m_TagString
+      value: StaticObject
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c171fc04633af44992e36a47fdf4daf, type: 3}
@@ -6907,6 +6931,10 @@ Prefab:
     - target: {fileID: 400002, guid: a27d9b490fad77047b2adc4717072cde, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -113.798004
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: a27d9b490fad77047b2adc4717072cde, type: 3}
+      propertyPath: m_TagString
+      value: StaticObject
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a27d9b490fad77047b2adc4717072cde, type: 3}
