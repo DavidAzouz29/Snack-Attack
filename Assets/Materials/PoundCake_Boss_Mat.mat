@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: PrCake_Neut_Mat 1
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION _NORMALMAP
+  m_Name: PoundCake_Boss_Mat
+  m_Shader: {fileID: 4800000, guid: e5e72f8989a4a754db0ff9090d3d4b26, type: 3}
+  m_ShaderKeywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -18,7 +18,7 @@ Material:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 2800000, guid: c0e0c857b681ad041a9f2f444c5f9630, type: 3}
+        m_Texture: {fileID: 2800000, guid: f8065476404e7464b922ab8475b0f1a2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -42,25 +42,25 @@ Material:
     - first:
         name: _EmissionMap
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 2745d378f895feb4fa2e10852a857ff7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: dc9f326987ec6b9448c7131ce55523e4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 17e4764285c5f4940aa5d079d774ee7d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MetallicGlossMap
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 4505e966c03a06c4fb1659540f3731a4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _OcclusionMap
       second:
-        m_Texture: {fileID: 2800000, guid: f22dad58bc180cc42b79c47e56f3afc8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 449f31d93e0b9b84e9826058dd4879a9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -99,7 +99,10 @@ Material:
       second: 0
     - first:
         name: _OcclusionStrength
-      second: 0.489
+      second: 0.363
+    - first:
+        name: _Outline
+      second: 0.005
     - first:
         name: _Parallax
       second: 0.02
@@ -124,4 +127,7 @@ Material:
       second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
+      second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _OutlineColor
       second: {r: 0, g: 0, b: 0, a: 1}

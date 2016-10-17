@@ -144,7 +144,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //jump
         //fMovementSpeedSlowDown = fMovementSpeed - 2.0f;
-        fJumpForce = 5.0f;
         //fJumpForceMax = fJumpForce;// *2;
         m_PreviousPos = transform.position;
     }
