@@ -8,23 +8,72 @@
 /// </summary>
 
 using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 using System.Linq;
 
 public class PlayerInfoController : MonoBehaviour
 {
 	public int PlayerIndex;
+	public bool isReady = false;
 	public UnityEngine.UI.Button PlayerColor;
 	public UnityEngine.UI.Text c_PlayerBrain;
-    [SerializeField] private GameSettings m_ActiveGameSettings;
+    public float fSensitivity = 2.0f;
 
     //private MainMenuController _mainMenu;
-	private GameSettings.PlayerInfo _player;
+    private GameSettings.PlayerInfo _player;
+	private ArrayLayout playerButtonsArray;
+    private int m_Controller = 0; // tracks time
+    private float m_Timer = 0; // tracks time
+    private float m_TimerPause = 0; // Time before next input
     public void Awake()
     {
         //_mainMenu = GetComponentInParent<MainMenuController>();
-        m_ActiveGameSettings = GetComponentInParent<MainMenuController>().GameSettingsTemplate;
-        CharacterSelection(GameSettings.Instance.players[PlayerIndex]);// m_ActiveGameSettings.players[i]);
+        CharacterSelection(GameSettings.Instance.players[PlayerIndex]);
+        playerButtonsArray = GetComponentInParent<PlayerSelect>().playerButtons;
+        m_Controller = PlayerIndex + 1;
+}
+
+    void Update()
+    {
+        m_Timer += Time.deltaTime;
+
+        // Left
+        if (Input.GetKeyDown("joystick " + (m_Controller) + " button 4") && m_Timer <= m_TimerPause || 
+            Input.GetAxis("P" + (m_Controller) + "_Horizontal") < fSensitivity && m_Timer <= m_TimerPause)
+        {
+            // Cycle left in character list
+            OnPreviousBrain();
+            //playerButtonsArray.playerColsButton[PlayerIndex].coloumn[1].Select();
+            //playerButtonsArray.playerRows[PlayerIndex].row[PlayerIndex].Select();
+            m_Timer = 0;
+        }
+
+        // Right
+        if (Input.GetKeyDown("joystick " + (m_Controller) + " button 5") && m_Timer <= m_TimerPause ||
+            Input.GetAxis("P" + (m_Controller) + "_Horizontal") > fSensitivity && m_Timer <= m_TimerPause)
+        {
+            // Cycle right in character list
+            OnNextBrain();
+            //playerButtonsArray.playerColsButton[PlayerIndex].coloumn[2].Select();
+            //playerButtonsArray.playerRows[PlayerIndex].row[PlayerIndex].Select();
+            m_Timer = 0;
+        }
+
+        if (Input.GetAxis("P" + (m_Controller) + "_Vertical") < fSensitivity && m_Timer <= m_TimerPause)
+        {
+
+        }
+
+        // Select (A on Xbox)
+        if (Input.GetKeyDown("joystick " + (m_Controller) + " button 0") && m_Timer <= m_TimerPause)
+        {
+            // Toggle "Ready" on/ off
+            isReady = !isReady;
+            //playerButtonsArray.playerColsButton[PlayerIndex].coloumn[1].Select();
+            //playerButtonsArray.playerRows[PlayerIndex].row[PlayerIndex].Select();
+            m_Timer = 0;
+        }
     }
 
     public void Refresh()
@@ -42,17 +91,22 @@ public class PlayerInfoController : MonoBehaviour
 
     }
 
-	/*public void OnCycleColor()
+    /*public void OnCycleColor()
 	{
 		_player.Color = _mainMenu.GetNextColor(_player.Color);
 		Refresh();
 	} */
 
+    public void ToggleIsReady()
+    {
+        isReady = !isReady;
+    }
+
     // Left
     public void OnPreviousBrain()
     {
         //_player.Brain = _mainMenu.CycleNextSelection(_player.Brain, false);
-        _player.Brain = m_ActiveGameSettings.CycleNextSelection(_player.Brain, false);
+        _player.Brain = GameSettings.Instance.CycleNextSelection(_player.Brain, false);
         CharacterSelection(_player);
         Refresh();
     }
@@ -61,7 +115,7 @@ public class PlayerInfoController : MonoBehaviour
     public void OnNextBrain()
 	{
         //_player.Brain = _mainMenu.CycleNextSelection(_player.Brain, true);
-        _player.Brain = m_ActiveGameSettings.CycleNextSelection(_player.Brain, true);
+        _player.Brain = GameSettings.Instance.CycleNextSelection(_player.Brain, true);
         CharacterSelection(_player);
         Refresh();
     }
@@ -70,7 +124,7 @@ public class PlayerInfoController : MonoBehaviour
     {
         //UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(playerButtons.playerColsButton[a_player].coloumn[0].gameObject);
         // //c_GameSettings.availableBrains[iCurrentClassSelection[a_player]];//c_Characters[iCurrentClassSelection[a_player]];
-        SubClassBrain c_currChar = m_ActiveGameSettings.availableBrains.FirstOrDefault(b => b._iBrainID == (int)a_player.eClassState);
+        SubClassBrain c_currChar = GameSettings.Instance.availableBrains.FirstOrDefault(b => b._iBrainID == (int)a_player.eClassState);
         GameObject characterSlot = null;
         // Rocky Road
         if ((int)a_player.eClassState < (int)PlayerBuild.E_ROCKYROAD_STATE.E_ROCKYROAD_BASE_ROCKYROAD_COUNT)

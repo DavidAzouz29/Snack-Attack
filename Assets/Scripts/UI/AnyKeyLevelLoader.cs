@@ -26,6 +26,6 @@ public class AnyKeyLevelLoader : MonoBehaviour {
 		CancelInvoke("LoadLevel");
         GC.Collect();
         Resources.UnloadUnusedAssets();
-		SceneManager.LoadScene(levelToLoad);
+		SceneManager.LoadScene(levelToLoad, LoadSceneMode.Single);
 	}
 }

@@ -105,7 +105,7 @@ public class BossBlobs : MonoBehaviour
         m_Power = 132;
         m_CurrentThreshold = m_Blobs.RegularThresh;
         transform.localScale = new Vector3(m_PowerLevelScale[1], m_PowerLevelScale[1], m_PowerLevelScale[1]);
-        r_PlayerMan = FindObjectOfType<PlayerManager>();
+        r_PlayerMan = PlayerManager.Instance;
         r_PlayerCon = GetComponent<PlayerController>();
         blobsArray = r_PlayerMan.GetBlobArray();
 

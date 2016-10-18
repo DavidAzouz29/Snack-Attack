@@ -23,7 +23,6 @@
 /// ----------------------------------
 
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 //using System.Linq;
@@ -36,12 +35,6 @@ public class PlayerSelect : MonoBehaviour
 	public float fSensitivity = 2.0f;
 	public Button c_LevelSelect;
 
-    // ------------------------------------
-    // Used to hold the different characters we can play as.
-    // Mesh, MeshRenderer, and Animation
-    // ------------------
-    //public GameObject[] c_Characters = new GameObject[(int)PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_BASE_COUNT];
-    public GameSettings c_GameSettings;
     public GameObject c_eventSystems;
 
     // For which player
@@ -55,7 +48,7 @@ public class PlayerSelect : MonoBehaviour
         {
             playersConfirmed[i] = false;
             // Start 1-4 Coroutines to check for player input - each on their own "thread*"
-            StartCoroutine(PlayerInput(i));
+            //StartCoroutine(PlayerInput(i));
         }		
 	}
 

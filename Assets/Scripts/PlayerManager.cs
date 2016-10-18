@@ -59,10 +59,31 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     [SerializeField] private SnackBrain[] m_SnackBrains = new SnackBrain[MAX_PLAYERS];
     public SkinnedMeshRenderer[] m_ModelMeshRenderers;
 
+    // Part of our game manager's Game Object that doesn't destroy 
+    // - therefore we don't want to create an instance
+    private static PlayerManager _instance;
+    public static PlayerManager Instance
+    {
+        get
+        {
+            if (_instance != null)
+            {
+                return _instance;
+            }
+            // If we're null
+            PlayerManager playerManager = FindObjectOfType<PlayerManager>().GetComponent<PlayerManager>();
+            if (playerManager != null)
+            {
+                _instance = playerManager;
+            }
+            return _instance;
+        }
+    }
+
     // Use this for initialization
     void Start ()
     {
-		m_GameManager = FindObjectOfType<GameManager>();
+		m_GameManager = GetComponentInParent<GameManager>();
         OnLevelWasLoaded();
     }
 
