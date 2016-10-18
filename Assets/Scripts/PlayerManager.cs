@@ -141,8 +141,8 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
                 Material matSlot = characterSkinnedRenderers[k].sharedMaterial;
                 // set the slot a material
                 matSlot = m_SnackBrains[(int)i].GetStateMaterial(k);
-                matSlot.SetTexture("_EmissionMap",
-                    GameSettings.Instance.players[(int)i].Brain.GetEmissionMaps()[k]);
+                /*matSlot.SetTexture("_EmissionMap",
+                    GameSettings.Instance.players[(int)i].Brain.GetEmissionMaps()[k]); */
                 matSlot.SetColor("_EmissionColor", Color.black);
                 characterSkinnedRenderers[k].sharedMaterial = matSlot;
                 characterSkinnedRenderers[k].sharedMesh = m_SnackBrains[(int)i].GetStateMesh(k);

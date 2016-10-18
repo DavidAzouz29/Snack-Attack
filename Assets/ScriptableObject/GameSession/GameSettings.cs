@@ -75,6 +75,7 @@ public class GameSettings : ScriptableObject
             if (gameSettings != null)
             {
                 _instance = Instantiate(gameSettings);
+                _instance.availableBrains.OrderBy(n => n._iBrainID); //TODO: works?
             }
 #if UNITY_EDITOR
             if (_instance == null)
