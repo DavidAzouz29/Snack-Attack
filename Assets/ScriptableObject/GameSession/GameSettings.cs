@@ -31,7 +31,11 @@ public class GameSettings : ScriptableObject
 				if (!_cachedBrain && !String.IsNullOrEmpty(BrainName))
 				{
                     // TODO: get rid of hack
-					_cachedBrain = Instance.availableBrains.FirstOrDefault(b => b.name == BrainName);
+                    var inst = Instance;
+                    var availBrains = inst.availableBrains;
+                    var firstWithName = availBrains.FirstOrDefault(b => b.name == BrainName);
+
+                    _cachedBrain = Instance.availableBrains.FirstOrDefault(b => b.name == BrainName);
 				}
 				return _cachedBrain;
 			}
@@ -59,22 +63,27 @@ public class GameSettings : ScriptableObject
 
     private static GameSettings _instance;
 	public static GameSettings Instance
-	{
-		get
-		{
-			if (_instance)
+    {
+        get
+        {
+            if (_instance != null)
             {
                 return _instance;
             }
-			if (!_instance)
-				_instance = Resources.FindObjectsOfTypeAll<GameSettings>().FirstOrDefault();
+            // If we're null
+            var gameSettings = Resources.FindObjectsOfTypeAll<GameSettings>().FirstOrDefault();
+            if (gameSettings != null)
+            {
+                _instance = Instantiate(gameSettings);
+                _instance.availableBrains.OrderBy(n => n._iBrainID); //TODO: works?
+            }
 #if UNITY_EDITOR
-			if (!_instance)
-				InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Default game settings.asset"));
+            if (_instance == null)
+                InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Default game settings.asset"));
 #endif
-			return _instance;
-		}
-	}
+            return _instance;
+        }
+    }
 
     // Public due to SO
     public int NumberOfRounds;
@@ -129,7 +138,7 @@ public class GameSettings : ScriptableObject
 
 	public static void LoadFromJSON(string path)
 	{
-		if (!_instance) DestroyImmediate(_instance);
+		if (_instance != null) DestroyImmediate(_instance);
 		_instance = ScriptableObject.CreateInstance<GameSettings>();
 		JsonUtility.FromJsonOverwrite(System.IO.File.ReadAllText(path), _instance);
 		_instance.hideFlags = HideFlags.HideAndDontSave;
@@ -143,7 +152,7 @@ public class GameSettings : ScriptableObject
 
 	public static void InitializeFromDefault(GameSettings settings)
 	{
-		if (_instance) DestroyImmediate(_instance);
+		if (_instance != null) DestroyImmediate(_instance);
 		_instance = Instantiate(settings); // TODO: breaks here
 		_instance.hideFlags = HideFlags.HideAndDontSave;
     }

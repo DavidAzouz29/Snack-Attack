@@ -43,15 +43,15 @@ public class BossBlobs : MonoBehaviour
 
     public enum Thresholds
     {
-        BIG,
+        SMALL,
         REGULAR,
-        SMALL
+        BIG,
     }
     public enum TransitionState
     {
-        BOSS,
+        WEAK,
         NEUT,
-        WEAK
+        BOSS,
     }
 
     public Thresholds m_Threshold;
@@ -66,7 +66,7 @@ public class BossBlobs : MonoBehaviour
     };
 
     public Blobs m_Blobs;
-    public int PlayerCounter = 0;
+    public int PlayerCounter = 0; // TODO: Player ID is set up in PlayerManager -> Player Controller
     //public UIBossLevel r_UIBoss;
 
     /*
@@ -84,6 +84,9 @@ public class BossBlobs : MonoBehaviour
     [SerializeField]
     private GameObject[] blobsArray = new GameObject[PlayerManager.MAX_PLAYERS];
     private bool m_Respawned = false;
+    private bool m_Invulnerable = false;
+    private float m_InvulnerabilityTimer = 0f;
+    private float m_InvulnerabilityThreshold = 1.0f;
 
 
     void Start()
@@ -129,7 +132,7 @@ public class BossBlobs : MonoBehaviour
                     m_ModelMeshRenderers[i].material.SetColor("_OutlineColor", Color.green);
                     break;
                 case 3:
-                    m_ModelMeshRenderers[i].material.SetColor("_OutlineColor", new Color(0.4f, 0.18f, 0.58f));
+                    m_ModelMeshRenderers[i].material.SetColor("_OutlineColor", new Color(0.28f, 0, 0.28f));
                     break;
                 default:
                     break;
@@ -142,7 +145,8 @@ public class BossBlobs : MonoBehaviour
         gameObject.transform.FindChild("Neut").gameObject.SetActive(true);
         gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
 
-        m_EmissionColor = new Color(0.35f, 0f, 0f);
+        m_EmissionColor = GameSettings.Instance.players[PlayerCounter].Color;
+        m_EmissionColor.r = 0.35f + m_EmissionColor.r;
         m_EmissionTimer = 0f;
         m_EmissionTimerEnabled = false;
         m_EmissionThreshold = 0.5f;
@@ -177,7 +181,7 @@ public class BossBlobs : MonoBehaviour
         UpdateScale();
         if (m_EmissionTimerEnabled)
             m_EmissionTimer += Time.deltaTime;
-        if (m_EmissionTimer > m_EmissionThreshold)
+        if (m_EmissionTimer >= m_EmissionThreshold)
         {
             for (int i = 0; i < m_ModelMeshRenderers.Length; i++)
             {
@@ -185,6 +189,13 @@ public class BossBlobs : MonoBehaviour
             }
             m_EmissionTimerEnabled = false;
             m_EmissionTimer = 0f;
+        }
+        if (m_Invulnerable)
+            m_InvulnerabilityTimer += Time.deltaTime;
+        if (m_InvulnerabilityTimer >= m_InvulnerabilityThreshold)
+        {
+            m_Invulnerable = false;
+            m_InvulnerabilityTimer = 0f;
         }
     }
 
@@ -232,6 +243,8 @@ public class BossBlobs : MonoBehaviour
 
     void OnTriggerEnter(Collider _col)
     {
+        if (m_Invulnerable)
+            return;
         PlayerAnims m_LocalAnim = gameObject.GetComponent<PlayerAnims>();
         PlayerAnims m_ColliderAnim = _col.gameObject.GetComponentInParent<PlayerAnims>();
         //Check if a player is hiting us
@@ -443,6 +456,7 @@ public class BossBlobs : MonoBehaviour
         gameObject.transform.FindChild("Weak").gameObject.GetComponent<Animator>().SetBool("Boss", false);
         gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", false);
         gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
+        m_Invulnerable = true;
 
         m_TransitionState = TransitionState.WEAK;
     }

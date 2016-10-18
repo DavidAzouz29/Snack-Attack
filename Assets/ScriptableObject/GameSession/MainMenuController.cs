@@ -1,5 +1,11 @@
-﻿using System;
+﻿///<summary>
+///
+/// viewed: http://www.alanzucconi.com/2016/03/30/loading-bar-in-unity/
+/// </summary>
+
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -9,23 +15,39 @@ public class MainMenuController : MonoBehaviour
 
 	public Color[] AvailableColors;
 
-	//public UnityEngine.UI.Button PanelSwitcher;
-	//public GameObject PlayersPanel;
-	//public GameObject SettingsPanel;
+    public Text[] LoadingBarTexts = new Text[3];
 
-	public string SavedSettingsPath {
+    //public UnityEngine.UI.Button PanelSwitcher;
+    //public GameObject PlayersPanel;
+    //public GameObject SettingsPanel;
+
+    public string SavedSettingsPathEditor
+    {
 		get {
-			return System.IO.Path.Combine(Application.persistentDataPath, "snacks-settings.json");
+			return System.IO.Path.Combine(Application.persistentDataPath, "snacks-settings-editor.json");
 		}
 	}
 
-	void Start ()
+    public string SavedSettingsPath
     {
-        // TODO: restore?
-		/*if (System.IO.File.Exists(SavedSettingsPath))
+        get
+        {
+            return System.IO.Path.Combine(Application.persistentDataPath, "snacks-settings-build.json");
+        }
+    }
+
+    void Start ()
+    {
+#if UNITY_EDITOR
+        if (System.IO.File.Exists(SavedSettingsPathEditor))
+            GameSettings.LoadFromJSON(SavedSettingsPathEditor);
+
+#else
+        if (System.IO.File.Exists(SavedSettingsPath))
 			GameSettings.LoadFromJSON(SavedSettingsPath);
-		else //*/
-			GameSettings.InitializeFromDefault(GameSettingsTemplate);
+#endif
+        else //
+            GameSettings.InitializeFromDefault(GameSettingsTemplate);
 
 		foreach(var info in GetComponentsInChildren<PlayerInfoController>())
 			info.Refresh();
@@ -33,12 +55,58 @@ public class MainMenuController : MonoBehaviour
 		//NumberOfRoundsSlider.value = GameSettings.Instance.NumberOfRounds;
 	}
 
-	public void Play()
-	{
-		GameSettings.Instance.SaveToJSON(SavedSettingsPath);
-		GameState.CreateFromSettings(GameSettings.Instance);
-		SceneManager.LoadScene(this.GetComponent<MenuScript>().GetLevelSelection(), LoadSceneMode.Single);
-	}
+    IEnumerator AsynchronousLoad(int a_scene)
+    {
+        yield return null;
+
+        AsyncOperation ao = SceneManager.LoadSceneAsync(a_scene);
+        ao.allowSceneActivation = false;
+        // TODO: clean up one day? 17/10/2016
+        string sTextSlot = null;
+        if(a_scene == 2)
+        {
+            sTextSlot = "Kitchen";
+        }
+        else if (a_scene == 3)
+        {
+            sTextSlot = "Banquet";
+        }
+        LoadingBarTexts[1].text = sTextSlot; //SceneManager.GetSceneAt(a_scene).name.TrimStart("L1_".ToCharArray());
+
+        while (!ao.isDone)
+        {
+            // [0, 0.9] > [0, 1]
+            float progress = Mathf.Clamp01(ao.progress / 0.9f);
+            Debug.Log("Loading progress: " + (progress * 100) + "%");
+            LoadingBarTexts[2].text = (progress * 100).ToString() + " Complete";
+
+            // Loading completed
+            if (ao.progress == 0.9f)
+            {
+                LoadingBarTexts[2].text = "Press Any Key."; Debug.Log("Press a key to start");
+                if (Input.anyKey && !Input.GetKeyDown(KeyCode.JoystickButton15))
+                {
+                    ao.allowSceneActivation = true;
+                }
+            }
+
+            yield return null;
+        }
+    }
+
+    public void Play()
+    {
+        string sPath = "";
+#if UNITY_EDITOR
+        sPath = SavedSettingsPathEditor;
+#else
+                sPath = SavedSettingsPath;
+#endif
+        GameSettings.Instance.SaveToJSON(sPath);
+        GameState.CreateFromSettings(GameSettings.Instance);
+        //SceneManager.LoadScene(this.GetComponent<MenuScript>().GetLevelSelection(), LoadSceneMode.Single);
+        StartCoroutine(AsynchronousLoad(this.GetComponent<MenuScript>().GetLevelSelection()));
+    }
 
 	public Color GetNextColor(Color color)
 	{

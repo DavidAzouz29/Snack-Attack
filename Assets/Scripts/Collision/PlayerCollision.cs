@@ -26,7 +26,8 @@ public class PlayerCollision : MonoBehaviour {
     public SkinnedMeshRenderer c_SMR;
     [SerializeField] private TrailRenderer c_TrailRenderer;
     private uint iPlayerID;
-    //private BossBlobs.TransitionState eTransitionState;
+    private GameSettings.PlayerInfo players;
+    private BossBlobs r_BossBlobs;
     //Attack Timer
     private float m_Timer = 0;
     private bool m_TimerEnabled = false;
@@ -44,7 +45,8 @@ public class PlayerCollision : MonoBehaviour {
                 weaponIsActive = false;
                 c_TrailRenderer = GetComponent<TrailRenderer>();
                 iPlayerID = GetComponentInParent<PlayerController>().GetPlayerID();
-                //eTransitionState = GetComponentInParent<BossBlobs>().m_TransitionState;
+                players = GameSettings.Instance.players[(int)iPlayerID];
+                r_BossBlobs = GetComponentInParent<BossBlobs>();
             }
         }
     }
@@ -56,7 +58,15 @@ public class PlayerCollision : MonoBehaviour {
             m_TimerEnabled = true;
             PunchEffects(true);
             // Emissive map //[(int)eTransitionState]
-            c_SMR.sharedMaterial.SetColor("_EmissionColor", GameSettings.Instance.players[(int)iPlayerID].Color);
+            c_SMR.sharedMaterial.SetTexture("_EmissionMap", players.Brain.GetEmissionMaps()[(int)r_BossBlobs.m_TransitionState]);
+            c_SMR.sharedMaterial.SetColor("_EmissionColor", players.Color);
+        }
+        else if(isHeavyAttack)
+        {
+            m_TimerEnabled = true; //TODO: tweak? Boss state and heavy attack isn't working?
+            PunchEffects(true);
+            c_SMR.sharedMaterial.SetTexture("_EmissionMap", players.Brain.GetEmissionMaps()[(int)r_BossBlobs.m_TransitionState]);
+            c_SMR.sharedMaterial.SetColor("_EmissionColor", players.Color);
         }
 
         if (m_TimerEnabled)
@@ -70,6 +80,7 @@ public class PlayerCollision : MonoBehaviour {
             m_TimerEnabled = false;
             PunchEffects(false);
             // Emissive map //[(int)eTransitionState]
+            c_SMR.sharedMaterial.SetTexture("_EmissionMap", null);
             c_SMR.sharedMaterial.SetColor("_EmissionColor", Color.black);
             m_Timer = 0.0f;
         }
