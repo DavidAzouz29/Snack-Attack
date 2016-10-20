@@ -5,6 +5,7 @@ using System;
 [CreateAssetMenu(menuName= "Brains/Base Class Brain", order =0)]
 public class BaseClassBrain : SnackBrain
 {
+    [Header("Base class properties")]
     [SerializeField] protected PlayerBuild.E_BASE_CLASS_STATE _eBaseClassState;
     //[SerializeField] protected new PlayerBuild.E_ROCKYROAD_STATE eRockyRoadSkinState;
     // Animation
@@ -44,7 +45,7 @@ public class BaseClassBrain : SnackBrain
     public override Texture[] GetEmissionMaps() { return _charEmissionMaps; }
     public override RuntimeAnimatorController GetAnimatorController() { return _charAnimatorController; }
     public override Avatar GetAnimatorAvatar() { return _charAvatar; }
-    public override Sprite GetIcon() { return null; }
+    public override Sprite GetIcon(int i) { return null; }
 
 
     /*{

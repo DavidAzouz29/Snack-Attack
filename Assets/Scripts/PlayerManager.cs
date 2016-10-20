@@ -56,6 +56,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     private GameManager m_GameManager;
     private SpawnManager m_SpawnManager;
     private CameraControl m_CameraControl;
+    [HideInInspector] public UILevel r_UILevel;
     [SerializeField] private SnackBrain[] m_SnackBrains = new SnackBrain[MAX_PLAYERS];
     public SkinnedMeshRenderer[] m_ModelMeshRenderers;
 
@@ -98,6 +99,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
                 m_SpawnManager = FindObjectOfType<SpawnManager>();
                 m_PlayerSpawns = m_SpawnManager.m_PlayerSpawns;
                 m_CameraControl = FindObjectOfType<CameraControl>();
+                r_UILevel = FindObjectOfType<UILevel>();
             }
         }
     }
@@ -174,25 +176,21 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             if (i == 0)
             {
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.red;
-                r_Player.GetComponent<BossBlobs>().PlayerCounter = 0;
             }
             else if (i == 1)
             {
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.blue;
-                r_Player.GetComponent<BossBlobs>().PlayerCounter = 1;
             }
             else if (i == 2)
             {
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.green;
-                r_Player.GetComponent<BossBlobs>().PlayerCounter = 2;
-
             }
             else if (i == 3)
             {
                 Color Player4Color = new Color(0.4f, 0.18f, 0.58f);
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Player4Color; // m_playerInfo.Brain.Color;
-                r_Player.GetComponent<BossBlobs>().PlayerCounter = 3;
             }
+            //r_Player.GetComponent<BossBlobs>().PlayerCounter = (int)i; // TODO: id is in P Con
 
             Object j = Instantiate(r_Player, m_PlayerSpawns[(int)i].transform.position, r_Player.transform.rotation);
             j.name = "Character " + (i + 1);

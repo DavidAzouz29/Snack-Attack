@@ -5,12 +5,13 @@ using System;
 [CreateAssetMenu(menuName= "Brains/Sub Class Brain", order =1)]
 public class SubClassBrain : BaseClassBrain
 {
+    [Header("Unique to each sub class")]
     public BaseClassBrain _baseClassBrain;
-    public int _iBrainID; // Order #
+    public int _iBrainID; // # to Order by
     [SerializeField] protected string _charName;
     [SerializeField] protected Color _Color;
     [SerializeField] protected PlayerController.E_CLASS_STATE _eClassState;
-    [SerializeField] protected Sprite _charIcon;
+    [SerializeField] protected Sprite[] _charIcon = new Sprite[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT + 1];
     [SerializeField] protected Material[] _charStateMaterials = new Material[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT];
     [SerializeField] protected Material _charBlobMaterial;
 
@@ -35,7 +36,7 @@ public class SubClassBrain : BaseClassBrain
         charName = _charName;
         Color = _Color;
         eClassState = _eClassState;
-        c_charIcon = _charIcon;
+        c_charIcon = _charIcon; //TODO: set to neut through state
         c_charBlobMaterial = _charBlobMaterial;
     }
 
@@ -50,6 +51,6 @@ public class SubClassBrain : BaseClassBrain
     public override Texture[] GetEmissionMaps() { return c_charEmissionMaps; }
     public override RuntimeAnimatorController GetAnimatorController() { return c_charAnimatorController; }
     public override Avatar GetAnimatorAvatar() { return c_charAvatar; }
-    public override Sprite GetIcon() { return c_charIcon; }
+    public override Sprite GetIcon(int i) { return c_charIcon[i]; }
 
 }

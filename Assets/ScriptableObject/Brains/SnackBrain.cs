@@ -6,6 +6,7 @@ using System.Linq;
 
 public abstract class SnackBrain : ScriptableObject
 {
+    #region Base Class
     protected string charName;
     protected Color Color;
     // Unique per base class
@@ -18,14 +19,16 @@ public abstract class SnackBrain : ScriptableObject
     protected Mesh[] c_charStateMeshes = new Mesh[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT];
     protected Mesh c_charBlobMesh;
     protected Texture[] c_charEmissionMaps = new Texture[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT];
+    #endregion
 
-    // Unique per class
-    protected Sprite c_charIcon;
+    #region Unique per class
+    protected Sprite[] c_charIcon = new Sprite[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT + 1];
     protected Material[] c_charStateMaterials;
     protected Material c_charBlobMaterial;
     protected PlayerBuild.E_ROCKYROAD_STATE eRockyRoadSkinState;
     protected PlayerBuild.E_PRINCESSCAKE_STATE ePrincessCakeSkinState;
     protected PlayerBuild.E_PIZZAPUNK_STATE ePizzaPunkSkinState;
+    #endregion
 
     //public virtual void Initialize(SnackThinker snack) { } //base.Initialize(snack);
     public abstract void InitializeBase();
@@ -45,6 +48,6 @@ public abstract class SnackBrain : ScriptableObject
     public abstract Texture[] GetEmissionMaps();
     public abstract RuntimeAnimatorController GetAnimatorController();
     public abstract Avatar GetAnimatorAvatar();
-    public abstract Sprite GetIcon();
+    public abstract Sprite GetIcon(int i);
     //public abstract void Think(SnackThinker snack);
 }

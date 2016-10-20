@@ -1,4 +1,22 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Author: 		Nick Delafore, Dylan Harvey, and David Azouz
+/// Date Created: 	/16
+/// Date Modified: 	/16
+/// --------------------------------------------------
+/// Brief: BossBlobs are what players seek to grow and evolve.
+/// Combat also happens here.
+/// viewed 
+/// 
+/// ***EDIT***
+/// - removed PlayerCounter and us respawing as weak	- David Azouz 20/10/16
+/// -  - David Azouz 11/04/16
+/// - Players have unique material - David Azouz 21/06/16
+/// 
+/// TODO:
+/// - change remove const from MAX_PLAYERS
+/// </summary>
+
+using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
@@ -41,6 +59,7 @@ public class BossBlobs : MonoBehaviour
     public float m_EmissionThreshold;
     public SkinnedMeshRenderer[] m_ModelMeshRenderers;
 
+    // TODO: two enums that do the same thing?
     public enum Thresholds
     {
         SMALL,
@@ -66,7 +85,6 @@ public class BossBlobs : MonoBehaviour
     };
 
     public Blobs m_Blobs;
-    public int PlayerCounter = 0; // TODO: Player ID is set up in PlayerManager -> Player Controller
     //public UIBossLevel r_UIBoss;
 
     /*
@@ -81,6 +99,9 @@ public class BossBlobs : MonoBehaviour
 
     private PlayerManager r_PlayerMan;
     private PlayerController r_PlayerCon;
+    private UILevel r_UILevel;
+    private int iPlayerID;
+    private bool isNeut = false; // used for respawn
     [SerializeField]
     private GameObject[] blobsArray = new GameObject[PlayerManager.MAX_PLAYERS];
     private bool m_Respawned = false;
@@ -97,7 +118,7 @@ public class BossBlobs : MonoBehaviour
         //   Physics.IgnoreCollision(gameObject.GetComponent<BoxCollider>(), AttackIgnore[i]);
         //   Physics.IgnoreCollision(gameObject.GetComponent<CapsuleCollider>(), AttackIgnore[i]);
         //}
-        m_Killbox = FindObjectOfType<Killbox>();
+        m_Killbox = FindObjectOfType<Killbox>(); //TODO: remove find
         InitializeStruct();
 
         m_Threshold = Thresholds.REGULAR;
@@ -107,7 +128,9 @@ public class BossBlobs : MonoBehaviour
         transform.localScale = new Vector3(m_PowerLevelScale[1], m_PowerLevelScale[1], m_PowerLevelScale[1]);
         r_PlayerMan = PlayerManager.Instance;
         r_PlayerCon = GetComponent<PlayerController>();
+        r_UILevel = r_PlayerMan.r_UILevel;
         blobsArray = r_PlayerMan.GetBlobArray();
+        iPlayerID = (int)r_PlayerCon.GetPlayerID();
 
 
         //Material Caching
@@ -120,7 +143,7 @@ public class BossBlobs : MonoBehaviour
         for (int i = 0; i < m_ModelMeshRenderers.Length; i++ )
         {
             m_ModelMeshRenderers[i].material.GetType();
-            switch(PlayerCounter)
+            switch(iPlayerID)
             {
                 case 0:
                     m_ModelMeshRenderers[i].material.SetColor("_OutlineColor", Color.red);
@@ -145,7 +168,7 @@ public class BossBlobs : MonoBehaviour
         gameObject.transform.FindChild("Neut").gameObject.SetActive(true);
         gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
 
-        m_EmissionColor = GameSettings.Instance.players[PlayerCounter].Color;
+        m_EmissionColor = GameSettings.Instance.players[iPlayerID].Color;
         m_EmissionColor.r = 0.35f + m_EmissionColor.r;
         m_EmissionTimer = 0f;
         m_EmissionTimerEnabled = false;
@@ -175,6 +198,7 @@ public class BossBlobs : MonoBehaviour
     {
         if (m_Power <= 0 && !m_Respawned)
         {
+            StartCoroutine(r_UILevel.UpdateIcon(iPlayerID, m_TransitionState, true));
             m_Killbox.PlayerRespawn(gameObject);
             m_Respawned = true;
         }
@@ -238,6 +262,8 @@ public class BossBlobs : MonoBehaviour
                 m_TransitionState = TransitionState.WEAK;
                 m_Threshold = Thresholds.SMALL;
             }
+            // Update our icon based on our new state
+            StartCoroutine(r_UILevel.UpdateIcon(iPlayerID, m_TransitionState, false));
         }
     }
 
@@ -446,19 +472,55 @@ public class BossBlobs : MonoBehaviour
 
     public void Respawn()
     {
-        m_Threshold = Thresholds.SMALL;
-        m_Power = 66;
-        m_CurrentThreshold = m_Blobs.SmallThresh;
-        transform.localScale = new Vector3(m_PowerLevelScale[2], m_PowerLevelScale[2], m_PowerLevelScale[2]);
-        gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
-        gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
-        gameObject.transform.FindChild("Weak").gameObject.SetActive(true);
-        gameObject.transform.FindChild("Weak").gameObject.GetComponent<Animator>().SetBool("Boss", false);
-        gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", false);
-        gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
-        m_Invulnerable = true;
+        // we never need to "Respawn" as boss, 
+        // therefore can only check two conditions:
+        // weak and neut
+        //string sState = "Aeaa";
+        switch (m_TransitionState)
+        {
+            // From Neut or Weak
+            case TransitionState.WEAK:
+            case TransitionState.NEUT:
+                {
+                    isNeut = false;
+                    m_Threshold = Thresholds.SMALL;
+                    m_TransitionState = TransitionState.WEAK;
+                    m_Power = 66; //TOOD: enum
+                    m_CurrentThreshold = m_Blobs.SmallThresh;
+                    //sState = "Weak";
+                    transform.localScale = new Vector3(m_PowerLevelScale[2], m_PowerLevelScale[2], m_PowerLevelScale[2]);
+                    break;
+                }
+            // From Boss to Neut
+            case TransitionState.BOSS:
+                {
+                    isNeut = true;
+                    m_Threshold = Thresholds.REGULAR;
+                    m_TransitionState = TransitionState.NEUT;
+                    m_Power = 132; //TOOD: enum
+                    m_CurrentThreshold = m_Blobs.RegularThresh;
+                    //sState = "Neut";
+                    transform.localScale = new Vector3(m_PowerLevelScale[1], m_PowerLevelScale[1], m_PowerLevelScale[1]);
+                    break;
+                }
+            default:
+                {
+                    isNeut = false;
+                    break;
+                }
+        }
 
-        m_TransitionState = TransitionState.WEAK;
+        // Perform under all conditions
+        gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
+        gameObject.transform.FindChild("Neut").gameObject.SetActive(isNeut);
+        gameObject.transform.FindChild("Weak").gameObject.SetActive(!isNeut);
+        GetComponentInChildren<Animator>().SetBool("Boss", false);
+        gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", false);
+        gameObject.GetComponent<PlayerAnims>().m_Anim = GetComponentInChildren<Animator>();
+        m_Invulnerable = true;
+        // Switch sprite to "hit" momentarily and switch back
+        StartCoroutine(r_UILevel.UpdateIcon(iPlayerID, m_TransitionState, false));
+
     }
 
     public void UpdateScore(Collider _col)
@@ -490,6 +552,8 @@ public class BossBlobs : MonoBehaviour
 
         //Apply Damage
         m_Power = m_Power - _col.gameObject.GetComponent<PlayerCollision>().damage; // Power - Damage recieved
+        // Switch sprite to "hit" momentarily and switch back
+        StartCoroutine(r_UILevel.UpdateIcon(iPlayerID, _col.GetComponentInParent<BossBlobs>().m_TransitionState, false));
         if (m_Power < m_CurrentThreshold)
         {
             Drop(m_Threshold);
