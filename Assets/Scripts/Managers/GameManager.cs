@@ -48,6 +48,40 @@ public class GameManager : MonoBehaviour
     private List<SnackThinker> m_Snacks;
 
     public GameSettings m_ActiveGameSettings;
+
+    private static GameManager _instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            // If we have an instance
+            if (_instance != null)
+            {
+                return _instance;
+            }
+            // If we're null
+            // Still need to call this for the build/ first initialisation in Splash.
+            GameManager gameManager = FindObjectOfType<GameManager>(); //.GetComponent<GameManager>();
+            // If we've found an object
+            if (gameManager != null)
+            {
+                _instance = gameManager; //_instance = Instantiate(gameManager);
+                return _instance;
+            }
+#if UNITY_EDITOR
+            // Still null
+            // In a build we will always have a Game Manager as we start from the splash screen.
+            // This is made to make testing much simpler.
+            Object prefab = UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Prefabs/ScenePrefabs/GameManager.prefab", typeof(GameObject));
+            _instance = (UnityEditor.PrefabUtility.InstantiatePrefab(prefab) as GameObject).GetComponent<GameManager>();
+            // you may now modify the game object
+            //_instance.transform.position = Vector3.one;
+            //UnityEditor.Selection.activeGameObject = obj;
+#endif
+            return _instance;
+        }
+    }
+
     void Awake()
     {
         if (SceneManager.GetActiveScene().buildIndex == Scene.Menu)
@@ -65,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        r_PlayerManager = FindObjectOfType<PlayerManager>();
+        r_PlayerManager = GetComponent<PlayerManager>();
 
         // Create the delays so they only have to be made once.
         m_StartWait = new WaitForSeconds(m_StartDelay);

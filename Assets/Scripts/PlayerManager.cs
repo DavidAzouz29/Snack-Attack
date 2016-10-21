@@ -72,7 +72,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
                 return _instance;
             }
             // If we're null
-            PlayerManager playerManager = FindObjectOfType<PlayerManager>().GetComponent<PlayerManager>();
+            PlayerManager playerManager = GameManager.Instance.GetComponent<PlayerManager>();
             if (playerManager != null)
             {
                 _instance = playerManager;
@@ -84,7 +84,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     // Use this for initialization
     void Start ()
     {
-		m_GameManager = GetComponentInParent<GameManager>();
+        m_GameManager = GameManager.Instance; // GetComponentInParent<GameManager>();
         OnLevelWasLoaded();
     }
 

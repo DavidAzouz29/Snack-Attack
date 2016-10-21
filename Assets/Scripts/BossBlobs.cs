@@ -4,7 +4,7 @@
 /// Date Modified: 	/16
 /// --------------------------------------------------
 /// Brief: BossBlobs are what players seek to grow and evolve.
-/// Combat also happens here.
+/// Combat/ Melee also happens here.
 /// viewed 
 /// 
 /// ***EDIT***
@@ -239,6 +239,7 @@ public class BossBlobs : MonoBehaviour
                 gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", true);
                 m_TransitionState = TransitionState.BOSS;
                 m_Threshold = Thresholds.BIG;
+                GameManager.Instance.transform.GetChild(1).GetChild(0).GetComponent<AudioSource>().Play();
             }
             else if (m_Power >= BossDropThreshold[1])
             {
@@ -250,6 +251,7 @@ public class BossBlobs : MonoBehaviour
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
                 m_TransitionState = TransitionState.NEUT;
                 m_Threshold = Thresholds.REGULAR;
+                GameManager.Instance.transform.GetChild(1).GetChild(1).GetComponent<AudioSource>().Play();
             }
             else if (m_Power >= BossDropThreshold[2])
             {
@@ -261,7 +263,9 @@ public class BossBlobs : MonoBehaviour
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
                 m_TransitionState = TransitionState.WEAK;
                 m_Threshold = Thresholds.SMALL;
+                GameManager.Instance.transform.GetChild(1).GetChild(1).GetComponent<AudioSource>().Play();
             }
+
             // Update our icon based on our new state
             StartCoroutine(r_UILevel.UpdateIcon(iPlayerID, m_TransitionState, false));
         }
@@ -557,6 +561,7 @@ public class BossBlobs : MonoBehaviour
         if (m_Power < m_CurrentThreshold)
         {
             Drop(m_Threshold);
+            //GameManager.Instance.transform.GetChild(1).GetChild(1).GetComponent<AudioSource>().Play();
         }
         if (m_Power <= 0)
         {

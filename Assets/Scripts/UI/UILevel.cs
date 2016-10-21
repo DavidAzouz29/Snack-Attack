@@ -19,7 +19,7 @@ public class UILevel : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        r_RoundTimer = FindObjectOfType<RoundTimer>();
+        r_RoundTimer = GameManager.Instance.GetComponent<RoundTimer>();
         //r_text.GetComponentInChildren<Text>();
         for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
         {

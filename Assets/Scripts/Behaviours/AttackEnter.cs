@@ -10,7 +10,7 @@ public class AttackEnter : StateMachineBehaviour {
 
     void OnEnable()
     {
-        m_GameManager = FindObjectOfType<GameManager>();
+        m_GameManager = GameManager.Instance;
     }
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
