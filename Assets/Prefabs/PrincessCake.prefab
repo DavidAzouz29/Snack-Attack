@@ -160,6 +160,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 407236}
   - 95: {fileID: 9572098}
+  - 136: {fileID: 136000014064189942}
+  - 65: {fileID: 65000014199504914}
   m_Layer: 0
   m_Name: Neut
   m_TagString: Untagged
@@ -349,8 +351,6 @@ GameObject:
   - 54: {fileID: 5485468}
   - 114: {fileID: 11411288}
   - 114: {fileID: 11497748}
-  - 65: {fileID: 6538442}
-  - 136: {fileID: 13667634}
   - 114: {fileID: 114000012991333766}
   m_Layer: 0
   m_Name: PrincessCake
@@ -439,7 +439,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.171905, y: -0.6233034, z: -13.315971}
+  m_LocalPosition: {x: -1.9206142, y: -0.6233034, z: -16.210228}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children:
@@ -729,18 +729,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!65 &6538442
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 196634}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 0.5, z: 2}
-  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!95 &9572098
 Animator:
   serializedVersion: 3
@@ -837,19 +825,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 9572098}
   m_TransitionState: 1
---- !u!136 &13667634
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 196634}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.3, z: 0}
 --- !u!137 &13717942
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -978,6 +953,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012277686352}
   - 95: {fileID: 95000011865815990}
+  - 136: {fileID: 136000010312936472}
+  - 65: {fileID: 65000014210304374}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -1236,8 +1213,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010898980634}
   - 114: {fileID: 114000011487870830}
-  - 135: {fileID: 135000012169627746}
   - 96: {fileID: 96000013957692142}
+  - 136: {fileID: 136000013257275620}
   m_Layer: 0
   m_Name: Weapon1Left
   m_TagString: Weapon1Left
@@ -1614,8 +1591,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010359411934}
   - 114: {fileID: 114000014063792228}
-  - 135: {fileID: 135000013491490598}
   - 96: {fileID: 96000013731743390}
+  - 136: {fileID: 136000013889027878}
   m_Layer: 0
   m_Name: Weapon1Left
   m_TagString: Weapon1Left
@@ -1789,6 +1766,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011899839734}
   - 95: {fileID: 95000011819937366}
+  - 136: {fileID: 136000010767012470}
+  - 65: {fileID: 65000010847972952}
   m_Layer: 0
   m_Name: Weak
   m_TagString: Untagged
@@ -2506,6 +2485,54 @@ Transform:
   - {fileID: 4000012472415958}
   m_Father: {fileID: 4000014205575146}
   m_RootOrder: 0
+--- !u!65 &65000010141142686
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196634}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.926034, y: 0.6971283, z: 2.36476}
+  m_Center: {x: -0.015687466, y: 0.15143585, z: 0.015888214}
+--- !u!65 &65000010847972952
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014266203998}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.6430376, y: 1, z: 2.5369563}
+  m_Center: {x: 0.06386558, y: 0, z: 0.06249427}
+--- !u!65 &65000014199504914
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172812}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9063612, y: 0.953788, z: 1.8474272}
+  m_Center: {x: 0.013758188, y: 0.02310594, z: -0.026569286}
+--- !u!65 &65000014210304374
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010242127750}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.313385, y: 0.8861607, z: 2.3412614}
+  m_Center: {x: -0.02010274, y: 0.056919646, z: -0.011708721}
 --- !u!95 &95000011819937366
 Animator:
   serializedVersion: 3
@@ -3374,18 +3401,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0.4, y: 0, z: 0}
---- !u!135 &135000012169627746
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011895364696}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: -0.4, y: 0, z: 0}
 --- !u!135 &135000013006787698
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -3424,6 +3439,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.2, y: -0.5, z: 0}
+--- !u!136 &136000010767012470
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014266203998}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.4925412
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.61, z: 0}
 --- !u!136 &136000011919649168
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3437,6 +3465,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: -0.2, y: 0.5, z: 0}
+--- !u!136 &136000013257275620
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011895364696}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.2, y: -0.5, z: 0}
 --- !u!136 &136000013427119258
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3463,6 +3504,32 @@ CapsuleCollider:
   m_Height: 1.7
   m_Direction: 1
   m_Center: {x: 0.2, y: 0.4, z: 0}
+--- !u!136 &136000013889027878
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013474232394}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: -0.2, y: -0.4, z: 0}
+--- !u!136 &136000014064189942
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172812}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.1091595
+  m_Height: 2.9540944
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.87, z: 0}
 --- !u!137 &137000010013304120
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
