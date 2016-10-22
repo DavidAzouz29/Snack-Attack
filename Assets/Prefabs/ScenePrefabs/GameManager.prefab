@@ -55,6 +55,7 @@ MonoBehaviour:
   SpawnPoints: []
   m_ActiveGameSettings: {fileID: 11400000, guid: 5388f55cf06f78246ba003654a5839ae,
     type: 2}
+  m_GravityForce: 30
 --- !u!114 &11440896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -82,6 +83,7 @@ MonoBehaviour:
   m_LightAttack: 0
   m_HeavyAttack: 0
   c_ColPlayer2: {r: 0.27930364, g: 0.54228014, b: 0.9044118, a: 1}
+  r_UILevel: {fileID: 0}
   m_SnackBrains:
   - {fileID: 0}
   - {fileID: 0}
@@ -116,7 +118,6 @@ MonoBehaviour:
   m_eCurrentClassState: 0
   isOnGround: 0
   fJumpForce: 12
-  fGravity: 9.8
   m_playerID: 0
 --- !u!114 &11491296
 MonoBehaviour:

@@ -95,7 +95,6 @@ public class PlayerController : MonoBehaviour
     public E_CLASS_STATE m_eCurrentClassState;
     public bool isOnGround; // set to true if we are on the ground
     public float fJumpForce = 12.0f;
-    public float fGravity = 9.8f;
 
     // PRIVATE VARIABLES
     // A way to identidy players

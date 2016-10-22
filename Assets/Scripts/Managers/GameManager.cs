@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
 
     public GameSettings m_ActiveGameSettings;
 
+    [SerializeField] float m_GravityForce = 9.8f;      // Used once at start to set gravity of all rigidbodies.
+
     private static GameManager _instance;
     public static GameManager Instance
     {
@@ -106,6 +108,8 @@ public class GameManager : MonoBehaviour
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         AudioThemeSelection();
+
+        Physics.gravity = new Vector3(0, -m_GravityForce, 0);
 
         //SpawnAllSnacks(); //TODO: restore
         //SetCameraTargets();
