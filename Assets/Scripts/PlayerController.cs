@@ -110,8 +110,13 @@ public class PlayerController : MonoBehaviour
     float fJumpForceMax = 24.0f;// *2;
     private Vector3 m_PreviousPos;
 
-    // Use this for initialization
-    void Start ()
+    // This is used for bouncing.
+    [SerializeField] private float fBounceForce = 14;
+    private float bounceTimer;
+    private float bounceCooldown = 0.2f;
+
+// Use this for initialization
+void Start ()
     {
 		//setting our current state to alive
         m_eCurrentPlayerState = E_PLAYER_STATE.E_PLAYER_STATE_ALIVE;
@@ -121,7 +126,7 @@ public class PlayerController : MonoBehaviour
         Attack2 = "_Attack2";
         Jump = "_Jump";
         Block = "_Block";
-
+        bounceTimer = bounceCooldown;
         // Loops through our players and assigns variables for input from different controllers
         for (uint i = 0; i < MAX_PLAYERS; ++i)
         {
@@ -192,6 +197,11 @@ public class PlayerController : MonoBehaviour
         {
             m_eCurrentPlayerState = E_PLAYER_STATE.E_PLAYER_STATE_DEAD;
             //DO STUFF
+        }
+
+        if (bounceTimer > 0)
+        {
+            bounceTimer -= Time.deltaTime;
         }
 
         //Switches between player states
@@ -293,15 +303,13 @@ public class PlayerController : MonoBehaviour
             isOnGround = true;
         }
 
+    void OnCollisionEnter(Collision a_collision)
+    {
         // Bouncey objects
-        if (a_collision.transform.tag == "Bounce")
+        if (a_collision.transform.tag == "Bounce" && bounceTimer < 0)
         {
-            float amp = 80;
-            float freq = 1;
-            float decay = 1;
-
-            float t = Time.time;// - inPoint; //TODO: 
-            amp *= Mathf.Sin(t * freq * Mathf.PI * 2) / Mathf.Exp(t * decay);
+            rb.AddForce(0, fJumpForce, 0, ForceMode.Impulse);
+            bounceTimer = bounceCooldown;
         }
     }
 }
