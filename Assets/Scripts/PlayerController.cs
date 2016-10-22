@@ -179,11 +179,9 @@ void Start ()
         if (Mathf.Abs(moveHorizontal) > fRot || Mathf.Abs(moveVertical) > fRot && isPaused == false)
         {
             m_Moving = true;
-            // TOOD: rb.AddForce(Vector3.up);
             Vector3 movementDirection = new Vector3 (moveHorizontal, 0.0f, moveVertical);
-//            movementDirection = Quaternion.Euler(0, 45, 0) * movementDirection;
             Vector3 pos = transform.position + movementDirection * playerSpeed * Time.deltaTime;
-            transform.position = Vector3.Lerp (transform.position, pos, 0.2f);
+            rb.MovePosition(Vector3.Lerp(transform.position, pos, 0.2f));
             transform.forward = new Vector3(-moveVertical, 0.0f, moveHorizontal);
             transform.forward = Quaternion.Euler(0, 90, 0) * transform.forward;
         }
@@ -303,8 +301,6 @@ void Start ()
             isOnGround = true;
         }
 
-    void OnCollisionEnter(Collision a_collision)
-    {
         // Bouncey objects
         if (a_collision.transform.tag == "Bounce" && bounceTimer < 0)
         {
