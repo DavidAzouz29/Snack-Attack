@@ -34,7 +34,18 @@ public class AttackEnter : StateMachineBehaviour {
             for (int i = 0; i < temp.Length; i++)
             {
                 // Light Attack
-                if (temp[i].gameObject.tag == "Weapon1" && animator.GetBool("Attacking1"))
+                if (temp[i].gameObject.tag == "Weapon1Left" && animator.GetBool("Attacking1Left"))
+                {
+                    temp[i].weaponIsActive = true;
+                    // Cheat to get the first sound (light attack)
+                    audioSourceSlot = m_GameManager.transform.GetChild(0).GetComponentInChildren<AudioSource>();
+                    // ScriptableObject so no "WaitForSeconds"
+                    audioSourceSlot.pitch = Random.Range(fPitchMin, fPitchMax); //audioSourceSlot.loop = true;
+                    audioSourceSlot.Play(); //audioSourceSlot.loop = true;
+                    //audioSourceSlot.PlayDelayed(audioSourceSlot.clip.length); // For second hit etc.
+                }
+                // Right swing
+                if (temp[i].gameObject.tag == "Weapon1Right" && animator.GetBool("Attacking1Right"))
                 {
                     temp[i].weaponIsActive = true;
                     // Cheat to get the first sound (light attack)

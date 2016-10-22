@@ -278,7 +278,7 @@ public class BossBlobs : MonoBehaviour
         PlayerAnims m_LocalAnim = gameObject.GetComponent<PlayerAnims>();
         PlayerAnims m_ColliderAnim = _col.gameObject.GetComponentInParent<PlayerAnims>();
         //Check if a player is hiting us
-        if (_col.gameObject.tag == "Weapon1" || _col.gameObject.tag == "Weapon2")
+        if (_col.gameObject.tag == "Weapon1Left" || _col.gameObject.tag == "Weapon1Right" || _col.gameObject.tag == "Weapon2")
         {
             //Check if its an active hit
             if (_col.gameObject.GetComponent<PlayerCollision>().weaponIsActive)

@@ -7,7 +7,8 @@ public class AttackExit : StateMachineBehaviour {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetBool("AttackTrigger", false);
-        animator.SetBool("Attacking1", false);
+        animator.SetBool("Attacking1Left", false);
+        animator.SetBool("Attacking1Right", false);
         animator.SetBool("Attacking2", false);
         animator.SetBool("Blocking", false);
         PlayerCollision[] temp;

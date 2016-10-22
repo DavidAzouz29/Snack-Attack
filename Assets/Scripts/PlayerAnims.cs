@@ -23,7 +23,7 @@ public class PlayerAnims : MonoBehaviour {
     public BossBlobs.TransitionState m_TransitionState; //TODO ADD BOSS ATTACKS
 
     private PlayerController m_PC;
-    private bool m_Idling, m_Walking, m_Attacking, m_isJumping;
+    private bool m_Idling, m_Walking, m_Attacking, m_isLeftAttacking, m_isJumping;
     private Vector3 m_PreviousPos;
 
     void Start()
@@ -33,6 +33,7 @@ public class PlayerAnims : MonoBehaviour {
         m_Idling = true;
         m_isJumping = false;
         m_PreviousPos = transform.position;
+        m_isLeftAttacking = true;
         switch (m_TransitionState)
         {
             case BossBlobs.TransitionState.BOSS:
@@ -53,7 +54,16 @@ public class PlayerAnims : MonoBehaviour {
     {
         if (Input.GetButtonDown(m_PC.Attack1) && !m_Anim.GetBool("AttackTrigger"))
         {
-            AttackAnim1();
+
+            if (m_isLeftAttacking)
+            {
+                AttackAnim1Left();
+            }
+            else
+            {
+                AttackAnim1Right();
+            }
+            m_isLeftAttacking = !m_isLeftAttacking;
         }
         if (Input.GetButtonDown(m_PC.Attack2) && !m_Anim.GetBool("AttackTrigger"))
         {
@@ -161,11 +171,17 @@ public class PlayerAnims : MonoBehaviour {
         m_Anim.SetTrigger("AttackToJump");
         m_isJumping = true;
     }
-    void AttackAnim1()
+    void AttackAnim1Left()
     {
-        m_Anim.SetBool("Attack1", true);
-        m_Anim.SetBool("Attacking1", true);
+        m_Anim.SetBool("Attack1Left", true);
+        m_Anim.SetBool("Attacking1Left", true);
         m_Anim.SetBool("AttackTrigger", true);       
+    }
+    void AttackAnim1Right()
+    {
+        m_Anim.SetBool("Attack1Right", true);
+        m_Anim.SetBool("Attacking1Right", true);
+        m_Anim.SetBool("AttackTrigger", true);
     }
     void AttackAnim2()
     {
