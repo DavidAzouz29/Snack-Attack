@@ -52,6 +52,8 @@ public class PlayerAnims : MonoBehaviour {
 
     void FixedUpdate()
     {
+        if (!m_Anim.enabled) return;
+
         if (Input.GetButtonDown(m_PC.Attack1) && !m_Anim.GetBool("AttackTrigger"))
         {
 

@@ -117,6 +117,16 @@ public class PlayerController : MonoBehaviour
     private float bounceTimer;
     private float bounceCooldown = 0.2f;
 
+    // Hit stop related variables.
+    Vector3 m_storedVelocity = Vector3.zero;
+    Vector3 m_initialPosition;
+    Quaternion m_initialRotation;
+    [SerializeField] private float m_hitStopDuration = 1.0f;
+    [SerializeField] private float m_shakeAmount = 0.5f;
+    private float m_hitStopTimer = 0.0f;
+    private bool m_isInHitStop = false;
+    PlayerAnims m_playerAnims;
+
 // Use this for initialization
 void Start ()
     {
@@ -151,7 +161,9 @@ void Start ()
         //jump
         //fMovementSpeedSlowDown = fMovementSpeed - 2.0f;
         //fJumpForceMax = fJumpForce;// *2;
+
         m_PreviousPos = transform.position;
+        m_playerAnims = GetComponent<PlayerAnims>();
 
         playerSpeed = neutSpeed;
     }
@@ -173,7 +185,23 @@ void Start ()
     // Update is called once per frame
     void Update ()
     {
+        if (m_isInHitStop)
+        {
+            m_hitStopTimer -= Time.deltaTime;
 
+            rb.MovePosition(new Vector3(m_initialPosition.x + Mathf.PingPong(Time.time, m_shakeAmount * 0.1f), m_initialPosition.y, m_initialPosition.z));
+
+            if (m_hitStopTimer < 0)
+            {
+                rb.MovePosition(m_initialPosition);
+                transform.rotation = m_initialRotation;
+                rb.velocity = m_storedVelocity;
+                m_isInHitStop = false;
+                m_playerAnims.m_Anim.enabled = true;
+            }
+
+            return;
+        }
         //creating a variable that gets the input axis
         float moveHorizontal = Input.GetAxis(horizontalAxis);
         float moveVertical = Input.GetAxis(verticalAxis);
@@ -301,6 +329,16 @@ void Start ()
     {
         playerSpeed = speed;
     }
+
+    public void HitStop()
+    {
+        m_storedVelocity = rb.velocity;
+        m_initialPosition = transform.position;
+        m_initialRotation = transform.rotation;
+        m_isInHitStop = true;
+        m_hitStopTimer = m_hitStopDuration;
+        m_playerAnims.m_Anim.enabled = false;
+}
 
     void OnCollisionEnter(Collision a_collision)
     {

@@ -559,13 +559,14 @@ public class BossBlobs : MonoBehaviour
         }
         m_EmissionTimerEnabled = true;
 
+        PlayerCollision otherPlayerPlayerCollision = _col.GetComponent<PlayerCollision>();
         //Apply Knockback
-        Vector3 Dir = _col.GetComponent<PlayerCollision>().m_ParentTransform.position - gameObject.transform.position;
+        Vector3 Dir = otherPlayerPlayerCollision.m_ParentTransform.position - gameObject.transform.position;
         gameObject.GetComponent<Rigidbody>().AddForce(Dir.normalized * -m_Knockback);
         gameObject.GetComponent<PlayerAnims>().m_Anim.SetTrigger("Hit");
 
         //Apply Damage
-        m_Power = m_Power - _col.gameObject.GetComponent<PlayerCollision>().damage; // Power - Damage recieved
+        m_Power = m_Power - otherPlayerPlayerCollision.damage; // Power - Damage recieved
         // Switch sprite to "hit" momentarily and switch back
         StartCoroutine(r_UILevel.UpdateIcon(iPlayerID, _col.GetComponentInParent<BossBlobs>().m_TransitionState, false));
         if (m_Power < m_CurrentThreshold)
@@ -578,6 +579,9 @@ public class BossBlobs : MonoBehaviour
             m_Killbox.StartCoroutine(m_Killbox.IRespawn(gameObject));
             UpdateScore(_col);
         }
+
+        otherPlayerPlayerCollision.m_ParentTransform.GetComponent<PlayerController>().HitStop();
+        r_PlayerCon.HitStop();
     }
 }
 
