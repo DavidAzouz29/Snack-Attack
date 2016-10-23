@@ -33,8 +33,10 @@ public class PlayerController : MonoBehaviour
 
     // PRIVATE VARIABLES [MenuItem ("MyMenu/Do Something")]
     [Header("Movement")]
-    public float playerSpeed = 10.0f;
-    public float speedBoost = 6.0f;
+    public float weakSpeed = 12.0f;
+    public float neutSpeed = 10.0f;
+    public float bossSpeed = 8.0f;
+    private float playerSpeed = 10.0f;
     public bool m_Moving = false;
 
     [Tooltip("This will change at runtime.")]
@@ -150,6 +152,8 @@ void Start ()
         //fMovementSpeedSlowDown = fMovementSpeed - 2.0f;
         //fJumpForceMax = fJumpForce;// *2;
         m_PreviousPos = transform.position;
+
+        playerSpeed = neutSpeed;
     }
 
     // Should be used for Physics calculations
@@ -291,6 +295,11 @@ void Start ()
     public void SetPlayerTag(string a_tag)
     {
         m_PlayerTag = a_tag;
+    }
+
+    public void SetPlayerSpeed(float speed)
+    {
+        playerSpeed = speed;
     }
 
     void OnCollisionEnter(Collision a_collision)

@@ -240,6 +240,8 @@ public class BossBlobs : MonoBehaviour
                 m_TransitionState = TransitionState.BOSS;
                 m_Threshold = Thresholds.BIG;
                 GameManager.Instance.transform.GetChild(1).GetChild(0).GetComponent<AudioSource>().Play();
+                // Change speed and damage.
+                r_PlayerCon.SetPlayerSpeed(r_PlayerCon.bossSpeed);
             }
             else if (m_Power >= BossDropThreshold[1])
             {
@@ -252,6 +254,8 @@ public class BossBlobs : MonoBehaviour
                 m_TransitionState = TransitionState.NEUT;
                 m_Threshold = Thresholds.REGULAR;
                 GameManager.Instance.transform.GetChild(1).GetChild(1).GetComponent<AudioSource>().Play();
+                // Change speed and damage.
+                r_PlayerCon.SetPlayerSpeed(r_PlayerCon.neutSpeed);
             }
             else if (m_Power >= BossDropThreshold[2])
             {
@@ -264,6 +268,8 @@ public class BossBlobs : MonoBehaviour
                 m_TransitionState = TransitionState.WEAK;
                 m_Threshold = Thresholds.SMALL;
                 GameManager.Instance.transform.GetChild(1).GetChild(1).GetComponent<AudioSource>().Play();
+                // Change speed and damage.
+                r_PlayerCon.SetPlayerSpeed(r_PlayerCon.weakSpeed);
             }
 
             // Update our icon based on our new state
@@ -493,6 +499,8 @@ public class BossBlobs : MonoBehaviour
                     m_CurrentThreshold = m_Blobs.SmallThresh;
                     //sState = "Weak";
                     transform.localScale = new Vector3(m_PowerLevelScale[2], m_PowerLevelScale[2], m_PowerLevelScale[2]);
+                    // Change speed and damage.
+                    r_PlayerCon.SetPlayerSpeed(r_PlayerCon.weakSpeed);
                     break;
                 }
             // From Boss to Neut
@@ -505,6 +513,8 @@ public class BossBlobs : MonoBehaviour
                     m_CurrentThreshold = m_Blobs.RegularThresh;
                     //sState = "Neut";
                     transform.localScale = new Vector3(m_PowerLevelScale[1], m_PowerLevelScale[1], m_PowerLevelScale[1]);
+                    // Change speed and damage.
+                    r_PlayerCon.SetPlayerSpeed(r_PlayerCon.neutSpeed);
                     break;
                 }
             default:
