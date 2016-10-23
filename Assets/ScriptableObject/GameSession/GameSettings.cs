@@ -72,13 +72,13 @@ public class GameSettings : ScriptableObject
                 return _instance;
             }
             // If we're null
-            /*var gameSettings = Resources.FindObjectsOfTypeAll<GameSettings>().FirstOrDefault();
+            var gameSettings = Resources.FindObjectsOfTypeAll<GameSettings>().FirstOrDefault();
             if (gameSettings != null)
             {
                 _instance = Instantiate(gameSettings);
-                _instance.availableBrains.OrderBy(n => n._iBrainID); //TODO: works?
-            }*/
-            InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Default game settings.asset"));
+                //_instance.availableBrains.OrderBy(n => n._iBrainID); //TODO: breaks things?
+            }//TODO: fix
+            //InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Default game settings.asset"));
 #if UNITY_EDITOR
             if (_instance == null)
                 InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Default game settings.asset"));
