@@ -25,5 +25,8 @@ public class UIBossLevel : MonoBehaviour {
         // normalise the power value = (between 0 and 1) then 
         // times by ten to make it equal between 0 and 100.
         c_BossSlider.value = 1 + (r_BossBlobs.m_Power - 1) * (100 - 1) / (100 - 1) / 2;
+
+        // This is to keep the object the correct rotation without flickering.
+        transform.rotation = Quaternion.AngleAxis(-90.0f, Vector3.left);
     }
 }
