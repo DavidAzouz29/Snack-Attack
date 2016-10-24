@@ -54,9 +54,10 @@ public class BossBlobs : MonoBehaviour
 
     //Emission Color Varriables
     private Color m_EmissionColor;
-    private float m_EmissionTimer;
+    private float m_EmissionTimer = 0.0f;
     private bool m_EmissionTimerEnabled;
-    public float m_EmissionThreshold;
+    public float m_EmissionThreshold = 0.5f;
+    public float m_EmissionBrightness = 0.34f;
     public SkinnedMeshRenderer[] m_ModelMeshRenderers;
 
     // TODO: two enums that do the same thing?
@@ -107,7 +108,7 @@ public class BossBlobs : MonoBehaviour
     private bool m_Respawned = false;
     private bool m_Invulnerable = false;
     private float m_InvulnerabilityTimer = 0f;
-    private float m_InvulnerabilityThreshold = 1.0f;
+    public float m_InvulnerabilityThreshold = 1.0f;
 
 
     void Start()
@@ -169,10 +170,8 @@ public class BossBlobs : MonoBehaviour
         gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
 
         m_EmissionColor = GameSettings.Instance.players[iPlayerID].Color;
-        m_EmissionColor.r = 0.35f + m_EmissionColor.r;
-        m_EmissionTimer = 0f;
+        m_EmissionColor.r = m_EmissionBrightness + m_EmissionColor.r;
         m_EmissionTimerEnabled = false;
-        m_EmissionThreshold = 0.5f;
     }
 
     void InitializeStruct()
