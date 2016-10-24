@@ -86,7 +86,7 @@ public class PlayerInfoController : MonoBehaviour
 		PlayerColor.colors = colorBlock;
 
 		c_PlayerBrain.text = (_player.Brain != null)
-			? _player.Brain.name.TrimEnd(" Brain".ToCharArray())
+			? _player.Brain.name.Substring(0, _player.Brain.name.Length - " Brain".Length)
 			: "None";
 
     }
