@@ -73,9 +73,9 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
             // Still null
             // In a build we will always have a Game Manager as we start from the splash screen.
-            // This is made to make testing much simpler.
-            Object prefab = UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Prefabs/ScenePrefabs/GameManager.prefab", typeof(GameObject));
-            _instance = (Instantiate(prefab) as GameObject).GetComponent<GameManager>();
+            // This is made to make testing much simpler. //TODO: make a Game Manager Debug
+            //Object prefab = UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Prefabs/ScenePrefabs/GameManager.prefab", typeof(GameObject));
+            //_instance = (Instantiate(prefab) as GameObject).GetComponent<GameManager>();
             // you may now modify the game object
             //_instance.transform.position = Vector3.one;
             //UnityEditor.Selection.activeGameObject = obj;

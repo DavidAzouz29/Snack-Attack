@@ -19,6 +19,7 @@ public abstract class SnackBrain : ScriptableObject
     protected Mesh[] c_charStateMeshes = new Mesh[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT];
     protected Mesh c_charBlobMesh;
     protected Texture[] c_charEmissionMaps = new Texture[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT];
+    protected AudioClip[] c_charTaunts = new AudioClip[4];
     #endregion
 
     #region Unique per class
@@ -46,8 +47,14 @@ public abstract class SnackBrain : ScriptableObject
     public abstract Material GetBlobMaterial();
     public abstract Mesh GetBlobMesh();
     public abstract Texture[] GetEmissionMaps();
+    public abstract AudioClip[] GetAudioTaunts();
+    public abstract AudioClip GetAudioTaunt(int i);
     public abstract RuntimeAnimatorController GetAnimatorController();
     public abstract Avatar GetAnimatorAvatar();
     public abstract Sprite GetIcon(int i);
+
+    //internal AudioClip GetAudioTaunt(int v) { return c_charTaunts[v]; }
     //public abstract void Think(SnackThinker snack);
+
+
 }

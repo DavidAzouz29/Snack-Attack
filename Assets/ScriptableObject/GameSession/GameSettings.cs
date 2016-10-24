@@ -16,6 +16,7 @@ public class GameSettings : ScriptableObject
         public PlayerBuild.E_BASE_CLASS_STATE eBaseClassState;
         public PlayerController.E_CLASS_STATE eClassState;
 		public int iScore; // Kills for podium position
+		public bool isReady; // Used for Player Select
 
         // Serializing an object reference directly to JSON doesn't do what we want - we just get an InstanceID
         // which is not stable between sessions. So instead we serialize the string name of the object, and

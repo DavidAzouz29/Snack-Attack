@@ -8,86 +8,114 @@
 /// </summary>
 
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Linq;
 
 public class PlayerInfoController : MonoBehaviour
 {
-	public int PlayerIndex;
-	public bool isReady = false;
-	public UnityEngine.UI.Button PlayerColor;
-	public UnityEngine.UI.Text c_PlayerBrain;
-    public float fSensitivity = 2.0f;
+    public int PlayerIndex;
+    //public bool isReady = false;
+    public UnityEngine.UI.Button PlayerColor;
+    public UnityEngine.UI.Text c_PlayerBrain;
+    public float fSensitivity = 0.2f;
 
     //private MainMenuController _mainMenu;
     private GameSettings.PlayerInfo _player;
-	private ArrayLayout playerButtonsArray;
-    private int m_Controller = 0; // tracks time
+    private AudioSource c_AudioSource;
+    private Image c_ReadyImage;
+    private ArrayLayout playerButtonsArray;
+    private int m_iController = 0; // tracks time
     private float m_Timer = 0; // tracks time
-    private float m_TimerPause = 0; // Time before next input
+    private float m_TimerPause = 0.3f; // Time before next input
+    bool isAudioToPlay = false;
+
     public void Awake()
     {
         //_mainMenu = GetComponentInParent<MainMenuController>();
-        CharacterSelection(GameSettings.Instance.players[PlayerIndex]);
+
+        //CharacterSelection(GameSettings.Instance.players[PlayerIndex]);
         playerButtonsArray = GetComponentInParent<PlayerSelect>().playerButtons;
-        m_Controller = PlayerIndex + 1;
-}
+        c_ReadyImage = transform.GetChild(0).GetChild(3).GetComponent<Image>();
+        c_ReadyImage.enabled = false;
+        m_iController = PlayerIndex + 1;
+        fSensitivity = 0.2f;
+
+    }
+
+    public void Start()
+    {
+        CharacterSelection(GameSettings.Instance.players[PlayerIndex]);
+    }
 
     void Update()
     {
         m_Timer += Time.deltaTime;
 
         // Left
-        if (Input.GetKeyDown("joystick " + (m_Controller) + " button 4") && m_Timer <= m_TimerPause || 
-            Input.GetAxis("P" + (m_Controller) + "_Horizontal") < fSensitivity && m_Timer <= m_TimerPause)
+        if (Input.GetKeyDown("joystick " + (m_iController) + " button 4") && m_Timer >= m_TimerPause ||
+            Input.GetAxis("P" + (m_iController) + "_Horizontal") < -fSensitivity && m_Timer >= m_TimerPause)
         {
-            // Cycle left in character list
-            OnPreviousBrain();
-            //playerButtonsArray.playerColsButton[PlayerIndex].coloumn[1].Select();
-            //playerButtonsArray.playerRows[PlayerIndex].row[PlayerIndex].Select();
-            m_Timer = 0;
+            OnLeft();
         }
 
         // Right
-        if (Input.GetKeyDown("joystick " + (m_Controller) + " button 5") && m_Timer <= m_TimerPause ||
-            Input.GetAxis("P" + (m_Controller) + "_Horizontal") > fSensitivity && m_Timer <= m_TimerPause)
+        if (Input.GetKeyDown("joystick " + (m_iController) + " button 5") && m_Timer >= m_TimerPause ||
+            Input.GetAxis("P" + (m_iController) + "_Horizontal") > fSensitivity && m_Timer >= m_TimerPause)
         {
-            // Cycle right in character list
-            OnNextBrain();
-            //playerButtonsArray.playerColsButton[PlayerIndex].coloumn[2].Select();
-            //playerButtonsArray.playerRows[PlayerIndex].row[PlayerIndex].Select();
-            m_Timer = 0;
+            OnRight();
         }
 
-        if (Input.GetAxis("P" + (m_Controller) + "_Vertical") < fSensitivity && m_Timer <= m_TimerPause)
+        if (Input.GetAxis("P" + (m_iController) + "_Vertical") < -fSensitivity && m_Timer >= m_TimerPause)
         {
 
         }
 
         // Select (A on Xbox)
-        if (Input.GetKeyDown("joystick " + (m_Controller) + " button 0") && m_Timer <= m_TimerPause)
+        if (Input.GetKeyDown("joystick " + (m_iController) + " button 7") && m_Timer >= m_TimerPause)
         {
-            // Toggle "Ready" on/ off
-            isReady = !isReady;
-            //playerButtonsArray.playerColsButton[PlayerIndex].coloumn[1].Select();
-            //playerButtonsArray.playerRows[PlayerIndex].row[PlayerIndex].Select();
-            m_Timer = 0;
+            ToggleIsReady();
+        }
+
+
+        // Submit/ ready
+        if (_player.isReady && isAudioToPlay)
+        {
+            // override the clip anyway
+            c_AudioSource = GameManager.Instance.transform.GetChild(2).GetChild(4).GetComponent<AudioSource>();
+            c_AudioSource.clip = _player.Brain.GetAudioTaunt(Random.Range(0, 4)); //GameManager.Instance.transform.GetChild(2).GetChild(4).GetComponent<AudioSource>();
+        }
+        else if (m_iController % 1 == 0 && isAudioToPlay)
+        {
+            c_AudioSource = GameManager.Instance.transform.GetChild(2).GetChild(5).GetComponent<AudioSource>();
+        }
+        else if (m_iController % 2 == 0 && isAudioToPlay)
+        {
+            c_AudioSource = GameManager.Instance.transform.GetChild(2).GetChild(6).GetComponent<AudioSource>();
+        }
+        
+        // if audio hasn't played
+        if (isAudioToPlay)
+        {
+            c_AudioSource.pitch = 1.0f + (m_iController * 0.1f); //TODO: this will play with the character's taunts
+            c_AudioSource.Play();
+            isAudioToPlay = false;
         }
     }
 
     public void Refresh()
-	{
-		_player = GameSettings.Instance.players[PlayerIndex];
+    {
+        _player = GameSettings.Instance.players[PlayerIndex];
 
-		var colorBlock = PlayerColor.colors;
-		colorBlock.normalColor = _player.Color;
-		colorBlock.highlightedColor = _player.Color;
-		PlayerColor.colors = colorBlock;
+        var colorBlock = PlayerColor.colors;
+        colorBlock.normalColor = _player.Color;
+        colorBlock.highlightedColor = _player.Color;
+        PlayerColor.colors = colorBlock;
 
-		c_PlayerBrain.text = (_player.Brain != null)
-			? _player.Brain.name.Substring(0, _player.Brain.name.Length - " Brain".Length)
-			: "None";
+        c_PlayerBrain.text = (_player.Brain != null)
+            ? _player.Brain.name.Substring(0, _player.Brain.name.Length - " Brain".Length)
+            : "None";
 
     }
 
@@ -97,9 +125,35 @@ public class PlayerInfoController : MonoBehaviour
 		Refresh();
 	} */
 
+    public void OnLeft()
+    {
+        // Cycle left in character list
+        OnPreviousBrain();
+        //playerButtonsArray.playerColsButton[PlayerIndex].coloumn[1].Select();
+        //playerButtonsArray.playerRows[PlayerIndex].row[PlayerIndex].Select();
+        m_Timer = 0;
+        isAudioToPlay = true;
+    }
+
+    public void OnRight()
+    {
+        // Cycle right in character list
+        OnNextBrain();
+        //playerButtonsArray.playerColsButton[PlayerIndex].coloumn[2].Select();
+        //playerButtonsArray.playerRows[PlayerIndex].row[PlayerIndex].Select();
+        m_Timer = 0;
+        isAudioToPlay = true;
+    }
+
     public void ToggleIsReady()
     {
-        isReady = !isReady;
+        _player.isReady = !_player.isReady;
+
+
+        m_Timer = 0;
+        //c_AudioSource.clip = _player.Brain.GetAudioTaunt(Random.Range(0, 4)); //TODO: 5?
+        c_ReadyImage.enabled = _player.isReady;
+        isAudioToPlay = true;
     }
 
     // Left
@@ -113,7 +167,7 @@ public class PlayerInfoController : MonoBehaviour
 
     // Right
     public void OnNextBrain()
-	{
+    {
         //_player.Brain = _mainMenu.CycleNextSelection(_player.Brain, true);
         _player.Brain = GameSettings.Instance.CycleNextSelection(_player.Brain, true);
         CharacterSelection(_player);

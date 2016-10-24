@@ -372,7 +372,11 @@ public class BossBlobs : MonoBehaviour
                     int a = i * (360 / m_Blobs.BigDrop);
                     _curBlob = (GameObject)Instantiate(m_SpawnableBlob, BlobSpawn(a), Quaternion.identity);
                     _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.BigPower;
-                    _curBlob.transform.rotation = Random.rotation;
+                    // if we don't have the RR blob, give it a rand rotation.
+                    if (m_SpawnableBlob != blobsArray[0])
+                    {
+                        _curBlob.transform.rotation = Random.rotation;
+                    }
                     m_BlobsCreated.Add(_curBlob);
                 }
                 // Apply Explosion
@@ -402,7 +406,11 @@ public class BossBlobs : MonoBehaviour
                     int a = i * (360 / m_Blobs.RegularDrop);
                     _curBlob = (GameObject)Instantiate(m_SpawnableBlob, BlobSpawn(a), Quaternion.identity);
                     _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.RegularPower;
-                    _curBlob.transform.rotation = Random.rotation;
+                    // if we don't have the RR blob, give it a rand rotation.
+                    if (m_SpawnableBlob != blobsArray[0])
+                    {
+                        _curBlob.transform.rotation = Random.rotation;
+                    }
                     m_BlobsCreated.Add(_curBlob);
                 }
                 // Apply Explosion
@@ -433,7 +441,11 @@ public class BossBlobs : MonoBehaviour
                     int a = i * (360 / m_Blobs.RegularDrop);
                     _curBlob = (GameObject)Instantiate(m_SpawnableBlob, BlobSpawn(a), Quaternion.identity);
                     _curBlob.GetComponent<BlobCollision>().m_PowerToGive = m_Blobs.RegularPower;
-                    _curBlob.transform.rotation = Random.rotation;
+                    // if we don't have the RR blob, give it a rand rotation.
+                    if (m_SpawnableBlob != blobsArray[0])
+                    {
+                        _curBlob.transform.rotation = Random.rotation;
+                    }
                     m_BlobsCreated.Add(_curBlob);
                 }
                 // Apply Explosion
