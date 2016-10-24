@@ -110,6 +110,11 @@ public class BossBlobs : MonoBehaviour
     private float m_InvulnerabilityTimer = 0f;
     public float m_InvulnerabilityThreshold = 1.0f;
 
+    // Hit stop invuln.
+    private bool m_hitStopInvuln = false;
+    private float m_hitStopInvulnTimer = 0.0f;
+    [SerializeField]
+    private float m_hitStopInvulnDuration = 0.2f;
 
     void Start()
     {
@@ -195,6 +200,8 @@ public class BossBlobs : MonoBehaviour
 
     void Update()
     {
+        if (r_PlayerCon.GetHitStop()) return;
+
         if (m_Power <= 0 && !m_Respawned)
         {
             StartCoroutine(r_UILevel.UpdateIcon(iPlayerID, m_TransitionState, true));
@@ -214,11 +221,22 @@ public class BossBlobs : MonoBehaviour
             m_EmissionTimer = 0f;
         }
         if (m_Invulnerable)
-            m_InvulnerabilityTimer += Time.deltaTime;
-        if (m_InvulnerabilityTimer >= m_InvulnerabilityThreshold)
         {
-            m_Invulnerable = false;
-            m_InvulnerabilityTimer = 0f;
+            m_InvulnerabilityTimer += Time.deltaTime;
+            if (m_InvulnerabilityTimer >= m_InvulnerabilityThreshold)
+            {
+                m_Invulnerable = false;
+                m_InvulnerabilityTimer = 0f;
+            }
+        }
+        if (m_hitStopInvuln)
+        {
+            m_hitStopInvulnTimer += Time.deltaTime;
+            if (m_hitStopInvulnTimer >= m_hitStopInvulnDuration)
+            {
+                m_hitStopInvuln = false;
+                m_hitStopInvulnTimer = 0.0f;
+            }
         }
     }
 
@@ -278,7 +296,7 @@ public class BossBlobs : MonoBehaviour
 
     void OnTriggerEnter(Collider _col)
     {
-        if (m_Invulnerable)
+        if (m_Invulnerable || m_hitStopInvuln)
             return;
         PlayerAnims m_LocalAnim = gameObject.GetComponent<PlayerAnims>();
         PlayerAnims m_ColliderAnim = _col.gameObject.GetComponentInParent<PlayerAnims>();
@@ -591,6 +609,10 @@ public class BossBlobs : MonoBehaviour
             UpdateScore(_col);
         }
 
+        // Become invulnerable on damage instance.
+        print("took damage");
+        m_hitStopInvuln = true;
+        // Freeze both characters.
         otherPlayerPlayerCollision.m_ParentTransform.GetComponent<PlayerController>().HitStop();
         r_PlayerCon.HitStop();
     }

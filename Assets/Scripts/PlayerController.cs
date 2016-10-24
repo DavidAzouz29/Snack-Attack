@@ -338,7 +338,12 @@ void Start ()
         m_isInHitStop = true;
         m_hitStopTimer = m_hitStopDuration;
         m_playerAnims.m_Anim.enabled = false;
-}
+    }
+    
+    public bool GetHitStop()
+    {
+        return m_isInHitStop;
+    }
 
     void OnCollisionEnter(Collision a_collision)
     {
