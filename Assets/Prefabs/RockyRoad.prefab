@@ -1101,8 +1101,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107578}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 19.797573, y: -0.6233034, z: -16.306702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5991178, y: -0.6233034, z: -14.638796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children:
@@ -1506,8 +1506,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weakSpeed: 50
-  neutSpeed: 35
-  bossSpeed: 25
+  neutSpeed: 40
+  bossSpeed: 30
   m_Moving: 0
   hitsBeforeDeath: 5
   health: 100
@@ -1522,11 +1522,11 @@ MonoBehaviour:
   m_eCurrentPlayerState: 0
   m_eCurrentClassState: 0
   isOnGround: 0
-  fJumpForce: 14
+  fJumpForce: 22
   m_playerID: 0
-  fBounceForce: 14
-  m_hitStopDuration: 0.2
-  m_shakeAmount: 0.5
+  fBounceForce: 22
+  m_hitStopDuration: 0.15
+  m_shakeAmount: 0.75
 --- !u!114 &11430586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1680,7 +1680,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 62c2470c52a99804aa8c018b463af682, type: 2}
+  - {fileID: 2100000, guid: eaa6c0fe06ccd3a4785db63ee8f34333, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -1736,7 +1736,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 7d26a8bc66cca514a819f1a0bcafc85b, type: 2}
+  - {fileID: 2100000, guid: 7b455c55149f34d47adf4eb03e3e877c, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3570,7 +3570,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: e06c13e192c49144791670411545a66a, type: 2}
+  - {fileID: 2100000, guid: 03b1ccd783dba3e488cb82d6cd88dfc2, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
