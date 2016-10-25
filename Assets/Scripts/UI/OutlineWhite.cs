@@ -19,7 +19,7 @@ namespace UnityEngine.UI
 
         public override void ModifyMesh(VertexHelper vertexHelper)
         {
-            Debug.Log("modify");
+            //Debug.Log("OW: modify");
             List<UIVertex> vertexList = new List<UIVertex>();
             //using (VertexHelper vertexHelper = new VertexHelper(a_mesh))
             //{
