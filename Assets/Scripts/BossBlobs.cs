@@ -105,6 +105,7 @@ public class BossBlobs : MonoBehaviour
     private bool isNeut = false; // used for respawn
     [SerializeField]
     private GameObject[] blobsArray = new GameObject[PlayerManager.MAX_PLAYERS];
+    private Quaternion qBlobRot = Quaternion.identity;
     private bool m_Respawned = false;
     private bool m_Invulnerable = false;
     private float m_InvulnerabilityTimer = 0f;
@@ -381,6 +382,8 @@ public class BossBlobs : MonoBehaviour
         }
         #endregion
 
+        qBlobRot.eulerAngles = new Vector3(0, Random.Range(0, 180), 0);
+
         switch (_t)
         {
             #region BIG
@@ -394,6 +397,11 @@ public class BossBlobs : MonoBehaviour
                     if (m_SpawnableBlob != blobsArray[0])
                     {
                         _curBlob.transform.rotation = Random.rotation;
+                    }
+                    //m_SpawnableBlob is blobsArray[0]
+                    else
+                    {
+                        _curBlob.transform.rotation = qBlobRot;
                     }
                     m_BlobsCreated.Add(_curBlob);
                 }
@@ -429,6 +437,11 @@ public class BossBlobs : MonoBehaviour
                     {
                         _curBlob.transform.rotation = Random.rotation;
                     }
+                    //m_SpawnableBlob is blobsArray[0]
+                    else
+                    {
+                        _curBlob.transform.rotation = qBlobRot;
+                    }
                     m_BlobsCreated.Add(_curBlob);
                 }
                 // Apply Explosion
@@ -463,6 +476,11 @@ public class BossBlobs : MonoBehaviour
                     if (m_SpawnableBlob != blobsArray[0])
                     {
                         _curBlob.transform.rotation = Random.rotation;
+                    }
+                    //m_SpawnableBlob is blobsArray[0]
+                    else
+                    {
+                        _curBlob.transform.rotation = qBlobRot;
                     }
                     m_BlobsCreated.Add(_curBlob);
                 }
