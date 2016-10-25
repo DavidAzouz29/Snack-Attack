@@ -151,7 +151,7 @@ public class PlayerSelect : MonoBehaviour
         }*/
 
         /*// Player Select Panel is turned on/ off
-        for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+        /*for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
         {
             GameObject go = c_eventSystems.transform.GetChild(i).gameObject;
             go.SetActive(isActive);

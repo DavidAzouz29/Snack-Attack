@@ -19,11 +19,11 @@ public abstract class SnackBrain : ScriptableObject
     protected Mesh[] c_charStateMeshes = new Mesh[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT];
     protected Mesh c_charBlobMesh;
     protected Texture[] c_charEmissionMaps = new Texture[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT];
-    protected AudioClip[] c_charTaunts = new AudioClip[4];
+    protected AudioSource[] c_charTaunts = new AudioSource[4]; //TODO: figure out how many taunts there will be
     #endregion
 
     #region Unique per class
-    protected Sprite[] c_charIcon = new Sprite[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT + 1];
+    protected Sprite[] c_charIcons = new Sprite[2];//(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT + 1];
     protected Material[] c_charStateMaterials;
     protected Material c_charBlobMaterial;
     protected PlayerBuild.E_ROCKYROAD_STATE eRockyRoadSkinState;

@@ -49,7 +49,7 @@ public class PlayerInfoController : MonoBehaviour
         CharacterSelection(GameSettings.Instance.players[PlayerIndex]);
     }
 
-    void Update()
+void Update()
     {
         m_Timer += Time.deltaTime;
 
