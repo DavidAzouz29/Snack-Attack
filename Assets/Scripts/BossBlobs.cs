@@ -703,11 +703,10 @@ public class BossBlobs : MonoBehaviour
             UpdateScore(_col);
         }
 
+        print("Event: Damage Applied.");
         // Become invulnerable on damage instance.
-        print("took damage");
         m_hitStopInvuln = true;
-        // Freeze both characters.
-        otherPlayerPlayerCollision.m_ParentTransform.GetComponent<PlayerController>().HitStop();
+        // Freeze the damaged character.
         r_PlayerCon.HitStop();
     }
 }
