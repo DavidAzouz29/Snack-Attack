@@ -70,7 +70,14 @@ public class GameManager : MonoBehaviour
                 _instance = gameManager; //_instance = Instantiate(gameManager);
                 return _instance;
             }
+            // if we're in the editor...
 #if UNITY_EDITOR
+            // Not the splash screen and we have a GM...
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+            {
+                // deactivate it
+                FindObjectOfType<GameManager>().gameObject.SetActive(false);
+            }
             // Still null
             // In a build we will always have a Game Manager as we start from the splash screen.
             // This is made to make testing much simpler. //TODO: make a Game Manager Debug
@@ -97,6 +104,12 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(this.gameObject);
         }
+        else if (SceneManager.GetActiveScene().buildIndex != 0 ||
+            SceneManager.GetActiveScene().buildIndex != Scene.Menu)
+        {
+            //PlayerAnims r_playerAnims = new PlayerAnims();
+            //r_playerAnims.SetupAnimID();
+        }
     }
 
     void Start()
@@ -110,7 +123,7 @@ public class GameManager : MonoBehaviour
         AudioThemeSelection();
 
         Physics.gravity = new Vector3(0, -m_GravityForce, 0);
-
+        
         //SpawnAllSnacks(); //TODO: restore
         //SetCameraTargets();
 

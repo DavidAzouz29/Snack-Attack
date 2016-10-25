@@ -50,12 +50,13 @@ public class PlayerScoreList : MonoBehaviour {
 		foreach (string name in names) {
 			GameObject go = (GameObject)Instantiate (playerScoreEntryPrefab);
 			go.transform.SetParent (this.transform);
-			go.transform.Find ("Username").GetComponent<Text> ().text = name;
+            go.transform.localScale = new Vector3(1, 1);
+            go.GetComponent<Image>().color = GameSettings.Instance.players[i].Color; //TODO: set ID
+            go.transform.Find("Username").GetComponent<Text>().text = name;
 			go.transform.Find ("Kills").GetComponent<Text> ().text = scoreManager.GetScore (name, "kills").ToString ();
 			// Set the 'x' text of 'x' U.I. component to Player 'x' kills.
 			//r_UILevel.r_PlayerScoresText [i].text = scoreManager.GetScore (name, "kills").ToString ();
 			go.transform.Find ("Deaths").GetComponent<Text> ().text = scoreManager.GetScore (name, "deaths").ToString ();
-			go.transform.Find ("Assists").GetComponent<Text> ().text = scoreManager.GetScore (name, "assists").ToString ();
 			i++;
 		}
 	}

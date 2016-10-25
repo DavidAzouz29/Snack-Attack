@@ -8,7 +8,6 @@
 /// </summary>
 
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Linq;
@@ -24,7 +23,7 @@ public class PlayerInfoController : MonoBehaviour
     //private MainMenuController _mainMenu;
     private GameSettings.PlayerInfo _player;
     private AudioSource c_AudioSource;
-    private Image c_ReadyImage;
+    private UnityEngine.UI.Image c_ReadyImage;
     private ArrayLayout playerButtonsArray;
     private int m_iController = 0; // tracks time
     private float m_Timer = 0; // tracks time
@@ -37,7 +36,7 @@ public class PlayerInfoController : MonoBehaviour
 
         //CharacterSelection(GameSettings.Instance.players[PlayerIndex]);
         playerButtonsArray = GetComponentInParent<PlayerSelect>().playerButtons;
-        c_ReadyImage = transform.GetChild(0).GetChild(3).GetComponent<Image>();
+        c_ReadyImage = transform.GetChild(0).GetChild(3).GetComponent<UnityEngine.UI.Image>();
         c_ReadyImage.enabled = false;
         m_iController = PlayerIndex + 1;
         fSensitivity = 0.2f;
@@ -46,10 +45,31 @@ public class PlayerInfoController : MonoBehaviour
 
     public void Start()
     {
-        CharacterSelection(GameSettings.Instance.players[PlayerIndex]);
+        GameObject charSlot = CharacterSelection(GameSettings.Instance.players[PlayerIndex]);
+        int animClassID = 0;
+        switch (_player.eBaseClassState)
+        {
+            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
+                {
+                    animClassID = 0;
+                    break;
+                }
+            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
+                {
+                    animClassID = 2;
+                    break;
+                }
+            default:
+                {
+                    animClassID = 0;
+                    break;
+                }
+        }
+
+        charSlot.GetComponent<Animator>().SetInteger("AnimationClassID", animClassID);
     }
 
-void Update()
+    void Update()
     {
         m_Timer += Time.deltaTime;
 
@@ -94,7 +114,7 @@ void Update()
         {
             c_AudioSource = GameManager.Instance.transform.GetChild(2).GetChild(6).GetComponent<AudioSource>();
         }
-        
+
         // if audio hasn't played
         if (isAudioToPlay)
         {
@@ -176,7 +196,7 @@ void Update()
         Refresh();
     }
 
-    void CharacterSelection(GameSettings.PlayerInfo a_player)
+    GameObject CharacterSelection(GameSettings.PlayerInfo a_player)
     {
         //UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(playerButtons.playerColsButton[a_player].coloumn[0].gameObject);
         // //c_GameSettings.availableBrains[iCurrentClassSelection[a_player]];//c_Characters[iCurrentClassSelection[a_player]];
@@ -220,8 +240,29 @@ void Update()
         characterSkinnedRenderer.sharedMesh = c_currChar.GetStateMesh(1);// GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh;
         characterAnimator.runtimeAnimatorController = c_currChar.GetAnimatorController(); //GetComponent<Animator>().runtimeAnimatorController;
         characterAnimator.avatar = c_currChar.GetAnimatorAvatar();// GetComponent<Animator>().avatar;
+        int animClassID = 0;
+        switch (_player.eBaseClassState)
+        {
+            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
+                {
+                    animClassID = 0;
+                    break;
+                }
+            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
+                {
+                    animClassID = 2;
+                    break;
+                }
+            default:
+                {
+                    animClassID = 2;
+                    break;
+                }
+        }
+        characterAnimator.SetInteger("AnimationClassID", animClassID);
 
         characterSlot.transform.rotation = c_currChar._rotation; //transform.rotation;
         characterSlot.transform.localScale = new Vector3(c_currChar._localScale, c_currChar._localScale, c_currChar._localScale); // transform.localScale;
+        return characterSlot;
     }
 }

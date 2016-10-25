@@ -41,10 +41,12 @@ public class MainMenuController : MonoBehaviour
 #if UNITY_EDITOR
         if (System.IO.File.Exists(SavedSettingsPathEditor))
             GameSettings.LoadFromJSON(SavedSettingsPathEditor);
+            //System.IO.File.Delete(SavedSettingsPathEditor);
 
 #else
         if (System.IO.File.Exists(SavedSettingsPath))
 			GameSettings.LoadFromJSON(SavedSettingsPath);
+            //System.IO.File.Delete(SavedSettingsPath);
 #endif
         else //
             GameSettings.InitializeFromDefault(GameSettingsTemplate);

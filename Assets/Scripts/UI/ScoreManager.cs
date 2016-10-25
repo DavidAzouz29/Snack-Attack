@@ -22,7 +22,6 @@ public class ScoreManager : MonoBehaviour {
             //Player Setup
             SetScore(GameSettings.Instance.players[i].ClassName, "kills", 0);
             SetScore(GameSettings.Instance.players[i].ClassName, "deaths", 0);
-            SetScore(GameSettings.Instance.players[i].ClassName, "assists", 0);
         }
     }
 

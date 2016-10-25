@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37356463, g: 0.38112056, b: 0.35887718, a: 1}
+  m_IndirectSpecularColor: {r: 0.3735644, g: 0.38112032, b: 0.35887682, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -298,7 +298,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 450434, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 450434, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
       propertyPath: m_LocalRotation.z
@@ -306,7 +306,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 450434, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 450434, guid: f9642900bffa76c4b820548d358f12d3, type: 2}
       propertyPath: m_RootOrder
@@ -545,7 +545,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 414588, guid: 44129389ab83a014390464a27ee9f7f1, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 414588, guid: 44129389ab83a014390464a27ee9f7f1, type: 2}
       propertyPath: m_LocalRotation.z
@@ -553,7 +553,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 414588, guid: 44129389ab83a014390464a27ee9f7f1, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 414588, guid: 44129389ab83a014390464a27ee9f7f1, type: 2}
       propertyPath: m_RootOrder
@@ -664,7 +664,6 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 0
   m_FirstSelected: {fileID: 1906868802}
   m_sendNavigationEvents: 0
   m_DragThreshold: 5

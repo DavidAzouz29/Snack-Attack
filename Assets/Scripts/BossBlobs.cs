@@ -241,50 +241,125 @@ public class BossBlobs : MonoBehaviour
         }
     }
 
+    void SetAnimID(TransitionState a_TransitionState, Animator a_anim)
+    {
+        switch (a_TransitionState)
+        {
+            case TransitionState.NEUT:
+                {
+                    switch (r_PlayerCon.m_eCurrentClassState)
+                    {
+                        //case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_ROCKYROAD:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_MINTCHOPCHIP:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_COOKIECRUNCH:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_RAINBOWWARRIOR:
+                            {
+                                a_anim.SetBool("Boss", false);
+                                a_anim.SetInteger("AnimationClassID", 0);
+                                break;
+                            }
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_PRINCESSCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_DUCHESSCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_POUNDCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_ANGELCAKE:
+                            {
+                                a_anim.SetBool("Boss", false);
+                                a_anim.SetInteger("AnimationClassID", 2);
+                                break;
+                            }
+                        default:
+                            {
+                                a_anim.SetBool("Boss", false);
+                                a_anim.SetInteger("AnimationClassID", 0);
+                                break;
+                            }
+                    }
+                    break;
+                }
+            case TransitionState.BOSS:
+                {
+                    switch (r_PlayerCon.m_eCurrentClassState)
+                    {
+                        //case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_ROCKYROAD:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_MINTCHOPCHIP:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_COOKIECRUNCH:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_RAINBOWWARRIOR:
+                            {
+                                a_anim.SetBool("Boss", true);
+                                a_anim.SetInteger("AnimationClassID", 1);
+                                break;
+                            }
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_PRINCESSCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_DUCHESSCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_POUNDCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_ANGELCAKE:
+                            {
+                                a_anim.SetBool("Boss", true);
+                                a_anim.SetInteger("AnimationClassID", 3);
+                                break;
+                            }
+                        default:
+                            {
+                                a_anim.SetBool("Boss", true);
+                                a_anim.SetInteger("AnimationClassID", 1);
+                                break;
+                            }
+                    }
+                    break;
+                }
+        }
+    }
+
     void UpdateScale()
     {
         if (m_Updated)
         {
             m_Updated = false;
+            // Boss
             if (m_Power >= BossDropThreshold[0]) // if power >= 200
             {
+                m_TransitionState = TransitionState.BOSS;
+                m_Threshold = Thresholds.BIG;
                 transform.localScale = new Vector3(m_PowerLevelScale[0], m_PowerLevelScale[0], m_PowerLevelScale[0]);
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(true);
-                gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>().SetBool("Boss", true);
+                SetAnimID(m_TransitionState, gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>());
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
-                gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", true);
-                m_TransitionState = TransitionState.BOSS;
-                m_Threshold = Thresholds.BIG;
+                gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", true); //TODO: set avobe and here?
                 GameManager.Instance.transform.GetChild(1).GetChild(0).GetComponent<AudioSource>().Play();
                 // Change speed and damage.
                 r_PlayerCon.SetPlayerSpeed(r_PlayerCon.bossSpeed);
             }
+            // Neut
             else if (m_Power >= BossDropThreshold[1])
             {
+                m_TransitionState = TransitionState.NEUT;
+                m_Threshold = Thresholds.REGULAR;
                 transform.localScale = new Vector3(m_PowerLevelScale[1], m_PowerLevelScale[1], m_PowerLevelScale[1]);
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
+                SetAnimID(m_TransitionState, gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>());
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(true);
                 gameObject.transform.FindChild("Neut").gameObject.GetComponent<Animator>().SetBool("Boss", false);
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
-                m_TransitionState = TransitionState.NEUT;
-                m_Threshold = Thresholds.REGULAR;
                 GameManager.Instance.transform.GetChild(1).GetChild(1).GetComponent<AudioSource>().Play();
                 // Change speed and damage.
                 r_PlayerCon.SetPlayerSpeed(r_PlayerCon.neutSpeed);
             }
+            // Weak
             else if (m_Power >= BossDropThreshold[2])
             {
+                m_TransitionState = TransitionState.WEAK;
+                m_Threshold = Thresholds.SMALL;
                 transform.localScale = new Vector3(m_PowerLevelScale[2], m_PowerLevelScale[2], m_PowerLevelScale[2]);
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(true);
-                gameObject.transform.FindChild("Weak").gameObject.GetComponent<Animator>().SetBool("Boss", false);
+                SetAnimID(m_TransitionState, gameObject.transform.FindChild("Weak").gameObject.GetComponent<Animator>());//.SetBool("Boss", false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
-                m_TransitionState = TransitionState.WEAK;
-                m_Threshold = Thresholds.SMALL;
                 GameManager.Instance.transform.GetChild(1).GetChild(1).GetComponent<AudioSource>().Play();
                 // Change speed and damage.
                 r_PlayerCon.SetPlayerSpeed(r_PlayerCon.weakSpeed);
@@ -575,7 +650,8 @@ public class BossBlobs : MonoBehaviour
         gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
         gameObject.transform.FindChild("Neut").gameObject.SetActive(isNeut);
         gameObject.transform.FindChild("Weak").gameObject.SetActive(!isNeut);
-        GetComponentInChildren<Animator>().SetBool("Boss", false);
+
+        SetAnimID(m_TransitionState, GetComponentInChildren<Animator>());//.SetBool("Boss", false);
         gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", false);
         gameObject.GetComponent<PlayerAnims>().m_Anim = GetComponentInChildren<Animator>();
         m_Invulnerable = true;
