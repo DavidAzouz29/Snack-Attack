@@ -89,7 +89,8 @@ public class RoundTimer : MonoBehaviour {
 
         if(m_RoundStarted)
         {
-            m_TimeRemaining -= Time.deltaTime;
+            m_TimeRemaining = Mathf.Max( m_TimeRemaining - Time.deltaTime, 0.0f );
+
             // Time's up and Scoreboard
             if (m_TimeRemaining <= 0.0f)
             {
