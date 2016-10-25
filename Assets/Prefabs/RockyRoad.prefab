@@ -1955,7 +1955,7 @@ GameObject:
   - 114: {fileID: 114000013787186382}
   - 114: {fileID: 114000011045587144}
   - 114: {fileID: 114000011339359018}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BossLevelCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2033,7 +2033,7 @@ GameObject:
   - 222: {fileID: 222000013000069384}
   - 114: {fileID: 114000010179758596}
   - 114: {fileID: 114000011062881358}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2050,7 +2050,7 @@ GameObject:
   - 224: {fileID: 224000013262804908}
   - 222: {fileID: 222000012394464956}
   - 114: {fileID: 114000013326059030}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2066,7 +2066,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 224000010844484662}
   - 114: {fileID: 114000010395871754}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BossSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2209,7 +2209,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 224000010571170836}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3309,8 +3309,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   c_BossSlider: {fileID: 114000010395871754}
   c_WheelImage: {fileID: 114000013326059030}
-  fJumpHeight: 2.8
-  fShelfHeight: 12
+  mask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114000012462330252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3341,7 +3342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3645,8 +3646,8 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 904158141
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &224000010571170836
 RectTransform:
