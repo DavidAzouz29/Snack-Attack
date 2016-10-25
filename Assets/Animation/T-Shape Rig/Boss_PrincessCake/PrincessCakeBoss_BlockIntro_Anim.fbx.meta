@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: c2bebffcc1677464884ee1b99b478fa7
-timeCreated: 1477356720
+guid: 2227e443e3af1e0469038f0c25b6addb
+timeCreated: 1477356719
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -47,7 +47,7 @@ ModelImporter:
     400036: TBodyType_Right_Shoulder_JNT
     400038: TBodyType_Right_Wrist_JNT
     400040: TBodyType_Sternum_JNT
-    7400000: 'PrincessCakeBoss_Knockback_Anim '
+    7400000: PrincessCakeBoss_BlockIntro_Anim
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -71,10 +71,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: 'PrincessCakeBoss_Knockback_Anim '
-      takeName: 'PrincessCakeBoss_Knockback '
-      firstFrame: 900
-      lastFrame: 910
+      name: PrincessCakeBoss_BlockIntro_Anim
+      takeName: PrincessCakeBoss_Block
+      firstFrame: 608
+      lastFrame: 615
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -139,7 +139,7 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 608
     isReadable: 1
   meshes:
     lODScreenPercentages: []
