@@ -127,8 +127,11 @@ public class PlayerController : MonoBehaviour
     private bool m_isInHitStop = false;
     PlayerAnims m_playerAnims;
 
+    [SerializeField] bool m_frozenDuringAttack = true;
+    [SerializeField] private float m_attackMoveAmount = 5.0f;
+
 // Use this for initialization
-void Start ()
+    void Start ()
     {
 		//setting our current state to alive
         m_eCurrentPlayerState = E_PLAYER_STATE.E_PLAYER_STATE_ALIVE;
@@ -185,6 +188,7 @@ void Start ()
     // Update is called once per frame
     void Update ()
     {
+        // Don't allow input if frozen by hitstop.
         if (m_isInHitStop)
         {
             m_hitStopTimer -= Time.deltaTime;
@@ -202,6 +206,23 @@ void Start ()
 
             return;
         }
+
+        // Don't allow input if currently in an animation. And inspector bool is set.
+        if (!m_playerAnims) return;
+
+        Animator animator = m_playerAnims.m_Anim;
+        if (animator.GetBool("AttackTrigger") && m_frozenDuringAttack)
+        {
+            // If you are not boss then move forward while attacking.
+            if (!animator.GetBool("Boss"))
+            {
+                Vector3 movement = transform.position + (transform.forward * m_attackMoveAmount * Time.deltaTime);
+                rb.MovePosition(Vector3.Lerp(transform.position, movement, 0.2f));
+            }
+
+            return;
+        }
+
         //creating a variable that gets the input axis
         float moveHorizontal = Input.GetAxis(horizontalAxis);
         float moveVertical = Input.GetAxis(verticalAxis);
