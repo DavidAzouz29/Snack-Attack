@@ -49,7 +49,7 @@ public class PlayerInfoController : MonoBehaviour
         CharacterSelection(GameSettings.Instance.players[PlayerIndex]);
     }
 
-void Update()
+    void Update()
     {
         m_Timer += Time.deltaTime;
 
@@ -153,8 +153,6 @@ void Update()
         m_Timer = 0;
         //c_AudioSource.clip = _player.Brain.GetAudioTaunt(Random.Range(0, 4)); //TODO: 5?
         c_ReadyImage.enabled = _player.isReady;
-        c_AudioSource.clip = _player.Brain.GetAudioTaunt(Random.Range(0, 4));
-
         isAudioToPlay = true;
     }
 

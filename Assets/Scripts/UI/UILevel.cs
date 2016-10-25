@@ -24,7 +24,7 @@ public class UILevel : MonoBehaviour {
         for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
         {
             // Get the neut icon as the default
-            c_playerIcons[i].sprite = GameSettings.Instance.players[i].Brain.GetIcon(0);
+            c_playerIcons[i].sprite = GameSettings.Instance.players[i].Brain.GetIcon(1);
         }
     }
 
@@ -60,7 +60,7 @@ public class UILevel : MonoBehaviour {
     /// <returns></returns>
     public IEnumerator UpdateIcon(int a_chosenPlayer, BossBlobs.TransitionState a_eTransitionState, bool a_isDead)
     {
-        c_playerIcons[a_chosenPlayer].sprite = GameSettings.Instance.players[a_chosenPlayer].Brain.GetIcon(1);
+        c_playerIcons[a_chosenPlayer].sprite = GameSettings.Instance.players[a_chosenPlayer].Brain.GetIcon(3);
         // If they're dead
         if(a_isDead)
         {
@@ -69,7 +69,7 @@ public class UILevel : MonoBehaviour {
         }
         yield return new WaitForSeconds(0.7f);
         c_playerIcons[a_chosenPlayer].color += Color.white;
-        c_playerIcons[a_chosenPlayer].sprite = GameSettings.Instance.players[a_chosenPlayer].Brain.GetIcon(0); //(int)a_eTransitionState
+        c_playerIcons[a_chosenPlayer].sprite = GameSettings.Instance.players[a_chosenPlayer].Brain.GetIcon((int)a_eTransitionState);
         yield return null;
     }
 }
