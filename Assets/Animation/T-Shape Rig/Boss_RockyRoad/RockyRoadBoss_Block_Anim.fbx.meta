@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 563a535f61c87e54698d27c8275191e4
-timeCreated: 1477356719
+guid: 579a0fd84aba42045a99011e04959fe8
+timeCreated: 1477368707
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -47,7 +47,7 @@ ModelImporter:
     400036: TBodyType_Right_Shoulder_JNT
     400038: TBodyType_Right_Wrist_JNT
     400040: TBodyType_Sternum_JNT
-    7400000: RockyRoadBoss_Block_Anim
+    7400000: Block
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -69,77 +69,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: RockyRoadBoss_Block_Anim
-      takeName: Block
-      firstFrame: 608
-      lastFrame: 625
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: jnt_GRP
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT/TBodyType_Left_armBase_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT/TBodyType_Left_armBase_JNT/TBodyType_Left_Shoulder_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT/TBodyType_Left_armBase_JNT/TBodyType_Left_Shoulder_JNT/TBodyType_Left_Elbow_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT/TBodyType_Left_armBase_JNT/TBodyType_Left_Shoulder_JNT/TBodyType_Left_Elbow_JNT/TBodyType_Left_Wrist_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT/TBodyType_Left_armBase_JNT/TBodyType_Left_Shoulder_JNT/TBodyType_Left_Elbow_JNT/TBodyType_Left_Wrist_JNT/TBodyType_Left_Fist_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT/TBodyType_Neck_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT/TBodyType_Neck_JNT/TBodyType_Head_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT/TBodyType_Neck_JNT/TBodyType_Head_JNT/TBodyType_HighHead_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT/TBodyType_Right_armBase_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT/TBodyType_Right_armBase_JNT/TBodyType_Right_Shoulder_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT/TBodyType_Right_armBase_JNT/TBodyType_Right_Shoulder_JNT/TBodyType_Right_Elbow_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT/TBodyType_Right_armBase_JNT/TBodyType_Right_Shoulder_JNT/TBodyType_Right_Elbow_JNT/TBodyType_Right_Wrist_JNT
-        weight: 1
-      - path: jnt_GRP/TBodyType_Base_/TBodyType_lowLeg_JNT/TBodyType_MidLeg_JNT/TBodyType_Pelvis_JNT/TBodyType_abdomen_JNT/TBodyType_Sternum_JNT/TBodyType_Right_armBase_JNT/TBodyType_Right_Shoulder_JNT/TBodyType_Right_Elbow_JNT/TBodyType_Right_Wrist_JNT/TBodyType_Right_Fist_JNT
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 600
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
