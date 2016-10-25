@@ -11,7 +11,7 @@ public class SubClassBrain : BaseClassBrain
     [SerializeField] protected string _charName;
     [SerializeField] protected Color _Color;
     [SerializeField] protected PlayerController.E_CLASS_STATE _eClassState;
-    [SerializeField] protected Sprite[] _charIcon = new Sprite[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT + 1];
+    [SerializeField] protected Sprite[] _charIcons = new Sprite[2];
     [SerializeField] protected Material[] _charStateMaterials = new Material[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT];
     [SerializeField] protected Material _charBlobMaterial;
 
@@ -36,7 +36,7 @@ public class SubClassBrain : BaseClassBrain
         charName = _charName;
         Color = _Color;
         eClassState = _eClassState;
-        c_charIcon = _charIcon; //TODO: set to neut through state
+        c_charIcons = _charIcons; //TODO: set to neut through state
         c_charBlobMaterial = _charBlobMaterial;
     }
 
@@ -53,6 +53,6 @@ public class SubClassBrain : BaseClassBrain
     public override AudioClip GetAudioTaunt(int i) { return c_charTaunts[i]; }
     public override RuntimeAnimatorController GetAnimatorController() { return c_charAnimatorController; }
     public override Avatar GetAnimatorAvatar() { return c_charAvatar; }
-    public override Sprite GetIcon(int i) { return c_charIcon[i]; }
+    public override Sprite GetIcon(int i) { return c_charIcons[i]; }
 
 }

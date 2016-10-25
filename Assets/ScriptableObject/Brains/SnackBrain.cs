@@ -23,7 +23,7 @@ public abstract class SnackBrain : ScriptableObject
     #endregion
 
     #region Unique per class
-    protected Sprite[] c_charIcon = new Sprite[(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT + 1];
+    protected Sprite[] c_charIcons = new Sprite[2];//(int)PlayerBuild.E_BOSS_STATE.E_BOSS_STATE_MAIN_COUNT + 1];
     protected Material[] c_charStateMaterials;
     protected Material c_charBlobMaterial;
     protected PlayerBuild.E_ROCKYROAD_STATE eRockyRoadSkinState;
