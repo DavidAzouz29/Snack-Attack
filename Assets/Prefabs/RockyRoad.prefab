@@ -1101,8 +1101,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107578}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 19.797573, y: -0.6233034, z: -16.306702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5991178, y: -0.6233034, z: -14.638796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children:
@@ -1506,8 +1506,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weakSpeed: 50
-  neutSpeed: 35
-  bossSpeed: 25
+  neutSpeed: 40
+  bossSpeed: 30
   m_Moving: 0
   hitsBeforeDeath: 5
   health: 100
@@ -1522,11 +1522,11 @@ MonoBehaviour:
   m_eCurrentPlayerState: 0
   m_eCurrentClassState: 0
   isOnGround: 0
-  fJumpForce: 14
+  fJumpForce: 22
   m_playerID: 0
-  fBounceForce: 14
-  m_hitStopDuration: 0.2
-  m_shakeAmount: 0.5
+  fBounceForce: 22
+  m_hitStopDuration: 0.15
+  m_shakeAmount: 0.75
 --- !u!114 &11430586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1680,7 +1680,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 62c2470c52a99804aa8c018b463af682, type: 2}
+  - {fileID: 2100000, guid: eaa6c0fe06ccd3a4785db63ee8f34333, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -1736,7 +1736,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 7d26a8bc66cca514a819f1a0bcafc85b, type: 2}
+  - {fileID: 2100000, guid: 7b455c55149f34d47adf4eb03e3e877c, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -1955,7 +1955,7 @@ GameObject:
   - 114: {fileID: 114000013787186382}
   - 114: {fileID: 114000011045587144}
   - 114: {fileID: 114000011339359018}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BossLevelCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2033,7 +2033,7 @@ GameObject:
   - 222: {fileID: 222000013000069384}
   - 114: {fileID: 114000010179758596}
   - 114: {fileID: 114000011062881358}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2050,7 +2050,7 @@ GameObject:
   - 224: {fileID: 224000013262804908}
   - 222: {fileID: 222000012394464956}
   - 114: {fileID: 114000013326059030}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2066,7 +2066,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 224000010844484662}
   - 114: {fileID: 114000010395871754}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BossSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2209,7 +2209,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 224000010571170836}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3309,8 +3309,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   c_BossSlider: {fileID: 114000010395871754}
   c_WheelImage: {fileID: 114000013326059030}
-  fJumpHeight: 2.8
-  fShelfHeight: 12
+  mask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114000012462330252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3341,7 +3342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3570,7 +3571,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: e06c13e192c49144791670411545a66a, type: 2}
+  - {fileID: 2100000, guid: 03b1ccd783dba3e488cb82d6cd88dfc2, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3645,8 +3646,8 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 904158141
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &224000010571170836
 RectTransform:
