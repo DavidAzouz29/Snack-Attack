@@ -1505,9 +1505,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a38d93fbb21cdf41911aaf39ce72b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weakSpeed: 50
-  neutSpeed: 35
-  bossSpeed: 25
+  weakSpeed: 60
+  neutSpeed: 40
+  bossSpeed: 30
   m_Moving: 0
   hitsBeforeDeath: 5
   health: 100
@@ -1522,13 +1522,13 @@ MonoBehaviour:
   m_eCurrentPlayerState: 0
   m_eCurrentClassState: 0
   isOnGround: 0
-  fJumpForce: 14
+  fJumpForce: 26
   m_playerID: 0
-  fBounceForce: 14
+  fBounceForce: 24
   m_hitStopDuration: 0.1
   m_shakeAmount: 0.5
   m_frozenDuringAttack: 1
-  m_attackMoveAmount: 5
+  m_attackMoveAmount: 25
 --- !u!114 &11430586
 MonoBehaviour:
   m_ObjectHideFlags: 1
