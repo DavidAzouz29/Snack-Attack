@@ -105,6 +105,7 @@ public class BossBlobs : MonoBehaviour
     private bool isNeut = false; // used for respawn
     [SerializeField]
     private GameObject[] blobsArray = new GameObject[PlayerManager.MAX_PLAYERS];
+    private Material c_blobMaterial;
     private Quaternion qBlobRot = Quaternion.identity;
     private bool m_Respawned = false;
     private bool m_Invulnerable = false;
@@ -137,6 +138,7 @@ public class BossBlobs : MonoBehaviour
         r_PlayerCon = GetComponent<PlayerController>();
         r_UILevel = r_PlayerMan.r_UILevel;
         blobsArray = r_PlayerMan.GetBlobArray();
+        c_blobMaterial = GameSettings.Instance.players[(int)r_PlayerCon.GetPlayerID()].Brain.GetBlobMaterial();
         iPlayerID = (int)r_PlayerCon.GetPlayerID();
 
 
@@ -431,6 +433,9 @@ public class BossBlobs : MonoBehaviour
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_RAINBOWWARRIOR:
                 {
                     m_SpawnableBlob = blobsArray[0];
+                    // Blob Materials
+                    m_SpawnableBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
+                    m_SpawnableBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = c_blobMaterial;
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_PRINCESSCAKE:
@@ -439,12 +444,18 @@ public class BossBlobs : MonoBehaviour
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_ANGELCAKE:
                 {
                     m_SpawnableBlob = blobsArray[1];
+                    // Blob Materials
+                    m_SpawnableBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
+                    //m_SpawnableBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = c_blobMaterial;
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PIZZAPUNK:
                 {
                     m_SpawnableBlob = blobsArray[2];
-                    m_SpawnableBlob.GetComponent<MeshRenderer>().material = r_PlayerMan.GetSnackBrains()[1].GetBlobMaterial();
+                    // Blob Materials
+                    m_SpawnableBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
+                    m_SpawnableBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = c_blobMaterial;
+                    //m_SpawnableBlob.GetComponent<MeshRenderer>().material = r_PlayerMan.GetSnackBrains()[1].GetBlobMaterial();
                     //shot.GetComponent<MeshRenderer>().material.mainTexture = r_Coli;
                     //shot.GetComponent<MeshRenderer>().material.SetColor("_SpecColor", Color.white);
                     break;

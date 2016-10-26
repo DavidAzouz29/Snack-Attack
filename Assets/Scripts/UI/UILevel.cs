@@ -23,10 +23,13 @@ public class UILevel : MonoBehaviour {
     private float timer = 0.0f;
     [SerializeField] private float m_countDownDelay = 2.0f;
 
+    private GameManager r_GameManager;
+
     // Use this for initialization
     void Start ()
     {
-        r_RoundTimer = GameManager.Instance.GetComponent<RoundTimer>();
+        r_GameManager = FindObjectOfType<GameManager>(); // TODO: use GameManager.Instance
+        r_RoundTimer = r_GameManager.GetComponent<RoundTimer>();
         //r_text.GetComponentInChildren<Text>();
         for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
         {
@@ -35,7 +38,7 @@ public class UILevel : MonoBehaviour {
         }
 
         // Countdown related stuffs.
-        Time.timeScale = 0.0f;
+        //Time.timeScale = 0.0f;
         timer = m_countDownDelay;
         c_countDown.enabled = true;
         c_timer.enabled = false;
@@ -65,6 +68,11 @@ public class UILevel : MonoBehaviour {
                 c_countDown.enabled = false;
                 c_timer.enabled = true;
                 Time.timeScale = 1.0f;
+                // Enable movement. Read the comment for disabling movement.
+                for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+                {
+                    GameManager.Instance.r_PlayerManager.GetPlayer(i).GetComponent<PlayerController>().enabled = true;
+                }
             }
             timer = m_countDownDelay;
             if (m_countDown == 0)

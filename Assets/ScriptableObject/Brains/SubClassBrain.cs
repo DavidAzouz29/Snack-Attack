@@ -8,6 +8,7 @@ public class SubClassBrain : BaseClassBrain
     [Header("Unique to each sub class")]
     public BaseClassBrain _baseClassBrain;
     public int _iBrainID; // # to Order by
+    public int _iAnimClassID; // # to Order by
     [SerializeField] protected string _charName;
     [SerializeField] protected Color _Color;
     [SerializeField] protected PlayerController.E_CLASS_STATE _eClassState;
@@ -53,6 +54,7 @@ public class SubClassBrain : BaseClassBrain
     public override AudioClip GetAudioTaunt(int i) { return c_charTaunts[i]; }
     public override RuntimeAnimatorController GetAnimatorController() { return c_charAnimatorController; }
     public override Avatar GetAnimatorAvatar() { return c_charAvatar; }
+    public override int GetAnimID() { return _iAnimClassID; }
     public override Sprite GetIcon(int i) { return c_charIcons[i]; }
 
 }

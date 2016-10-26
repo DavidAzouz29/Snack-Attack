@@ -45,8 +45,17 @@ public class PlayerInfoController : MonoBehaviour
 
     public void Start()
     {
-        GameObject charSlot = CharacterSelection(GameSettings.Instance.players[PlayerIndex]);
-        int animClassID = 0;
+        Refresh();
+        // if a Princess Cake is selected - set the ID
+        Animator[] anims = GetComponentsInChildren<Animator>();
+        foreach (Animator anim in anims)
+        {
+            anim.SetInteger("AnimationClassID", _player.Brain.GetAnimID());
+        }
+        GameObject charSlot = CharacterSelection(_player);// GameSettings.Instance.players[PlayerIndex]);
+        //GetComponentInChildren<Animator>().SetInteger("AnimationClassID", _player.Brain.GetAnimID());
+        Refresh();
+        /*int animClassID = 0;
         switch (_player.eBaseClassState)
         {
             case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
@@ -64,9 +73,9 @@ public class PlayerInfoController : MonoBehaviour
                     animClassID = 0;
                     break;
                 }
-        }
+        } */
 
-        charSlot.GetComponent<Animator>().SetInteger("AnimationClassID", animClassID);
+        //charSlot.GetComponent<Animator>().SetInteger("AnimationClassID", _player.Brain.GetAnimID());
     }
 
     void Update()
@@ -173,7 +182,7 @@ public class PlayerInfoController : MonoBehaviour
         m_Timer = 0;
         //c_AudioSource.clip = _player.Brain.GetAudioTaunt(Random.Range(0, 4)); //TODO: 5?
         c_ReadyImage.enabled = _player.isReady;
-        c_AudioSource.clip = _player.Brain.GetAudioTaunt(Random.Range(0, 4));
+        //c_AudioSource.clip = _player.Brain.GetAudioTaunt(Random.Range(0, 4));
 
         isAudioToPlay = true;
     }

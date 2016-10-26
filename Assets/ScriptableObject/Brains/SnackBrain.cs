@@ -51,6 +51,7 @@ public abstract class SnackBrain : ScriptableObject
     public abstract AudioClip GetAudioTaunt(int i);
     public abstract RuntimeAnimatorController GetAnimatorController();
     public abstract Avatar GetAnimatorAvatar();
+    public abstract int GetAnimID();
     public abstract Sprite GetIcon(int i);
 
     //internal AudioClip GetAudioTaunt(int v) { return c_charTaunts[v]; }

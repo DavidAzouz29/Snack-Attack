@@ -49,6 +49,7 @@ public class BaseClassBrain : SnackBrain
     public override AudioClip GetAudioTaunt(int i) { return _charTaunts[i]; }
     public override RuntimeAnimatorController GetAnimatorController() { return _charAnimatorController; }
     public override Avatar GetAnimatorAvatar() { return _charAvatar; }
+    public override int GetAnimID() { return -1; }
     public override Sprite GetIcon(int i) { return null; }
 
 

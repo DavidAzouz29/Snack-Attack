@@ -97,7 +97,7 @@ public class RoundTimer : MonoBehaviour {
                 m_RoundStarted = false;
                 for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
                 {
-                    m_PlayerManager.GetPlayer(0).GetComponent<PlayerController>().enabled = false;
+                    m_PlayerManager.GetPlayer(i).GetComponent<PlayerController>().enabled = false;
                 }
                 m_ScoreBoardWindow.GetComponent<WindowManager>().TimesUp();
                 Time.timeScale = 0.5f;
@@ -108,6 +108,11 @@ public class RoundTimer : MonoBehaviour {
 
                 m_Spawned = true;
                 m_PlayerManager.CreatePlayers();
+                // Disable movement so Princess Anims can sync up.
+                for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+                {
+                    //m_PlayerManager.GetPlayer(i).GetComponent<PlayerController>().enabled = false;
+                }
             }
         }
 
