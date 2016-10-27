@@ -35,7 +35,8 @@ public class UIBossLevel : MonoBehaviour
         Ray ray = new Ray(transform.parent.position, -transform.parent.up);
         // shouldn't be an if check as we're always "hitting" something (floor)
         Physics.Raycast(ray, out hit, 100, mask.value);
-        transform.position = new Vector3(transform.position.x, hit.point.y + 0.5f, transform.position.z);
+        Vector3 prevPos = transform.position;
+        transform.position = Vector3.Lerp(prevPos, new Vector3(transform.position.x, hit.point.y + 0.5f, transform.position.z), Time.deltaTime + 0.75f);// 0.5f);
 
         // This is to keep the object the correct rotation without flickering.
         transform.rotation = Quaternion.AngleAxis(-90.0f, Vector3.left);

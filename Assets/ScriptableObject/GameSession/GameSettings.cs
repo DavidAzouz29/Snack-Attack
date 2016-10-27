@@ -16,7 +16,7 @@ public class GameSettings : ScriptableObject
         public PlayerBuild.E_BASE_CLASS_STATE eBaseClassState;
         public PlayerController.E_CLASS_STATE eClassState;
 		public int iScore; // Kills for podium position
-		public bool isReady; // Used for Player Select
+		public bool isReady = false; // Used for Player Select
 
         // Serializing an object reference directly to JSON doesn't do what we want - we just get an InstanceID
         // which is not stable between sessions. So instead we serialize the string name of the object, and
@@ -26,6 +26,25 @@ public class GameSettings : ScriptableObject
 		{
 			get
 			{
+                //TODO: https://bitbucket.org/richardfine/scriptableobjectdemo 
+                /*if (!_cachedBrain && !String.IsNullOrEmpty(BrainName))
+                {
+                    SubClassBrain[] availableBrains;
+#if UNITY_EDITOR
+                    // When working in the Editor and launching the game directly from the play scenes, rather than the
+                    // main menu, the brains may not be loaded and so Resources.FindObjectsOfTypeAll will not find them.
+                    // Instead, use the AssetDatabase to find them. At runtime, all available brains get loaded by the
+                    // MainMenuController so it's not a problem outside the editor.
+
+                    availableBrains = UnityEditor.AssetDatabase.FindAssets("t:SubClassBrain")
+                                .Select(guid => UnityEditor.AssetDatabase.GUIDToAssetPath(guid))
+                                .Select(path => UnityEditor.AssetDatabase.LoadAssetAtPath<SubClassBrain>(path))
+                                .OrderBy(b => b._iBrainID).ToArray();
+
+#else
+					availableBrains = Resources.FindObjectsOfTypeAll<SubClassBrain>().OrderBy(b => b._iBrainID).ToArray();
+#endif
+                }*/
                 if (_cachedBrain)
                 {
                     return _cachedBrain;
@@ -39,9 +58,9 @@ public class GameSettings : ScriptableObject
 
                     _cachedBrain = Instance.availableBrains.FirstOrDefault(b => b.name == BrainName);
 				}
-				return _cachedBrain;
-			}
-			set
+				return _cachedBrain; 
+            }
+            set
 			{
 				_cachedBrain = value;
 				BrainName = value ? value.name : String.Empty;
@@ -68,20 +87,10 @@ public class GameSettings : ScriptableObject
     {
         get
         {
-            if (_instance != null)
-            {
-                return _instance;
-            }
-            // If we're null
-            var gameSettings = Resources.FindObjectsOfTypeAll<GameSettings>().FirstOrDefault();
-            if (gameSettings != null)
-            {
-                _instance = Instantiate(gameSettings);
-                //_instance.availableBrains.OrderBy(n => n._iBrainID); //TODO: breaks things?
-            }//TODO: fix
-            //InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Default game settings.asset"));
+            if (!_instance)
+                _instance = Resources.FindObjectsOfTypeAll<GameSettings>().FirstOrDefault();
 #if UNITY_EDITOR
-            if (_instance == null)
+            if (!_instance)
                 InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Default game settings.asset"));
 #endif
             return _instance;
@@ -100,12 +109,13 @@ public class GameSettings : ScriptableObject
         // Instead, use the AssetDatabase to find them. At runtime, all available brains get loaded by the
         // MainMenuController so it's not a problem outside the editor.
 
-        //availableBrains = UnityEditor.AssetDatabase.FindAssets("t:SubClassBrain")
-        //                .Select(guid => UnityEditor.AssetDatabase.GUIDToAssetPath(guid))
-        //                .Select(path => UnityEditor.AssetDatabase.LoadAssetAtPath<SubClassBrain>(path))
-        //                .Where(b => b).ToArray();
+        availableBrains = UnityEditor.AssetDatabase.FindAssets("t:SubClassBrain")
+                        .Select(guid => UnityEditor.AssetDatabase.GUIDToAssetPath(guid))
+                        .Select(path => UnityEditor.AssetDatabase.LoadAssetAtPath<SubClassBrain>(path))
+                        .OrderBy(b => b._iBrainID).ToArray();
+
 #else
-					availableBrains = Resources.FindObjectsOfTypeAll<SubClassBrain>();
+					availableBrains = Resources.FindObjectsOfTypeAll<SubClassBrain>().OrderBy(b => b._iBrainID).ToArray();
 #endif
 
     }

@@ -22,6 +22,7 @@ public class PlayerInfoController : MonoBehaviour
 
     //private MainMenuController _mainMenu;
     private GameSettings.PlayerInfo _player;
+    private Animator[] anims = new Animator[(int)PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_BASE_COUNT - 1]; //RECODE: remove -1 for add. char
     private AudioSource c_AudioSource;
     private UnityEngine.UI.Image c_ReadyImage;
     private ArrayLayout playerButtonsArray;
@@ -34,6 +35,14 @@ public class PlayerInfoController : MonoBehaviour
     {
         //_mainMenu = GetComponentInParent<MainMenuController>();
 
+        Refresh();
+        // if a Princess Cake is selected - set the ID //RECODE: remove the "- 1" for additional characters
+        for (int i = 0; i < (int)PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_BASE_COUNT - 1; i++)
+        {
+            anims[i] = transform.GetChild(i + 1).GetComponent<Animator>();
+            anims[i].SetInteger("AnimationClassID", _player.Brain.GetAnimID());
+        }
+
         //CharacterSelection(GameSettings.Instance.players[PlayerIndex]);
         playerButtonsArray = GetComponentInParent<PlayerSelect>().playerButtons;
         c_ReadyImage = transform.GetChild(0).GetChild(3).GetComponent<UnityEngine.UI.Image>();
@@ -45,68 +54,42 @@ public class PlayerInfoController : MonoBehaviour
 
     public void Start()
     {
+        CharacterSelection(_player);// GameSettings.Instance.players[PlayerIndex]);
         Refresh();
-        // if a Princess Cake is selected - set the ID
-        Animator[] anims = GetComponentsInChildren<Animator>();
-        foreach (Animator anim in anims)
-        {
-            anim.SetInteger("AnimationClassID", _player.Brain.GetAnimID());
-        }
-        GameObject charSlot = CharacterSelection(_player);// GameSettings.Instance.players[PlayerIndex]);
-        //GetComponentInChildren<Animator>().SetInteger("AnimationClassID", _player.Brain.GetAnimID());
-        Refresh();
-        /*int animClassID = 0;
-        switch (_player.eBaseClassState)
-        {
-            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
-                {
-                    animClassID = 0;
-                    break;
-                }
-            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
-                {
-                    animClassID = 2;
-                    break;
-                }
-            default:
-                {
-                    animClassID = 0;
-                    break;
-                }
-        } */
-
-        //charSlot.GetComponent<Animator>().SetInteger("AnimationClassID", _player.Brain.GetAnimID());
     }
 
     void Update()
     {
         m_Timer += Time.deltaTime;
 
-        // Left
-        if (Input.GetKeyDown("joystick " + (m_iController) + " button 4") && m_Timer >= m_TimerPause ||
-            Input.GetAxis("P" + (m_iController) + "_Horizontal") < -fSensitivity && m_Timer >= m_TimerPause)
+        // If a player isn't ready, receive input.
+        if (!_player.isReady)
         {
-            OnLeft();
+            // Left
+            if (Input.GetKeyDown("joystick " + (m_iController) + " button 4") && m_Timer >= m_TimerPause ||
+                Input.GetAxis("P" + (m_iController) + "_Horizontal") < -fSensitivity && m_Timer >= m_TimerPause)
+            {
+                OnLeft();
+            }
+
+            // Right
+            if (Input.GetKeyDown("joystick " + (m_iController) + " button 5") && m_Timer >= m_TimerPause ||
+                Input.GetAxis("P" + (m_iController) + "_Horizontal") > fSensitivity && m_Timer >= m_TimerPause)
+            {
+                OnRight();
+            }
+
+            if (Input.GetAxis("P" + (m_iController) + "_Vertical") < -fSensitivity && m_Timer >= m_TimerPause)
+            {
+
+            }
+
+            // Select (A on Xbox)
+            if (Input.GetKeyDown("joystick " + (m_iController) + " button 7") && m_Timer >= m_TimerPause)
+            {
+                ToggleIsReady();
+            }
         }
-
-        // Right
-        if (Input.GetKeyDown("joystick " + (m_iController) + " button 5") && m_Timer >= m_TimerPause ||
-            Input.GetAxis("P" + (m_iController) + "_Horizontal") > fSensitivity && m_Timer >= m_TimerPause)
-        {
-            OnRight();
-        }
-
-        if (Input.GetAxis("P" + (m_iController) + "_Vertical") < -fSensitivity && m_Timer >= m_TimerPause)
-        {
-
-        }
-
-        // Select (A on Xbox)
-        if (Input.GetKeyDown("joystick " + (m_iController) + " button 7") && m_Timer >= m_TimerPause)
-        {
-            ToggleIsReady();
-        }
-
 
         // Submit/ ready
         if (_player.isReady && isAudioToPlay)
@@ -127,7 +110,7 @@ public class PlayerInfoController : MonoBehaviour
         // if audio hasn't played
         if (isAudioToPlay)
         {
-            c_AudioSource.pitch = 1.0f + (m_iController * 0.1f); //TODO: this will play with the character's taunts
+            c_AudioSource.pitch = 1.0f + (m_iController * 0.1f); //TODO: this will play with the character's taunts?
             c_AudioSource.Play();
             isAudioToPlay = false;
         }
@@ -182,8 +165,19 @@ public class PlayerInfoController : MonoBehaviour
         m_Timer = 0;
         //c_AudioSource.clip = _player.Brain.GetAudioTaunt(Random.Range(0, 4)); //TODO: 5?
         c_ReadyImage.enabled = _player.isReady;
-        //c_AudioSource.clip = _player.Brain.GetAudioTaunt(Random.Range(0, 4));
 
+        // Attack and walk if we're ready
+        anims[(int)_player.eBaseClassState].SetBool("Attack1Left", _player.isReady);
+        anims[(int)_player.eBaseClassState].SetBool("Walking", _player.isReady);
+        anims[(int)_player.eBaseClassState].SetBool("Idling", !_player.isReady);
+        if (_player.isReady)
+        {
+            anims[(int)_player.eBaseClassState].SetTrigger("AttackToWalk");
+            //anims[(int)_player.eBaseClassState].CrossFade("Walkcycle", 0);
+        }
+        //else
+            //anims[(int)_player.eBaseClassState].CrossFade("Idle", 0);
+        //c_AudioSource.clip = _player.Brain.GetAudioTaunt(Random.Range(0, 4));
         isAudioToPlay = true;
     }
 
@@ -231,7 +225,7 @@ public class PlayerInfoController : MonoBehaviour
             characterSlot = transform.GetChild(2).gameObject;
             transform.GetChild(1).gameObject.SetActive(false);
         }
-        // Pizza Punk
+        /*/ Pizza Punk
         else if ((int)a_player.eClassState < (int)PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_BASE_PIZZAPUNK_COUNT)
         {
             // TODO: get child 3 // Set Child 2 to Inactive ^ same for others
@@ -241,7 +235,7 @@ public class PlayerInfoController : MonoBehaviour
             }
             characterSlot = transform.GetChild(2).gameObject;
             transform.GetChild(1).gameObject.SetActive(false);
-        }
+        }*/
 
         SkinnedMeshRenderer characterSkinnedRenderer = characterSlot.GetComponentInChildren<SkinnedMeshRenderer>();
         Animator characterAnimator = characterSlot.GetComponent<Animator>();
