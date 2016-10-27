@@ -6,6 +6,7 @@ public class CameraControl : MonoBehaviour {
     public float m_DampTime = 0.2f;                 // Approximate time for the camera to refocus.
     public float m_ScreenEdgeBuffer = 4f;           // Space between the top/bottom most target and the screen edge.
     public float m_MinSize = 6.5f;                  // The smallest orthographic size the camera can be.
+    public float m_LerpSpeed = 0.5f;                // How smooth should the camera pan.
     [HideInInspector]
     public Transform[] m_Targets; // All the targets the camera needs to encompass.
 
@@ -14,13 +15,6 @@ public class CameraControl : MonoBehaviour {
     private float m_ZoomSpeed;                      // Reference speed for the smooth damping of the orthographic size.
     private Vector3 m_MoveVelocity;                 // Reference velocity for the smooth damping of the position.
     private Vector3 m_DesiredPosition;              // The position the camera is moving towards.
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
 
     private void Awake()
     {
@@ -35,12 +29,6 @@ public class CameraControl : MonoBehaviour {
         // Change the size of the camera based.
         Zoom();
     }
-
-    private void FixedUpdate()
-    {
-        
-    }
-
 
     private void Move()
     {
@@ -85,7 +73,8 @@ public class CameraControl : MonoBehaviour {
         // Find the required size based on the desired position and smoothly transition to that size.
         float requiredSize = FindRequiredSize();
         //m_Camera.transform.LookAt(m_DesiredPosition);
-        m_Camera.fieldOfView = requiredSize * m_ScreenEdgeBuffer / 2;
+        float prevFOV =  m_Camera.fieldOfView;
+        m_Camera.fieldOfView = Mathf.Lerp(prevFOV, requiredSize * m_ScreenEdgeBuffer * 0.5f, Time.deltaTime * m_LerpSpeed);
         //m_Camera.orthographicSize = Mathf.SmoothDamp(m_Camera.orthographicSize, requiredSize, ref m_ZoomSpeed, m_DampTime);
 
     }
