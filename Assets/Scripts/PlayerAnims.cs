@@ -15,6 +15,7 @@
 /// </summary>
 /// ----------------------------------
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PlayerAnims : MonoBehaviour {
@@ -34,54 +35,61 @@ public class PlayerAnims : MonoBehaviour {
         m_isJumping = false;
         m_PreviousPos = transform.position;
         m_isLeftAttacking = true;
+    /*}
+    void Awake()
+    {
+      //OnLevelWasLoaded();
+    }
 
-        /*void Awake()
+    void OnLevelWasLoaded()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 0)
         { */
-        //if (SceneManager.GetActiveScene().buildIndex != 0)
-        switch (m_TransitionState)
-        {
-            case BossBlobs.TransitionState.BOSS:
-                {
-                    m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
-
-                    switch (GameSettings.Instance.players[(int)m_PC.GetPlayerID()].eBaseClassState)
+            switch (m_TransitionState)
+            {
+                case BossBlobs.TransitionState.BOSS:
                     {
-                        case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
-                            {
-                                m_Anim.SetInteger("AnimationClassID", 1);
-                                break;
-                            }
-                        case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
-                            {
-                                m_Anim.SetInteger("AnimationClassID", 3);
-                                break;
-                            }
-                    }
-                    break;
-                }
-            case BossBlobs.TransitionState.NEUT:
-                {
-                    m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
+                        m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
 
-                    switch (GameSettings.Instance.players[(int)m_PC.GetPlayerID()].eBaseClassState)
-                    {
-                        case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
-                            {
-                                m_Anim.SetInteger("AnimationClassID", 0);
-                                break;
-                            }
-                        case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
-                            {
-                                m_Anim.SetInteger("AnimationClassID", 2);
-                                break;
-                            }
+                        switch (GameSettings.Instance.players[(int)m_PC.GetPlayerID()].eBaseClassState)
+                        {
+                            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
+                                {
+                                    m_Anim.SetInteger("AnimationClassID", 1);
+                                    break;
+                                }
+                            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
+                                {
+                                    m_Anim.SetInteger("AnimationClassID", 3);
+                                    break;
+                                }
+                        }
+                        break;
                     }
+                case BossBlobs.TransitionState.NEUT:
+                    {
+                        m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
+
+                        switch (GameSettings.Instance.players[(int)m_PC.GetPlayerID()].eBaseClassState)
+                        {
+                            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
+                                {
+                                    m_Anim.SetInteger("AnimationClassID", 0);
+                                    break;
+                                }
+                            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
+                                {
+                                    m_Anim.SetInteger("AnimationClassID", 2);
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+                case BossBlobs.TransitionState.WEAK:
+                    m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
                     break;
-                }
-            case BossBlobs.TransitionState.WEAK:
-                m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
-                break;
-        }
+            }
+        //}
     }
 
     public void SetupAnimID()

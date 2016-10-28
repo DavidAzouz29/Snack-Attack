@@ -13,7 +13,7 @@ using System.Linq;
 public class ScoreManager : MonoBehaviour {
 
 	Dictionary< string, Dictionary<string, int> > playerScores;
-	int changeCounter = 0;
+	int changeCounter = -1;
 
 	void Start()
     {
@@ -23,6 +23,7 @@ public class ScoreManager : MonoBehaviour {
             SetScore(GameSettings.Instance.players[i].ClassName, "kills", 0);
             SetScore(GameSettings.Instance.players[i].ClassName, "deaths", 0);
         }
+        changeCounter++; // Updates the scoreboard once.
     }
 
 	// Init this instance.

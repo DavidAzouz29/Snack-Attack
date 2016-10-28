@@ -439,7 +439,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196634}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -4.92, y: -0.43, z: -14.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -844,7 +844,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: ca23fd4d87eaed2439564ea661408304, type: 2}
+  - {fileID: 2100000, guid: eb2971b515074d24caaae31e894d951f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3264,6 +3264,8 @@ MonoBehaviour:
   m_Knockback: 250
   m_EmissionThreshold: 0
   m_EmissionBrightness: 0.34
+  m_EmissionSpawnPulseSpeed: 4
+  m_EmissionSpawnDarkTint: 0.3
   m_ModelMeshRenderers:
   - {fileID: 0}
   - {fileID: 0}
@@ -3277,7 +3279,6 @@ MonoBehaviour:
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
-  m_InvulnerabilityThreshold: 1
   m_hitStopInvulnDuration: 0.1
 --- !u!114 &114000013423421516
 MonoBehaviour:
@@ -3312,7 +3313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.4, g: 0.18, b: 0.58, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3543,7 +3544,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 38458a7cb486f9f4a8ec39708088a99f, type: 2}
+  - {fileID: 2100000, guid: 6f38523019ff84e41b83fbd2c838c895, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3601,7 +3602,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 8a502118930d3424aa9bc6c98ad443cf, type: 2}
+  - {fileID: 2100000, guid: a864f56ee6199404ab303e50cbcf3c4d, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}

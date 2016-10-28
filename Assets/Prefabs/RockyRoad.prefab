@@ -1479,6 +1479,8 @@ MonoBehaviour:
   m_Knockback: 250
   m_EmissionThreshold: 0
   m_EmissionBrightness: 0.34
+  m_EmissionSpawnPulseSpeed: 4
+  m_EmissionSpawnDarkTint: 0.3
   m_ModelMeshRenderers:
   - {fileID: 0}
   - {fileID: 13756246}
@@ -1492,7 +1494,6 @@ MonoBehaviour:
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
-  m_InvulnerabilityThreshold: 1
   m_hitStopInvulnDuration: 0.1
 --- !u!114 &11417940
 MonoBehaviour:
@@ -3311,6 +3312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   c_BossSlider: {fileID: 114000010395871754}
   c_WheelImage: {fileID: 114000013326059030}
+  fDisFromGround: 0.5
   mask:
     serializedVersion: 2
     m_Bits: 4294967295

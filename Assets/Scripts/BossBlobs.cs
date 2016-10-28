@@ -5,7 +5,8 @@
 /// --------------------------------------------------
 /// Brief: BossBlobs are what players seek to grow and evolve.
 /// Combat/ Melee also happens here.
-/// viewed 
+/// viewed: 
+/// http://answers.unity3d.com/questions/914923/standard-shader-emission-control-via-script.html
 /// 
 /// ***EDIT***
 /// - removed PlayerCounter and us respawing as weak	- David Azouz 20/10/16
@@ -53,11 +54,15 @@ public class BossBlobs : MonoBehaviour
     private int m_KillCounter = 1;
 
     //Emission Color Varriables
+    // When hit
     private Color m_EmissionColor;
     private float m_EmissionTimer = 0.0f;
     private bool m_EmissionTimerEnabled;
     public float m_EmissionThreshold = 0.5f;
     public float m_EmissionBrightness = 0.34f;
+    // Spawn
+    public float m_EmissionSpawnPulseSpeed = 2.0f;
+    public float m_EmissionSpawnDarkTint = 0.3f;
     public SkinnedMeshRenderer[] m_ModelMeshRenderers;
 
     // TODO: two enums that do the same thing?
@@ -110,7 +115,7 @@ public class BossBlobs : MonoBehaviour
     private bool m_Respawned = false;
     private bool m_Invulnerable = false;
     private float m_InvulnerabilityTimer = 0f;
-    public float m_InvulnerabilityThreshold = 1.0f;
+    private float m_InvulnerabilityThreshold = 1.5f;
 
     // Hit stop invuln.
     private bool m_hitStopInvuln = false;
@@ -223,15 +228,28 @@ public class BossBlobs : MonoBehaviour
             m_EmissionTimerEnabled = false;
             m_EmissionTimer = 0f;
         }
+
+        // Just spawned
         if (m_Invulnerable)
         {
             m_InvulnerabilityTimer += Time.deltaTime;
+            // Emission colour flashing
+            SkinnedMeshRenderer renderer = m_ModelMeshRenderers[(int)m_TransitionState];
+            Material mat = renderer.material;
+
+            float emission = Mathf.PingPong(Time.time * m_EmissionSpawnPulseSpeed, 1);
+            Color baseColor = m_EmissionColor; //Replace this with whatever you want for your base color at emission level '1'
+
+            Color finalColor = baseColor * Mathf.LinearToGammaSpace(emission * m_EmissionSpawnDarkTint);
+
+            mat.SetColor("_EmissionColor", finalColor);
             if (m_InvulnerabilityTimer >= m_InvulnerabilityThreshold)
             {
                 m_Invulnerable = false;
                 m_InvulnerabilityTimer = 0f;
             }
         }
+
         if (m_hitStopInvuln)
         {
             m_hitStopInvulnTimer += Time.deltaTime;
