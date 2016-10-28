@@ -14,6 +14,7 @@ public class UIBossLevel : MonoBehaviour
 
     public Slider c_BossSlider;
     public Image c_WheelImage;
+	public float fDisFromGround = 0.5f;
     public LayerMask mask = -1;
     private BossBlobs r_BossBlobs;
 
@@ -36,7 +37,7 @@ public class UIBossLevel : MonoBehaviour
         // shouldn't be an if check as we're always "hitting" something (floor)
         Physics.Raycast(ray, out hit, 100, mask.value);
         Vector3 prevPos = transform.position;
-        transform.position = Vector3.Lerp(prevPos, new Vector3(transform.position.x, hit.point.y + 0.5f, transform.position.z), Time.deltaTime + 0.75f);// 0.5f);
+		transform.position = Vector3.Lerp(prevPos, new Vector3(transform.position.x, hit.point.y + fDisFromGround, transform.position.z), Time.deltaTime + 0.75f);// 0.5f);
 
         // This is to keep the object the correct rotation without flickering.
         transform.rotation = Quaternion.AngleAxis(-90.0f, Vector3.left);

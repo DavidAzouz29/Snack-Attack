@@ -411,7 +411,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172812}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.359, z: 0}
+  m_LocalPosition: {x: 0, y: 0.231, z: 0}
   m_LocalScale: {x: 1.1670532, y: 1.1670531, z: 1.1670531}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -440,7 +440,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08667374, y: -0.6233034, z: -14.75}
+  m_LocalPosition: {x: -4.92, y: -0.43, z: -14.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children:
@@ -844,7 +844,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9024587ec87485545af98b85836607f6, type: 2}
+  - {fileID: 2100000, guid: ca23fd4d87eaed2439564ea661408304, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2037,7 +2037,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014266203998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.37, z: 0}
+  m_LocalPosition: {x: 0, y: 0.258, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2136,7 +2136,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010242127750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.321, z: 0}
+  m_LocalPosition: {x: 0, y: 0.267, z: 0}
   m_LocalScale: {x: 1.2787635, y: 1.2787638, z: 1.2787638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2513,7 +2513,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.6430376, y: 1, z: 2.5369563}
-  m_Center: {x: 0.06386558, y: 0, z: 0.06249427}
+  m_Center: {x: 0.06386558, y: -0.21, z: 0.06249427}
 --- !u!65 &65000014199504914
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2525,7 +2525,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.9063612, y: 0.953788, z: 1.8474272}
-  m_Center: {x: 0.013758188, y: 0.02310594, z: -0.026569286}
+  m_Center: {x: 0.013758188, y: 0.13, z: -0.026569286}
 --- !u!65 &65000014210304374
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3083,6 +3083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   c_BossSlider: {fileID: 114000010146801166}
   c_WheelImage: {fileID: 114000013878730484}
+  fDisFromGround: 0.5
   mask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -3311,7 +3312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4, g: 0.18, b: 0.58, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3424,7 +3425,7 @@ CapsuleCollider:
   m_Radius: 1.2644306
   m_Height: 3.0611548
   m_Direction: 1
-  m_Center: {x: 0, y: 0.98, z: 0}
+  m_Center: {x: 0, y: 1.16, z: 0}
 --- !u!136 &136000010619696828
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3448,9 +3449,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.4925412
-  m_Height: 1
+  m_Height: 3.6
   m_Direction: 1
-  m_Center: {x: 0, y: 0.61, z: 0}
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!136 &136000011919649168
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3526,9 +3527,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.1091595
-  m_Height: 2.9540944
+  m_Height: 2.77
   m_Direction: 1
-  m_Center: {x: 0, y: 0.87, z: 0}
+  m_Center: {x: 0, y: 1.08, z: 0}
 --- !u!137 &137000010013304120
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -3542,7 +3543,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: f4d1baa6c6a5ba24ab7412cc9b1a6d9a, type: 2}
+  - {fileID: 2100000, guid: 38458a7cb486f9f4a8ec39708088a99f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3600,7 +3601,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: de787db540cb2f543a688f4f010e85b7, type: 2}
+  - {fileID: 2100000, guid: 8a502118930d3424aa9bc6c98ad443cf, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3706,7 +3707,7 @@ RectTransform:
   m_GameObject: {fileID: 1000013810669526}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5146282, y: 1.5146278, z: 1.5146278}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 224000010075441050}
@@ -3714,7 +3715,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.19}
   m_SizeDelta: {x: 3.5, y: 3.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000011988944326
