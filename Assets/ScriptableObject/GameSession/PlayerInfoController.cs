@@ -174,6 +174,8 @@ public class PlayerInfoController : MonoBehaviour
         {
             anims[(int)_player.eBaseClassState].SetTrigger("AttackToWalk");
             //anims[(int)_player.eBaseClassState].CrossFade("Walkcycle", 0);
+            // Ready! anim
+            transform.GetChild(0).GetChild(3).GetComponent<Animator>().SetTrigger("Pressed");
         }
         //else
             //anims[(int)_player.eBaseClassState].CrossFade("Idle", 0);

@@ -21,7 +21,8 @@ public class RoundTimer : MonoBehaviour {
     private bool m_RoundStarted = false;
     private bool m_Spawned = false;
 
-    private List<GameObject> m_PlayerSpawns;
+    [SerializeField]
+    //private List<GameObject> m_PlayerSpawns;
 
     private int m_PlayerCount;
     [SerializeField]
@@ -48,7 +49,7 @@ public class RoundTimer : MonoBehaviour {
             if (SceneManager.GetActiveScene().buildIndex != 0)
             {
                 //m_TimeRemaining = GameSettings.Instance.iRoundTimerChoice;
-                m_PlayerSpawns = FindObjectOfType<SpawnManager>().m_PlayerSpawns;
+                //m_PlayerSpawns = FindObjectOfType<SpawnManager>().m_PlayerSpawns;
                 m_ScoreBoardWindow = FindObjectOfType<WindowManager>().gameObject;
                 m_TimeRemaining = m_TimePerRound;
                 m_Spawned = false;

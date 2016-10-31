@@ -14,6 +14,14 @@ using System.Linq;
 [CreateAssetMenu]
 public class GameSettings : ScriptableObject
 {
+    /*void OnEnable()
+    {
+        for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+        {
+            players[i].isReady = false;
+        }
+    } */
+
 	[Serializable]
 	public class PlayerInfo
 	{

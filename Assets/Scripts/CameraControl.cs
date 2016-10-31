@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿///<summary>
+///
+/// http://unitytipsandtricks.blogspot.com.au/2013/05/camera-shake.html
+/// </summary>
+
+using UnityEngine;
 using System.Collections;
 
 public class CameraControl : MonoBehaviour {
@@ -9,7 +14,9 @@ public class CameraControl : MonoBehaviour {
     public float m_LerpSpeed = 0.5f;                // How smooth should the camera pan.
     [HideInInspector]
     public Transform[] m_Targets; // All the targets the camera needs to encompass.
-
+    [Header("Camera Shake")]
+    public float fCameraShakeDuration = 0.3f;
+    public float fCameraShakeMagnitude = 0.25f; 
 
     private Camera m_Camera;                        // Used for referencing the camera.
     private float m_ZoomSpeed;                      // Reference speed for the smooth damping of the orthographic size.
@@ -127,5 +134,34 @@ public class CameraControl : MonoBehaviour {
 
         // Find and set the required size of the camera.
         m_Camera.orthographicSize = FindRequiredSize();
+    }
+
+    public IEnumerator CameraShake()
+    {
+
+        float elapsed = 0.0f;
+
+        Vector3 originalCamPos = Camera.main.transform.parent.position;
+
+        while (elapsed < fCameraShakeDuration)
+        {
+
+            elapsed += Time.deltaTime;
+
+            float percentComplete = elapsed / fCameraShakeDuration;
+            float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
+
+            // map value to [-1, 1]
+            float x = Random.value * 2.0f - 1.0f;
+            float z = Random.value * 2.0f - 1.0f;
+            x *= fCameraShakeMagnitude * damper;
+            z *= fCameraShakeMagnitude * damper;
+
+            Camera.main.transform.parent.position = new Vector3(originalCamPos.x + x, originalCamPos.y, originalCamPos.z + z);
+
+            yield return null;
+        }
+
+        Camera.main.transform.parent.position = originalCamPos;
     }
 }

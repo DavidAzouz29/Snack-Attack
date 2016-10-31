@@ -5325,8 +5325,6 @@ MonoBehaviour:
   fSensitivity: 2
   c_BackButton: {fileID: 11488376}
   c_LevelSelect: {fileID: 11457610}
-  c_eventSystems: {fileID: 0}
-  playersConfirmed: 00000000
 --- !u!114 &11493310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8401,6 +8399,7 @@ GameObject:
   - 224: {fileID: 224000013830484298}
   - 222: {fileID: 222000010905879782}
   - 114: {fileID: 114000011862523120}
+  - 95: {fileID: 95000012159223558}
   m_Layer: 5
   m_Name: P2ReadyImage
   m_TagString: Untagged
@@ -9826,6 +9825,7 @@ GameObject:
   - 224: {fileID: 224000013947482632}
   - 222: {fileID: 222000012302547402}
   - 114: {fileID: 114000013558571936}
+  - 95: {fileID: 95000010518818492}
   m_Layer: 5
   m_Name: P3ReadyImage
   m_TagString: Untagged
@@ -10082,6 +10082,7 @@ GameObject:
   - 224: {fileID: 224000013225215692}
   - 222: {fileID: 222000012877899136}
   - 114: {fileID: 114000012455515120}
+  - 95: {fileID: 95000011522404408}
   m_Layer: 5
   m_Name: P1ReadyImage
   m_TagString: Untagged
@@ -10793,6 +10794,7 @@ GameObject:
   - 224: {fileID: 224000010540161754}
   - 222: {fileID: 222000011328582228}
   - 114: {fileID: 114000010457441554}
+  - 95: {fileID: 95000010205559782}
   m_Layer: 5
   m_Name: P4ReadyImage
   m_TagString: Untagged
@@ -14154,6 +14156,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95000010205559782
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013439332000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 86521de87503e2749b3287d895a1f1e9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95000010350438972
 Animator:
   serializedVersion: 3
@@ -14178,6 +14197,23 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191960}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 86521de87503e2749b3287d895a1f1e9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95000010518818492
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012375297234}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 86521de87503e2749b3287d895a1f1e9, type: 2}
@@ -14375,6 +14411,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95000011522404408
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012748702174}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 86521de87503e2749b3287d895a1f1e9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95000011792936750
 Animator:
   serializedVersion: 3
@@ -14456,6 +14509,23 @@ Animator:
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95000012159223558
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010789899250}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 86521de87503e2749b3287d895a1f1e9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -19824,7 +19894,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011328954392}
-  serializedVersion: 4
+  serializedVersion: 2
   lengthInSec: 5
   startDelay:
     scalar: 0
@@ -19862,13 +19932,12 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
+  randomSeed: 1111302400
   looping: 1
   prewarm: 1
   playOnAwake: 1
   moveWithTransform: 1
-  autoRandomSeed: 0
   scalingMode: 1
-  randomSeed: 1111302400
   InitialModule:
     serializedVersion: 2
     enabled: 1

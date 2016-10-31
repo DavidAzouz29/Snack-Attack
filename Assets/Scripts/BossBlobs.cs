@@ -353,6 +353,8 @@ public class BossBlobs : MonoBehaviour
                 GameManager.Instance.transform.GetChild(1).GetChild(0).GetComponent<AudioSource>().Play();
                 // Change speed and damage.
                 r_PlayerCon.SetPlayerSpeed(r_PlayerCon.bossSpeed);
+                // Camera Shake
+                StartCoroutine(FindObjectOfType<CameraControl>().CameraShake());
             }
             // Neut
             else if (m_Power >= BossDropThreshold[1])
@@ -676,7 +678,7 @@ public class BossBlobs : MonoBehaviour
                 }
         }
 
-        // Perform under all conditions
+        // Perform under all conditions // TODO: fix warning
         gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
         gameObject.transform.FindChild("Neut").gameObject.SetActive(isNeut);
         gameObject.transform.FindChild("Weak").gameObject.SetActive(!isNeut);
