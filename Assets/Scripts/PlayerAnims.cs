@@ -27,6 +27,10 @@ public class PlayerAnims : MonoBehaviour {
     private bool m_Idling, m_Walking, m_Attacking, m_isLeftAttacking, m_isJumping;
     private Vector3 m_PreviousPos;
 
+    void Awake()
+    { 
+}
+
     void Start()
     {
         // Player Controller script is attached to our game object anyway.
@@ -89,6 +93,7 @@ public class PlayerAnims : MonoBehaviour {
                     m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
                     break;
             }
+        m_Anim.SetTrigger("AnimationClassIDChange");
         //}
     }
 
