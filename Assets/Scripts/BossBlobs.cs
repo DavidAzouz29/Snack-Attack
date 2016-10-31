@@ -277,7 +277,6 @@ public class BossBlobs : MonoBehaviour
                             {
                                 a_anim.SetBool("Boss", false);
                                 a_anim.SetInteger("AnimationClassID", 0);
-                                a_anim.SetTrigger("AnimationClassIDChange");
                                 break;
                             }
                         case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_PRINCESSCAKE:
@@ -287,14 +286,12 @@ public class BossBlobs : MonoBehaviour
                             {
                                 a_anim.SetBool("Boss", false);
                                 a_anim.SetInteger("AnimationClassID", 2);
-                                a_anim.SetTrigger("AnimationClassIDChange");
                                 break;
                             }
                         default:
                             {
                                 a_anim.SetBool("Boss", false);
                                 a_anim.SetInteger("AnimationClassID", 0);
-                                a_anim.SetTrigger("AnimationClassIDChange");
                                 break;
                             }
                     }
@@ -312,7 +309,6 @@ public class BossBlobs : MonoBehaviour
                             {
                                 a_anim.SetBool("Boss", true);
                                 a_anim.SetInteger("AnimationClassID", 1);
-                                a_anim.SetTrigger("AnimationClassIDChange");
                                 break;
                             }
                         case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_PRINCESSCAKE:
@@ -322,20 +318,19 @@ public class BossBlobs : MonoBehaviour
                             {
                                 a_anim.SetBool("Boss", true);
                                 a_anim.SetInteger("AnimationClassID", 3);
-                                a_anim.SetTrigger("AnimationClassIDChange");
                                 break;
                             }
                         default:
                             {
                                 a_anim.SetBool("Boss", true);
                                 a_anim.SetInteger("AnimationClassID", 1);
-                                a_anim.SetTrigger("AnimationClassIDChange");
                                 break;
                             }
                     }
                     break;
                 }
         }
+        a_anim.SetTrigger("AnimationClassIDChange");
     }
 
     void UpdateScale()
