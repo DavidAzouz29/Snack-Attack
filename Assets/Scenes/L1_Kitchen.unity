@@ -503,7 +503,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010622216906, guid: 3f6ee13e5bd0b0d4aadd78be9d13efa7, type: 2}
       propertyPath: m_TagString
-      value: StaticObject
+      value: Bounce
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 54000013710644970, guid: 3f6ee13e5bd0b0d4aadd78be9d13efa7, type: 2}
@@ -1931,7 +1931,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010622216906, guid: 3f6ee13e5bd0b0d4aadd78be9d13efa7, type: 2}
       propertyPath: m_TagString
-      value: Bounce
+      value: StaticObject
       objectReference: {fileID: 0}
     - target: {fileID: 95000013822277146, guid: 3f6ee13e5bd0b0d4aadd78be9d13efa7,
         type: 2}
@@ -2585,7 +2585,12 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.32
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1000010622216906, guid: 3f6ee13e5bd0b0d4aadd78be9d13efa7, type: 2}
+      propertyPath: m_TagString
+      value: Bounce
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 54000013710644970, guid: 3f6ee13e5bd0b0d4aadd78be9d13efa7, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3f6ee13e5bd0b0d4aadd78be9d13efa7, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &717205322
