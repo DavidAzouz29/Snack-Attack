@@ -5,7 +5,8 @@
 /// --------------------------------------------------
 /// Brief: BossBlobs are what players seek to grow and evolve.
 /// Combat/ Melee also happens here.
-/// viewed 
+/// viewed: 
+/// http://answers.unity3d.com/questions/914923/standard-shader-emission-control-via-script.html
 /// 
 /// ***EDIT***
 /// - removed PlayerCounter and us respawing as weak	- David Azouz 20/10/16
@@ -53,11 +54,15 @@ public class BossBlobs : MonoBehaviour
     private int m_KillCounter = 1;
 
     //Emission Color Varriables
+    // When hit
     private Color m_EmissionColor;
     private float m_EmissionTimer = 0.0f;
     private bool m_EmissionTimerEnabled;
     public float m_EmissionThreshold = 0.5f;
     public float m_EmissionBrightness = 0.34f;
+    // Spawn
+    public float m_EmissionSpawnPulseSpeed = 2.0f;
+    public float m_EmissionSpawnDarkTint = 0.3f;
     public SkinnedMeshRenderer[] m_ModelMeshRenderers;
 
     // TODO: two enums that do the same thing?
@@ -105,11 +110,12 @@ public class BossBlobs : MonoBehaviour
     private bool isNeut = false; // used for respawn
     [SerializeField]
     private GameObject[] blobsArray = new GameObject[PlayerManager.MAX_PLAYERS];
+    private Material c_blobMaterial;
     private Quaternion qBlobRot = Quaternion.identity;
     private bool m_Respawned = false;
     private bool m_Invulnerable = false;
     private float m_InvulnerabilityTimer = 0f;
-    public float m_InvulnerabilityThreshold = 1.0f;
+    private float m_InvulnerabilityThreshold = 1.5f;
 
     // Hit stop invuln.
     private bool m_hitStopInvuln = false;
@@ -137,6 +143,7 @@ public class BossBlobs : MonoBehaviour
         r_PlayerCon = GetComponent<PlayerController>();
         r_UILevel = r_PlayerMan.r_UILevel;
         blobsArray = r_PlayerMan.GetBlobArray();
+        c_blobMaterial = GameSettings.Instance.players[(int)r_PlayerCon.GetPlayerID()].Brain.GetBlobMaterial();
         iPlayerID = (int)r_PlayerCon.GetPlayerID();
 
 
@@ -221,15 +228,28 @@ public class BossBlobs : MonoBehaviour
             m_EmissionTimerEnabled = false;
             m_EmissionTimer = 0f;
         }
+
+        // Just spawned
         if (m_Invulnerable)
         {
             m_InvulnerabilityTimer += Time.deltaTime;
+            // Emission colour flashing
+            SkinnedMeshRenderer renderer = m_ModelMeshRenderers[(int)m_TransitionState];
+            Material mat = renderer.material;
+
+            float emission = Mathf.PingPong(Time.time * m_EmissionSpawnPulseSpeed, 1);
+            Color baseColor = m_EmissionColor; //Replace this with whatever you want for your base color at emission level '1'
+
+            Color finalColor = baseColor * Mathf.LinearToGammaSpace(emission * m_EmissionSpawnDarkTint);
+
+            mat.SetColor("_EmissionColor", finalColor);
             if (m_InvulnerabilityTimer >= m_InvulnerabilityThreshold)
             {
                 m_Invulnerable = false;
                 m_InvulnerabilityTimer = 0f;
             }
         }
+
         if (m_hitStopInvuln)
         {
             m_hitStopInvulnTimer += Time.deltaTime;
@@ -241,50 +261,128 @@ public class BossBlobs : MonoBehaviour
         }
     }
 
+    void SetAnimID(TransitionState a_TransitionState, Animator a_anim)
+    {
+        switch (a_TransitionState)
+        {
+            case TransitionState.NEUT:
+                {
+                    switch (r_PlayerCon.m_eCurrentClassState)
+                    {
+                        //case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_ROCKYROAD:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_MINTCHOPCHIP:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_COOKIECRUNCH:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_RAINBOWWARRIOR:
+                            {
+                                a_anim.SetBool("Boss", false);
+                                a_anim.SetInteger("AnimationClassID", 0);
+                                break;
+                            }
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_PRINCESSCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_DUCHESSCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_POUNDCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_ANGELCAKE:
+                            {
+                                a_anim.SetBool("Boss", false);
+                                a_anim.SetInteger("AnimationClassID", 2);
+                                break;
+                            }
+                        default:
+                            {
+                                a_anim.SetBool("Boss", false);
+                                a_anim.SetInteger("AnimationClassID", 0);
+                                break;
+                            }
+                    }
+                    break;
+                }
+            case TransitionState.BOSS:
+                {
+                    switch (r_PlayerCon.m_eCurrentClassState)
+                    {
+                        //case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_ROCKYROAD:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_MINTCHOPCHIP:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_COOKIECRUNCH:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_RAINBOWWARRIOR:
+                            {
+                                a_anim.SetBool("Boss", true);
+                                a_anim.SetInteger("AnimationClassID", 1);
+                                break;
+                            }
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_PRINCESSCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_DUCHESSCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_POUNDCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_ANGELCAKE:
+                            {
+                                a_anim.SetBool("Boss", true);
+                                a_anim.SetInteger("AnimationClassID", 3);
+                                break;
+                            }
+                        default:
+                            {
+                                a_anim.SetBool("Boss", true);
+                                a_anim.SetInteger("AnimationClassID", 1);
+                                break;
+                            }
+                    }
+                    break;
+                }
+        }
+        a_anim.SetTrigger("AnimationClassIDChange");
+    }
+
     void UpdateScale()
     {
         if (m_Updated)
         {
             m_Updated = false;
+            // Boss
             if (m_Power >= BossDropThreshold[0]) // if power >= 200
             {
+                m_TransitionState = TransitionState.BOSS;
+                m_Threshold = Thresholds.BIG;
                 transform.localScale = new Vector3(m_PowerLevelScale[0], m_PowerLevelScale[0], m_PowerLevelScale[0]);
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(true);
-                gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>().SetBool("Boss", true);
+                SetAnimID(m_TransitionState, gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>());
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
-                gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", true);
-                m_TransitionState = TransitionState.BOSS;
-                m_Threshold = Thresholds.BIG;
+                gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", true); //TODO: set avobe and here?
                 GameManager.Instance.transform.GetChild(1).GetChild(0).GetComponent<AudioSource>().Play();
                 // Change speed and damage.
                 r_PlayerCon.SetPlayerSpeed(r_PlayerCon.bossSpeed);
+                // Camera Shake
+                StartCoroutine(FindObjectOfType<CameraControl>().CameraShake());
             }
+            // Neut
             else if (m_Power >= BossDropThreshold[1])
             {
+                m_TransitionState = TransitionState.NEUT;
+                m_Threshold = Thresholds.REGULAR;
                 transform.localScale = new Vector3(m_PowerLevelScale[1], m_PowerLevelScale[1], m_PowerLevelScale[1]);
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
+                SetAnimID(m_TransitionState, gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>());
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(true);
                 gameObject.transform.FindChild("Neut").gameObject.GetComponent<Animator>().SetBool("Boss", false);
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
-                m_TransitionState = TransitionState.NEUT;
-                m_Threshold = Thresholds.REGULAR;
                 GameManager.Instance.transform.GetChild(1).GetChild(1).GetComponent<AudioSource>().Play();
                 // Change speed and damage.
                 r_PlayerCon.SetPlayerSpeed(r_PlayerCon.neutSpeed);
             }
+            // Weak
             else if (m_Power >= BossDropThreshold[2])
             {
+                m_TransitionState = TransitionState.WEAK;
+                m_Threshold = Thresholds.SMALL;
                 transform.localScale = new Vector3(m_PowerLevelScale[2], m_PowerLevelScale[2], m_PowerLevelScale[2]);
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(true);
-                gameObject.transform.FindChild("Weak").gameObject.GetComponent<Animator>().SetBool("Boss", false);
+                SetAnimID(m_TransitionState, gameObject.transform.FindChild("Weak").gameObject.GetComponent<Animator>());//.SetBool("Boss", false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
-                m_TransitionState = TransitionState.WEAK;
-                m_Threshold = Thresholds.SMALL;
                 GameManager.Instance.transform.GetChild(1).GetChild(1).GetComponent<AudioSource>().Play();
                 // Change speed and damage.
                 r_PlayerCon.SetPlayerSpeed(r_PlayerCon.weakSpeed);
@@ -356,6 +454,9 @@ public class BossBlobs : MonoBehaviour
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_RAINBOWWARRIOR:
                 {
                     m_SpawnableBlob = blobsArray[0];
+                    // Blob Materials
+                    m_SpawnableBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
+                    m_SpawnableBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = c_blobMaterial;
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_PRINCESSCAKE:
@@ -364,12 +465,18 @@ public class BossBlobs : MonoBehaviour
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_ANGELCAKE:
                 {
                     m_SpawnableBlob = blobsArray[1];
+                    // Blob Materials
+                    m_SpawnableBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
+                    //m_SpawnableBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = c_blobMaterial;
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PIZZAPUNK:
                 {
                     m_SpawnableBlob = blobsArray[2];
-                    m_SpawnableBlob.GetComponent<MeshRenderer>().material = r_PlayerMan.GetSnackBrains()[1].GetBlobMaterial();
+                    // Blob Materials
+                    m_SpawnableBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
+                    m_SpawnableBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = c_blobMaterial;
+                    //m_SpawnableBlob.GetComponent<MeshRenderer>().material = r_PlayerMan.GetSnackBrains()[1].GetBlobMaterial();
                     //shot.GetComponent<MeshRenderer>().material.mainTexture = r_Coli;
                     //shot.GetComponent<MeshRenderer>().material.SetColor("_SpecColor", Color.white);
                     break;
@@ -571,11 +678,12 @@ public class BossBlobs : MonoBehaviour
                 }
         }
 
-        // Perform under all conditions
+        // Perform under all conditions // TODO: fix warning
         gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
         gameObject.transform.FindChild("Neut").gameObject.SetActive(isNeut);
         gameObject.transform.FindChild("Weak").gameObject.SetActive(!isNeut);
-        GetComponentInChildren<Animator>().SetBool("Boss", false);
+
+        SetAnimID(m_TransitionState, GetComponentInChildren<Animator>());//.SetBool("Boss", false);
         gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", false);
         gameObject.GetComponent<PlayerAnims>().m_Anim = GetComponentInChildren<Animator>();
         m_Invulnerable = true;
@@ -627,11 +735,10 @@ public class BossBlobs : MonoBehaviour
             UpdateScore(_col);
         }
 
+        print("Event: Damage Applied.");
         // Become invulnerable on damage instance.
-        print("took damage");
         m_hitStopInvuln = true;
-        // Freeze both characters.
-        otherPlayerPlayerCollision.m_ParentTransform.GetComponent<PlayerController>().HitStop();
+        // Freeze the damaged character.
         r_PlayerCon.HitStop();
     }
 }

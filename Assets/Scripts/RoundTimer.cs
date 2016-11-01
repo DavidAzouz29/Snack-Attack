@@ -21,7 +21,8 @@ public class RoundTimer : MonoBehaviour {
     private bool m_RoundStarted = false;
     private bool m_Spawned = false;
 
-    private List<GameObject> m_PlayerSpawns;
+    [SerializeField]
+    //private List<GameObject> m_PlayerSpawns;
 
     private int m_PlayerCount;
     [SerializeField]
@@ -48,7 +49,7 @@ public class RoundTimer : MonoBehaviour {
             if (SceneManager.GetActiveScene().buildIndex != 0)
             {
                 //m_TimeRemaining = GameSettings.Instance.iRoundTimerChoice;
-                m_PlayerSpawns = FindObjectOfType<SpawnManager>().m_PlayerSpawns;
+                //m_PlayerSpawns = FindObjectOfType<SpawnManager>().m_PlayerSpawns;
                 m_ScoreBoardWindow = FindObjectOfType<WindowManager>().gameObject;
                 m_TimeRemaining = m_TimePerRound;
                 m_Spawned = false;
@@ -89,14 +90,15 @@ public class RoundTimer : MonoBehaviour {
 
         if(m_RoundStarted)
         {
-            m_TimeRemaining -= Time.deltaTime;
+            m_TimeRemaining = Mathf.Max( m_TimeRemaining - Time.deltaTime, 0.0f );
+
             // Time's up and Scoreboard
             if (m_TimeRemaining <= 0.0f)
             {
                 m_RoundStarted = false;
                 for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
                 {
-                    m_PlayerManager.GetPlayer(0).GetComponent<PlayerController>().enabled = false;
+                    m_PlayerManager.GetPlayer(i).GetComponent<PlayerController>().enabled = false;
                 }
                 m_ScoreBoardWindow.GetComponent<WindowManager>().TimesUp();
                 Time.timeScale = 0.5f;
@@ -107,6 +109,11 @@ public class RoundTimer : MonoBehaviour {
 
                 m_Spawned = true;
                 m_PlayerManager.CreatePlayers();
+                // Disable movement so Princess Anims can sync up.
+                for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+                {
+                    //m_PlayerManager.GetPlayer(i).GetComponent<PlayerController>().enabled = false;
+                }
             }
         }
 

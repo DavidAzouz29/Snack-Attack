@@ -59,6 +59,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     [HideInInspector] public UILevel r_UILevel;
     [SerializeField] private SnackBrain[] m_SnackBrains = new SnackBrain[MAX_PLAYERS];
     public SkinnedMeshRenderer[] m_ModelMeshRenderers;
+    public Material m_TrailRendererMat;
 
     // Part of our game manager's Game Object that doesn't destroy 
     // - therefore we don't want to create an instance
@@ -171,24 +172,51 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
                 characterSkinnedRenderers[k].sharedMesh = m_SnackBrains[(int)i].GetStateMesh(k);
             }
 
+            // Trail Renderer colours
+            TrailRenderer[] c_trailRenderers = r_Player.GetComponentsInChildren<TrailRenderer>();
+
             // Position characters randomly on the floor
             // if it's the first player, set them to character 'x', second to 'y' etc.
             if (i == 0)
             {
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.red;
+                foreach (TrailRenderer trail in c_trailRenderers)
+                {
+                    trail.sharedMaterial = Instantiate(m_TrailRendererMat);
+                    trail.sharedMaterial.SetColor("_TintColor", Color.red);
+                    trail.enabled = false;
+                }
             }
             else if (i == 1)
             {
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.blue;
+                foreach (TrailRenderer trail in c_trailRenderers)
+                {
+                    trail.sharedMaterial = Instantiate(m_TrailRendererMat);
+                    trail.sharedMaterial.SetColor("_TintColor", Color.blue);
+                    trail.enabled = false;
+                }
             }
             else if (i == 2)
             {
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Color.green;
+                foreach (TrailRenderer trail in c_trailRenderers)
+                {
+                    trail.sharedMaterial = Instantiate(m_TrailRendererMat);
+                    trail.sharedMaterial.SetColor("_TintColor", Color.green);
+                    trail.enabled = false;
+                }
             }
             else if (i == 3)
             {
                 Color Player4Color = new Color(0.4f, 0.18f, 0.58f);
                 r_Player.GetComponentInChildren<UIBossLevel>().c_WheelImage.color = Player4Color; // m_playerInfo.Brain.Color;
+                foreach (TrailRenderer trail in c_trailRenderers)
+                {
+                    trail.sharedMaterial = Instantiate(m_TrailRendererMat);
+                    trail.sharedMaterial.SetColor("_TintColor", Player4Color);
+                    trail.enabled = false;
+                }
             }
             //r_Player.GetComponent<BossBlobs>().PlayerCounter = (int)i; // TODO: id is in P Con
 

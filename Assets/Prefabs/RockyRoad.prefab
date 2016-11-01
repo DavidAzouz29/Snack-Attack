@@ -95,7 +95,7 @@ GameObject:
   m_Layer: 0
   m_Name: RockyRoad
   m_TagString: Player
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1102,7 +1102,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107578}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 19.797573, y: -0.6233034, z: -16.306702}
+  m_LocalPosition: {x: -1.5991178, y: -0.6233034, z: -14.638796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children:
@@ -1479,6 +1479,8 @@ MonoBehaviour:
   m_Knockback: 250
   m_EmissionThreshold: 0
   m_EmissionBrightness: 0.34
+  m_EmissionSpawnPulseSpeed: 4
+  m_EmissionSpawnDarkTint: 0.3
   m_ModelMeshRenderers:
   - {fileID: 0}
   - {fileID: 13756246}
@@ -1492,8 +1494,7 @@ MonoBehaviour:
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
-  m_InvulnerabilityThreshold: 1
-  m_hitStopInvulnDuration: 0.2
+  m_hitStopInvulnDuration: 0.1
 --- !u!114 &11417940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1505,9 +1506,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a38d93fbb21cdf41911aaf39ce72b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weakSpeed: 50
-  neutSpeed: 35
-  bossSpeed: 25
+  weakSpeed: 60
+  neutSpeed: 40
+  bossSpeed: 30
   m_Moving: 0
   hitsBeforeDeath: 5
   health: 100
@@ -1522,11 +1523,13 @@ MonoBehaviour:
   m_eCurrentPlayerState: 0
   m_eCurrentClassState: 0
   isOnGround: 0
-  fJumpForce: 14
+  fJumpForce: 26
   m_playerID: 0
-  fBounceForce: 14
-  m_hitStopDuration: 0.2
+  fBounceForce: 24
+  m_hitStopDuration: 0.1
   m_shakeAmount: 0.5
+  m_frozenDuringAttack: 0
+  m_attackMoveAmount: 50
 --- !u!114 &11430586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1680,7 +1683,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 62c2470c52a99804aa8c018b463af682, type: 2}
+  - {fileID: 2100000, guid: eaa6c0fe06ccd3a4785db63ee8f34333, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -1736,7 +1739,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 7d26a8bc66cca514a819f1a0bcafc85b, type: 2}
+  - {fileID: 2100000, guid: 7b455c55149f34d47adf4eb03e3e877c, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2718,7 +2721,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2768,7 +2771,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2818,7 +2821,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2868,7 +2871,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2918,7 +2921,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2968,7 +2971,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3018,7 +3021,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3068,7 +3071,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3118,7 +3121,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3309,8 +3312,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   c_BossSlider: {fileID: 114000010395871754}
   c_WheelImage: {fileID: 114000013326059030}
-  fJumpHeight: 2.8
-  fShelfHeight: 12
+  fDisFromGround: 0.5
+  mask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114000012462330252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3341,7 +3346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3570,7 +3575,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: e06c13e192c49144791670411545a66a, type: 2}
+  - {fileID: 2100000, guid: 03b1ccd783dba3e488cb82d6cd88dfc2, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}

@@ -23,6 +23,7 @@
 /// ----------------------------------
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 //using System.Linq;
@@ -36,24 +37,29 @@ public class PlayerSelect : MonoBehaviour
 	public Button c_BackButton;
 	public Button c_LevelSelect;
 
-    public GameObject c_eventSystems;
+    private bool hasAllPlayersSelected = false;
 
-    // For which player
-	// used for when players have confirmed their character selection
-	[SerializeField] bool[] playersConfirmed = new bool[PlayerManager.MAX_PLAYERS];
+    delegate void OnLevelFinishedLoading();
+    OnLevelFinishedLoading m_OnLevelFinishedLoading;
 
-	// Use this for initialization
-	void Start () //TODO: Awake?
+    // Use this for initialization
+    void Start () //TODO: Awake?
 	{
+        OnLevelWasLoaded();
+    }
+
+    void OnLevelWasLoaded()
+    {
         for (int i = 0; i <= PlayerManager.MAX_PLAYERS - 1; ++i)
         {
-            playersConfirmed[i] = false;
-            // Start 1-4 Coroutines to check for player input - each on their own "thread*"
-            //StartCoroutine(PlayerInput(i));
-        }		
-	}
+            GameSettings.Instance.players[i].isReady = false;
+            // turn images off //TODO: on back button, *breaks*
+            GameObject.Find(("P" + (i + 1) + "ReadyImage")).GetComponent<Image>().enabled = false;
+        }
+        hasAllPlayersSelected = false;
+    }
 
-	/*//Coroutine, which gets Started in "Start()" and runs over the whole game to check for player input
+    /*//Coroutine, which gets Started in "Start()" and runs over the whole game to check for player input
 	IEnumerator PlayerInput(int i)
 	{
 		//Loop. Otherwise we wouldnt check continoulsy
@@ -85,10 +91,10 @@ public class PlayerSelect : MonoBehaviour
 		}
 	} */
 
-	// Update is called once per frame
-	void Update () 
+    // Update is called once per frame
+    void Update () 
 	{
-		/*// Player 1
+        /*// Player 1
 		// Left Bumper
 		if (Input.GetButtonDown((string)"joystick 1 button 4")) //Input.GetAxis ("P1_Horizontal") < fSensitivity
 		{
@@ -97,32 +103,53 @@ public class PlayerSelect : MonoBehaviour
 			//Navigation.defaultNavigation.selectOnLeft = c_MenuButtons [0] [0]; //.navigation.selectOnLeft;
 		}*/
 
-		// Check if all players are ready to go
-		for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++) 
-		{
-			// if all players are not ready
-			if (!GameSettings.Instance.players[i].isReady) 
-			{
-                //c_BackButton.Select();
-                break;
-			} 
-			// All players are ready
-			else 
-			{
-                //StopAllCoroutines(); //TODO: does this break things?
-                LevelSelect(true);
-			}
-		}	
+        // if all characters haven't confimed their selection
+        if (!hasAllPlayersSelected)
+        {
+            // Check if all players are ready to go
+            //for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+            //{
+                // if all players are not ready
+                //if (!GameSettings.Instance.players[i].isReady)
+                // if player 1 is ready 
+                if (GameSettings.Instance.players[0].isReady)
+                {
+                    //c_BackButton.Select();
+                    c_LevelSelect.interactable = false;
+                }
+            //}
+            //hasAllPlayersSelected = true;
+
+        }
+        // All players are ready
+        else
+        {
+            //StopAllCoroutines(); //TODO: does this break things?
+            LevelSelect(true);
+
+        }
 	}
 
-	// '0' based
-	/*public void PlayerReady(int i)
-	{
-		playersConfirmed [i] = !playersConfirmed[i];
-		//TODO: "Ready" animation?
-	} */
+    /*void OnEnable()
+    {
+        //Tell our 'OnLevelFinishedLoading' function to start listening for a scene change as soon as this script is enabled.
+        //SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
 
-	void LevelSelect(bool a_isActive)
+    void OnDisable()
+    {
+        //Tell our 'OnLevelFinishedLoading' function to stop listening for a scene change as soon as this script is disabled. Remember to always have an unsubscription for every delegate you subscribe to!
+        //SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
+    UnityEngine.Event OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("Level Loaded");
+        Debug.Log(scene.name);
+        Debug.Log(mode);
+    }*/
+
+    void LevelSelect(bool a_isActive)
 	{
         c_LevelSelect.interactable = a_isActive;// !c_LevelSelect.interactable;
 		c_LevelSelect.Select();
@@ -132,41 +159,10 @@ public class PlayerSelect : MonoBehaviour
     public void PlayerSelectPanel(bool isActive)
     {
         // toggle the PS panel on/ off
-        if (!gameObject.activeSelf && isActive)
-        {
-            this.gameObject.SetActive(true);
-        }
-
-        // Player Select Panel is turned off
-        /*if (!isActive)
-        {
-            c_eventSystems.transform.GetChild(c_eventSystems.transform.childCount - 1).gameObject.SetActive(true);
-            // Set the Selected GameObject in the Event System.
-            // Due to "back to main menu" and "forward to level select"
-        }
-        else
-        {
-            // turn the main event system off if we're in the PS
-            c_eventSystems.transform.GetChild(c_eventSystems.transform.childCount - 1).gameObject.SetActive(false);
-        }*/
-
-        /*// Player Select Panel is turned on/ off
-        /*for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
-        {
-            GameObject go = c_eventSystems.transform.GetChild(i).gameObject;
-            go.SetActive(isActive);
-            // if PS is turned on
-            if (go.activeSelf)
-            {
-                go.GetComponent<MyEventSystem>().SetSelectedGameObject(
-                transform.GetChild(0).GetChild(i).GetChild(1).GetChild(1).gameObject);
-            }
-        } */
-
-        if (!isActive)
-        {
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(!gameObject.activeSelf);
+        // Reset characters
+        OnLevelWasLoaded();
 
     }
+
 }

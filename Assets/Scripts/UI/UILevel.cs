@@ -9,6 +9,8 @@ public class UILevel : MonoBehaviour {
 
     [SerializeField]
     private Text c_timer;
+    [SerializeField]
+    private Text c_countDown;
 
     [SerializeField]
     private Image[] c_playerIcons = new Image[PlayerManager.MAX_PLAYERS];
@@ -16,23 +18,68 @@ public class UILevel : MonoBehaviour {
     float m_Mins;
     float m_Secs;
 
-	// Use this for initialization
-	void Start ()
+    private bool m_roundStarted = false;
+    private int m_countDown = 3;
+    private float timer = 0.0f;
+    [SerializeField] private float m_countDownDelay = 2.0f;
+
+    private GameManager r_GameManager;
+
+    // Use this for initialization
+    void Start ()
     {
-        r_RoundTimer = GameManager.Instance.GetComponent<RoundTimer>();
+        r_GameManager = FindObjectOfType<GameManager>(); // TODO: use GameManager.Instance
+        r_RoundTimer = r_GameManager.GetComponent<RoundTimer>();
         //r_text.GetComponentInChildren<Text>();
         for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
         {
             // Get the neut icon as the default
             c_playerIcons[i].sprite = GameSettings.Instance.players[i].Brain.GetIcon(0);
         }
+
+        // Countdown related stuffs.
+        //Time.timeScale = 0.0f;
+        timer = m_countDownDelay;
+        c_countDown.enabled = true;
+        c_timer.enabled = false;
     }
 
     // Update is called once per frame
     void Update ()
     {
-        SetClockText();
+        if (!m_roundStarted) CountDownUpdate();
+        else                 SetClockText();
+    }
 
+    void CountDownUpdate()
+    {
+        c_countDown.text = ( m_countDown > 0 ) ? m_countDown.ToString() : "FIGHT!";
+
+        float scaleValue = (m_countDown > 0) ? timer / m_countDownDelay : 1 - (timer / m_countDownDelay);
+        c_countDown.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
+
+        timer -= Time.unscaledDeltaTime;
+        if (timer <= 0)
+        {
+            m_countDown--;
+            if (m_countDown < 0)
+            {
+                m_roundStarted = true;
+                c_countDown.enabled = false;
+                c_timer.enabled = true;
+                Time.timeScale = 1.0f;
+                // Enable movement. Read the comment for disabling movement.
+                for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+                {
+                    GameManager.Instance.r_PlayerManager.GetPlayer(i).GetComponent<PlayerController>().enabled = true;
+                }
+            }
+            timer = m_countDownDelay;
+            if (m_countDown == 0)
+            {
+                timer = 0.5f;
+            }
+        }
     }
 
     void SetClockText()

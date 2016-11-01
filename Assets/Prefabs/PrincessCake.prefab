@@ -356,7 +356,7 @@ GameObject:
   m_Layer: 0
   m_Name: PrincessCake
   m_TagString: Player
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -411,7 +411,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172812}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.359, z: 0}
+  m_LocalPosition: {x: 0, y: 0.231, z: 0}
   m_LocalScale: {x: 1.1670532, y: 1.1670531, z: 1.1670531}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -439,8 +439,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196634}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.540352, y: -0.6233034, z: -14.18367}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.08667374, y: -0.6233034, z: -14.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children:
@@ -758,9 +758,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a38d93fbb21cdf41911aaf39ce72b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weakSpeed: 50
-  neutSpeed: 35
-  bossSpeed: 25
+  weakSpeed: 60
+  neutSpeed: 40
+  bossSpeed: 30
   m_Moving: 0
   hitsBeforeDeath: 5
   health: 100
@@ -775,11 +775,13 @@ MonoBehaviour:
   m_eCurrentPlayerState: 0
   m_eCurrentClassState: 0
   isOnGround: 0
-  fJumpForce: 14
+  fJumpForce: 26
   m_playerID: 0
-  fBounceForce: 14
-  m_hitStopDuration: 0.2
+  fBounceForce: 24
+  m_hitStopDuration: 0.1
   m_shakeAmount: 0.5
+  m_frozenDuringAttack: 0
+  m_attackMoveAmount: 50
 --- !u!114 &11435424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2035,7 +2037,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014266203998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.37, z: 0}
+  m_LocalPosition: {x: 0, y: 0.258, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2134,7 +2136,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010242127750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.321, z: 0}
+  m_LocalPosition: {x: 0, y: 0.267, z: 0}
   m_LocalScale: {x: 1.2787635, y: 1.2787638, z: 1.2787638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2511,7 +2513,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.6430376, y: 1, z: 2.5369563}
-  m_Center: {x: 0.06386558, y: 0, z: 0.06249427}
+  m_Center: {x: 0.06386558, y: -0.21, z: 0.06249427}
 --- !u!65 &65000014199504914
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2523,7 +2525,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.9063612, y: 0.953788, z: 1.8474272}
-  m_Center: {x: 0.013758188, y: 0.02310594, z: -0.026569286}
+  m_Center: {x: 0.013758188, y: 0.13, z: -0.026569286}
 --- !u!65 &65000014210304374
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2583,7 +2585,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2633,7 +2635,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2683,7 +2685,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2733,7 +2735,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2783,7 +2785,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2833,7 +2835,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2883,7 +2885,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2933,7 +2935,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2983,7 +2985,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3081,8 +3083,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   c_BossSlider: {fileID: 114000010146801166}
   c_WheelImage: {fileID: 114000013878730484}
-  fJumpHeight: 2.8
-  fShelfHeight: 12
+  fDisFromGround: 0.5
+  mask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114000010418970602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3260,6 +3264,8 @@ MonoBehaviour:
   m_Knockback: 250
   m_EmissionThreshold: 0
   m_EmissionBrightness: 0.34
+  m_EmissionSpawnPulseSpeed: 4
+  m_EmissionSpawnDarkTint: 0.3
   m_ModelMeshRenderers:
   - {fileID: 0}
   - {fileID: 0}
@@ -3273,8 +3279,7 @@ MonoBehaviour:
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
   - {fileID: 137888, guid: 9b31cf9c0a4782747803417c1bc14858, type: 2}
-  m_InvulnerabilityThreshold: 1
-  m_hitStopInvulnDuration: 0.2
+  m_hitStopInvulnDuration: 0.1
 --- !u!114 &114000013423421516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3421,7 +3426,7 @@ CapsuleCollider:
   m_Radius: 1.2644306
   m_Height: 3.0611548
   m_Direction: 1
-  m_Center: {x: 0, y: 0.98, z: 0}
+  m_Center: {x: 0, y: 1.16, z: 0}
 --- !u!136 &136000010619696828
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3445,9 +3450,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.4925412
-  m_Height: 1
+  m_Height: 3.6
   m_Direction: 1
-  m_Center: {x: 0, y: 0.61, z: 0}
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!136 &136000011919649168
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3523,9 +3528,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.1091595
-  m_Height: 2.9540944
+  m_Height: 2.77
   m_Direction: 1
-  m_Center: {x: 0, y: 0.87, z: 0}
+  m_Center: {x: 0, y: 1.08, z: 0}
 --- !u!137 &137000010013304120
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -3703,7 +3708,7 @@ RectTransform:
   m_GameObject: {fileID: 1000013810669526}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5146282, y: 1.5146278, z: 1.5146278}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 224000010075441050}
@@ -3711,7 +3716,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.19}
   m_SizeDelta: {x: 3.5, y: 3.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000011988944326
