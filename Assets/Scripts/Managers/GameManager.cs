@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
             if (SceneManager.GetActiveScene().buildIndex != 0)
             {
                 // deactivate it
-                FindObjectOfType<GameManager>().gameObject.SetActive(false);
+                //FindObjectOfType<GameManager>().gameObject.SetActive(false); //TODO: what is this
             }
             // Still null
             // In a build we will always have a Game Manager as we start from the splash screen.
@@ -150,7 +150,6 @@ public class GameManager : MonoBehaviour
                 {
                     // For Splash only
                     audioSlot = transform.GetChild(2).GetComponentInChildren<AudioSource>();
-                    audioSlot.pitch = Random.Range(0.78f, 1.5f); //TODO: remove
                     audioSlot.loop = true;
                     audioSlot.Play();
                     break;

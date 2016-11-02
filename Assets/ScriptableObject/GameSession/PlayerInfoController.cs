@@ -24,7 +24,7 @@ public class PlayerInfoController : MonoBehaviour
     private GameSettings.PlayerInfo _player;
     private Animator[] anims = new Animator[(int)PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_BASE_COUNT - 1]; //RECODE: remove -1 for add. char
     private AudioSource c_AudioSource;
-    private UnityEngine.UI.Image c_ReadyImage;
+    private UnityEngine.UI.Text c_ReadyText;
     private ArrayLayout playerButtonsArray;
     private int m_iController = 0; // tracks time
     private float m_Timer = 0; // tracks time
@@ -45,8 +45,8 @@ public class PlayerInfoController : MonoBehaviour
 
         //CharacterSelection(GameSettings.Instance.players[PlayerIndex]);
         playerButtonsArray = GetComponentInParent<PlayerSelect>().playerButtons;
-        c_ReadyImage = transform.GetChild(0).GetChild(3).GetComponent<UnityEngine.UI.Image>();
-        c_ReadyImage.enabled = false;
+        c_ReadyText = transform.GetChild(0).GetChild(3).GetComponent<UnityEngine.UI.Text>();
+        c_ReadyText.enabled = false;
         m_iController = PlayerIndex + 1;
         fSensitivity = 0.2f;
 
@@ -164,7 +164,7 @@ public class PlayerInfoController : MonoBehaviour
 
         m_Timer = 0;
         //c_AudioSource.clip = _player.Brain.GetAudioTaunt(Random.Range(0, 4)); //TODO: 5?
-        c_ReadyImage.enabled = _player.isReady;
+        c_ReadyText.enabled = _player.isReady;
 
         // Attack and walk if we're ready
         anims[(int)_player.eBaseClassState].SetBool("Attack1Left", _player.isReady);

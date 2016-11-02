@@ -34,6 +34,7 @@ public class PlayerSelect : MonoBehaviour
 	// [Players][Confirm, left, Right]
 	public ArrayLayout playerButtons;
 	public float fSensitivity = 2.0f;
+	public float fWaitForNextInteractable = 0.5f;
 	public Button c_BackButton;
 	public Button c_LevelSelect;
 
@@ -50,11 +51,18 @@ public class PlayerSelect : MonoBehaviour
 
     void OnLevelWasLoaded()
     {
-        for (int i = 0; i <= PlayerManager.MAX_PLAYERS - 1; ++i)
+        if (gameObject.activeSelf)
         {
-            GameSettings.Instance.players[i].isReady = false;
-            // turn images off //TODO: on back button, *breaks*
-            GameObject.Find(("P" + (i + 1) + "ReadyImage")).GetComponent<Image>().enabled = false;
+            for (int i = 0; i <= PlayerManager.MAX_PLAYERS - 1; ++i)
+            {
+                GameSettings.Instance.players[i].isReady = false;
+                // turn images off //TODO: on back button, *breaks*
+
+                Text text = GameObject.Find(("P" + (i + 1) + "ReadyImage")).GetComponent<Text>();
+                text.enabled = true;
+                text.enabled = false;
+            }
+            c_LevelSelect.interactable = false;
         }
         hasAllPlayersSelected = false;
     }
@@ -109,14 +117,13 @@ public class PlayerSelect : MonoBehaviour
             // Check if all players are ready to go
             //for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
             //{
-                // if all players are not ready
-                //if (!GameSettings.Instance.players[i].isReady)
-                // if player 1 is ready 
-                if (GameSettings.Instance.players[0].isReady)
-                {
-                    //c_BackButton.Select();
-                    c_LevelSelect.interactable = false;
-                }
+            // if all players are not ready
+            //if (!GameSettings.Instance.players[i].isReady)
+            // if player 1 is ready 
+            if (GameSettings.Instance.players[0].isReady)
+            {
+                StartCoroutine(PlayerReadyWait());
+            }
             //}
             //hasAllPlayersSelected = true;
 
@@ -129,6 +136,15 @@ public class PlayerSelect : MonoBehaviour
 
         }
 	}
+
+    // Wait for a few seconds before allowing to continue to the next section.
+    IEnumerator PlayerReadyWait()
+    {
+        yield return new WaitForSeconds(fWaitForNextInteractable);
+        c_LevelSelect.interactable = true;
+
+        yield return null;
+    }
 
     /*void OnEnable()
     {

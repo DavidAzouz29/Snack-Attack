@@ -4,6 +4,9 @@ using System.Collections;
 public class AttackEnter : StateMachineBehaviour {
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    public float fCameraShakeMagnitude = 0.4f;
+    float fCameraShakeAttackWaitRR = 0.4f;
+    float fCameraShakeAttackWaitPC = 0.4f;
     private GameManager m_GameManager;
     float fPitchMin = 0.9f;
     float fPitchMax = 1.3f;
@@ -27,6 +30,30 @@ public class AttackEnter : StateMachineBehaviour {
                 audioSourceSlot.pitch = Random.Range(fPitchMin, fPitchMax); //audioSourceSlot.loop = true;
                 audioSourceSlot.Play();
                 //TODO: m_GameManager.r_PlayerManager.GetPlayer(0).GetComponent<PlayerController>().enabled = false;
+                float waitForCameraShake = 0.1f;
+                switch (animator.GetInteger("AnimationClassID"))
+                {
+                    // RockyRoad
+                    case 1:
+                        {
+                            waitForCameraShake = fCameraShakeAttackWaitRR;
+                            break;
+                        }
+                    // PrincessCake
+                    case 3:
+                        {
+                            waitForCameraShake = fCameraShakeAttackWaitPC;
+                            break;
+                        }
+                    default:
+                        {
+                            waitForCameraShake = fCameraShakeAttackWaitRR;// 0.3f;
+                            break;
+                        }
+                }
+                // TODO: relocate to when char is hit
+                m_GameManager.StartCoroutine(FindObjectOfType<CameraControl>().CameraShake(fCameraShakeMagnitude, waitForCameraShake));
+
             }
         }
         else

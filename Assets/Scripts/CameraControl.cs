@@ -16,7 +16,6 @@ public class CameraControl : MonoBehaviour {
     public Transform[] m_Targets; // All the targets the camera needs to encompass.
     [Header("Camera Shake")]
     public float fCameraShakeDuration = 0.3f;
-    public float fCameraShakeMagnitude = 0.25f; 
 
     private Camera m_Camera;                        // Used for referencing the camera.
     private float m_ZoomSpeed;                      // Reference speed for the smooth damping of the orthographic size.
@@ -136,12 +135,16 @@ public class CameraControl : MonoBehaviour {
         m_Camera.orthographicSize = FindRequiredSize();
     }
 
-    public IEnumerator CameraShake()
+    public IEnumerator CameraShake(float a_magnitude, float a_attackWait)
     {
+        yield return new WaitForSecondsRealtime(a_attackWait);
 
         float elapsed = 0.0f;
-
         Vector3 originalCamPos = Camera.main.transform.parent.position;
+        // Hit/ Glass Break Audio
+        AudioSource audioSource = GameManager.Instance.transform.GetChild(0).GetChild(2).GetComponent<AudioSource>();
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.Play();
 
         while (elapsed < fCameraShakeDuration)
         {
@@ -154,8 +157,8 @@ public class CameraControl : MonoBehaviour {
             // map value to [-1, 1]
             float x = Random.value * 2.0f - 1.0f;
             float z = Random.value * 2.0f - 1.0f;
-            x *= fCameraShakeMagnitude * damper;
-            z *= fCameraShakeMagnitude * damper;
+            x *= a_magnitude * damper;
+            z *= a_magnitude * damper;
 
             Camera.main.transform.parent.position = new Vector3(originalCamPos.x + x, originalCamPos.y, originalCamPos.z + z);
 

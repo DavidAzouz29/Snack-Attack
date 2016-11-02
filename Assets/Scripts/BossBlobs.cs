@@ -49,6 +49,11 @@ public class BossBlobs : MonoBehaviour
     public bool m_Updated = false;
     public int m_Knockback = 150;
 
+    // Camera Shake Boss
+    public float fCameraShakeMagnitude = 0.4f;
+    float fCameraShakeAttackWaitRR = 0.4f;
+    float fCameraShakeAttackWaitPC = 0.4f;
+
     private Killbox m_Killbox;
     private bool activeWeaponCheck;
     private int m_KillCounter = 1;
@@ -259,6 +264,14 @@ public class BossBlobs : MonoBehaviour
                 m_hitStopInvulnTimer = 0.0f;
             }
         }
+
+        // Cheat to quickly become the boss
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            BecomeBoss();
+        }
+#endif
     }
 
     void SetAnimID(TransitionState a_TransitionState, Animator a_anim)
@@ -333,6 +346,25 @@ public class BossBlobs : MonoBehaviour
         a_anim.SetTrigger("AnimationClassIDChange");
     }
 
+    void BecomeBoss()
+    {
+        m_Power = BossDropThreshold[0];
+        m_TransitionState = TransitionState.BOSS;
+        m_Threshold = Thresholds.BIG;
+        transform.localScale = new Vector3(m_PowerLevelScale[0], m_PowerLevelScale[0], m_PowerLevelScale[0]);
+        gameObject.transform.FindChild("Boss").gameObject.SetActive(true);
+        SetAnimID(m_TransitionState, gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>());
+        gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
+        gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
+        gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
+        gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", true); //TODO: set above and here?
+        GameManager.Instance.transform.GetChild(1).GetChild(0).GetComponent<AudioSource>().Play();
+        // Change speed and damage.
+        r_PlayerCon.SetPlayerSpeed(r_PlayerCon.bossSpeed);
+        // Camera Shake
+        StartCoroutine(FindObjectOfType<CameraControl>().CameraShake(0.25f, 0));
+    }
+
     void UpdateScale()
     {
         if (m_Updated)
@@ -341,20 +373,7 @@ public class BossBlobs : MonoBehaviour
             // Boss
             if (m_Power >= BossDropThreshold[0]) // if power >= 200
             {
-                m_TransitionState = TransitionState.BOSS;
-                m_Threshold = Thresholds.BIG;
-                transform.localScale = new Vector3(m_PowerLevelScale[0], m_PowerLevelScale[0], m_PowerLevelScale[0]);
-                gameObject.transform.FindChild("Boss").gameObject.SetActive(true);
-                SetAnimID(m_TransitionState, gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>());
-                gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
-                gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
-                gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
-                gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", true); //TODO: set avobe and here?
-                GameManager.Instance.transform.GetChild(1).GetChild(0).GetComponent<AudioSource>().Play();
-                // Change speed and damage.
-                r_PlayerCon.SetPlayerSpeed(r_PlayerCon.bossSpeed);
-                // Camera Shake
-                StartCoroutine(FindObjectOfType<CameraControl>().CameraShake());
+                BecomeBoss();
             }
             // Neut
             else if (m_Power >= BossDropThreshold[1])
@@ -413,7 +432,7 @@ public class BossBlobs : MonoBehaviour
                     //Check Heavy Attack
                     if (_col.gameObject.GetComponent<PlayerCollision>().isHeavyAttack)
                     {
-                        //If Heacy Attack
+                        //If Heavy Attack
 
                         //check if its a boss heavy attack
                         if (m_ColliderAnim.m_Anim.GetBool("Boss"))
@@ -421,6 +440,36 @@ public class BossBlobs : MonoBehaviour
                             //Stun player and apply damage
                             m_LocalAnim.m_Anim.SetTrigger("Stunned");
                             ApplyDamage(_col);
+                            //TODO: remove from AttackEnter
+                            float waitForCameraShake = 0.1f;
+                            switch (r_PlayerCon.m_eCurrentClassState)
+                            {
+                                // RockyRoad
+                                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_ROCKYROAD:
+                                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_MINTCHOPCHIP:
+                                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_COOKIECRUNCH:
+                                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_RAINBOWWARRIOR:
+                                    {
+                                        waitForCameraShake = fCameraShakeAttackWaitRR;
+                                        break;
+                                    }
+                                // PrincessCake
+                                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_PRINCESSCAKE:
+                                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_DUCHESSCAKE:
+                                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_POUNDCAKE:
+                                case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_ANGELCAKE:
+                                    {
+                                        waitForCameraShake = fCameraShakeAttackWaitPC;
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        waitForCameraShake = fCameraShakeAttackWaitRR;// 0.3f;
+                                        break;
+                                    }
+                            }
+                            // Camera shake when char is hit with boss heavy attack
+                            StartCoroutine(FindObjectOfType<CameraControl>().CameraShake(fCameraShakeMagnitude, waitForCameraShake));
                         }
                         //Else End Block
                         else

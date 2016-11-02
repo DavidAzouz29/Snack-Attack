@@ -780,7 +780,7 @@ MonoBehaviour:
   fBounceForce: 24
   m_hitStopDuration: 0.1
   m_shakeAmount: 0.5
-  m_frozenDuringAttack: 0
+  m_frozenDuringAttack: 1
   m_attackMoveAmount: 50
 --- !u!114 &11435424
 MonoBehaviour:
@@ -844,7 +844,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9024587ec87485545af98b85836607f6, type: 2}
+  - {fileID: 2100000, guid: ca23fd4d87eaed2439564ea661408304, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3262,6 +3262,7 @@ MonoBehaviour:
   m_PowerMax: 150
   m_Updated: 0
   m_Knockback: 250
+  fCameraShakeMagnitude: 0.4
   m_EmissionThreshold: 0
   m_EmissionBrightness: 0.34
   m_EmissionSpawnPulseSpeed: 4
@@ -3544,7 +3545,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: f4d1baa6c6a5ba24ab7412cc9b1a6d9a, type: 2}
+  - {fileID: 2100000, guid: 38458a7cb486f9f4a8ec39708088a99f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -3602,7 +3603,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: de787db540cb2f543a688f4f010e85b7, type: 2}
+  - {fileID: 2100000, guid: 8a502118930d3424aa9bc6c98ad443cf, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}

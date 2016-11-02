@@ -45,6 +45,7 @@ public class WindowManager : MonoBehaviour {
         Time.timeScale = 1f;
         c_TimesUpRay.SetActive(true);
         c_TimesUpText.SetActive(true);
+        GameManager.Instance.transform.GetChild(2).GetChild(9).GetComponent<AudioSource>().Play();
         Invoke("ScoreboardEndGame", fScoreboardDelay);
     }
 

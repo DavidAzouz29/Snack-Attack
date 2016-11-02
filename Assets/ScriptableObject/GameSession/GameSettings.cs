@@ -26,11 +26,13 @@ public class GameSettings : ScriptableObject
 	public class PlayerInfo
 	{
         // Unique per class varient
+        public int playerID;
 		public string ClassName; // name to display e.g. "Rocky Road"
         public Color Color;
         public PlayerBuild.E_BASE_CLASS_STATE eBaseClassState;
         public PlayerController.E_CLASS_STATE eClassState;
-		public int iScore; // Kills for podium position
+		public int iKills; // Kills for scoreboard and podium position
+		public int iDeaths; // Deaths for scoreboard
 		public bool isReady = false; // Used for Player Select
 
         // Serializing an object reference directly to JSON doesn't do what we want - we just get an InstanceID
@@ -79,7 +81,16 @@ public class GameSettings : ScriptableObject
 		{
 			return "<color=#" + ColorUtility.ToHtmlStringRGBA(Color) + ">" + ClassName + "</color>";
 		}
-	}
+        
+        public void SetPlayerKills(int a_kills)
+        {
+            iKills = a_kills;
+        }
+        public void SetPlayerDeaths(int a_deaths)
+        {
+            iDeaths = a_deaths;
+        }
+    }
 
 	public List<PlayerInfo> players;
 
@@ -91,13 +102,13 @@ public class GameSettings : ScriptableObject
     {
         get
         {
-            if (!_instance)
-                //_instance = Resources.FindObjectsOfTypeAll<GameSettings>().FirstOrDefault();
-                InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Default game settings.asset"));
 #if UNITY_EDITOR
             if (!_instance)
                 InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Default game settings.asset"));
 #endif
+            if (!_instance)
+                _instance = GameManager.Instance.m_ActiveGameSettings; //Resources.FindObjectsOfTypeAll<GameSettings>().FirstOrDefault();
+                //InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Default game settings.asset"));
             return _instance;
         }
     }
@@ -115,14 +126,14 @@ public class GameSettings : ScriptableObject
         int index = Array.FindIndex(availableBrains, b => b == brain);
         if (isRight)
         {
-            index++;
+            index++; //TODO: for when computer is selected: availableBrains[1]
             return (index <= (availableBrains.Length - 1)) ? availableBrains[index] : availableBrains[0];
         }
         // Player chose left
         else
         {
             index--;
-            if(index < 0) //TODO: correct?
+            if(index < 0) //TODO: correct? < 1
             {
                 index = availableBrains.Length - 1;
             }

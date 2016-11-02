@@ -24,13 +24,21 @@ public class UILevel : MonoBehaviour {
     [SerializeField] private float m_countDownDelay = 2.0f;
 
     private GameManager r_GameManager;
+    private Transform r_AudioCountdown;
+
+    void Awake()
+    {
+        r_GameManager = FindObjectOfType<GameManager>(); // TODO: use GameManager.Instance
+        r_RoundTimer = r_GameManager.GetComponent<RoundTimer>();
+        r_AudioCountdown = r_GameManager.transform.GetChild(2);
+        // Countdown Audio
+        r_AudioCountdown.GetChild(7).GetComponent<AudioSource>().Play();
+    }
 
     // Use this for initialization
     void Start ()
     {
-        r_GameManager = FindObjectOfType<GameManager>(); // TODO: use GameManager.Instance
-        r_RoundTimer = r_GameManager.GetComponent<RoundTimer>();
-        //r_text.GetComponentInChildren<Text>();
+       //r_text.GetComponentInChildren<Text>();
         for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
         {
             // Get the neut icon as the default
@@ -48,7 +56,7 @@ public class UILevel : MonoBehaviour {
     void Update ()
     {
         if (!m_roundStarted) CountDownUpdate();
-        else                 SetClockText();
+        else SetClockText();
     }
 
     void CountDownUpdate()
@@ -78,6 +86,10 @@ public class UILevel : MonoBehaviour {
             if (m_countDown == 0)
             {
                 timer = 0.5f;
+                // Fight!
+                r_AudioCountdown.GetChild(8).GetComponent<AudioSource>().Play();
+                // Kitchen Theme //TODO: restore once footage is captured
+                //r_AudioCountdown.GetChild(1).GetComponent<AudioSource>().Play();
             }
         }
     }

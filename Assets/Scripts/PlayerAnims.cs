@@ -202,7 +202,12 @@ public class PlayerAnims : MonoBehaviour {
     {
         // extra check is for our jump animation
         float fDis = Vector2.Distance(new Vector2(m_PreviousPos.x, m_PreviousPos.z), new Vector2(transform.position.x, transform.position.z));
-        if (fDis > 0.05f && !m_Walking 
+        float fLength = 0.05f;
+        if(m_TransitionState == BossBlobs.TransitionState.BOSS)
+        {
+            fLength = 0.03f;
+        }
+        if (fDis > fLength && !m_Walking 
             && (m_PreviousPos.y - transform.position.y) < 0.5f)
         {
             m_Anim.SetBool("Walking", true);
