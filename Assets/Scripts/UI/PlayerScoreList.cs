@@ -17,9 +17,9 @@ public class PlayerScoreList : MonoBehaviour {
 		scoreManager = GetComponentInParent<ScoreManager>();
 		r_UILevel = GameObject.FindObjectOfType<UILevel>(); // TODO: Find is slow - fix for Beta
         lastChangeCounter = scoreManager.GetChangeCounter();
-
-		// Set default values
-		for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+        lastChangeCounter++;
+        // Set default values
+        for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
         {
 			r_UILevel.r_PlayerScoresText [i].text = "0";
 		}

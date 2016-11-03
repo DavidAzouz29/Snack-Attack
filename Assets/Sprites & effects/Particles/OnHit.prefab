@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000012591976818}
   - 198: {fileID: 198000013629168878}
   - 199: {fileID: 199000011747831402}
+  - 114: {fileID: 114000013419833468}
   m_Layer: 0
   m_Name: OnHit
   m_TagString: Untagged
@@ -41,6 +42,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &114000013419833468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013073399682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e930d4f91bcfbef4984de9ee0b68c6af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fDestroyAfterTime: 0.4
 --- !u!198 &198000013629168878
 ParticleSystem:
   m_ObjectHideFlags: 1

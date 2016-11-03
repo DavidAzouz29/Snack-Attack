@@ -26,7 +26,13 @@ public class Killbox : MonoBehaviour {
 
     void OnTriggerEnter(Collider _col) // Entering the killbox will kill the player, move them to a spawn, and respawn their blobs if need be.
     {
-        if(_col.gameObject.tag == "Player")
+        // Blender wiz
+        if(tag == "Bench")
+        {
+            GameManager.Instance.transform.GetChild(3).GetChild(0).GetComponent<AudioSource>().Play();
+        }
+
+        if (_col.gameObject.tag == "Player")
         {
             m_Player = _col.gameObject;
             GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>().ChangeScore(m_Player.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);

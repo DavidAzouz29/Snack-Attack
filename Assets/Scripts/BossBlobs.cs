@@ -271,6 +271,10 @@ public class BossBlobs : MonoBehaviour
         {
             BecomeBoss();
         }
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            UnityEditor.EditorApplication.isPaused = true;
+        }
 #endif
     }
 

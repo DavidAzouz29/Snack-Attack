@@ -21,10 +21,11 @@ GameObject:
   - 4: {fileID: 4000011149367716}
   - 198: {fileID: 198000012467278212}
   - 199: {fileID: 199000010123663502}
+  - 114: {fileID: 114000013697481496}
   m_Layer: 0
   m_Name: Groundpound
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -41,6 +42,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &114000013697481496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012295558176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e930d4f91bcfbef4984de9ee0b68c6af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fDestroyAfterTime: 0.4
 --- !u!198 &198000012467278212
 ParticleSystem:
   m_ObjectHideFlags: 1
