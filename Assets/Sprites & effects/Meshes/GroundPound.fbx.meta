@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c37f36101f4ac0c409122b2f727b7312
-timeCreated: 1473030677
+timeCreated: 1478056597
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,8 +9,10 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: pCylinder1
-    7400000: Take 001
+    4300000: pCylinder6
+    4300002: pCylinder8
+    4300004: pCylinder10
+    7400000: GroundPound
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -19,7 +21,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
@@ -34,17 +36,17 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: GroundPound
       takeName: Take 001
-      firstFrame: 800
-      lastFrame: 836
+      firstFrame: 400
+      lastFrame: 430
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -62,7 +64,7 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 800
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
