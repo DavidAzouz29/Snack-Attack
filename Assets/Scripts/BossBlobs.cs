@@ -111,6 +111,7 @@ public class BossBlobs : MonoBehaviour
     private PlayerManager r_PlayerMan;
     private PlayerController r_PlayerCon;
     private UILevel r_UILevel;
+    private EffectManager r_EffectManager;
     private int iPlayerID;
     private bool isNeut = false; // used for respawn
     [SerializeField]
@@ -147,6 +148,7 @@ public class BossBlobs : MonoBehaviour
         r_PlayerMan = PlayerManager.Instance;
         r_PlayerCon = GetComponent<PlayerController>();
         r_UILevel = r_PlayerMan.r_UILevel;
+        r_EffectManager = GetComponent<EffectManager>();
         blobsArray = r_PlayerMan.GetBlobArray();
         c_blobMaterial = GameSettings.Instance.players[(int)r_PlayerCon.GetPlayerID()].Brain.GetBlobMaterial();
         iPlayerID = (int)r_PlayerCon.GetPlayerID();
@@ -443,6 +445,8 @@ public class BossBlobs : MonoBehaviour
                         {
                             //Stun player and apply damage
                             m_LocalAnim.m_Anim.SetTrigger("Stunned");
+                            float fEffectForward = 5.0f;
+                            r_EffectManager.HitEffect(_col.transform.position + new Vector3(0, 0, fEffectForward));
                             ApplyDamage(_col);
                             //TODO: remove from AttackEnter
                             float waitForCameraShake = 0.1f;

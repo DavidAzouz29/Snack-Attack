@@ -30,10 +30,10 @@ public class EffectManager : MonoBehaviour
     private ParticleSystem c_HitEffect;
     private ParticleSystem c_ShieldEffect;
 
-    // Used for instanciating
-    private ParticleSystem localHeavyAttackSmokeEffect;
-    private ParticleSystem localHitEffect;
-    private ParticleSystem localShieldEffect;
+    // Used for instanciating/ destroying
+    //private ParticleSystem localHeavyAttackSmokeEffect;
+    //private ParticleSystem localHitEffect;
+    //private ParticleSystem localShieldEffect;
 
     private int iChild = 3;
     private string sCurrAnim = "aeaa";
@@ -81,6 +81,7 @@ public class EffectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #region Anim Selection
         switch (r_BossBlobs.m_TransitionState)
         {
             case BossBlobs.TransitionState.WEAK:
@@ -114,6 +115,7 @@ public class EffectManager : MonoBehaviour
                     break;
                 }
         }
+        #endregion
 
         // Blocking // will work for any evolution state that's active: weak, neut, boss //TODO: get "Blocking.cs" working
         if (Input.GetButton(r_PlayerController.Block))// && !c_CurrAnim.GetBool("Blocking"))
@@ -151,8 +153,8 @@ public class EffectManager : MonoBehaviour
                 v3HeavyEffectSpawnEffect = new Vector3(v3HeavyEffectSpawnEffect.x,
                     v3HeavyEffectSpawnEffect.y - fHeavySpawnHeight, v3HeavyEffectSpawnEffect.z);
 
-                localHeavyAttackSmokeEffect =
-                    Instantiate(c_HeavyAttackSmokeEffect, v3HeavyEffectSpawnEffect, qHeavyRot) as ParticleSystem;// true);
+                //localHeavyAttackSmokeEffect =
+                Instantiate(c_HeavyAttackSmokeEffect, v3HeavyEffectSpawnEffect, qHeavyRot);// as ParticleSystem;// true);
                 m_isHeavyAttackToBeSpawned = false;
                 //Destroy(localHeavyAttackSmokeEffect, m_AttackThresholdDestroy);// localHeavyAttackSmokeEffect.duration);
                 m_AttackTimerEnabled = false;
@@ -166,5 +168,10 @@ public class EffectManager : MonoBehaviour
         {
             Destroy(localHeavyAttackSmokeEffect, localHeavyAttackSmokeEffect.duration);
         } */
+    }
+
+    public void HitEffect(Vector3 a_otherPlayerPosition)
+    {
+        Instantiate(c_HitEffect, a_otherPlayerPosition, Quaternion.identity);
     }
 }

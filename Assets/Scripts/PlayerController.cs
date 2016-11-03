@@ -128,9 +128,13 @@ public class PlayerController : MonoBehaviour
     PlayerAnims m_playerAnims;
 
     [SerializeField] bool m_frozenDuringAttack = true;
-    [SerializeField] private float m_attackMoveAmount = 5.0f;
+    private float m_attackMoveAmount = 30.0f;//120.0f;
+    private float m_AttackTimer = 0.0f;
+    private bool m_AttackTimerEnabled = false;
+    private float m_AttackThreshold = 0.1f;
+    public float m_AttackDistanceSpeed = 0.3f;
 
-// Use this for initialization
+    // Use this for initialization
     void Start ()
     {
 		//setting our current state to alive
@@ -213,11 +217,21 @@ public class PlayerController : MonoBehaviour
         Animator animator = m_playerAnims.m_Anim;
         if (animator.GetBool("AttackTrigger") && m_frozenDuringAttack)
         {
+            m_AttackTimerEnabled = true;
             // If you are not boss then move forward while attacking.
             if (!animator.GetBool("Boss"))
             {
-                Vector3 movement = transform.position + (transform.forward * m_attackMoveAmount * Time.deltaTime);
-                rb.MovePosition(Vector3.Lerp(transform.position, movement, 0.2f));
+                if (m_AttackTimerEnabled)
+                {
+                    m_AttackTimer += Time.deltaTime;
+                }
+                if (m_AttackTimer >= m_AttackThreshold)
+                {
+                    Vector3 movement = transform.position + (transform.forward * m_attackMoveAmount * Time.deltaTime);
+                    rb.MovePosition(Vector3.Lerp(transform.position, movement, m_AttackDistanceSpeed));
+                    m_AttackTimerEnabled = false;
+                    m_AttackTimer = 0f;
+                }
             }
 
             return;
@@ -293,8 +307,8 @@ public class PlayerController : MonoBehaviour
                     // Particle effect bomb (explosion)
                     //r_bombExplosionParticleEffect.SetActive(true);
                     // actions to perform after a certain time
-                    uint uiBombEffectTimer = 2;
-                    Invoke("BombEffectDead", uiBombEffectTimer);
+                    //uint uiBombEffectTimer = 2;
+                    //Invoke("BombEffectDead", uiBombEffectTimer);
 					//c_death.CrossFade("Death");
 
                     Debug.Log("Dead :(");
@@ -309,7 +323,7 @@ public class PlayerController : MonoBehaviour
         #endregion
 	}
 
-    void BombEffectDead()
+    /*void BombEffectDead()
     {
         //r_weapon.SetActive(false);
         Destroy(this.gameObject);
@@ -323,7 +337,7 @@ public class PlayerController : MonoBehaviour
     void ReturnToMenu()
     {
         SceneManager.LoadScene(Scene.Menu);
-    }
+    } */
 
     // this is the function that should be used
     public void SetPlayerState(E_PLAYER_STATE a_ePlayerState)

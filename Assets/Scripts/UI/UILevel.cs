@@ -104,9 +104,11 @@ public class UILevel : MonoBehaviour {
         {
             c_timer.text = (m_Mins.ToString() + ":" + "0" + m_Secs.ToString());
         }
-        else if (m_Secs <= 0.3f)
+        // if "0:03" or lower
+        if (m_Secs <= 4.9f && m_Secs >= 4.0f && m_Mins < 1)
         {
-            c_timer.text = "!!!!";
+            // Countdown
+            r_AudioCountdown.GetChild(7).GetComponent<AudioSource>().Play();
         }
     }
 
