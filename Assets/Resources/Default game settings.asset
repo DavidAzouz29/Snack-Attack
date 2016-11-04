@@ -12,25 +12,45 @@ MonoBehaviour:
   m_Name: Default game settings
   m_EditorClassIdentifier: 
   players:
-  - ClassName: Rocky Road
+  - playerID: 0
+    ClassName: Rocky Road
+    sPlayerTag: Rocky Road
     Color: {r: 0.9264706, g: 0.11941532, b: 0.02043687, a: 1}
     eBaseClassState: 0
     eClassState: 0
+    iKills: 0
+    iDeaths: 0
+    isReady: 0
     BrainName: Rocky Road Brain
-  - ClassName: Princess Cake
+  - playerID: 1
+    ClassName: Princess Cake
+    sPlayerTag: Princess Cake
     Color: {r: 0.059364192, g: 0.4705961, b: 0.89705884, a: 1}
     eBaseClassState: 1
     eClassState: 4
+    iKills: 0
+    iDeaths: 0
+    isReady: 0
     BrainName: Princess Cake Brain
-  - ClassName: Mint Chop Chip
+  - playerID: 2
+    ClassName: Mint Chop Chip
+    sPlayerTag: Mint Chop Chip
     Color: {r: 0.34515557, g: 0.83823526, b: 0.08628891, a: 1}
     eBaseClassState: 0
     eClassState: 1
+    iKills: 0
+    iDeaths: 0
+    isReady: 0
     BrainName: Mint Chop Chip Brain
-  - ClassName: Duchess Cake
+  - playerID: 3
+    ClassName: Duchess Cake
+    sPlayerTag: Duchess Cake
     Color: {r: 0.50536805, g: 0.10207612, b: 0.86764705, a: 1}
     eBaseClassState: 1
     eClassState: 5
+    iKills: 0
+    iDeaths: 0
+    isReady: 0
     BrainName: Duchess Cake Brain
   availableBrains:
   - {fileID: 11400000, guid: 352c7b0033b1bd94899447204ac1e002, type: 2}

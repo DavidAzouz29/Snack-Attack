@@ -10,6 +10,7 @@ public class SubClassBrain : BaseClassBrain
     public int _iBrainID; // # to Order by
     public int _iAnimClassID; // # to Order by
     [SerializeField] protected string _charName;
+    [SerializeField] protected string _playerTag;
     [SerializeField] protected Color _Color;
     [SerializeField] protected PlayerController.E_CLASS_STATE _eClassState;
     [SerializeField] protected Sprite[] _charIcons = new Sprite[2];
@@ -35,6 +36,8 @@ public class SubClassBrain : BaseClassBrain
         _rotation = _baseClassBrain._rotation;
         //eRockyRoadSkinState = PlayerBuild.E_ROCKYROAD_STATE.E_ROCKYROAD_STATE_ROCKYROAD;
         charName = _charName;
+        _playerTag = _charName;
+        playerTag = _playerTag;
         Color = _Color;
         eClassState = _eClassState;
         c_charIcons = _charIcons; //TODO: set to neut through state
@@ -42,6 +45,7 @@ public class SubClassBrain : BaseClassBrain
     }
 
     public override string GetClassName() { return _charName; }
+    public override string GetPlayerTag() { return _playerTag; }
     public override PlayerBuild.E_BASE_CLASS_STATE GetBaseState() { return eBaseClassState; }
     public override PlayerController.E_CLASS_STATE GetClassState() { return eClassState; }
     public override Material GetStateMaterial(int i) { return _charStateMaterials[i]; }
@@ -57,4 +61,5 @@ public class SubClassBrain : BaseClassBrain
     public override int GetAnimID() { return _iAnimClassID; }
     public override Sprite GetIcon(int i) { return c_charIcons[i]; }
 
+    public override void SetPlayerTag(string a_playerTag) { playerTag = a_playerTag; }
 }

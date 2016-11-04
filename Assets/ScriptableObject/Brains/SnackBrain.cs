@@ -8,6 +8,7 @@ public abstract class SnackBrain : ScriptableObject
 {
     #region Base Class
     protected string charName;
+    protected string playerTag; // scoreboard
     protected Color Color;
     // Unique per base class
     protected PlayerBuild.E_BASE_CLASS_STATE eBaseClassState;
@@ -39,6 +40,7 @@ public abstract class SnackBrain : ScriptableObject
     //public abstract void Initialize(SnackThinker snack);
     // Getters
     public abstract string GetClassName();
+    public abstract string GetPlayerTag();
     public abstract PlayerBuild.E_BASE_CLASS_STATE GetBaseState();
     public abstract PlayerController.E_CLASS_STATE GetClassState();
     public abstract Material GetStateMaterial(int i);
@@ -53,6 +55,8 @@ public abstract class SnackBrain : ScriptableObject
     public abstract Avatar GetAnimatorAvatar();
     public abstract int GetAnimID();
     public abstract Sprite GetIcon(int i);
+
+    public abstract void SetPlayerTag(string a_playerTag);
 
     //internal AudioClip GetAudioTaunt(int v) { return c_charTaunts[v]; }
     //public abstract void Think(SnackThinker snack);

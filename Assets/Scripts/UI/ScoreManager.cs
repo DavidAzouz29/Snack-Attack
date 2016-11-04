@@ -14,20 +14,33 @@ public class ScoreManager : MonoBehaviour {
 
 	Dictionary< string, Dictionary<string, int> > playerScores;
 	int changeCounter = -1;
+    private string[] namesOgOrder = new string[PlayerManager.MAX_PLAYERS]; // used for colors on the scoreboard
 
-	void Start()
+    void Start()
     {
+        Init();
+
+        //Player Setup
         for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
         {
-            //Player Setup
-            SetScore(GameSettings.Instance.players[i].ClassName, "kills", 0);
-            SetScore(GameSettings.Instance.players[i].ClassName, "deaths", 0);
+            string sPlayerTag = GameSettings.Instance.players[i].sPlayerTag;
+            // If two or more players choose the same character...
+            if (playerScores.ContainsKey(sPlayerTag))
+            {
+                // add a number to the end of the name
+                sPlayerTag += " " + (i % PlayerManager.MAX_PLAYERS);
+                // set the name to the new name
+                GameSettings.Instance.players[i].sPlayerTag = sPlayerTag;
+            }
+            SetScore(sPlayerTag, "kills", 0);
+            SetScore(sPlayerTag, "deaths", 0);
         }
         changeCounter++; // Updates the scoreboard once.
+        namesOgOrder = GetPlayerNames();
     }
 
-	// Init this instance.
-	void Init() {
+    // Init this instance.
+    void Init() {
         if (playerScores != null)
 			return;
 
@@ -86,6 +99,11 @@ public class ScoreManager : MonoBehaviour {
 		Init ();
 		return playerScores.Keys.OrderByDescending( n => GetScore(n, sortingScoreType) ).ToArray();
 	}
+
+    public string[] GetOriginalOrder()
+    {
+        return namesOgOrder;
+    }
 
 	public int GetChangeCounter() {
 		return changeCounter;

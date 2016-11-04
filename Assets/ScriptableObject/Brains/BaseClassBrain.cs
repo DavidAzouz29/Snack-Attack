@@ -37,6 +37,7 @@ public class BaseClassBrain : SnackBrain
 
     public override void Initialize(SnackThinker snack) { }
     public override string GetClassName() { return "None"; }
+    public override string GetPlayerTag() { return "None"; }
     public override PlayerBuild.E_BASE_CLASS_STATE GetBaseState() { return _eBaseClassState; }
     public override PlayerController.E_CLASS_STATE GetClassState() { return PlayerController.E_CLASS_STATE.E_PLAYER_STATE_COUNT; }
     public override Material GetStateMaterial(int i) { return null; }
@@ -52,6 +53,7 @@ public class BaseClassBrain : SnackBrain
     public override int GetAnimID() { return -1; }
     public override Sprite GetIcon(int i) { return null; }
 
+    public override void SetPlayerTag(string a_playerTag) { playerTag = a_playerTag; }
 
     /*{
         InitializeBase(snack);

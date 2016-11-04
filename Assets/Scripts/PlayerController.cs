@@ -350,6 +350,11 @@ public class PlayerController : MonoBehaviour
         return m_playerID;
     }
 
+    public string GetPlayerTag()
+    {
+        return m_PlayerTag;
+    }
+
     public void SetPlayerID(uint a_uiPlayerID)
     {
         m_playerID = a_uiPlayerID; 

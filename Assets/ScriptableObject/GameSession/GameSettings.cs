@@ -28,6 +28,7 @@ public class GameSettings : ScriptableObject
         // Unique per class varient
         public int playerID;
 		public string ClassName; // name to display e.g. "Rocky Road"
+		public string sPlayerTag; // name to display on scoreboard e.g. "Rocky Road"
         public Color Color;
         public PlayerBuild.E_BASE_CLASS_STATE eBaseClassState;
         public PlayerController.E_CLASS_STATE eClassState;
@@ -70,6 +71,7 @@ public class GameSettings : ScriptableObject
 				_cachedBrain = value;
 				BrainName = value ? value.name : String.Empty;
                 ClassName = _cachedBrain.GetClassName();
+                sPlayerTag = _cachedBrain.GetClassName();
                 eBaseClassState = _cachedBrain.GetBaseState();
                 eClassState = _cachedBrain.GetClassState();
             }
@@ -80,8 +82,18 @@ public class GameSettings : ScriptableObject
 		public string GetColoredName()
 		{
 			return "<color=#" + ColorUtility.ToHtmlStringRGBA(Color) + ">" + ClassName + "</color>";
-		}
-        
+        }
+
+        public string GetPlayerTag()
+        {
+            return sPlayerTag;
+        }
+
+        public void SetPlayerTag(string a_tag)
+        {
+            sPlayerTag = a_tag;
+        }
+
         public void SetPlayerKills(int a_kills)
         {
             iKills = a_kills;
@@ -104,11 +116,11 @@ public class GameSettings : ScriptableObject
         {
 #if UNITY_EDITOR
             if (!_instance)
-                InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Default game settings.asset"));
+                InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Resources/Default game settings.asset"));
 #endif
             if (!_instance)
-                _instance = GameManager.Instance.m_ActiveGameSettings; //Resources.FindObjectsOfTypeAll<GameSettings>().FirstOrDefault();
-                //InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Default game settings.asset"));
+                _instance = Resources.Load("Assets/Resources/Default game settings.asset") as GameSettings; //FindObjectsOfTypeAll<GameSettings>().FirstOrDefault(); //GameManager.Instance.m_ActiveGameSettings;
+                //InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Resources/Default game settings.asset"));
             return _instance;
         }
     }

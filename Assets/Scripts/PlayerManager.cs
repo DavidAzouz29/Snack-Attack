@@ -53,6 +53,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
 
     private List<GameObject> m_PlayerSpawns;
 
+    private bool isFirstTime = true;
     private GameManager m_GameManager;
     private SpawnManager m_SpawnManager;
     private CameraControl m_CameraControl;
@@ -115,6 +116,18 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
 		return r_Players [i];
 	}
 
+    public GameObject GetPlayer(string a_name)
+    {
+        for (int i = 0; i < MAX_PLAYERS; i++)
+        {
+            if(r_Players[i].GetComponent<PlayerController>().GetPlayerTag() == a_name)
+            {
+                return r_Players[i];
+            }
+        }
+        return null;
+    }
+
     public GameObject[] GetBlobArray()
     {
         return blobArray;
@@ -126,12 +139,21 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     {
         //GameObject.Find("Scoreboard Canvas").GetComponent<ScoreManager>().PrototypeStartup();
         m_CameraControl.m_Targets = new Transform[MAX_PLAYERS]; //assigns the maximum characters the camera should track
+        // Used to check for duplicates later
+        string[] sPlayerTags = new string[MAX_PLAYERS + 1];
+        for (int i = 0; i <= MAX_PLAYERS; i++)
+        {
+            sPlayerTags[i] = "Hello World";
+        }
+        string sPlayerTag = "";
+
         //Loop through and create our players.
         for (uint i = 0; i < MAX_PLAYERS; ++i)
         {
             m_SnackBrains[i] = GameSettings.Instance.players[(int)i].Brain;// m_GameManager.m_ActiveGameSettings.players[(int)i].Brain;
             //PlayerController.E_CLASS_STATE playerState = PlayerController.E_CLASS_STATE.E_PLAYER_STATE_COUNT;
             SkinnedMeshRenderer[] characterSkinnedRenderers = null;
+            #region Choose a base character from a prefab
             PlayerBuild.E_BASE_CLASS_STATE eBaseState = m_SnackBrains[(int)i].GetBaseState();
             switch (eBaseState)
             {
@@ -171,8 +193,10 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
                 characterSkinnedRenderers[k].sharedMaterial = matSlot;
                 characterSkinnedRenderers[k].sharedMesh = m_SnackBrains[(int)i].GetStateMesh(k);
             }
+            #endregion
 
             // Trail Renderer colours
+            #region Setting Colours based on player
             TrailRenderer[] c_trailRenderers = r_Player.GetComponentsInChildren<TrailRenderer>();
 
             // Position characters randomly on the floor
@@ -219,6 +243,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
                 }
             }
             //r_Player.GetComponent<BossBlobs>().PlayerCounter = (int)i; // TODO: id is in P Con
+            #endregion
 
             Object j = Instantiate(r_Player, m_PlayerSpawns[(int)i].transform.position, r_Player.transform.rotation);
             j.name = "Character " + (i + 1);
@@ -227,7 +252,28 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             // -------------------------------------------------------------
             r_PlayerController = ((GameObject)j).GetComponent<PlayerController>();
             r_PlayerController.SetPlayerID(i);
-            r_PlayerController.SetPlayerTag(m_SnackBrains[(int)i].GetClassName());
+            sPlayerTags[i] = m_SnackBrains[i].GetPlayerTag();
+            sPlayerTag = sPlayerTags[i];
+
+            if (isFirstTime)
+            {
+                sPlayerTags[0] = sPlayerTag; //TODO: will not work for two RR and two PC?
+                isFirstTime = false;
+            }
+            else
+            {
+                foreach (string playerTag in sPlayerTags)
+                {
+                    if (sPlayerTag.Contains(playerTag))
+                    {
+                        sPlayerTag = sPlayerTag + " " + ((i % MAX_PLAYERS));
+                        sPlayerTags[i] = sPlayerTag;
+                        break;
+                    }
+                }
+            }
+            m_SnackBrains[(int)i].SetPlayerTag(sPlayerTag);
+            r_PlayerController.SetPlayerTag(sPlayerTag);
 
             uiPlayerConArray[i] = r_PlayerController;
             uiPlayerConArray[i].m_eCurrentClassState = m_SnackBrains[(int)i].GetClassState();
