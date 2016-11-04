@@ -26,7 +26,7 @@ public class AttackEnter : StateMachineBehaviour {
             for (int i = 0; i < temp.Length; i++)
             {
                 temp[i].weaponIsActive = true;
-                audioSourceSlot = m_GameManager.transform.GetChild(0).GetChild(1).GetComponent<AudioSource>();
+                audioSourceSlot = m_GameManager.transform.GetChild(GameManager.iChCombat).GetChild(1).GetComponent<AudioSource>();
                 audioSourceSlot.pitch = Random.Range(fPitchMin, fPitchMax); //audioSourceSlot.loop = true;
                 audioSourceSlot.Play();
                 //TODO: m_GameManager.r_PlayerManager.GetPlayer(0).GetComponent<PlayerController>().enabled = false;
@@ -65,7 +65,7 @@ public class AttackEnter : StateMachineBehaviour {
                 {
                     temp[i].weaponIsActive = true;
                     // Cheat to get the first sound (light attack)
-                    audioSourceSlot = m_GameManager.transform.GetChild(0).GetComponentInChildren<AudioSource>();
+                    audioSourceSlot = m_GameManager.transform.GetChild(GameManager.iChCombat).GetComponentInChildren<AudioSource>();
                     // ScriptableObject so no "WaitForSeconds"
                     audioSourceSlot.pitch = Random.Range(fPitchMin, fPitchMax); //audioSourceSlot.loop = true;
                     audioSourceSlot.Play(); //audioSourceSlot.loop = true;
@@ -76,7 +76,7 @@ public class AttackEnter : StateMachineBehaviour {
                 {
                     temp[i].weaponIsActive = true;
                     // Cheat to get the first sound (light attack)
-                    audioSourceSlot = m_GameManager.transform.GetChild(0).GetComponentInChildren<AudioSource>();
+                    audioSourceSlot = m_GameManager.transform.GetChild(GameManager.iChCombat).GetComponentInChildren<AudioSource>();
                     // ScriptableObject so no "WaitForSeconds"
                     audioSourceSlot.pitch = Random.Range(fPitchMin, fPitchMax); //audioSourceSlot.loop = true;
                     audioSourceSlot.Play(); //audioSourceSlot.loop = true;
@@ -87,7 +87,7 @@ public class AttackEnter : StateMachineBehaviour {
                 {
                     temp[i].weaponIsActive = true;
                     temp[i].isHeavyAttack = true;
-                    audioSourceSlot = m_GameManager.transform.GetChild(0).GetChild(1).GetComponent<AudioSource>();
+                    audioSourceSlot = m_GameManager.transform.GetChild(GameManager.iChCombat).GetChild(1).GetComponent<AudioSource>();
                     audioSourceSlot.pitch = Random.Range(fPitchMin, fPitchMax); //audioSourceSlot.loop = true;
                     audioSourceSlot.Play();
                 }

@@ -2604,6 +2604,17 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   - eventID: 16
@@ -3837,6 +3848,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11457706
@@ -4165,7 +4187,7 @@ MonoBehaviour:
           m_MethodName: SetSelectedGameObject
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 1000012612697238}
+            m_ObjectArgument: {fileID: 102118}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -5323,6 +5345,7 @@ MonoBehaviour:
       - {fileID: 0}
       - {fileID: 0}
   fSensitivity: 2
+  fWaitForNextInteractable: 0.5
   c_BackButton: {fileID: 11488376}
   c_LevelSelect: {fileID: 11457610}
 --- !u!114 &11493310
@@ -15114,7 +15137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 1.15, y: 1.17}
+  m_EffectDistance: {x: -0.46, y: 0.14}
   m_UseGraphicAlpha: 1
   highlightColor: {r: 0.6137934, g: 0, b: 1, a: 0}
 --- !u!114 &114000010400921814
@@ -15987,7 +16010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 1.15, y: 1.17}
+  m_EffectDistance: {x: -0.46, y: 0.14}
   m_UseGraphicAlpha: 1
   highlightColor: {r: 0.6137934, g: 0, b: 1, a: 0}
 --- !u!114 &114000011266886710
@@ -16095,7 +16118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 1.15, y: 1.17}
+  m_EffectDistance: {x: -0.46, y: 0.14}
   m_UseGraphicAlpha: 1
   highlightColor: {r: 0.6137934, g: 0, b: 1, a: 0}
 --- !u!114 &114000011295176776
@@ -17303,7 +17326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 1.15, y: 1.17}
+  m_EffectDistance: {x: -0.46, y: 0.14}
   m_UseGraphicAlpha: 1
   highlightColor: {r: 0.6137934, g: 0, b: 1, a: 0}
 --- !u!114 &114000012225579362
@@ -19978,7 +20001,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011328954392}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 5
   startDelay:
     scalar: 0
@@ -20016,12 +20039,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 1111302400
   looping: 1
   prewarm: 1
   playOnAwake: 1
   moveWithTransform: 1
+  autoRandomSeed: 0
   scalingMode: 1
+  randomSeed: 1111302400
   InitialModule:
     serializedVersion: 2
     enabled: 1

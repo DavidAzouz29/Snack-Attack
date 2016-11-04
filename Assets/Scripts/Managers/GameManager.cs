@@ -31,7 +31,12 @@ public class GameManager : MonoBehaviour
 {
 
     public PlayerManager r_PlayerManager; //TODO: why not PlayerManager?
-    //const uint MAX_PLAYERS = PlayerManager.MAX_PLAYERS; //TODO: needed?
+    // Used for Audio
+    public const int iChCombat = 0;
+    public const int iChState = 1;
+    public const int iChInGame = 2;
+    public const int iChLKitchen = 3;
+    public const int iChLBanquet = 4;
 
     private int m_RandomPlayer;
     private float m_BossScale;
@@ -131,6 +136,13 @@ public class GameManager : MonoBehaviour
         //StartCoroutine(GameLoop());
     }
 
+    public AudioSource PlayAudioClip(int a_parent, int a_child)
+    {
+        AudioSource audioSource = transform.GetChild(a_parent).GetChild(a_child).GetComponent<AudioSource>();
+        audioSource.Play();
+        return audioSource;
+    }
+
     // TODO: move to RoundStarting()
     public void Init()
     {
@@ -149,20 +161,12 @@ public class GameManager : MonoBehaviour
             default:
                 {
                     // For Splash only
-                    audioSlot = transform.GetChild(2).GetComponentInChildren<AudioSource>();
+                    audioSlot = transform.GetChild(iChInGame).GetComponentInChildren<AudioSource>();
                     audioSlot.loop = true;
                     audioSlot.Play();
                     break;
                 }
-            case 2: // Scene.Level1Kitchen:
-            case 3: // Scene.Level2Banquet:
-                {
-                    transform.GetChild(2).GetComponentInChildren<AudioSource>().enabled = false; //TODO: solve this
-                    audioSlot = transform.GetChild(2).GetChild(iScene - 1).GetComponent<AudioSource>(); Debug.Log("GM: Theme " + iScene);
-                    audioSlot.loop = true;
-                    audioSlot.Play();
-                    break;
-                }
+                // Level themes are selected in UILevel after the countdown
         }
     }
 

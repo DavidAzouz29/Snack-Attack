@@ -26,13 +26,16 @@ public class UILevel : MonoBehaviour {
     private GameManager r_GameManager;
     private Transform r_AudioCountdown;
 
+    private const int iAudioSlotCountDown = 8;
+    private const int iAudioSlotFight = 9;
+
     void Awake()
     {
         r_GameManager = FindObjectOfType<GameManager>(); // TODO: use GameManager.Instance
         r_RoundTimer = r_GameManager.GetComponent<RoundTimer>();
-        r_AudioCountdown = r_GameManager.transform.GetChild(2);
+        r_AudioCountdown = r_GameManager.transform.GetChild(GameManager.iChInGame);
         // Countdown Audio
-        r_AudioCountdown.GetChild(7).GetComponent<AudioSource>().Play();
+        r_AudioCountdown.GetChild(iAudioSlotCountDown).GetComponent<AudioSource>().Play();
     }
 
     // Use this for initialization
@@ -87,9 +90,32 @@ public class UILevel : MonoBehaviour {
             {
                 timer = 0.5f;
                 // Fight!
-                r_AudioCountdown.GetChild(8).GetComponent<AudioSource>().Play();
-                // Kitchen Theme //TODO: restore once footage is captured
-                //r_AudioCountdown.GetChild(1).GetComponent<AudioSource>().Play();
+                r_AudioCountdown.GetChild(iAudioSlotFight).GetComponent<AudioSource>().Play();
+                // Play correlated level theme: Kitchen/ Banquet
+                AudioSource audioSlot = null;
+                int iScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+                switch (iScene)
+                {
+                    case 0:
+                    case 1: //Scene.Menu
+                    default:
+                        {
+                            // For Splash only
+                            audioSlot = GameManager.Instance.transform.GetChild(GameManager.iChInGame).GetComponentInChildren<AudioSource>();
+                            audioSlot.loop = true;
+                            audioSlot.Play();
+                            break;
+                        }
+                    case 2: // Scene.Level1Kitchen:
+                    case 3: // Scene.Level2Banquet:
+                        {
+                            GameManager.Instance.transform.GetChild(GameManager.iChInGame).GetComponentInChildren<AudioSource>().enabled = false; //TODO: solve this
+                            //audioSlot = transform.GetChild(iScene + 1).GetChild(1).GetComponent<AudioSource>(); //Debug.Log("GM: Theme " + iScene);
+                            //audioSlot.loop = true; //TODO: restore once footage is captured
+                            //audioSlot.Play();
+                            break;
+                        }
+                }
             }
         }
     }
@@ -108,7 +134,7 @@ public class UILevel : MonoBehaviour {
         if (m_Secs <= 4.9f && m_Secs >= 4.0f && m_Mins < 1)
         {
             // Countdown
-            r_AudioCountdown.GetChild(7).GetComponent<AudioSource>().Play();
+            r_AudioCountdown.GetChild(iAudioSlotCountDown).GetComponent<AudioSource>().Play();
         }
     }
 

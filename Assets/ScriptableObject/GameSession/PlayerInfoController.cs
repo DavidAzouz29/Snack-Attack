@@ -84,7 +84,7 @@ public class PlayerInfoController : MonoBehaviour
 
             }
 
-            // Select (A on Xbox)
+            // Select (Start on Xbox)
             if (Input.GetKeyDown("joystick " + (m_iController) + " button 7") && m_Timer >= m_TimerPause)
             {
                 ToggleIsReady();
@@ -95,16 +95,16 @@ public class PlayerInfoController : MonoBehaviour
         if (_player.isReady && isAudioToPlay)
         {
             // override the clip anyway
-            c_AudioSource = GameManager.Instance.transform.GetChild(2).GetChild(4).GetComponent<AudioSource>();
+            c_AudioSource = GameManager.Instance.transform.GetChild(GameManager.iChInGame).GetChild(4).GetComponent<AudioSource>();
             c_AudioSource.clip = _player.Brain.GetAudioTaunt(Random.Range(0, 4)); //GameManager.Instance.transform.GetChild(2).GetChild(4).GetComponent<AudioSource>();
         }
         else if (m_iController % 1 == 0 && isAudioToPlay)
         {
-            c_AudioSource = GameManager.Instance.transform.GetChild(2).GetChild(5).GetComponent<AudioSource>();
+            c_AudioSource = GameManager.Instance.transform.GetChild(GameManager.iChInGame).GetChild(5).GetComponent<AudioSource>();
         }
         else if (m_iController % 2 == 0 && isAudioToPlay)
         {
-            c_AudioSource = GameManager.Instance.transform.GetChild(2).GetChild(6).GetComponent<AudioSource>();
+            c_AudioSource = GameManager.Instance.transform.GetChild(GameManager.iChInGame).GetChild(6).GetComponent<AudioSource>();
         }
 
         // if audio hasn't played

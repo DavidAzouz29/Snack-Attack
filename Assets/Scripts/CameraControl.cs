@@ -142,7 +142,7 @@ public class CameraControl : MonoBehaviour {
         float elapsed = 0.0f;
         Vector3 originalCamPos = Camera.main.transform.parent.position;
         // Hit/ Glass Break Audio
-        AudioSource audioSource = GameManager.Instance.transform.GetChild(0).GetChild(2).GetComponent<AudioSource>();
+        AudioSource audioSource = GameManager.Instance.transform.GetChild(GameManager.iChCombat).GetChild(2).GetComponent<AudioSource>();
         audioSource.pitch = Random.Range(0.9f, 1.1f);
         audioSource.Play();
 

@@ -102,6 +102,15 @@ public class PlayerSelect : MonoBehaviour
     // Update is called once per frame
     void Update () 
 	{
+        /*if(gameObject.activeSelf)
+        {
+            PlayerSelectPanel(true);
+        }
+        else
+        {
+            PlayerSelectPanel(false);
+        } */
+
         /*// Player 1
 		// Left Bumper
 		if (Input.GetButtonDown((string)"joystick 1 button 4")) //Input.GetAxis ("P1_Horizontal") < fSensitivity
@@ -176,6 +185,11 @@ public class PlayerSelect : MonoBehaviour
     {
         // toggle the PS panel on/ off
         gameObject.SetActive(!gameObject.activeSelf);
+        // Choose/ Pick your Character/ Player
+        if(isActive)
+        {
+            GameManager.Instance.PlayAudioClip(2, 1);
+        }
         // Reset characters
         OnLevelWasLoaded();
 

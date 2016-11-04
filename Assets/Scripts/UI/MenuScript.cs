@@ -52,6 +52,11 @@ public class MenuScript : MonoBehaviour
         }
 	} */
 
+    public void PlayAudioClip(int a_parent, int a_child)
+    {
+        GameManager.Instance.PlayAudioClip(a_parent, a_child);
+    }
+
     #region Panels
     /// <summary>
     /// Shows/ hides the 'Title Screen' panel 
@@ -81,6 +86,10 @@ public class MenuScript : MonoBehaviour
     {
         // set the Level Select panel on/ off
 		levelSelectPanel.SetActive(!levelSelectPanel.activeSelf);
+        if(levelSelectPanel.activeSelf)
+        {
+            GameManager.Instance.PlayAudioClip(2, 2);
+        }
     }
 
     ///-----------------------------------

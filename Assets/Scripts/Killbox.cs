@@ -29,7 +29,7 @@ public class Killbox : MonoBehaviour {
         // Blender wiz
         if(tag == "Bench")
         {
-            GameManager.Instance.transform.GetChild(3).GetChild(0).GetComponent<AudioSource>().Play();
+            GameManager.Instance.transform.GetChild(GameManager.iChLKitchen).GetChild(1).GetComponent<AudioSource>().Play();
         }
 
         if (_col.gameObject.tag == "Player")

@@ -364,7 +364,7 @@ public class BossBlobs : MonoBehaviour
         gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
         gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
         gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", true); //TODO: set above and here?
-        GameManager.Instance.transform.GetChild(1).GetChild(0).GetComponent<AudioSource>().Play();
+        GameManager.Instance.transform.GetChild(GameManager.iChState).GetChild(0).GetComponent<AudioSource>().Play();
         // Change speed and damage.
         r_PlayerCon.SetPlayerSpeed(r_PlayerCon.bossSpeed);
         // Camera Shake
@@ -393,7 +393,7 @@ public class BossBlobs : MonoBehaviour
                 gameObject.transform.FindChild("Neut").gameObject.GetComponent<Animator>().SetBool("Boss", false);
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
-                GameManager.Instance.transform.GetChild(1).GetChild(1).GetComponent<AudioSource>().Play();
+                GameManager.Instance.transform.GetChild(GameManager.iChState).GetChild(1).GetComponent<AudioSource>().Play();
                 // Change speed and damage.
                 r_PlayerCon.SetPlayerSpeed(r_PlayerCon.neutSpeed);
             }
@@ -408,7 +408,7 @@ public class BossBlobs : MonoBehaviour
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(true);
                 SetAnimID(m_TransitionState, gameObject.transform.FindChild("Weak").gameObject.GetComponent<Animator>());//.SetBool("Boss", false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
-                GameManager.Instance.transform.GetChild(1).GetChild(1).GetComponent<AudioSource>().Play();
+                GameManager.Instance.transform.GetChild(GameManager.iChState).GetChild(1).GetComponent<AudioSource>().Play();
                 // Change speed and damage.
                 r_PlayerCon.SetPlayerSpeed(r_PlayerCon.weakSpeed);
             }
@@ -784,7 +784,7 @@ public class BossBlobs : MonoBehaviour
         if (m_Power < m_CurrentThreshold)
         {
             Drop(m_Threshold);
-            //GameManager.Instance.transform.GetChild(1).GetChild(1).GetComponent<AudioSource>().Play();
+            //GameManager.Instance.transform.GetChild(GameManager.iChState).GetChild(1).GetComponent<AudioSource>().Play();
         }
         if (m_Power <= 0)
         {
