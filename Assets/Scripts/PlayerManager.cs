@@ -255,7 +255,7 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             sPlayerTags[i] = m_SnackBrains[i].GetPlayerTag();
             sPlayerTag = sPlayerTags[i];
 
-            if (isFirstTime)
+            /*if (isFirstTime)
             {
                 sPlayerTags[0] = sPlayerTag; //TODO: will not work for two RR and two PC?
                 isFirstTime = false;
@@ -264,14 +264,14 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             {
                 foreach (string playerTag in sPlayerTags)
                 {
-                    if (sPlayerTag.Contains(playerTag))
+                    if (sPlayerTag == playerTag) //sPlayerTag.Contains(playerTag)
                     {
                         sPlayerTag = sPlayerTag + " " + ((i % MAX_PLAYERS));
                         sPlayerTags[i] = sPlayerTag;
                         break;
                     }
                 }
-            }
+            }*/
             m_SnackBrains[(int)i].SetPlayerTag(sPlayerTag);
             r_PlayerController.SetPlayerTag(sPlayerTag);
 

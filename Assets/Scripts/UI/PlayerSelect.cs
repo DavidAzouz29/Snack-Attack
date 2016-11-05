@@ -184,7 +184,7 @@ public class PlayerSelect : MonoBehaviour
     public void PlayerSelectPanel(bool isActive)
     {
         // toggle the PS panel on/ off
-        gameObject.SetActive(!gameObject.activeSelf);
+        gameObject.SetActive(isActive);
         // Choose/ Pick your Character/ Player
         if(isActive)
         {

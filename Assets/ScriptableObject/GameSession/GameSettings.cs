@@ -117,10 +117,10 @@ public class GameSettings : ScriptableObject
 #if UNITY_EDITOR
             if (!_instance)
                 InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Resources/Default game settings.asset"));
-#endif
+#else
             if (!_instance)
-                _instance = Resources.Load("Assets/Resources/Default game settings.asset") as GameSettings; //FindObjectsOfTypeAll<GameSettings>().FirstOrDefault(); //GameManager.Instance.m_ActiveGameSettings;
-                //InitializeFromDefault(UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Resources/Default game settings.asset"));
+                _instance = Resources.Load("Default game settings") as GameSettings; //FindObjectsOfTypeAll<GameSettings>().FirstOrDefault(); //GameManager.Instance.m_ActiveGameSettings;
+#endif
             return _instance;
         }
     }
@@ -172,11 +172,16 @@ public class GameSettings : ScriptableObject
 		System.IO.File.WriteAllText(path, JsonUtility.ToJson(this, true));
 	}
 
-	public static void InitializeFromDefault(GameSettings settings)
-	{
-		if (_instance != null) DestroyImmediate(_instance);
-		_instance = Instantiate(settings); // TODO: fix break here
-		_instance.hideFlags = HideFlags.HideAndDontSave;
+    public static void InitializeFromDefault(GameSettings settings)
+    {
+        // If we have a settings to replace our null instance with
+        if (settings != null && _instance == null)
+        {
+            //if (_instance != null)
+            DestroyImmediate(_instance);
+            _instance = Instantiate(settings);
+        }
+        _instance.hideFlags = HideFlags.HideAndDontSave;
     }
 
 #if UNITY_EDITOR

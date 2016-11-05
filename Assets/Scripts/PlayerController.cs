@@ -26,7 +26,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody))]
+//[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     public const uint MAX_PLAYERS = PlayerManager.MAX_PLAYERS;

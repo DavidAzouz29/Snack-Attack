@@ -16,6 +16,7 @@ public class MainMenuController : MonoBehaviour
 	public Color[] AvailableColors;
 
     public Text[] LoadingBarTexts = new Text[3];
+    public Slider c_LoadingBarSlider;
 
     //public UnityEngine.UI.Button PanelSwitcher;
     //public GameObject PlayersPanel;
@@ -38,6 +39,11 @@ public class MainMenuController : MonoBehaviour
 
     void Start ()
     {
+        if(GameSettingsTemplate == null)
+        {
+            GameSettingsTemplate = GameManager.Instance.m_ActiveGameSettings;// GameSettings.Instance;
+        }
+
 #if UNITY_EDITOR
         if (System.IO.File.Exists(SavedSettingsPathEditor))
             GameSettings.LoadFromJSON(SavedSettingsPathEditor);
@@ -65,11 +71,11 @@ public class MainMenuController : MonoBehaviour
         ao.allowSceneActivation = false;
         // TODO: clean up one day? 17/10/2016
         string sTextSlot = null;
-        if(a_scene == 2)
+        if(a_scene == Scene.Level1Kitchen)
         {
             sTextSlot = "Kitchen";
         }
-        else if (a_scene == 3)
+        else if (a_scene == Scene.Level2Banquet)
         {
             sTextSlot = "Banquet";
         }
@@ -79,13 +85,14 @@ public class MainMenuController : MonoBehaviour
         {
             // [0, 0.9] > [0, 1]
             float progress = Mathf.Clamp01(ao.progress / 0.9f);
-            Debug.Log("Loading progress: " + (progress * 100) + "%");
-            LoadingBarTexts[2].text = (progress * 100).ToString() + " Complete";
+            //Debug.Log("Loading progress: " + (progress * 100) + "%");
+            c_LoadingBarSlider.value = progress;
+            LoadingBarTexts[2].text = (progress * 100).ToString("F0") + "% Complete";
 
             // Loading completed
             if (ao.progress == 0.9f)
             {
-                LoadingBarTexts[2].text = "Press Any Key."; Debug.Log("Press a key to start");
+                LoadingBarTexts[2].text = "Press Any Key."; //Debug.Log("Press a key to start");
                 if (Input.anyKey && !Input.GetKeyDown(KeyCode.JoystickButton15))
                 {
                     ao.allowSceneActivation = true;
