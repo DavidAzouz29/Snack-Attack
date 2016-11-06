@@ -66,7 +66,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
@@ -79,7 +79,87 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Brocco_IDLE
+      takeName: Brocco_IDLE
+      firstFrame: 5
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: butt_JNT
+        weight: 1
+      - path: butt_JNT/BL_Left_Hip_JNT
+        weight: 1
+      - path: butt_JNT/BL_Left_Hip_JNT/BL_Left_Leg_JNT
+        weight: 1
+      - path: butt_JNT/BL_Left_Hip_JNT/BL_Left_Leg_JNT/BL_Left_Knee_JNT
+        weight: 1
+      - path: butt_JNT/BL_Left_Hip_JNT/BL_Left_Leg_JNT/BL_Left_Knee_JNT/BL_Left_Foot_JNT
+        weight: 1
+      - path: butt_JNT/BL_Right_Hip_JNT
+        weight: 1
+      - path: butt_JNT/BL_Right_Hip_JNT/BL_Right_Leg_JNT
+        weight: 1
+      - path: butt_JNT/BL_Right_Hip_JNT/BL_Right_Leg_JNT/BL_Right_Knee_JNT
+        weight: 1
+      - path: butt_JNT/BL_Right_Hip_JNT/BL_Right_Leg_JNT/BL_Right_Knee_JNT/BL_Right_Foot_JNT
+        weight: 1
+      - path: butt_JNT/Mid_JNT
+        weight: 1
+      - path: butt_JNT/Mid_JNT/Sternum_JNT
+        weight: 1
+      - path: butt_JNT/Mid_JNT/Sternum_JNT/FL_Left_Clavicle_JNT
+        weight: 1
+      - path: butt_JNT/Mid_JNT/Sternum_JNT/FL_Left_Clavicle_JNT/FL_Left_Shoulder_JNT
+        weight: 1
+      - path: butt_JNT/Mid_JNT/Sternum_JNT/FL_Left_Clavicle_JNT/FL_Left_Shoulder_JNT/FL_Left_Elbow_JNT
+        weight: 1
+      - path: butt_JNT/Mid_JNT/Sternum_JNT/FL_Left_Clavicle_JNT/FL_Left_Shoulder_JNT/FL_Left_Elbow_JNT/FL_Left_Claw_JNT
+        weight: 1
+      - path: butt_JNT/Mid_JNT/Sternum_JNT/FL_Right_Clavicle_JNT
+        weight: 1
+      - path: butt_JNT/Mid_JNT/Sternum_JNT/FL_Right_Clavicle_JNT/FL_Right_Shoulder_JNT
+        weight: 1
+      - path: butt_JNT/Mid_JNT/Sternum_JNT/FL_Right_Clavicle_JNT/FL_Right_Shoulder_JNT/FL_Right_Elbow_JNT
+        weight: 1
+      - path: butt_JNT/Mid_JNT/Sternum_JNT/FL_Right_Clavicle_JNT/FL_Right_Shoulder_JNT/FL_Right_Elbow_JNT/FL_Right_Claw_JNT
+        weight: 1
+      - path: butt_JNT/Mid_JNT/Sternum_JNT/Mane_JNT
+        weight: 1
+      - path: butt_JNT/Mid_JNT/Sternum_JNT/Mane_JNT/Neck_JNT
+        weight: 1
+      - path: butt_JNT/Mid_JNT/Sternum_JNT/Mane_JNT/Neck_JNT/Face_JNT
+        weight: 1
+      - path: butt_JNT/Tailbase_JNT
+        weight: 1
+      - path: butt_JNT/Tailbase_JNT/TailMid_JNT
+        weight: 1
+      - path: butt_JNT/Tailbase_JNT/TailMid_JNT/TailEnd_JNT
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 5
     isReadable: 1
   meshes:
     lODScreenPercentages: []
