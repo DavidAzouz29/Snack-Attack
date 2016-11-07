@@ -105,7 +105,6 @@ MonoBehaviour:
   isOnGround: 0
   fJumpForce: 12
   m_playerID: 0
-  fBounceForce: 14
   m_hitStopDuration: 1
   m_shakeAmount: 0.5
   m_frozenDuringAttack: 1
@@ -341,7 +340,7 @@ GameObject:
   - 4: {fileID: 4000012166602538}
   - 82: {fileID: 82000011345592696}
   m_Layer: 0
-  m_Name: C_Hit
+  m_Name: C_CharHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1679,9 +1678,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24378114, guid: 86a7353f2579d476fbaa7f161c2e5d00,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 008278e51998ef849995b3fc1a289c46, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.35
+  m_Volume: 0.035
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2354,9 +2353,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24378114, guid: 86a7353f2579d476fbaa7f161c2e5d00,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 008278e51998ef849995b3fc1a289c46, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.35
+  m_Volume: 0.035
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3256,7 +3255,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 008278e51998ef849995b3fc1a289c46, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.35
+  m_Volume: 0.035
   m_Pitch: 1
   Loop: 0
   Mute: 0
