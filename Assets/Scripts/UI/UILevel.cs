@@ -106,13 +106,13 @@ public class UILevel : MonoBehaviour {
                             audioSlot.Play();
                             break;
                         }
-                    case 2: // Scene.Level1Kitchen:
+                    case 2: // Scene.Level1Kitchen:}
                     case 3: // Scene.Level2Banquet:
                         {
                             GameManager.Instance.transform.GetChild(GameManager.iChInGame).GetComponentInChildren<AudioSource>().enabled = false; //TODO: solve this
-                            //audioSlot = transform.GetChild(iScene + 1).GetChild(1).GetComponent<AudioSource>(); //Debug.Log("GM: Theme " + iScene);
-                            //audioSlot.loop = true; //TODO: restore once footage is captured
-                            //audioSlot.Play();
+                            audioSlot = GameManager.Instance.transform.GetChild(iScene + 1).GetChild(0).GetComponent<AudioSource>(); //Debug.Log("GM: Theme " + iScene);
+                            audioSlot.loop = true; //TODO: restore once footage is captured
+                            audioSlot.Play();
                             break;
                         }
                 }
