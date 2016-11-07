@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     private float fRot = 0.2f;
     bool isPaused = false;
     // Health
-    private int healthDeduct = 0;
+    //private int healthDeduct = 0;
     // used for jumping
 
     Rigidbody rb;
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 m_PreviousPos;
 
     // This is used for bouncing.
-    [SerializeField] private float fBounceForce = 14;
+    //[SerializeField] private float fBounceForce = 14;
     private float bounceTimer;
     private float bounceCooldown = 0.2f;
 
@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
         }
         //m_ShootingManager.SetFire(Fire);
         //TODO: healthBars = FindObjectOfType<healthBar> ();
-        healthDeduct = health / hitsBeforeDeath;
+        //healthDeduct = health / hitsBeforeDeath;
         animator = GetComponent<Animator>(); //GetComponentInChildren<Animator> ();
         rb = GetComponent<Rigidbody>();
         //jump
@@ -345,9 +345,9 @@ public class PlayerController : MonoBehaviour
         m_eCurrentPlayerState = a_ePlayerState;
     }
 
-    public uint GetPlayerID()
+    public int GetPlayerID()
     {
-        return m_playerID;
+        return (int)m_playerID;
     }
 
     public string GetPlayerTag()
@@ -388,7 +388,7 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter(Collision a_collision)
     {
         // make jump work
-        if (a_collision.transform.tag == "StaticObject")
+        if (a_collision.transform.tag == "StaticObject" || a_collision.transform.tag == "Bounce")
         {
             isOnGround = true;
         }

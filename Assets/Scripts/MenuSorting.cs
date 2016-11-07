@@ -49,7 +49,7 @@ public class MenuSorting : MonoBehaviour
     //[SerializeField]
     //private GameObject[] r_LevelsShow = new GameObject[SHOW_COUNT]; // Show only (3)
     // Movement
-    private float fSensitivity = 0.2f;
+    //private float fSensitivity = 0.2f;
     private float moveHorizontal;
     private float moveVertical;
 
