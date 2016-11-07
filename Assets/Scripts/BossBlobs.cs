@@ -150,8 +150,8 @@ public class BossBlobs : MonoBehaviour
         r_UILevel = r_PlayerMan.r_UILevel;
         r_EffectManager = GetComponent<EffectManager>();
         blobsArray = r_PlayerMan.GetBlobArray();
-        c_blobMaterial = GameSettings.Instance.players[(int)r_PlayerCon.GetPlayerID()].Brain.GetBlobMaterial();
-        iPlayerID = (int)r_PlayerCon.GetPlayerID();
+        c_blobMaterial = GameSettings.Instance.players[r_PlayerCon.GetPlayerID()].Brain.GetBlobMaterial();
+        iPlayerID = r_PlayerCon.GetPlayerID();
 
 
         //Material Caching
@@ -752,7 +752,13 @@ public class BossBlobs : MonoBehaviour
     public void UpdateScore(Collider _col)
     {
         ScoreManager myScore = GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>();
-        myScore.ChangeScore(_col.gameObject.GetComponentInParent<PlayerController>().m_PlayerTag, "kills", 1);
+        PlayerController _colPlayerCon = _col.gameObject.GetComponentInParent<PlayerController>();
+        myScore.ChangeScore(_colPlayerCon.m_PlayerTag, "kills", 1);
+        // Play random taunt as player scores a kill
+        AudioSource asClip = GameManager.Instance.transform.GetChild(GameManager.iChCombat).GetChild(7).GetComponent<AudioSource>();
+        asClip.clip = GameSettings.Instance.players[_colPlayerCon.GetPlayerID()].Brain.GetAudioTaunt(Random.Range(0, 4));
+        asClip.Play();
+
         // Game objects that are tagged
         GameObject.FindGameObjectWithTag("Player " + //TODO: clean up
             _col.gameObject.GetComponentInParent<PlayerController>().GetPlayerID()

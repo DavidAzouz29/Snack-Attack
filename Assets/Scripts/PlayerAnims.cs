@@ -55,7 +55,7 @@ public class PlayerAnims : MonoBehaviour {
                     {
                         m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
 
-                        switch (GameSettings.Instance.players[(int)m_PC.GetPlayerID()].eBaseClassState)
+                        switch (GameSettings.Instance.players[m_PC.GetPlayerID()].eBaseClassState)
                         {
                             case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
                                 {
@@ -74,7 +74,7 @@ public class PlayerAnims : MonoBehaviour {
                     {
                         m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
 
-                        switch (GameSettings.Instance.players[(int)m_PC.GetPlayerID()].eBaseClassState)
+                        switch (GameSettings.Instance.players[m_PC.GetPlayerID()].eBaseClassState)
                         {
                             case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
                                 {
@@ -105,7 +105,7 @@ public class PlayerAnims : MonoBehaviour {
                 {
                 m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
 
-                switch (GameSettings.Instance.players[(int)m_PC.GetPlayerID()].eBaseClassState)
+                switch (GameSettings.Instance.players[m_PC.GetPlayerID()].eBaseClassState)
                 {
                     case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
                         {
@@ -124,7 +124,7 @@ public class PlayerAnims : MonoBehaviour {
                 {
                 m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
 
-                switch (GameSettings.Instance.players[(int)m_PC.GetPlayerID()].eBaseClassState)
+                switch (GameSettings.Instance.players[m_PC.GetPlayerID()].eBaseClassState)
                 {
                     case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
                         {

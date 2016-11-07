@@ -25,7 +25,7 @@ public class PlayerCollision : MonoBehaviour {
     public Transform m_ParentTransform;
     public SkinnedMeshRenderer c_SMR;
     [SerializeField] private TrailRenderer c_TrailRenderer;
-    private uint iPlayerID;
+    private int iPlayerID;
     private GameSettings.PlayerInfo players;
     private BossBlobs r_BossBlobs;
     //Attack Timer
