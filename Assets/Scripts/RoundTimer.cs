@@ -110,10 +110,10 @@ public class RoundTimer : MonoBehaviour {
                 m_Spawned = true;
                 m_PlayerManager.CreatePlayers();
                 // Disable movement so Princess Anims can sync up.
-                for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+                /*for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
                 {
                     //m_PlayerManager.GetPlayer(i).GetComponent<PlayerController>().enabled = false;
-                }
+                }*/
             }
         }
 

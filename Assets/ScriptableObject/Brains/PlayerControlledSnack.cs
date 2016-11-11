@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(menuName="Brains/Player Controlled")]
+//[CreateAssetMenu(menuName="Brains/Player Controlled")]
 public class PlayerControlledSnack //: SnackBrain
 {
 
-	public int PlayerNumber;
+	/*public int PlayerNumber;
 	private string m_MovementAxisName;
 	private string m_TurnAxisName;
 	private string m_FireButton;
@@ -18,7 +18,7 @@ public class PlayerControlledSnack //: SnackBrain
 		m_FireButton = "Fire" + PlayerNumber;
 	}
 
-	/*public override void Think(SnackThinker Snack)
+	public override void Think(SnackThinker Snack)
 	{
 		var movement = Snack.GetComponent<SnackMovement>();
 

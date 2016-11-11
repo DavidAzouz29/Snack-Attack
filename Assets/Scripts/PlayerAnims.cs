@@ -24,7 +24,7 @@ public class PlayerAnims : MonoBehaviour {
     public BossBlobs.TransitionState m_TransitionState; //TODO ADD BOSS ATTACKS
 
     private PlayerController m_PC;
-    private bool m_Idling, m_Walking, m_Attacking, m_isLeftAttacking, m_isJumping;
+    private bool /*m_Idling,*/ m_Walking, m_Attacking, m_isLeftAttacking, m_isJumping;
     private Vector3 m_PreviousPos;
 
     void Awake()
@@ -35,7 +35,7 @@ public class PlayerAnims : MonoBehaviour {
     {
         // Player Controller script is attached to our game object anyway.
         m_PC = GetComponent<PlayerController>();
-        m_Idling = true;
+        //m_Idling = true;
         m_isJumping = false;
         m_PreviousPos = transform.position;
         m_isLeftAttacking = true;

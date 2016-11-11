@@ -366,6 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 0
   m_FirstSelected: {fileID: 1203335140}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
@@ -762,6 +763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa1baa7345c5e3469fdae730427eb57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 0
   m_FirstSelected: {fileID: 1223699655}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
@@ -1395,6 +1397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa1baa7345c5e3469fdae730427eb57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 0
   m_FirstSelected: {fileID: 433772530}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
@@ -1825,6 +1828,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 0
   m_FirstSelected: {fileID: 433772530}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
@@ -2259,6 +2263,11 @@ Prefab:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 146289041}
+    - target: {fileID: 114000012585289458, guid: 47ee762f1b5e089499c81138ee56d8a3,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 191275133}
     - target: {fileID: 114000012573675440, guid: 47ee762f1b5e089499c81138ee56d8a3,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2763,7 +2772,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22405128, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 119.03297
+      value: 115.80403
       objectReference: {fileID: 0}
     - target: {fileID: 22405128, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -2771,7 +2780,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22405128, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 238.06593
+      value: 231.60806
       objectReference: {fileID: 0}
     - target: {fileID: 22405128, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
       propertyPath: m_SizeDelta.y
@@ -2787,7 +2796,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22467870, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 370.4989
+      value: 360.81207
       objectReference: {fileID: 0}
     - target: {fileID: 22467870, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -2795,7 +2804,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22467870, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 238.06593
+      value: 231.60806
       objectReference: {fileID: 0}
     - target: {fileID: 22467870, guid: 47ee762f1b5e089499c81138ee56d8a3, type: 2}
       propertyPath: m_SizeDelta.y
@@ -2824,7 +2833,7 @@ Prefab:
     - target: {fileID: 224000011670354554, guid: 47ee762f1b5e089499c81138ee56d8a3,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 337.0681
+      value: 349.98392
       objectReference: {fileID: 0}
     - target: {fileID: 224000011670354554, guid: 47ee762f1b5e089499c81138ee56d8a3,
         type: 2}
@@ -3302,6 +3311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa1baa7345c5e3469fdae730427eb57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 0
   m_FirstSelected: {fileID: 1688990335}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
@@ -3677,7 +3687,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1706654281}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 5
   startDelay:
     scalar: 0
@@ -3715,12 +3725,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 0
   looping: 1
   prewarm: 0
   playOnAwake: 1
   moveWithTransform: 0
+  autoRandomSeed: 1
   scalingMode: 1
+  randomSeed: 0
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -6436,6 +6447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa1baa7345c5e3469fdae730427eb57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 0
   m_FirstSelected: {fileID: 1071761845}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5

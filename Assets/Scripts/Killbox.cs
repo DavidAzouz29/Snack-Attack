@@ -13,7 +13,7 @@ public class Killbox : MonoBehaviour {
 
     private Vector3 m_BlobPos;
 
-    private float m_ResetTime = 2.0f;
+    //private float m_ResetTime = 2.0f;
     private bool m_Respawning;
     private GameObject m_Player;
 
@@ -81,7 +81,7 @@ public class Killbox : MonoBehaviour {
 
     Vector3 BlobSpawn(int _a)
     {
-        if(m_BlobPos == null || m_BlobPos == Vector3.zero)
+        if(m_BlobPos == Vector3.zero)
             m_BlobPos = m_BlobSpawnList[Random.Range(0, m_BlobSpawnList.Count)].transform.position;
 
         float _radius = 3.0f;

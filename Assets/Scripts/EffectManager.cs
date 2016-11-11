@@ -28,7 +28,7 @@ public class EffectManager : MonoBehaviour
     // used for getting the components from game objects
     private ParticleSystem c_HeavyAttackSmokeEffect;
     private ParticleSystem c_HitEffect;
-    private ParticleSystem c_ShieldEffect;
+    //private ParticleSystem c_ShieldEffect;
 
     // Used for instanciating/ destroying
     //private ParticleSystem localHeavyAttackSmokeEffect;
@@ -36,7 +36,7 @@ public class EffectManager : MonoBehaviour
     //private ParticleSystem localShieldEffect;
 
     private int iChild = 3;
-    private string sCurrAnim = "aeaa";
+    //private string sCurrAnim = "aeaa";
     private Animator c_CurrAnim;
     private BossBlobs r_BossBlobs;
     private PlayerController r_PlayerController;
@@ -75,7 +75,7 @@ public class EffectManager : MonoBehaviour
     {
         c_HeavyAttackSmokeEffect = heavyAttackSmokeEffect.GetComponent<ParticleSystem>();
         c_HitEffect = hitEffect.GetComponent<ParticleSystem>();
-        c_ShieldEffect = shieldEffect.GetComponent<ParticleSystem>();
+        //c_ShieldEffect = shieldEffect.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -90,7 +90,7 @@ public class EffectManager : MonoBehaviour
                     {
                         c_CurrAnim = transform.FindChild("Weak").GetComponent<Animator>();
                         iChild = 2;
-                        sCurrAnim = "Weak";
+                        //sCurrAnim = "Weak";
                     }
                     break;
                 }
@@ -100,7 +100,7 @@ public class EffectManager : MonoBehaviour
                     {
                         c_CurrAnim = transform.FindChild("Neut").GetComponent<Animator>();
                         iChild = 3;
-                        sCurrAnim = "Neut";
+                        //sCurrAnim = "Neut";
                     }
                     break;
                 }
@@ -110,7 +110,7 @@ public class EffectManager : MonoBehaviour
                     {
                         c_CurrAnim = transform.FindChild("Boss").GetComponent<Animator>();
                         iChild = 4;
-                        sCurrAnim = "Boss";
+                        //sCurrAnim = "Boss";
                     }
                     break;
                 }

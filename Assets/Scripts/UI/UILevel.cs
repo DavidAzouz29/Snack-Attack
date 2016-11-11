@@ -64,6 +64,7 @@ public class UILevel : MonoBehaviour {
 
     void CountDownUpdate()
     {
+        r_GameManager.transform.GetChild(GameManager.iChInGame).GetComponentInChildren<AudioSource>().volume = 0.3f;
         c_countDown.text = ( m_countDown > 0 ) ? m_countDown.ToString() : "FIGHT!";
 
         float scaleValue = (m_countDown > 0) ? timer / m_countDownDelay : 1 - (timer / m_countDownDelay);
@@ -82,7 +83,7 @@ public class UILevel : MonoBehaviour {
                 // Enable movement. Read the comment for disabling movement.
                 for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
                 {
-                    GameManager.Instance.r_PlayerManager.GetPlayer(i).GetComponent<PlayerController>().enabled = true;
+                    r_GameManager.r_PlayerManager.GetPlayer(i).GetComponent<PlayerController>().enabled = true;
                 }
             }
             timer = m_countDownDelay;
@@ -101,7 +102,7 @@ public class UILevel : MonoBehaviour {
                     default:
                         {
                             // For Splash only
-                            audioSlot = GameManager.Instance.transform.GetChild(GameManager.iChInGame).GetComponentInChildren<AudioSource>();
+                            audioSlot = r_GameManager.transform.GetChild(GameManager.iChInGame).GetComponentInChildren<AudioSource>();
                             audioSlot.loop = true;
                             audioSlot.Play();
                             break;
@@ -109,8 +110,8 @@ public class UILevel : MonoBehaviour {
                     case 2: // Scene.Level1Kitchen:}
                     case 3: // Scene.Level2Banquet:
                         {
-                            GameManager.Instance.transform.GetChild(GameManager.iChInGame).GetComponentInChildren<AudioSource>().enabled = false; //TODO: solve this
-                            audioSlot = GameManager.Instance.transform.GetChild(iScene + 1).GetChild(0).GetComponent<AudioSource>(); //Debug.Log("GM: Theme " + iScene);
+                            r_GameManager.transform.GetChild(GameManager.iChInGame).GetComponentInChildren<AudioSource>().Stop(); //TODO: solve this
+                            audioSlot = r_GameManager.transform.GetChild(iScene + 1).GetChild(0).GetComponent<AudioSource>(); //Debug.Log("GM: Theme " + iScene);
                             audioSlot.loop = true; //TODO: restore once footage is captured
                             audioSlot.Play();
                             break;

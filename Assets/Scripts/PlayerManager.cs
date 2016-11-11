@@ -48,12 +48,12 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     //----------------------------------
     // PRIVATE VARIABLES
     //----------------------------------
-    Vector3 v3PlayerPosition = Vector3.zero;
+    //Vector3 v3PlayerPosition = Vector3.zero;
     private GameObject r_Player; // temp
 
     private List<GameObject> m_PlayerSpawns;
 
-    private bool isFirstTime = true;
+    //private bool isFirstTime = true;
     private GameManager m_GameManager;
     private SpawnManager m_SpawnManager;
     private CameraControl m_CameraControl;

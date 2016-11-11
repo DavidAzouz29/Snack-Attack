@@ -94,8 +94,8 @@ public class PlayerInfoController : MonoBehaviour
         // Submit/ ready
         if (_player.isReady && isAudioToPlay)
         {
-            // override the clip anyway
-            c_AudioSource = GameManager.Instance.transform.GetChild(GameManager.iChInGame).GetChild(4).GetComponent<AudioSource>();
+            // Taunt Slot
+            c_AudioSource = GameManager.Instance.transform.GetChild(GameManager.iChCombat).GetChild(7).GetComponent<AudioSource>();
             c_AudioSource.clip = _player.Brain.GetAudioTaunt(Random.Range(0, 4)); //GameManager.Instance.transform.GetChild(2).GetChild(4).GetComponent<AudioSource>();
         }
         else if (m_iController % 1 == 0 && isAudioToPlay)
@@ -201,6 +201,12 @@ public class PlayerInfoController : MonoBehaviour
         Refresh();
     }
 
+    /// <summary>
+    /// Cycles Character models in the Player Select.
+    /// Retrieves the Mesh, Material, and animations of a character.
+    /// </summary>
+    /// <param name="a_player">Which player to cycle.</param>
+    /// <returns></returns>
     GameObject CharacterSelection(GameSettings.PlayerInfo a_player)
     {
         //UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(playerButtons.playerColsButton[a_player].coloumn[0].gameObject);

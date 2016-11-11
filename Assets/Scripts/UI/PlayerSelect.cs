@@ -32,7 +32,7 @@ public class PlayerSelect : MonoBehaviour
 {
 	// Per Player Navigation
 	// [Players][Confirm, left, Right]
-	public ArrayLayout playerButtons;
+	//public ArrayLayout playerButtons;
 	public float fSensitivity = 2.0f;
 	public float fWaitForNextInteractable = 0.5f;
 	public Button c_BackButton;
@@ -67,80 +67,24 @@ public class PlayerSelect : MonoBehaviour
         hasAllPlayersSelected = false;
     }
 
-    /*//Coroutine, which gets Started in "Start()" and runs over the whole game to check for player input
-	IEnumerator PlayerInput(int i)
-	{
-		//Loop. Otherwise we wouldnt check continoulsy
-		while (true) 
-		{
-			// Left Bumper //Input.GetAxis ("P1_Horizontal") < fSensitivity
-			if (Input.GetKeyDown ((string)"joystick " + (i + 1) + " button 4")) 
-			{
-				// Cycle left in character list
-				playerButtons.playerColsButton [i].coloumn [1].Select ();
-				playerButtons.playerRows [i].row [i].Select ();
-			}
-
-			// Right Bumper
-			if (Input.GetKeyDown ((string)"joystick " + (i + 1) + " button 5")) 
-			{
-				// Cycle right in character list
-				playerButtons.playerColsButton [i].coloumn [2].Select ();
-				playerButtons.playerRows [i].row [i].Select ();
-			}
-
-			// Select (A on Xbox)
-			if (Input.GetKeyDown ((string)"joystick " + (i + 1) + " button 0")) 
-			{
-				
-			}
-
-			yield return null;
-		}
-	} */
-
     // Update is called once per frame
     void Update () 
 	{
-        /*if(gameObject.activeSelf)
-        {
-            PlayerSelectPanel(true);
-        }
-        else
-        {
-            PlayerSelectPanel(false);
-        } */
-
-        /*// Player 1
-		// Left Bumper
-		if (Input.GetButtonDown((string)"joystick 1 button 4")) //Input.GetAxis ("P1_Horizontal") < fSensitivity
-		{
-			playerButtons.playerRows [0].row[0].Select();
-			playerButtons.playerColsButton [0].coloumn[0].Select();
-			//Navigation.defaultNavigation.selectOnLeft = c_MenuButtons [0] [0]; //.navigation.selectOnLeft;
-		}*/
-
         // if all characters haven't confimed their selection
         if (!hasAllPlayersSelected)
         {
-            // Check if all players are ready to go
-            //for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
-            //{
-            // if all players are not ready
-            //if (!GameSettings.Instance.players[i].isReady)
+            //RECODE: allow for AI players //if (!GameSettings.Instance.players[i].isReady)
             // if player 1 is ready 
             if (GameSettings.Instance.players[0].isReady)
             {
                 StartCoroutine(PlayerReadyWait());
             }
-            //}
             //hasAllPlayersSelected = true;
 
         }
         // All players are ready
         else
         {
-            //StopAllCoroutines(); //TODO: does this break things?
             LevelSelect(true);
 
         }
@@ -151,7 +95,8 @@ public class PlayerSelect : MonoBehaviour
     {
         yield return new WaitForSeconds(fWaitForNextInteractable);
         c_LevelSelect.interactable = true;
-
+        c_BackButton.Select(); // used to restart Level Select Anim
+        c_LevelSelect.Select();
         yield return null;
     }
 

@@ -220,7 +220,7 @@ public abstract class PlayerBuild : ScriptableObject
     //-------------------------------
     // Private Variables
     //-------------------------------
-    float maxBossBlobs = 200.0f;
+    //float maxBossBlobs = 200.0f;
 
     void Start()
     {

@@ -764,7 +764,7 @@ public class BossBlobs : MonoBehaviour
             _col.gameObject.GetComponentInParent<PlayerController>().GetPlayerID()
             + " Score").GetComponent<Text>().text = m_KillCounter.ToString();
         m_KillCounter++;
-        Debug.Log(m_KillCounter);
+        //Debug.Log(m_KillCounter);
         GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
     }
 
@@ -798,7 +798,7 @@ public class BossBlobs : MonoBehaviour
             UpdateScore(_col);
         }
 
-        print("Event: Damage Applied.");
+        //print("Event: Damage Applied.");
         // Become invulnerable on damage instance.
         m_hitStopInvuln = true;
         // Freeze the damaged character.

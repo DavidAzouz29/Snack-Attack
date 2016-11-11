@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
     public void Init()
     {
         AudioThemeSelection();
-        SetupBoss();
+        //SetupBoss();
     }
 
     public void AudioThemeSelection()
@@ -170,7 +170,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetupBoss()
+    // TOOD: what does this function do that doesn't get replaced?
+    // Was meant to be for Game Mode
+    /*public void SetupBoss()
     {
         //Generate Random player
         m_RandomPlayer = Random.Range(0, (int)PlayerManager.MAX_PLAYERS);
@@ -178,9 +180,9 @@ public class GameManager : MonoBehaviour
         // TODO: Player Array is 0 (in PlayerManager)- this is being called in (RoundTimer) Update not Start like it once was,
         // as there are 0 players in the array GameManager script is playing up
         r_PlayerManager.GetPlayer(m_RandomPlayer).GetComponent<BossBlobs>().enabled = true;
-        //m_BossScale = r_PlayerManager.GetPlayer(m_RandomPlayer).GetComponent<BossBlobs>().m_Blobs.BigScale;
+        m_BossScale = r_PlayerManager.GetPlayer(m_RandomPlayer).GetComponent<BossBlobs>().m_Blobs.BigScale;
         r_PlayerManager.GetPlayer(m_RandomPlayer).transform.localScale = new Vector3(m_BossScale, m_BossScale, m_BossScale);
-    }
+    }*/
 
     private void SpawnAllSnacks()
     {

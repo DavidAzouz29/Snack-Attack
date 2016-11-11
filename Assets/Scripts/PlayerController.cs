@@ -109,8 +109,8 @@ public class PlayerController : MonoBehaviour
     // used for jumping
 
     Rigidbody rb;
-    float fJumpForceMax = 24.0f;// *2;
-    private Vector3 m_PreviousPos;
+    //float fJumpForceMax = 24.0f;// *2;
+    //private Vector3 m_PreviousPos;
 
     // This is used for bouncing.
     //[SerializeField] private float fBounceForce = 14;
@@ -160,16 +160,10 @@ public class PlayerController : MonoBehaviour
                 //m_PlayerTag = "Player " + (i + 1);
             }
         }
-        //m_ShootingManager.SetFire(Fire);
-        //TODO: healthBars = FindObjectOfType<healthBar> ();
-        //healthDeduct = health / hitsBeforeDeath;
-        animator = GetComponent<Animator>(); //GetComponentInChildren<Animator> ();
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        //jump
-        //fMovementSpeedSlowDown = fMovementSpeed - 2.0f;
-        //fJumpForceMax = fJumpForce;// *2;
 
-        m_PreviousPos = transform.position;
+        //m_PreviousPos = transform.position;
         m_playerAnims = GetComponent<PlayerAnims>();
 
         playerSpeed = neutSpeed;
@@ -186,7 +180,7 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(0, fJumpForce, 0, ForceMode.Impulse);
             isOnGround = false;
         }
-        m_PreviousPos = transform.position;
+        //m_PreviousPos = transform.position;
     }
 
     // Update is called once per frame
@@ -214,7 +208,7 @@ public class PlayerController : MonoBehaviour
         // Don't allow input if currently in an animation. And inspector bool is set.
         if (!m_playerAnims) return;
 
-        Animator animator = m_playerAnims.m_Anim;
+        animator = m_playerAnims.m_Anim; //TODO: is this right?
         if (animator.GetBool("AttackTrigger") && m_frozenDuringAttack)
         {
             m_AttackTimerEnabled = true;
