@@ -4019,23 +4019,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 28
       objectReference: {fileID: 0}
-    - target: {fileID: 4000012306369238, guid: bd39ea0196928834fae20e6d77b47d0a, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.5000004
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012306369238, guid: bd39ea0196928834fae20e6d77b47d0a, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.5000004
-      objectReference: {fileID: 0}
-    - target: {fileID: 23000012907880748, guid: bd39ea0196928834fae20e6d77b47d0a,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 41826b357d7f4f44988f49ce9182ed28, type: 2}
-    - target: {fileID: 1000012880599566, guid: bd39ea0196928834fae20e6d77b47d0a, type: 2}
-      propertyPath: m_TagString
-      value: StaticObject
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd39ea0196928834fae20e6d77b47d0a, type: 2}
   m_IsPrefabParent: 0
@@ -8610,6 +8593,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 0
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
@@ -10565,7 +10549,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 147054, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8cc35c570f17e984aa5866644979b0b8, type: 2}

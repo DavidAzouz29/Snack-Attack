@@ -135,16 +135,28 @@ public class CameraControl : MonoBehaviour {
         m_Camera.orthographicSize = FindRequiredSize();
     }
 
+    /// <summary>
+    /// A subtle effect that shakes the Camera when the function is called.
+    /// </summary>
+    /// <param name="a_magnitude">How big is the impact.</param>
+    /// <param name="a_attackWait">How long shall we wait before we play the effect? Used for heavy attacks.</param>
+    /// <returns></returns>
     public IEnumerator CameraShake(float a_magnitude, float a_attackWait)
     {
         yield return new WaitForSecondsRealtime(a_attackWait);
 
         float elapsed = 0.0f;
         Vector3 originalCamPos = Camera.main.transform.parent.position;
-        // Hit/ Glass Break Audio
-        AudioSource audioSource = GameManager.Instance.transform.GetChild(GameManager.iChCombat).GetChild(3).GetComponent<AudioSource>();
-        audioSource.pitch = Random.Range(0.9f, 1.1f);
-        audioSource.Play();
+        // a_attackWait is used here to determine what state we're in
+        // if it's 0 then we have just become the boss -> so don't play the glass smash
+        // otherwise we can assume we are heavy attacking and play a smash sound.
+        if (!Mathf.Approximately(a_attackWait, 0))
+        {
+            // Hit/ Glass Break Audio
+            AudioSource audioSource = GameManager.Instance.transform.GetChild(GameManager.iChCombat).GetChild(3).GetComponent<AudioSource>();
+            audioSource.pitch = Random.Range(0.9f, 1.1f);
+            audioSource.Play();
+        }
 
         while (elapsed < fCameraShakeDuration)
         {

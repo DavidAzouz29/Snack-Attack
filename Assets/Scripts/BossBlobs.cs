@@ -284,8 +284,17 @@ public class BossBlobs : MonoBehaviour
     {
         switch (a_TransitionState)
         {
+            case TransitionState.WEAK:
+                {
+                    a_anim.SetBool("Boss", false);
+                    // Use the RR Neut anims regardless of class for weak
+                    a_anim.SetInteger("AnimationClassID", 0); 
+                    break;
+                }
             case TransitionState.NEUT:
                 {
+                    a_anim.SetBool("Boss", false);
+                    // Choose the correct animations to play
                     switch (r_PlayerCon.m_eCurrentClassState)
                     {
                         //case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
@@ -294,7 +303,6 @@ public class BossBlobs : MonoBehaviour
                         case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_COOKIECRUNCH:
                         case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_RAINBOWWARRIOR:
                             {
-                                a_anim.SetBool("Boss", false);
                                 a_anim.SetInteger("AnimationClassID", 0);
                                 break;
                             }
@@ -303,13 +311,11 @@ public class BossBlobs : MonoBehaviour
                         case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_POUNDCAKE:
                         case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_ANGELCAKE:
                             {
-                                a_anim.SetBool("Boss", false);
                                 a_anim.SetInteger("AnimationClassID", 2);
                                 break;
                             }
                         default:
                             {
-                                a_anim.SetBool("Boss", false);
                                 a_anim.SetInteger("AnimationClassID", 0);
                                 break;
                             }
@@ -318,6 +324,8 @@ public class BossBlobs : MonoBehaviour
                 }
             case TransitionState.BOSS:
                 {
+                    a_anim.SetBool("Boss", true);
+                    // Choose the correct animations to play
                     switch (r_PlayerCon.m_eCurrentClassState)
                     {
                         //case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
@@ -326,7 +334,6 @@ public class BossBlobs : MonoBehaviour
                         case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_COOKIECRUNCH:
                         case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_RAINBOWWARRIOR:
                             {
-                                a_anim.SetBool("Boss", true);
                                 a_anim.SetInteger("AnimationClassID", 1);
                                 break;
                             }
@@ -335,13 +342,11 @@ public class BossBlobs : MonoBehaviour
                         case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_POUNDCAKE:
                         case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_ANGELCAKE:
                             {
-                                a_anim.SetBool("Boss", true);
                                 a_anim.SetInteger("AnimationClassID", 3);
                                 break;
                             }
                         default:
                             {
-                                a_anim.SetBool("Boss", true);
                                 a_anim.SetInteger("AnimationClassID", 1);
                                 break;
                             }
@@ -359,11 +364,12 @@ public class BossBlobs : MonoBehaviour
         m_Threshold = Thresholds.BIG;
         transform.localScale = new Vector3(m_PowerLevelScale[0], m_PowerLevelScale[0], m_PowerLevelScale[0]);
         gameObject.transform.FindChild("Boss").gameObject.SetActive(true);
-        SetAnimID(m_TransitionState, gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>());
         gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
         gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
-        gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
-        gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", true); //TODO: set above and here?
+        // Animation Animator playerAnim = 
+        gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>();
+        //playerAnim.SetBool("Boss", true); //TODO: set below and here?
+        SetAnimID(m_TransitionState, gameObject.GetComponent<PlayerAnims>().m_Anim);
         GameManager.Instance.transform.GetChild(GameManager.iChState).GetChild(0).GetComponent<AudioSource>().Play();
         // Change speed and damage.
         r_PlayerCon.SetPlayerSpeed(r_PlayerCon.bossSpeed);
@@ -388,11 +394,13 @@ public class BossBlobs : MonoBehaviour
                 m_Threshold = Thresholds.REGULAR;
                 transform.localScale = new Vector3(m_PowerLevelScale[1], m_PowerLevelScale[1], m_PowerLevelScale[1]);
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
-                SetAnimID(m_TransitionState, gameObject.transform.FindChild("Boss").gameObject.GetComponent<Animator>());
-                gameObject.transform.FindChild("Neut").gameObject.SetActive(true);
-                gameObject.transform.FindChild("Neut").gameObject.GetComponent<Animator>().SetBool("Boss", false);
+                GameObject goNeut = gameObject.transform.FindChild("Neut").gameObject;
+                goNeut.SetActive(true);
+                Animator animNeut = goNeut.GetComponent<Animator>();
+                animNeut.SetBool("Boss", false); //TODO: needed?
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
-                gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
+                gameObject.GetComponent<PlayerAnims>().m_Anim = animNeut;
+                SetAnimID(m_TransitionState, gameObject.GetComponent<PlayerAnims>().m_Anim);
                 GameManager.Instance.transform.GetChild(GameManager.iChState).GetChild(1).GetComponent<AudioSource>().Play();
                 // Change speed and damage.
                 r_PlayerCon.SetPlayerSpeed(r_PlayerCon.neutSpeed);
@@ -406,8 +414,8 @@ public class BossBlobs : MonoBehaviour
                 gameObject.transform.FindChild("Boss").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(false);
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(true);
-                SetAnimID(m_TransitionState, gameObject.transform.FindChild("Weak").gameObject.GetComponent<Animator>());//.SetBool("Boss", false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
+                SetAnimID(m_TransitionState, gameObject.GetComponent<PlayerAnims>().m_Anim);//.SetBool("Boss", false);
                 GameManager.Instance.transform.GetChild(GameManager.iChState).GetChild(1).GetComponent<AudioSource>().Play();
                 // Change speed and damage.
                 r_PlayerCon.SetPlayerSpeed(r_PlayerCon.weakSpeed);
@@ -579,6 +587,7 @@ public class BossBlobs : MonoBehaviour
                 gameObject.transform.FindChild("Neut").gameObject.SetActive(true);
                 gameObject.transform.FindChild("Neut").gameObject.GetComponent<Animator>().SetBool("Boss", false);
                 gameObject.transform.FindChild("Weak").gameObject.SetActive(false);
+                gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Neut").gameObject.GetComponent<Animator>();
                 gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", false);
                 gameObject.GetComponent<PlayerAnims>().m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
                 //m_ModelMeshRenderers = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -740,9 +749,9 @@ public class BossBlobs : MonoBehaviour
         gameObject.transform.FindChild("Neut").gameObject.SetActive(isNeut);
         gameObject.transform.FindChild("Weak").gameObject.SetActive(!isNeut);
 
-        SetAnimID(m_TransitionState, GetComponentInChildren<Animator>());//.SetBool("Boss", false);
-        gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", false);
         gameObject.GetComponent<PlayerAnims>().m_Anim = GetComponentInChildren<Animator>();
+        //gameObject.GetComponent<PlayerAnims>().m_Anim.SetBool("Boss", false);
+        SetAnimID(m_TransitionState, gameObject.GetComponent<PlayerAnims>().m_Anim);//.SetBool("Boss", false);
         m_Invulnerable = true;
         // Switch sprite to "hit" momentarily and switch back
         StartCoroutine(r_UILevel.UpdateIcon(iPlayerID, m_TransitionState, false));
