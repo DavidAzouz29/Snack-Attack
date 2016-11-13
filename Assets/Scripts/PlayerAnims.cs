@@ -18,7 +18,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class PlayerAnims : MonoBehaviour {
+public class PlayerAnims : MonoBehaviour
+{
 
     public Animator m_Anim;
     public BossBlobs.TransitionState m_TransitionState; //TODO ADD BOSS ATTACKS
@@ -28,8 +29,8 @@ public class PlayerAnims : MonoBehaviour {
     private Vector3 m_PreviousPos;
 
     void Awake()
-    { 
-}
+    {
+    }
 
     void Start()
     {
@@ -39,60 +40,60 @@ public class PlayerAnims : MonoBehaviour {
         m_isJumping = false;
         m_PreviousPos = transform.position;
         m_isLeftAttacking = true;
-    /*}
-    void Awake()
-    {
-      //OnLevelWasLoaded();
-    }
+        /*}
+        void Awake()
+        {
+          //OnLevelWasLoaded();
+        }
 
-    void OnLevelWasLoaded()
-    {
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        { */
-            switch (m_TransitionState)
-            {
-                case BossBlobs.TransitionState.BOSS:
+        void OnLevelWasLoaded()
+        {
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+            { */
+        switch (m_TransitionState)
+        {
+            case BossBlobs.TransitionState.BOSS:
+                {
+                    m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
+
+                    switch (GameSettings.Instance.players[m_PC.GetPlayerID()].eBaseClassState)
                     {
-                        m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
-
-                        switch (GameSettings.Instance.players[m_PC.GetPlayerID()].eBaseClassState)
-                        {
-                            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
-                                {
-                                    m_Anim.SetInteger("AnimationClassID", 1);
-                                    break;
-                                }
-                            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
-                                {
-                                    m_Anim.SetInteger("AnimationClassID", 3);
-                                    break;
-                                }
-                        }
-                        break;
+                        case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
+                            {
+                                m_Anim.SetInteger("AnimationClassID", 1);
+                                break;
+                            }
+                        case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
+                            {
+                                m_Anim.SetInteger("AnimationClassID", 3);
+                                break;
+                            }
                     }
-                case BossBlobs.TransitionState.NEUT:
-                    {
-                        m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
-
-                        switch (GameSettings.Instance.players[m_PC.GetPlayerID()].eBaseClassState)
-                        {
-                            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
-                                {
-                                    m_Anim.SetInteger("AnimationClassID", 0);
-                                    break;
-                                }
-                            case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
-                                {
-                                    m_Anim.SetInteger("AnimationClassID", 2);
-                                    break;
-                                }
-                        }
-                        break;
-                    }
-                case BossBlobs.TransitionState.WEAK:
-                    m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
                     break;
-            }
+                }
+            case BossBlobs.TransitionState.NEUT:
+                {
+                    m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
+
+                    switch (GameSettings.Instance.players[m_PC.GetPlayerID()].eBaseClassState)
+                    {
+                        case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
+                            {
+                                m_Anim.SetInteger("AnimationClassID", 0);
+                                break;
+                            }
+                        case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
+                            {
+                                m_Anim.SetInteger("AnimationClassID", 2);
+                                break;
+                            }
+                    }
+                    break;
+                }
+            case BossBlobs.TransitionState.WEAK:
+                m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
+                break;
+        }
         m_Anim.SetTrigger("AnimationClassIDChange");
         //}
     }
@@ -103,45 +104,45 @@ public class PlayerAnims : MonoBehaviour {
         {
             case BossBlobs.TransitionState.BOSS:
                 {
-                m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
+                    m_Anim = gameObject.transform.FindChild("Boss").GetComponent<Animator>();
 
-                switch (GameSettings.Instance.players[m_PC.GetPlayerID()].eBaseClassState)
-                {
-                    case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
-                        {
-                            m_Anim.SetInteger("AnimationClassID", 1);
-                            break;
-                        }
-                    case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
-                        {
-                            m_Anim.SetInteger("AnimationClassID", 3);
-                            break;
-                        }
+                    switch (GameSettings.Instance.players[m_PC.GetPlayerID()].eBaseClassState)
+                    {
+                        case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
+                            {
+                                m_Anim.SetInteger("AnimationClassID", 1);
+                                break;
+                            }
+                        case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
+                            {
+                                m_Anim.SetInteger("AnimationClassID", 3);
+                                break;
+                            }
+                    }
+                    break;
                 }
-                break;
-            }
             case BossBlobs.TransitionState.NEUT:
                 {
-                m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
+                    m_Anim = gameObject.transform.FindChild("Neut").GetComponent<Animator>();
 
-                switch (GameSettings.Instance.players[m_PC.GetPlayerID()].eBaseClassState)
-                {
-                    case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
-                        {
-                            m_Anim.SetInteger("AnimationClassID", 0);
-                            break;
-                        }
-                    case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
-                        {
-                            m_Anim.SetInteger("AnimationClassID", 2);
-                            break;
-                        }
+                    switch (GameSettings.Instance.players[m_PC.GetPlayerID()].eBaseClassState)
+                    {
+                        case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_ROCKYROAD:
+                            {
+                                m_Anim.SetInteger("AnimationClassID", 0);
+                                break;
+                            }
+                        case PlayerBuild.E_BASE_CLASS_STATE.E_BASE_CLASS_STATE_PRINCESSCAKE:
+                            {
+                                m_Anim.SetInteger("AnimationClassID", 2);
+                                break;
+                            }
+                    }
+                    break;
                 }
-                break;
-            }
             case BossBlobs.TransitionState.WEAK:
                 m_Anim = gameObject.transform.FindChild("Weak").GetComponent<Animator>();
-            break;
+                break;
         }
     }
 
@@ -149,34 +150,52 @@ public class PlayerAnims : MonoBehaviour {
     {
         if (!m_Anim.enabled) return;
 
-        if (Input.GetButtonDown(m_PC.Attack1) && !m_Anim.GetBool("AttackTrigger"))
+        if (Input.anyKey)
         {
+            if (Input.GetButtonDown(m_PC.Attack1) && !m_Anim.GetBool("AttackTrigger"))
+            {
 
-            if (m_isLeftAttacking)
-            {
-                AttackAnim1Left();
+                if (m_isLeftAttacking)
+                {
+                    AttackAnim1Left();
+                }
+                else
+                {
+                    AttackAnim1Right();
+                }
+                m_isLeftAttacking = !m_isLeftAttacking;
+                m_Walking = false;
             }
-            else
+            if (Input.GetButtonDown(m_PC.Attack2) && !m_Anim.GetBool("AttackTrigger"))
             {
-                AttackAnim1Right();
+                AttackAnim2();
             }
-            m_isLeftAttacking = !m_isLeftAttacking;
+            if (m_PC.m_Moving)
+            {
+                m_Walking = true;
+            }
+            if (Input.GetButtonDown(m_PC.Block) && !m_Anim.GetBool("Blocking"))
+            {
+                m_Anim.SetTrigger("BlockStart");
+                m_Anim.SetBool("Blocking", true);
+            }
+            // if we are blocking
+            if (Input.GetButtonDown(m_PC.Block) && m_Anim.GetBool("Blocking"))
+            {
+                m_Anim.SetBool("Blocking", true);
+            }
         }
-        if (Input.GetButtonDown(m_PC.Attack2) && !m_Anim.GetBool("AttackTrigger"))
+        else
         {
-            AttackAnim2();
+            // Stop Blocking if no input is received
+            if (!m_PC.m_Blocking && m_Anim.GetBool("Blocking"))
+            {
+                m_Anim.SetBool("Blocking", false);
+                m_Anim.SetTrigger("BlockEnd");
+            }
         }
-        if (Input.GetButtonDown(m_PC.Block) && !m_Anim.GetBool("Blocking"))
-        {
-            m_Anim.SetTrigger("BlockStart");
-            m_Anim.SetBool("Blocking", true);
-        }
-        if (Input.GetButtonUp(m_PC.Block) && m_Anim.GetBool("Blocking"))
-        {
-            m_Anim.SetTrigger("BlockEnd");
-            m_Anim.SetBool("Blocking", false);
-        }
-        if (!gameObject.GetComponent<PlayerController>().isOnGround)
+        // Not on ground
+        if (!m_PC.isOnGround)
         {
             m_isJumping = true;
         }
@@ -203,16 +222,16 @@ public class PlayerAnims : MonoBehaviour {
         // extra check is for our jump animation
         float fDis = Vector2.Distance(new Vector2(m_PreviousPos.x, m_PreviousPos.z), new Vector2(transform.position.x, transform.position.z));
         float fLength = 0.05f;
-        if(m_TransitionState == BossBlobs.TransitionState.BOSS)
+        if (m_TransitionState == BossBlobs.TransitionState.BOSS)
         {
             fLength = 0.03f;
         }
-        if (fDis > fLength && !m_Walking 
+        if (fDis > fLength && !m_Walking
             && (m_PreviousPos.y - transform.position.y) < 0.5f)
         {
             m_Anim.SetBool("Walking", true);
             m_Anim.SetBool("Idling", false);
-            m_Walking = true;
+            //m_Walking = true;
         }
     }
     void IdleToJump()
@@ -277,7 +296,7 @@ public class PlayerAnims : MonoBehaviour {
     {
         m_Anim.SetBool("Attack1Left", true);
         m_Anim.SetBool("Attacking1Left", true);
-        m_Anim.SetBool("AttackTrigger", true);       
+        m_Anim.SetBool("AttackTrigger", true);
     }
     void AttackAnim1Right()
     {
@@ -311,5 +330,5 @@ public class PlayerAnims : MonoBehaviour {
         m_Anim.SetBool("Jumping", false);
         m_Anim.SetBool("Walking", true);
         m_isJumping = false;
-    } 
+    }
 }
