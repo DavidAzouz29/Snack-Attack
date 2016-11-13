@@ -11,6 +11,7 @@
 /// http://itween.pixelplacement.com/documentation.php
 /// http://blog.pastelstudios.com/2015/09/07/unity-tips-tricks-multiple-event-systems-single-scene-unity-5-1/
 /// 2D Arrays on Inspector https://youtu.be/uoHc-Lz9Lsc 
+/// http://answers.unity3d.com/questions/820599/simulate-button-presses-through-code-unity-46-gui.html
 /// *Edit*
 /// - Player Select almost happening with individual controllers - David Azouz 28/08/2016
 /// - Cleaned up and unified Player Selection - David Azouz 15/10/2016
@@ -23,7 +24,7 @@
 /// ----------------------------------
 
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 //using System.Linq;
@@ -39,6 +40,7 @@ public class PlayerSelect : MonoBehaviour
 	public Button c_LevelSelect;
 
     private bool hasAllPlayersSelected = false;
+    bool hasBeenSelected = false;
 
     delegate void OnLevelFinishedLoading();
     OnLevelFinishedLoading m_OnLevelFinishedLoading;
@@ -73,20 +75,29 @@ public class PlayerSelect : MonoBehaviour
         // if all characters haven't confimed their selection
         if (!hasAllPlayersSelected)
         {
-            //RECODE: allow for AI players //if (!GameSettings.Instance.players[i].isReady)
+            //RECODE: allow for AI players
             // if player 1 is ready 
-            if (GameSettings.Instance.players[0].isReady)
+            if (!hasBeenSelected)
             {
-                StartCoroutine(PlayerReadyWait());
+                if (GameSettings.Instance.players[0].isReady)
+                {
+                    StartCoroutine(PlayerReadyWait());
+                }
             }
-            //hasAllPlayersSelected = true;
 
-        }
-        // All players are ready
-        else
-        {
-            LevelSelect(true);
-
+            // Checks if all players are ready...
+            if (GameSettings.Instance.players.TrueForAll(player => player.isReady == true))
+            {
+                // proceed to LS screen
+                hasAllPlayersSelected = true;
+                LevelSelect(true);
+            }
+            // ...else/ if a player decides they're not ready
+            else
+            {
+                hasAllPlayersSelected = false;
+                //LevelSelect(false);
+            }
         }
 	}
 
@@ -95,8 +106,12 @@ public class PlayerSelect : MonoBehaviour
     {
         yield return new WaitForSeconds(fWaitForNextInteractable);
         c_LevelSelect.interactable = true;
-        c_BackButton.Select(); // used to restart Level Select Anim
-        c_LevelSelect.Select();
+        if (!hasBeenSelected)
+        {
+            c_BackButton.Select(); // used to restart Level Select Anim
+            c_LevelSelect.Select();
+            hasBeenSelected = true;
+        }
         yield return null;
     }
 
@@ -121,9 +136,13 @@ public class PlayerSelect : MonoBehaviour
 
     void LevelSelect(bool a_isActive)
 	{
-        c_LevelSelect.interactable = a_isActive;// !c_LevelSelect.interactable;
-		c_LevelSelect.Select();
-		// confirm (click)
+        c_LevelSelect.interactable = a_isActive;
+        if (a_isActive)
+        {
+            c_LevelSelect.Select();
+            // confirm (click)
+            ExecuteEvents.submitHandler(c_LevelSelect, new BaseEventData(FindObjectOfType<EventSystem>())); //TODO: EventSystem.current
+        }
 	}
 
     public void PlayerSelectPanel(bool isActive)

@@ -215,6 +215,7 @@ public class BossBlobs : MonoBehaviour
 
     void Update()
     {
+        //Profiler.BeginSample("BB: Update");
         if (r_PlayerCon.GetHitStop()) return;
 
         if (m_Power <= 0 && !m_Respawned)
@@ -278,6 +279,7 @@ public class BossBlobs : MonoBehaviour
             UnityEditor.EditorApplication.isPaused = true;
         }
 #endif
+        //Profiler.EndSample();
     }
 
     void SetAnimID(TransitionState a_TransitionState, Animator a_anim)
