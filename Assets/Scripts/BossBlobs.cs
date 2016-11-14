@@ -56,7 +56,6 @@ public class BossBlobs : MonoBehaviour
 
     private Killbox m_Killbox;
     private bool activeWeaponCheck;
-    private int m_KillCounter = 1;
 
     //Emission Color Varriables
     // When hit
@@ -771,12 +770,9 @@ public class BossBlobs : MonoBehaviour
         asClip.Play();
 
         // Game objects that are tagged
-        GameObject.FindGameObjectWithTag("Player " + //TODO: clean up
-            _col.gameObject.GetComponentInParent<PlayerController>().GetPlayerID()
-            + " Score").GetComponent<Text>().text = m_KillCounter.ToString();
-        m_KillCounter++;
-        //Debug.Log(m_KillCounter);
-        GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<ScoreManager>().ChangeScore(gameObject.GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
+        GameObject.FindGameObjectWithTag("Player " + _colPlayerCon.GetPlayerID() //TODO: clean up
+            + " Score").GetComponent<Text>().text = myScore.GetScore(_colPlayerCon.m_PlayerTag, "kills").ToString();// m_KillCounter.ToString();
+        myScore.ChangeScore(GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
     }
 
     public void ApplyDamage(Collider _col)
