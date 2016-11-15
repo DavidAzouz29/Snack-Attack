@@ -42,16 +42,13 @@ public class PlayerSelect : MonoBehaviour
     private bool hasAllPlayersSelected = false;
     bool hasBeenSelected = false;
 
-    delegate void OnLevelFinishedLoading();
-    OnLevelFinishedLoading m_OnLevelFinishedLoading;
-
     // Use this for initialization
     void Start () //TODO: Awake?
 	{
-        OnLevelWasLoaded();
+        ResetCharacters();
     }
 
-    void OnLevelWasLoaded()
+    void ResetCharacters()
     {
         if (gameObject.activeSelf)
         {
@@ -115,25 +112,6 @@ public class PlayerSelect : MonoBehaviour
         yield return null;
     }
 
-    /*void OnEnable()
-    {
-        //Tell our 'OnLevelFinishedLoading' function to start listening for a scene change as soon as this script is enabled.
-        //SceneManager.sceneLoaded += OnLevelFinishedLoading;
-    }
-
-    void OnDisable()
-    {
-        //Tell our 'OnLevelFinishedLoading' function to stop listening for a scene change as soon as this script is disabled. Remember to always have an unsubscription for every delegate you subscribe to!
-        //SceneManager.sceneLoaded -= OnLevelFinishedLoading;
-    }
-
-    UnityEngine.Event OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
-    {
-        Debug.Log("Level Loaded");
-        Debug.Log(scene.name);
-        Debug.Log(mode);
-    }*/
-
     void LevelSelect(bool a_isActive)
 	{
         c_LevelSelect.interactable = a_isActive;
@@ -155,7 +133,7 @@ public class PlayerSelect : MonoBehaviour
             GameManager.Instance.PlayAudioClip(2, 1);
         }
         // Reset characters
-        OnLevelWasLoaded();
+        ResetCharacters();
 
     }
 

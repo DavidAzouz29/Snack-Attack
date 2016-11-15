@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010620411994}
   - 114: {fileID: 11408802}
-  - 114: {fileID: 11491296}
   - 114: {fileID: 11440896}
   - 114: {fileID: 11482456}
   m_Layer: 0
@@ -109,23 +108,6 @@ MonoBehaviour:
   m_shakeAmount: 0.5
   m_frozenDuringAttack: 1
   m_AttackDistanceSpeed: 0.3
---- !u!114 &11491296
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a86d698baa9bf6438183b16356d8632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TimeRemaining: 0
-  m_RoundCountdownTime: 5
-  m_PlayerCount: 0
-  m_PlayerManager: {fileID: 0}
-  m_ScoreBoardWindow: {fileID: 0}
-  c_CountdownText: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

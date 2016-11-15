@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af54802cd8f9b847bf6cd01044cab2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r_RoundTimer: {fileID: 0}
+  r_RoundTimer: {fileID: 114000011095189248}
   r_PlayerScoresText:
   - {fileID: 11406468}
   - {fileID: 11468192}
@@ -1389,6 +1389,7 @@ GameObject:
   - 222: {fileID: 222000013553899342}
   - 114: {fileID: 114000010678168694}
   - 114: {fileID: 114000010473535166}
+  - 114: {fileID: 114000011095189248}
   m_Layer: 4
   m_Name: TimerText
   m_TagString: Untagged
@@ -1513,6 +1514,22 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 1:00
+--- !u!114 &114000011095189248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011022932892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a86d698baa9bf6438183b16356d8632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TimeRemaining: 0
+  m_RoundCountdownTime: 5
+  m_PlayerCount: 0
+  m_PlayerManager: {fileID: 0}
+  m_ScoreBoardWindow: {fileID: 0}
 --- !u!114 &114000013013270750
 MonoBehaviour:
   m_ObjectHideFlags: 1

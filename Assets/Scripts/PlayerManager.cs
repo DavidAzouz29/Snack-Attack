@@ -87,16 +87,17 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     void Start ()
     {
         m_GameManager = GameManager.Instance; // GetComponentInParent<GameManager>();
-        OnLevelWasLoaded();
+        SceneManager.activeSceneChanged += ResetManager;
+        ResetManager(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
     }
 
-    void OnLevelWasLoaded()
+    void ResetManager(UnityEngine.SceneManagement.Scene a_sceneFrom, UnityEngine.SceneManagement.Scene a_sceneTo)
     {
         // Return to Menu more than Splash
-        if (SceneManager.GetActiveScene().buildIndex != Scene.Menu)
+        if (a_sceneTo.buildIndex != Scene.Menu)
         {
         // Not the splash screen
-            if (SceneManager.GetActiveScene().buildIndex != 0)
+            if (a_sceneTo.buildIndex != 0)
             {
                 m_SpawnManager = FindObjectOfType<SpawnManager>();
                 m_PlayerSpawns = m_SpawnManager.m_PlayerSpawns;

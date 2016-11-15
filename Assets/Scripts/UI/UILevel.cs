@@ -32,7 +32,6 @@ public class UILevel : MonoBehaviour {
     void Awake()
     {
         r_GameManager = FindObjectOfType<GameManager>(); // TODO: use GameManager.Instance
-        r_RoundTimer = r_GameManager.GetComponent<RoundTimer>();
         r_AudioCountdown = r_GameManager.transform.GetChild(GameManager.iChInGame);
         // Countdown Audio
         r_AudioCountdown.GetChild(iAudioSlotCountDown).GetComponent<AudioSource>().Play();
