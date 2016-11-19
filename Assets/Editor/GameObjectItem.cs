@@ -22,49 +22,51 @@ using UnityEditor;
 
 public class GameObjectItem : Editor
 {
+    static void AddPrebab(string a_prefab)
+    {
+        Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/" + a_prefab + ".prefab", typeof(GameObject));
+        GameObject obj = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+        // you may now modify the game object
+        obj.transform.position = Vector3.one;
+        Selection.activeGameObject = obj;
+    }
+
     [MenuItem("Player Game Object/Add Player RockyRoad")]
     public static void AddPlayerRockyRoadToScene()
     {
-        Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/RockyRoad.prefab", typeof(GameObject));
-        GameObject obj = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-        // you may now modify the game object
-        obj.transform.position = Vector3.one;
-		Selection.activeGameObject = obj;
+        string player = "RockyRoad";
+        AddPrebab(player);
     }
-    [MenuItem("Player Game Object/Add Player BroccoLION")]
-    public static void AddPlayerBroccoLIONToScene()
+    [MenuItem("Player Game Object/Add Player PrincessCake")]
+    public static void AddPlayerPrincessCakeToScene()
     {
-        Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/BroccoLION.prefab", typeof(GameObject));
-        GameObject obj = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-        // you may now modify the game object
-        obj.transform.position = Vector3.one;
-        Selection.activeGameObject = obj;
+        string player = "PrincessCake";
+        AddPrebab(player);
     }
-    [MenuItem("Player Game Object/Add Player Watermelomon")]
-    public static void AddPlayerWatermelomonToScene()
+
+    // Weapons/ PlayerCollision
+    [MenuItem("Player Game Object/Select Weapons on Players")]
+    public static void SelectWeaponsOnPlayers()
     {
-        Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Watermelomon.prefab", typeof(GameObject));
-        GameObject obj = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-        // you may now modify the game object
-        obj.transform.position = Vector3.one;
-        Selection.activeGameObject = obj;
+        PlayerCollision[] weapons = FindObjectsOfType<PlayerCollision>();
+        // If our players are turned off.
+        if (weapons.Length == 0)
+        {
+            Debug.Log("You must turn on each <b>Player</b> first.");
+        }
+        else
+        {
+            Debug.Log("Don't forget to <b>Apply</b> each Player prefab when complete.");
+        }
+        Selection.objects = weapons;
     }
-    [MenuItem("Player Game Object/Add Player KataTea")]
-    public static void AddPlayerKataTeaToScene()
+    [MenuItem("Player Game Object/Open Weapons on Players")]
+    public static void OpenWeaponsOnPlayers()
     {
-        Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/KataTea.prefab", typeof(GameObject));
-        GameObject obj = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-        // you may now modify the game object
-        obj.transform.position = Vector3.one;
-        Selection.activeGameObject = obj;
-    }
-    [MenuItem("Player Game Object/Add Bolt")]
-    public static void AddBoltToScene()
-    {
-        Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Bolt.prefab", typeof(GameObject));
-        GameObject obj = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-        // you may now modify the game object
-        obj.transform.position = Vector3.one;
-		Selection.activeGameObject = obj;
+        PlayerCollision[] weapons = FindObjectsOfType<PlayerCollision>();
+        foreach (PlayerCollision weapon in weapons)
+        {
+            Selection.activeGameObject = weapon.gameObject;
+        }
     }
 }

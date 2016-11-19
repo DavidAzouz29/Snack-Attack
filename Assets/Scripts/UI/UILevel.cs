@@ -80,10 +80,10 @@ public class UILevel : MonoBehaviour {
                 c_timer.enabled = true;
                 Time.timeScale = 1.0f;
                 // Enable movement. Read the comment for disabling movement.
-                for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
+                /*for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
                 {
                     r_GameManager.r_PlayerManager.GetPlayer(i).GetComponent<PlayerController>().enabled = true;
-                }
+                }*/
             }
             timer = m_countDownDelay;
             if (m_countDown == 0)

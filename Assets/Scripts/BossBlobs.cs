@@ -791,7 +791,7 @@ public class BossBlobs : MonoBehaviour
         gameObject.GetComponent<PlayerAnims>().m_Anim.SetTrigger("Hit");
 
         //Apply Damage
-        m_Power = m_Power - otherPlayerPlayerCollision.damage; // Power - Damage recieved
+        m_Power = m_Power - (int)otherPlayerPlayerCollision.damage; // Power - Damage recieved
         // Switch sprite to "hit" momentarily and switch back
         StartCoroutine(r_UILevel.UpdateIcon(iPlayerID, _col.GetComponentInParent<BossBlobs>().m_TransitionState, false));
         if (m_Power < m_CurrentThreshold)

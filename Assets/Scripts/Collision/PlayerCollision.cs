@@ -18,8 +18,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerCollision : MonoBehaviour {
+    const string sTip = "Use 'x' for Light Attacks, and 'y' for Heavy.";
+    [Header("Damage: " + sTip)]
+    [Tooltip(sTip)]
+    public Vector2 v2WeakDamage = new Vector2(15.0f, 25.0f);
+    public Vector2 v2NeutDamage = new Vector2(25.0f, 35.0f);
+    public Vector2 v2BossDamage = new Vector2(35.0f, 45.0f);
+    public float damage; // will be cast as an int (Line 794 in Boss Blobs)
 
-    public int damage;
     public bool weaponIsActive;
     public bool isHeavyAttack;
     public Transform m_ParentTransform;
@@ -45,7 +51,7 @@ public class PlayerCollision : MonoBehaviour {
                 weaponIsActive = false;
                 c_TrailRenderer = GetComponent<TrailRenderer>();
                 iPlayerID = GetComponentInParent<PlayerController>().GetPlayerID();
-                players = GameSettings.Instance.players[(int)iPlayerID];
+                players = GameSettings.Instance.players[iPlayerID];
                 r_BossBlobs = GetComponentInParent<BossBlobs>();
             }
         }
@@ -60,6 +66,26 @@ public class PlayerCollision : MonoBehaviour {
             // Emissive map //[(int)eTransitionState]
             c_SMR.sharedMaterial.SetTexture("_EmissionMap", players.Brain.GetEmissionMaps()[(int)r_BossBlobs.m_TransitionState]);
             c_SMR.sharedMaterial.SetColor("_EmissionColor", players.Color);
+
+            // Light Attack Damage
+            switch (r_BossBlobs.m_TransitionState)
+            {
+                case BossBlobs.TransitionState.WEAK:
+                    {
+                        damage = v2WeakDamage.x;
+                        break;
+                    }
+                case BossBlobs.TransitionState.NEUT:
+                    {
+                        damage = v2NeutDamage.x;
+                        break;
+                    }
+                case BossBlobs.TransitionState.BOSS:
+                    {
+                        damage = v2BossDamage.x;
+                        break;
+                    }
+            }
         }
         else if(isHeavyAttack)
         {
@@ -67,6 +93,26 @@ public class PlayerCollision : MonoBehaviour {
             PunchEffects(true);
             c_SMR.sharedMaterial.SetTexture("_EmissionMap", players.Brain.GetEmissionMaps()[(int)r_BossBlobs.m_TransitionState]);
             c_SMR.sharedMaterial.SetColor("_EmissionColor", players.Color);
+
+            // Heavy Attack Damage
+            switch (r_BossBlobs.m_TransitionState)
+            {
+                case BossBlobs.TransitionState.WEAK:
+                    {
+                        damage = v2WeakDamage.y;
+                        break;
+                    }
+                case BossBlobs.TransitionState.NEUT:
+                    {
+                        damage = v2NeutDamage.y;
+                        break;
+                    }
+                case BossBlobs.TransitionState.BOSS:
+                    {
+                        damage = v2BossDamage.y;
+                        break;
+                    }
+            }
         }
 
         if (m_TimerEnabled)
