@@ -12,7 +12,7 @@ using System.Linq;
 
 public class ScoreManager : MonoBehaviour {
 
-	Dictionary< string, Dictionary<string, int> > playerScores;
+    Dictionary<string, Dictionary<string, int>> playerScores;
 	int changeCounter = -1;
     private string[] namesOgOrder = new string[PlayerManager.MAX_PLAYERS]; // used for colors on the scoreboard
 
@@ -23,15 +23,9 @@ public class ScoreManager : MonoBehaviour {
         //Player Setup
         for (int i = 0; i < PlayerManager.MAX_PLAYERS; i++)
         {
-            string sPlayerTag = GameSettings.Instance.players[i].sPlayerTag;
-            // If two or more players choose the same character...
-            if (playerScores.ContainsKey(sPlayerTag))
-            {
-                // add a number to the end of the name
-                sPlayerTag += " " + (i % PlayerManager.MAX_PLAYERS);
-                // set the name to the new name
-                GameSettings.Instance.players[i].sPlayerTag = sPlayerTag;
-            }
+            // This is used so two characters don't share the same name.
+            string sPlayerTag = "P" + (i + 1) + " " + GameSettings.Instance.players[i].ClassName; // sPlayerTag;
+            
             SetScore(sPlayerTag, "kills", 0);
             SetScore(sPlayerTag, "deaths", 0);
         }
@@ -116,7 +110,6 @@ public class ScoreManager : MonoBehaviour {
             //Player Setup
             SetScore("Player "+ (i+ 1), "kills", 0);
             SetScore("Player " + (i + 1), "deaths", 0);
-            SetScore("Player " + (i + 1), "assists", 0);
         }
     } */
 

@@ -48,12 +48,10 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
     //----------------------------------
     // PRIVATE VARIABLES
     //----------------------------------
-    //Vector3 v3PlayerPosition = Vector3.zero;
     private GameObject r_Player; // temp
 
     private List<GameObject> m_PlayerSpawns;
 
-    //private bool isFirstTime = true;
     private GameManager m_GameManager;
     private SpawnManager m_SpawnManager;
     private CameraControl m_CameraControl;
@@ -254,25 +252,8 @@ public class PlayerManager : MonoBehaviour//TOOD:, IClass
             r_PlayerController = ((GameObject)j).GetComponent<PlayerController>();
             r_PlayerController.SetPlayerID(i);
             sPlayerTags[i] = m_SnackBrains[i].GetPlayerTag();
-            sPlayerTag = sPlayerTags[i];
-
-            /*if (isFirstTime)
-            {
-                sPlayerTags[0] = sPlayerTag; //TODO: will not work for two RR and two PC?
-                isFirstTime = false;
-            }
-            else
-            {
-                foreach (string playerTag in sPlayerTags)
-                {
-                    if (sPlayerTag == playerTag) //sPlayerTag.Contains(playerTag)
-                    {
-                        sPlayerTag = sPlayerTag + " " + ((i % MAX_PLAYERS));
-                        sPlayerTags[i] = sPlayerTag;
-                        break;
-                    }
-                }
-            }*/
+            sPlayerTag = "P" + (i + 1) + " " + sPlayerTags[i];
+            
             m_SnackBrains[(int)i].SetPlayerTag(sPlayerTag);
             r_PlayerController.SetPlayerTag(sPlayerTag);
 
