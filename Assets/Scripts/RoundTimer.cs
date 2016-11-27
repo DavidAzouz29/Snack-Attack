@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 public class RoundTimer : MonoBehaviour {
 
-    private float m_TimePerRound = 180.0f;
+    //private float m_TimePerRound = 180.0f;
 
     [SerializeField]
     private float m_TimeRemaining;
@@ -34,7 +34,7 @@ public class RoundTimer : MonoBehaviour {
     void Awake()
     {
         m_ScoreBoardWindow = FindObjectOfType<WindowManager>().gameObject;
-        m_TimeRemaining = m_TimePerRound;
+        m_TimeRemaining = 180.0f;// m_TimePerRound;
         m_Spawned = false;
         m_RoundStarted = true;
     }
@@ -42,7 +42,7 @@ public class RoundTimer : MonoBehaviour {
     void Start()
     {
         m_PlayerManager = PlayerManager.Instance;
-        m_TimeRemaining = GameSettings.Instance.iRoundTimerChoice;
+        SetTimerSelection(GameManager.Instance.m_ActiveGameSettings.iRoundTimerChoice);
     }
 
     void Update()
@@ -112,28 +112,24 @@ public class RoundTimer : MonoBehaviour {
             // One minute
             case 0:
                 {
-                    //GameSettings.Instance.SetRoundTimer(60);
-                    m_TimePerRound = 60.0f;
+                    m_TimeRemaining = 60.0f;
                     break;
                 }
             // Three Minutes
             case 1:
                 {
-                    //GameSettings.Instance.SetRoundTimer(180); Debug.Log("MS.cs Time Sel: " + GameSettings.Instance.iRoundTimerChoice);
-                    m_TimePerRound = 180.0f;
+                    m_TimeRemaining = 180.0f;
                     break;
                 }
             // Five Minutes
             case 2:
                 {
-                    //GameSettings.Instance.SetRoundTimer(300);
-                    m_TimePerRound = 300.0f;
+                    m_TimeRemaining = 300.0f;
                     break;
                 }
             default:
                 {
-                    //GameSettings.Instance.SetRoundTimer(60);
-                    m_TimePerRound = 60.0f;
+                    m_TimeRemaining = 180.0f;
                     break;
                 }
         }
