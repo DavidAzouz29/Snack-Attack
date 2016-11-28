@@ -18,6 +18,9 @@ public class MainMenuController : MonoBehaviour
     public Text[] LoadingBarTexts = new Text[3];
     public Slider c_LoadingBarSlider;
 
+    // hack used for joystick selecting level twice
+    private bool isFirstTimePlayed = false;
+
     //public UnityEngine.UI.Button PanelSwitcher;
     //public GameObject PlayersPanel;
     //public GameObject SettingsPanel;
@@ -39,7 +42,8 @@ public class MainMenuController : MonoBehaviour
 
     void Start ()
     {
-        if(GameSettingsTemplate == null)
+        isFirstTimePlayed = false;
+        if (GameSettingsTemplate == null)
         {
             GameSettingsTemplate = GameManager.Instance.m_ActiveGameSettings;// GameSettings.Instance;
         }
@@ -105,16 +109,20 @@ public class MainMenuController : MonoBehaviour
 
     public void Play()
     {
-        string sPath = "";
+        if (!isFirstTimePlayed)
+        {
+            string sPath = "";
 #if UNITY_EDITOR
-        sPath = SavedSettingsPathEditor;
+            sPath = SavedSettingsPathEditor;
 #else
                 sPath = SavedSettingsPath;
 #endif
-        GameSettings.Instance.SaveToJSON(sPath);
-        GameState.CreateFromSettings(GameSettings.Instance);
-        //SceneManager.LoadScene(this.GetComponent<MenuScript>().GetLevelSelection(), LoadSceneMode.Single);
-        StartCoroutine(AsynchronousLoad(this.GetComponent<MenuScript>().GetLevelSelection()));
+            GameSettings.Instance.SaveToJSON(sPath);
+            GameState.CreateFromSettings(GameSettings.Instance);
+            //SceneManager.LoadScene(this.GetComponent<MenuScript>().GetLevelSelection(), LoadSceneMode.Single);
+            StartCoroutine(AsynchronousLoad(this.GetComponent<MenuScript>().GetLevelSelection()));
+            isFirstTimePlayed = true;
+        }
     }
 
 	public Color GetNextColor(Color color)

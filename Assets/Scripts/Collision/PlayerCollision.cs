@@ -21,9 +21,9 @@ public class PlayerCollision : MonoBehaviour {
     const string sTip = "Use 'x' for Light Attacks, and 'y' for Heavy.";
     [Header("Damage: " + sTip)]
     [Tooltip(sTip)]
-    public Vector2 v2WeakDamage = new Vector2(15.0f, 25.0f);
-    public Vector2 v2NeutDamage = new Vector2(25.0f, 35.0f);
-    public Vector2 v2BossDamage = new Vector2(35.0f, 45.0f);
+    public Vector2 v2WeakDamage = new Vector2(8.0f, 12.0f);  //(15.0f, 25.0f);
+    public Vector2 v2NeutDamage = new Vector2(12.0f, 17.0f); //(25.0f, 35.0f);
+    public Vector2 v2BossDamage = new Vector2(17.0f, 22.0f); //(35.0f, 45.0f);
     public float damage; // will be cast as an int (Line 794 in Boss Blobs)
 
     public bool weaponIsActive;

@@ -15,6 +15,7 @@
 /// 
 /// TODO:
 /// - change remove const from MAX_PLAYERS
+/// - clean up repeated code in the switch case within the "Drop" func.
 /// </summary>
 
 using UnityEngine;
@@ -30,7 +31,7 @@ public class BossBlobs : MonoBehaviour
     public Collider[] IgnoreAttacksFrom;
 
     [Tooltip("Use these to specify at what Power the boss drops its blobs.")]
-    public List<int> BossDropThreshold = new List<int>(new int[] { 200, 132, 66 });
+    public List<int> BossDropThreshold = new List<int>(new int[] { 200, 160, 120 }); //{ 200, 132, 66 }
 
     [Tooltip("Use these to specify how many blobs to drop")]
     public List<int> m_BlobsToDrop = new List<int>(new int[] { 3, 2, 1 });
@@ -45,7 +46,7 @@ public class BossBlobs : MonoBehaviour
     public int m_CurrentThreshold;
     // Power (Boss)
     public int m_Power;
-    public int m_PowerMax = 150;
+    //public int m_PowerMax = 200;
     public bool m_Updated = false;
     public int m_Knockback = 150;
 
@@ -115,7 +116,8 @@ public class BossBlobs : MonoBehaviour
     private bool isNeut = false; // used for respawn
     [SerializeField]
     private GameObject[] blobsArray = new GameObject[PlayerManager.MAX_PLAYERS];
-    private Material c_blobMaterial;
+    public Material c_blobMaterial;
+    public Mesh c_blobMesh;
     private Quaternion qBlobRot = Quaternion.identity;
     private bool m_Respawned = false;
     private bool m_Invulnerable = false;
@@ -141,7 +143,7 @@ public class BossBlobs : MonoBehaviour
 
         m_Threshold = Thresholds.REGULAR;
         m_TransitionState = TransitionState.NEUT;
-        m_Power = 132;
+        m_Power = BossDropThreshold[1]; // 160/ 132;
         m_CurrentThreshold = m_Blobs.RegularThresh;
         transform.localScale = new Vector3(m_PowerLevelScale[1], m_PowerLevelScale[1], m_PowerLevelScale[1]);
         r_PlayerMan = PlayerManager.Instance;
@@ -149,9 +151,11 @@ public class BossBlobs : MonoBehaviour
         r_UILevel = r_PlayerMan.r_UILevel;
         r_EffectManager = GetComponent<EffectManager>();
         blobsArray = r_PlayerMan.GetBlobArray();
-        c_blobMaterial = GameSettings.Instance.players[r_PlayerCon.GetPlayerID()].Brain.GetBlobMaterial();
+        SnackBrain brain = GameSettings.Instance.players[r_PlayerCon.GetPlayerID()].Brain;
+        c_blobMaterial = brain.GetBlobMaterial();
+        c_blobMesh = brain.GetBlobMesh();
         iPlayerID = r_PlayerCon.GetPlayerID();
-
+        m_Knockback = 150; //TODO: knockback
 
         //Material Caching
 
@@ -507,6 +511,11 @@ public class BossBlobs : MonoBehaviour
         }
     }
 
+    public GameObject[] GetBlobArray()
+    {
+        return blobsArray;
+    }
+
     public void Drop(Thresholds _t)
     {
         //GameObject _curBlob = null;
@@ -520,9 +529,10 @@ public class BossBlobs : MonoBehaviour
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_RAINBOWWARRIOR:
                 {
                     m_SpawnableBlob = blobsArray[0];
-                    // Blob Materials
+                    // Blob Materials brain
                     m_SpawnableBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
                     m_SpawnableBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = c_blobMaterial;
+                    m_SpawnableBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh = c_blobMesh;
                     break;
                 }
             case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_PRINCESSCAKE:
@@ -533,6 +543,7 @@ public class BossBlobs : MonoBehaviour
                     m_SpawnableBlob = blobsArray[1];
                     // Blob Materials
                     m_SpawnableBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
+                    m_SpawnableBlob.GetComponent<MeshFilter>().sharedMesh = c_blobMesh;
                     //m_SpawnableBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = c_blobMaterial;
                     break;
                 }
@@ -570,11 +581,17 @@ public class BossBlobs : MonoBehaviour
                     if (m_SpawnableBlob != blobsArray[0])
                     {
                         _curBlob.transform.rotation = Random.rotation;
+                        // Blob Materials
+                        _curBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
+                        _curBlob.GetComponent<MeshFilter>().sharedMesh = c_blobMesh;
                     }
                     //m_SpawnableBlob is blobsArray[0]
                     else
                     {
                         _curBlob.transform.rotation = qBlobRot;
+                        _curBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
+                        _curBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = c_blobMaterial;
+                        _curBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh = c_blobMesh;
                     }
                     m_BlobsCreated.Add(_curBlob);
                 }
@@ -610,11 +627,17 @@ public class BossBlobs : MonoBehaviour
                     if (m_SpawnableBlob != blobsArray[0])
                     {
                         _curBlob.transform.rotation = Random.rotation;
+                        // Blob Materials
+                        _curBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
+                        _curBlob.GetComponent<MeshFilter>().sharedMesh = c_blobMesh;
                     }
                     //m_SpawnableBlob is blobsArray[0]
                     else
                     {
                         _curBlob.transform.rotation = qBlobRot;
+                        _curBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
+                        _curBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = c_blobMaterial;
+                        _curBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh = c_blobMesh;
                     }
                     m_BlobsCreated.Add(_curBlob);
                 }
@@ -640,7 +663,7 @@ public class BossBlobs : MonoBehaviour
             #endregion
 
             #region SMALL
-            case Thresholds.SMALL:
+            case Thresholds.SMALL: //TODO: SmallDrop? Breaks
                 for (int i = 0; i < m_Blobs.RegularDrop; i++)
                 {
                     int a = i * (360 / m_Blobs.RegularDrop);
@@ -650,11 +673,17 @@ public class BossBlobs : MonoBehaviour
                     if (m_SpawnableBlob != blobsArray[0])
                     {
                         _curBlob.transform.rotation = Random.rotation;
+                        _curBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
+                        _curBlob.GetComponent<MeshFilter>().sharedMesh = c_blobMesh;
                     }
                     //m_SpawnableBlob is blobsArray[0]
                     else
                     {
                         _curBlob.transform.rotation = qBlobRot;
+                        // Blob Materials
+                        _curBlob.GetComponent<MeshRenderer>().sharedMaterial = c_blobMaterial;
+                        _curBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = c_blobMaterial;
+                        _curBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh = c_blobMesh;
                     }
                     m_BlobsCreated.Add(_curBlob);
                 }
@@ -716,7 +745,7 @@ public class BossBlobs : MonoBehaviour
                     isNeut = false;
                     m_Threshold = Thresholds.SMALL;
                     m_TransitionState = TransitionState.WEAK;
-                    m_Power = 66; //TOOD: enum
+                    m_Power = BossDropThreshold[2]; // 66;
                     m_CurrentThreshold = m_Blobs.SmallThresh;
                     //sState = "Weak";
                     transform.localScale = new Vector3(m_PowerLevelScale[2], m_PowerLevelScale[2], m_PowerLevelScale[2]);
@@ -730,7 +759,7 @@ public class BossBlobs : MonoBehaviour
                     isNeut = true;
                     m_Threshold = Thresholds.REGULAR;
                     m_TransitionState = TransitionState.NEUT;
-                    m_Power = 132; //TOOD: enum
+                    m_Power = BossDropThreshold[1];// 132;
                     m_CurrentThreshold = m_Blobs.RegularThresh;
                     //sState = "Neut";
                     transform.localScale = new Vector3(m_PowerLevelScale[1], m_PowerLevelScale[1], m_PowerLevelScale[1]);
@@ -775,6 +804,10 @@ public class BossBlobs : MonoBehaviour
         myScore.ChangeScore(GetComponent<PlayerController>().m_PlayerTag, "deaths", 1);
     }
 
+    /// <summary>
+    /// Applies damage to this character.
+    /// </summary>
+    /// <param name="_col"></param>
     public void ApplyDamage(Collider _col)
     {
         //Apply Emmision Map
@@ -784,8 +817,16 @@ public class BossBlobs : MonoBehaviour
         }
         m_EmissionTimerEnabled = true;
 
+        //print("Event: Damage Applied.");
+        // Become invulnerable on damage instance. 
+        // TODO: readd Hit stop, remove below duplicate code below 
+        // and make hit stop and knockback work together
+        //m_hitStopInvuln = true;
+        // Freeze the damaged character.
+        //r_PlayerCon.HitStop();
+
         PlayerCollision otherPlayerPlayerCollision = _col.GetComponent<PlayerCollision>();
-        //Apply Knockback
+        //Apply Knockback after hit stop
         Vector3 Dir = otherPlayerPlayerCollision.m_ParentTransform.position - gameObject.transform.position;
         gameObject.GetComponent<Rigidbody>().AddForce(Dir.normalized * -m_Knockback);
         gameObject.GetComponent<PlayerAnims>().m_Anim.SetTrigger("Hit");

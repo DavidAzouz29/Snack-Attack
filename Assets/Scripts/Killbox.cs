@@ -42,7 +42,7 @@ public class Killbox : MonoBehaviour {
 
             int _pow = m_Player.GetComponent<BossBlobs>().m_Power;
             // Get player power here, spawn blobs they would have lost.
-            if (_pow >= 110)
+            if (_pow >= 110) //TODO: 110?
             {
                 float _toDrop = _pow / 20;
                 int _drop = Mathf.RoundToInt(_toDrop);
@@ -50,8 +50,42 @@ public class Killbox : MonoBehaviour {
                 for (int i = 0; i < _drop; i++)
                 {
                     int a = i * (360 / _drop);
-                    GameObject _blob = (GameObject)Instantiate(m_Player.GetComponent<BossBlobs>().m_SpawnableBlob, BlobSpawn(a), Quaternion.identity);
+                    // TODO: check if this can be cleaned up (Boss Blobs)
+                    BossBlobs bossBlobs = m_Player.GetComponent<BossBlobs>();
+                    GameObject _blob = (GameObject)Instantiate(bossBlobs.m_SpawnableBlob, BlobSpawn(a), Quaternion.identity);
                     _blob.GetComponent<BlobCollision>().m_PowerToGive = m_BlobPower;
+                    switch(m_Player.GetComponent<PlayerController>().m_eCurrentClassState)
+                    {
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_ROCKYROAD:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_MINTCHOPCHIP:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_COOKIECRUNCH:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_RR_RAINBOWWARRIOR:
+                            {
+                                _blob = bossBlobs.GetBlobArray()[0];
+                                // Blob Materials brain
+                                _blob.GetComponent<MeshRenderer>().sharedMaterial = bossBlobs.c_blobMaterial;
+                                _blob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = bossBlobs.c_blobMaterial;
+                                _blob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh = bossBlobs.c_blobMesh;
+                                break;
+                            }
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_PRINCESSCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_DUCHESSCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_POUNDCAKE:
+                        case PlayerController.E_CLASS_STATE.E_CLASS_STATE_PC_ANGELCAKE:
+                            {
+                                _blob = bossBlobs.GetBlobArray()[1];
+                                // Blob Materials
+                                _blob.GetComponent<MeshRenderer>().sharedMaterial = bossBlobs.c_blobMaterial;
+                                _blob.GetComponent<MeshFilter>().sharedMesh = bossBlobs.c_blobMesh;
+                                //m_SpawnableBlob.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = c_blobMaterial;
+                                break;
+                            }
+                        default:
+                            {
+                                Debug.LogError("BB: Character Blob not set up.");
+                                break;
+                            }
+                    }
                 }
                 ExplodeBlobs();
             }
