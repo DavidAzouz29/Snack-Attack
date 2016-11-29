@@ -37,9 +37,7 @@
 Getters and Setters will be inlined where possible.
 
 ## Known Issues:
-- If you use the joystick to confim a level, the level gets prepared for load twice.
 - Sometimes you lose control of your character (they keep walking straight) - hold "B" (either Keyboard or Joystick) to combat this.
-- If two players share the same name, they share the same score... The scoreboard needs work.
 - https://docs.google.com/spreadsheets/d/1XGaPM5nOZfb4ZymFyNCoNhbWRWzbf047i1xz23MyZR4/edit?usp=sharing
 
 ## Tutorials:
